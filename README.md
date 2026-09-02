@@ -1,8 +1,4 @@
 
-### Requisitos
-- Node.js 18+ o 22+
-- npm o pnpm
-
 ### Pasos
 ```bash
 # 1. Entrar al directorio
@@ -30,7 +26,7 @@ Visita `http://localhost:3000` en tu navegador.
 
 ---
 
-## 📦 Ejecución con Docker Compose
+## Ejecución con Docker Compose
 
 Puedes levantar el servicio frontend con:
 ```bash
@@ -39,7 +35,7 @@ docker compose up --build -d
 
 ---
 
-## 🔗 Endpoints del Backend Go Conectados
+## Endpoints del Backend Go Conectados
 
 | Método | Endpoint | Descripción | Componente Frontend |
 | :--- | :--- | :--- | :--- |
@@ -53,7 +49,7 @@ docker compose up --build -d
 
 ---
 
-## 📂 Estructura del Código
+## Estructura del Código
 
 ```
 udc-marketplace-frontend/
