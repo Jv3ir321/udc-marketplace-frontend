@@ -1,45 +1,3 @@
-# UDC Marketplace - Frontend 🛒🎓
-
-Frontend moderno, responsivo y completamente tipado para el **Marketplace Universitario de la Universidad de Cartagena (UDC)**, desarrollado en **React 18 + Vite + TypeScript** con componentes estilizados bajo la estética **shadcn/ui** y **Tailwind CSS**.
-
-Este frontend está diseñado para comunicarse directamente con el backend desarrollado en Go (`udc-go-marketplace`).
-
----
-
-## 🌟 Características Principales
-
-- **Autenticación Universitaria Completa**:
-  - Registro con campos institucionales (`Nombre/Title`, `Correo institucional`, `Código estudiantil`, `Sede UDC`, `Rol`, `Celular`).
-  - Inicio de sesión con almacenamiento seguro de Token JWT y decodificación de credenciales.
-  - Botón de auto-completado de prueba para testing rápido.
-
-- **Explorador y Catálogo de Artículos**:
-  - Filtros rápidos por Campus de la UDC (*Zaragocilla, Piedra de Bolívar, San Agustín, San Pablo, Ceres Turbaco, Ceres Magangué, etc.*).
-  - Filtros por Categoría (*Libros, Calculadoras y Tecnología, Batas y Uniformes, Habitaciones y Alquiler, Tutorías, etc.*).
-  - Búsqueda en tiempo real por palabra clave y rango de precios en Pesos Colombianos ($ COP).
-  - Ordenamiento por más recientes o precio.
-
-- **Publicación Multimodal (Fotos + Datos)**:
-  - Formulario de creación conectado a `POST /post/create` con `multipart/form-data`.
-  - Subida múltiple de imágenes con arrastrar y soltar (Drag & Drop), previsualización en tiempo real y selector de foto de portada.
-
-- **Detalle de Publicación y Trato Directo**:
-  - Galería de fotos con visor en alta resolución.
-  - Botón directo de **Contacto por WhatsApp** con mensaje pre-rellenado para el estudiante vendedor.
-  - Sección de Valoraciones y Reseñas conectada a `POST /valoration/send`.
-
-- **Gestión de Publicaciones Propias**:
-  - Panel "Mis Publicaciones" para listar artículos creados por el usuario.
-  - Edición en ventana modal conectada a `PUT /post/:id/update`.
-  - Eliminación con modal de confirmación conectada a `DELETE /post/:id/delete`.
-
-- **Dockerización de Producción**:
-  - `Dockerfile` multi-stage (Node 22 Builder + Nginx Alpine Server).
-  - `nginx.conf` optimizado con compresión Gzip y soporte para enrutamiento SPA.
-
----
-
-## 🚀 Cómo Ejecutar en Desarrollo
 
 ### Requisitos
 - Node.js 18+ o 22+
@@ -57,11 +15,6 @@ npm install
 npm run dev
 ```
 
-El frontend estará disponible en `http://localhost:3000`.
-
----
-
-## 🐳 Cómo Ejecutar con Docker
 
 ### Construir la imagen Docker:
 ```bash
