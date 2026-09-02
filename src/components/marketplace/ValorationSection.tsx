@@ -45,105 +45,97 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-        <h3 className="font-bold text-lg text-foreground flex items-center gap-2">
-          <MessageSquare className="h-5 w-5 text-primary" />
-          Valoraciones y Reseñas de Estudiantes
+    <div className="space-y-6 font-aeonik">
+      <div className="flex items-center justify-between border-b border-[#000000]/20 pb-3">
+        <h3 className="text-xl font-lateral uppercase text-[#000000] flex items-center gap-2">
+          <MessageSquare className="h-5 w-5 text-[#5c4ade]" />
+          Valoraciones y Preguntas
         </h3>
-        <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-          {valorations.length} {valorations.length === 1 ? 'reseña' : 'reseñas'}
+        <span className="text-xs font-bold text-[#000000] bg-[#e9ccff] px-3 py-0.5 rounded-[1600px] border border-[#000000]">
+          {valorations.length} {valorations.length === 1 ? 'comentario' : 'comentarios'}
         </span>
       </div>
 
       {/* Submit Form */}
       {isAuthenticated ? (
-        <form onSubmit={handleSubmit} className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200/80 space-y-3">
-          <div className="flex items-center gap-2">
-            <Avatar className="h-7 w-7">
-              <AvatarFallback className="text-xs bg-primary/10 text-primary font-bold">
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="flex items-start gap-3">
+            <Avatar className="h-9 w-9 rounded-[1600px] border border-[#000000]">
+              <AvatarFallback className="bg-[#ffd731] text-[#000000] text-xs font-bold">
                 {getInitials(user?.title || user?.name)}
               </AvatarFallback>
             </Avatar>
-            <span className="text-xs font-semibold text-slate-700">
-              {user?.title || user?.name} • Deja tu comentario o valoración:
-            </span>
-          </div>
-
-          <Textarea
-            placeholder="¿Compraste este producto o tomaste este servicio? Comparte tu experiencia con el vendedor..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="min-h-[80px] text-xs bg-white resize-none"
-            maxLength={300}
-            required
-          />
-
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] text-muted-foreground">
-              {comment.length}/300 caracteres
-            </span>
-            <Button
-              type="submit"
-              size="sm"
-              variant="udc"
-              disabled={isSubmitting || !comment.trim()}
-              className="text-xs"
-            >
-              <Send className="h-3.5 w-3.5 mr-1.5" />
-              {isSubmitting ? 'Enviando...' : 'Publicar Valoración'}
-            </Button>
+            <div className="flex-1 space-y-2">
+              <Textarea
+                placeholder="Pregunta sobre la edición, detalles o propone un punto de entrega en el campus..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className="text-xs rounded-[20px] border border-[#000000] bg-[#ffffff] p-3 focus-visible:ring-0 min-h-[70px]"
+                rows={2}
+              />
+              <div className="flex justify-end">
+                <Button
+                  type="submit"
+                  size="sm"
+                  disabled={isSubmitting || !comment.trim()}
+                  className="h-9 px-5 rounded-[1600px] bg-[#000000] hover:bg-[#222222] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#000000]"
+                >
+                  <Send className="h-3.5 w-3.5 mr-1.5" />
+                  Publicar Comentario
+                </Button>
+              </div>
+            </div>
           </div>
         </form>
       ) : (
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-center">
-          <p className="text-xs text-blue-900 font-medium">
-            Inicia sesión para dejar una reseña sobre este producto o servicio.
+        <div className="rounded-[20px] bg-[#dceeff]/50 border border-[#000000] p-4 text-center space-y-2">
+          <p className="text-xs font-medium text-[#000000]/80">
+            Debes iniciar sesión con tu cuenta estudiantil para enviar preguntas o valorar el artículo.
           </p>
-          <Button asChild size="sm" variant="outline" className="mt-2 text-xs border-blue-300 text-blue-800">
+          <Button asChild size="sm" className="h-8 px-4 rounded-[1600px] bg-[#000000] text-[#ffffff] text-xs font-bold border border-[#000000]">
             <Link to="/login">Iniciar Sesión</Link>
           </Button>
         </div>
       )}
 
-      {/* Valorations List */}
-      <div className="space-y-3">
-        {valorations.length === 0 ? (
-          <div className="text-center py-6 text-slate-400 text-xs">
-            Aún no hay valoraciones para este anuncio. ¡Sé el primero en comentar!
-          </div>
-        ) : (
-          valorations.map((v) => (
+      {/* List of comments */}
+      <div className="space-y-3 pt-2">
+        {valorations.length > 0 ? (
+          valorations.map((val) => (
             <div
-              key={v.id}
-              className="bg-white rounded-xl p-4 border border-slate-100 shadow-2xs space-y-2"
+              key={val.id}
+              className="p-4 rounded-[20px] bg-[#ffffff] border border-[#000000] space-y-2"
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Avatar className="h-7 w-7">
-                    <AvatarFallback className="text-[10px] bg-slate-100 text-slate-700 font-bold">
-                      {getInitials(v.user?.title || v.user?.name)}
+                <div className="flex items-center gap-2.5">
+                  <Avatar className="h-7 w-7 rounded-[1600px] border border-[#000000]">
+                    <AvatarFallback className="bg-[#e9ccff] text-[#000000] text-[10px] font-bold">
+                      {getInitials(val.user?.title || val.user?.name)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <span className="text-xs font-bold text-slate-800 block leading-tight">
-                      {v.user?.title || v.user?.name || 'Estudiante UDC'}
+                    <span className="text-xs font-bold text-[#000000] block leading-none">
+                      {val.user?.title || val.user?.name || 'Estudiante UDC'}
                     </span>
-                    <span className="text-[10px] text-slate-400">
-                      {v.user?.sede || 'Campus UDC'}
+                    <span className="text-[10px] text-[#000000]/60 font-medium">
+                      Campus {val.user?.sede || 'Cartagena'}
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-amber-500 text-xs">
-                  <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-[10px] text-slate-400">Verificado</span>
+                <div className="flex items-center gap-0.5 text-[#ffd731]">
+                  <Star className="h-3.5 w-3.5 fill-[#ffd731] text-[#000000]" />
+                  <span className="text-xs font-bold text-[#000000]">5.0</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-700 leading-relaxed pl-9">
-                {v.valoration}
+              <p className="text-xs text-[#000000]/85 font-medium pl-9 leading-relaxed">
+                {val.valoration}
               </p>
             </div>
           ))
+        ) : (
+          <div className="text-center py-6 text-xs text-[#000000]/60 font-medium">
+            No hay comentarios aún. ¡Sé el primero en consultar por este artículo!
+          </div>
         )}
       </div>
     </div>

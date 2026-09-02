@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, X, Image as ImageIcon, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { UploadCloud, X } from 'lucide-react';
 
 interface ImageUploaderProps {
   images: File[];
@@ -41,12 +40,12 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 font-aeonik">
       <div
-        className={`border-2 border-dashed rounded-2xl p-6 text-center transition-all cursor-pointer ${
+        className={`border-2 border-dashed rounded-[20px] p-6 text-center transition-all cursor-pointer ${
           dragActive
-            ? 'border-primary bg-primary/5'
-            : 'border-slate-300 hover:border-primary/60 bg-slate-50/50'
+            ? 'border-[#000000] bg-[#dceeff]'
+            : 'border-[#000000]/40 hover:border-[#000000] bg-[#dceeff]/30'
         }`}
         onDragOver={(e) => {
           e.preventDefault();
@@ -70,71 +69,51 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         />
 
         <div className="flex flex-col items-center justify-center gap-2">
-          <div className="h-12 w-12 rounded-full bg-blue-100 text-primary flex items-center justify-center shadow-xs">
-            <UploadCloud className="h-6 w-6" />
+          <div className="h-10 w-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] flex items-center justify-center text-[#000000]">
+            <UploadCloud className="h-5 w-5 text-[#fb4903]" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-foreground">
-              Haz clic o arrastra fotos de tu producto aquí
+            <p className="text-xs font-bold text-[#000000]">
+              Haz clic o arrastra fotos del artículo aquí
             </p>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              PNG, JPG o WEBP (Máx. {maxImages} fotos, hasta 5MB c/u)
+            <p className="text-[11px] text-[#000000]/60 font-medium">
+              PNG, JPG o WEBP hasta 5MB por foto (Máx. {maxImages} fotos)
             </p>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="mt-2 text-xs rounded-full"
-            onClick={(e) => {
-              e.stopPropagation();
-              fileInputRef.current?.click();
-            }}
-          >
-            <ImageIcon className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Seleccionar desde tu dispositivo
-          </Button>
+          <span className="h-7 px-3 rounded-[1600px] border border-[#000000] bg-[#ffffff] text-[11px] font-bold text-[#000000] inline-flex items-center">
+            Seleccionar Archivos
+          </span>
         </div>
       </div>
 
-      {/* Previews Grid */}
+      {/* Previews */}
       {images.length > 0 && (
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 pt-2">
-          {images.map((file, index) => {
+          {images.map((file, idx) => {
             const previewUrl = URL.createObjectURL(file);
             return (
               <div
-                key={index}
-                className="relative aspect-square rounded-xl overflow-hidden border border-slate-200 group bg-slate-100 shadow-2xs"
+                key={idx}
+                className="relative aspect-square rounded-[16px] overflow-hidden border border-[#000000] bg-[#ffffff]"
               >
                 <img
                   src={previewUrl}
-                  alt={`Preview ${index + 1}`}
+                  alt={`Subida ${idx + 1}`}
                   className="h-full w-full object-cover"
                 />
                 <button
                   type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-1 right-1 bg-destructive text-white p-1 rounded-full opacity-90 hover:opacity-100 shadow-sm transition-opacity"
-                  title="Eliminar foto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeImage(idx);
+                  }}
+                  className="absolute top-1 right-1 h-6 w-6 rounded-[1600px] bg-[#000000] text-[#ffffff] flex items-center justify-center hover:bg-[#fb4903] transition-colors"
                 >
-                  <X className="h-3.5 w-3.5" />
+                  <X className="h-3 w-3" />
                 </button>
-                {index === 0 && (
-                  <span className="absolute bottom-1 left-1 bg-blue-900/80 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded">
-                    Principal
-                  </span>
-                )}
               </div>
             );
           })}
-        </div>
-      )}
-
-      {images.length === 0 && (
-        <div className="flex items-center gap-1.5 text-xs text-amber-600">
-          <AlertCircle className="h-3.5 w-3.5 shrink-0" />
-          <span>El backend requiere al menos una imagen para crear la publicación.</span>
         </div>
       )}
     </div>

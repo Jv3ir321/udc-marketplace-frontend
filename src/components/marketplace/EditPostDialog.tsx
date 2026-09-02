@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Post, UpdatePostDTO } from '@/types';
 import { useMarketplace } from '@/context/MarketplaceContext';
 import {
@@ -18,24 +18,44 @@ import { Edit3 } from 'lucide-react';
 
 interface EditPostDialogProps {
   post: Post;
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  open?: boolean;
+  onClose?: () => void;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const EditPostDialog: React.FC<EditPostDialogProps> = ({
   post,
   isOpen,
+  open,
   onClose,
+  onOpenChange,
 }) => {
+  const isDialogOpen = open !== undefined ? open : (isOpen ?? false);
+  const handleClose = () => {
+    if (onOpenChange) onOpenChange(false);
+    if (onClose) onClose();
+  };
+
   const { updatePost } = useMarketplace();
   const [formData, setFormData] = useState<UpdatePostDTO>({
     nombre: post.nombre,
     desc: post.desc,
-    price: post.price,
+    price: String(post.price),
     sede: post.sede,
     tipoP: post.tipoP,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    setFormData({
+      nombre: post.nombre,
+      desc: post.desc,
+      price: String(post.price),
+      sede: post.sede,
+      tipoP: post.tipoP,
+    });
+  }, [post]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,97 +63,121 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
     const success = await updatePost(post.id, formData);
     setIsSubmitting(false);
     if (success) {
-      onClose();
+      handleClose();
     }
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-lg">
-        <form onSubmit={handleSubmit}>
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Edit3 className="h-5 w-5 text-primary" />
+    <Dialog open={isDialogOpen} onOpenChange={(val) => !val && handleClose()}>
+      <DialogContent className="sm:max-w-lg rounded-[24px] bg-[#ffffff] border border-[#171a3d] p-6 font-aeonik text-[#171a3d]">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <DialogHeader className="border-b border-[#171a3d]/20 pb-3">
+            <DialogTitle className="flex items-center gap-2 font-lateral text-2xl uppercase text-[#171a3d]">
+              <Edit3 className="h-5 w-5 text-[#3da898]" />
               Editar Publicación
             </DialogTitle>
-            <DialogDescription>
-              Modifica los detalles de tu anuncio en UDC Marketplace.
+            <DialogDescription className="text-xs text-[#171a3d]/70 font-medium">
+              Modifica los detalles de tu artículo en UDC Marketplace.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="grid gap-4 py-4">
+          <div className="space-y-3 pt-2">
             <div className="space-y-1.5">
-              <Label htmlFor="nombre" className="text-xs">Título del Anuncio</Label>
+              <Label htmlFor="edit-nombre" className="text-xs font-bold uppercase tracking-[0.032em]">
+                Título del Producto *
+              </Label>
               <Input
-                id="nombre"
+                id="edit-nombre"
                 value={formData.nombre}
-                onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                onChange={(e) => setFormData((prev) => ({ ...prev, nombre: e.target.value }))}
+                className="h-10 text-xs rounded-[1600px] border border-[#000000] bg-[#ffffff] focus-visible:ring-0"
                 required
-                className="text-xs"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="price" className="text-xs">Precio ($ COP)</Label>
+                <Label htmlFor="edit-price" className="text-xs font-bold uppercase tracking-[0.032em]">
+                  Precio ($ COP) *
+                </Label>
                 <Input
-                  id="price"
+                  id="edit-price"
+                  type="number"
                   value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, price: e.target.value }))}
+                  className="h-10 text-xs font-bold rounded-[1600px] border border-[#000000] bg-[#ffffff] focus-visible:ring-0"
                   required
-                  className="text-xs"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="sede" className="text-xs">Campus / Sede</Label>
+                <Label htmlFor="edit-sede" className="text-xs font-bold uppercase tracking-[0.032em]">
+                  Campus / Sede *
+                </Label>
                 <select
-                  id="sede"
-                  className="w-full h-10 rounded-md border border-input bg-background px-3 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary"
+                  id="edit-sede"
+                  className="w-full h-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] px-3 text-xs font-bold text-[#000000] focus:outline-none cursor-pointer"
                   value={formData.sede}
-                  onChange={(e) => setFormData({ ...formData, sede: e.target.value })}
-                  required
+                  onChange={(e) => setFormData((prev) => ({ ...prev, sede: e.target.value }))}
                 >
                   {UDC_SEDES.map((s) => (
-                    <option key={s} value={s}>{s}</option>
+                    <option key={s} value={s}>
+                      Campus {s}
+                    </option>
                   ))}
                 </select>
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="tipoP" className="text-xs">Categoría / Tipo de Publicación</Label>
+              <Label htmlFor="edit-tipoP" className="text-xs font-bold uppercase tracking-[0.032em]">
+                Categoría *
+              </Label>
               <select
-                id="tipoP"
-                className="w-full h-10 rounded-md border border-input bg-background px-3 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary"
+                id="edit-tipoP"
+                className="w-full h-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] px-3 text-xs font-bold text-[#000000] focus:outline-none cursor-pointer"
                 value={formData.tipoP}
-                onChange={(e) => setFormData({ ...formData, tipoP: e.target.value })}
-                required
+                onChange={(e) => setFormData((prev) => ({ ...prev, tipoP: e.target.value }))}
               >
                 {CATEGORIAS_PRODUCTO.map((c) => (
-                  <option key={c} value={c}>{c}</option>
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="desc" className="text-xs">Descripción Detallada</Label>
+              <Label htmlFor="edit-desc" className="text-xs font-bold uppercase tracking-[0.032em]">
+                Descripción *
+              </Label>
               <Textarea
-                id="desc"
-                rows={4}
+                id="edit-desc"
                 value={formData.desc}
-                onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
-                className="text-xs"
+                onChange={(e) => setFormData((prev) => ({ ...prev, desc: e.target.value }))}
+                rows={3}
+                className="text-xs rounded-[20px] border border-[#000000] bg-[#ffffff] p-3 focus-visible:ring-0"
                 required
               />
             </div>
           </div>
 
-          <DialogFooter>
-            <Button type="button" variant="outline" size="sm" onClick={onClose}>
+          <DialogFooter className="pt-3 border-t border-[#171a3d]/20 flex items-center justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handleClose}
+              className="h-9 px-4 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-xs font-bold text-[#171a3d] hover:bg-[#edf0f7]"
+            >
               Cancelar
             </Button>
-            <Button type="submit" variant="udc" size="sm" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              size="sm"
+              disabled={isSubmitting}
+              className="h-9 px-5 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-bold border border-[#171a3d]"
+            >
               {isSubmitting ? 'Guardando...' : 'Guardar Cambios'}
             </Button>
           </DialogFooter>

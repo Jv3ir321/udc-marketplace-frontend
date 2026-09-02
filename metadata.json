@@ -1,0 +1,6 @@
+{
+  "name": "UDC Marketplace",
+  "description": "Plataforma de compra, venta y conexión estudiantil para la Universidad de Cartagena",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

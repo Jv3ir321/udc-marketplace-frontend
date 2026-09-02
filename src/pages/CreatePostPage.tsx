@@ -8,9 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent } from '@/components/ui/card';
 import { UDC_SEDES, CATEGORIAS_PRODUCTO } from '@/lib/utils';
-import { PlusCircle, Sparkles, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const CreatePostPage: React.FC = () => {
@@ -35,7 +34,7 @@ export const CreatePostPage: React.FC = () => {
     }
 
     if (images.length === 0) {
-      toast.error('Debes adjuntar al menos una imagen (requerido por el backend)');
+      toast.error('Debes adjuntar al menos una imagen');
       return;
     }
 
@@ -57,153 +56,144 @@ export const CreatePostPage: React.FC = () => {
   };
 
   return (
-    <PageTransition className="min-h-screen bg-orange-50/20 py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto space-y-6">
-        <Button
-          variant="ghost"
-          size="sm"
+    <PageTransition className="min-h-screen bg-[#edf0f7] py-10 px-4 sm:px-6 lg:px-8 font-aeonik text-[#171a3d]">
+      <div className="max-w-2xl mx-auto space-y-6">
+        <button
+          type="button"
           onClick={() => navigate(-1)}
-          className="text-xs text-stone-600 hover:text-foreground"
+          className="text-xs h-9 px-4 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-[#171a3d] font-aeonik font-bold tracking-[0.032em] flex items-center gap-1.5 transition-colors"
         >
-          <ArrowLeft className="h-4 w-4 mr-1.5" />
-          Volver
-        </Button>
+          <ArrowLeft className="h-3.5 w-3.5" />
+          <span>Volver</span>
+        </button>
 
-        <Card className="rounded-3xl border-orange-100 shadow-md overflow-hidden bg-white">
-          <div className="bg-gradient-to-r from-orange-950 via-stone-900 to-orange-900 text-white p-6 sm:p-8 border-b border-orange-500/20">
-            <div className="flex items-center gap-2 text-orange-400 text-xs font-bold uppercase tracking-wider mb-2">
-              <Sparkles className="h-4 w-4" />
-              <span>Nuevo Anuncio Universitario</span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Publicar en UDC Marketplace
+        <div className="rounded-[24px] bg-[#ffffff] border border-[#171a3d] p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="border-b border-[#171a3d]/20 pb-4 space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-[0.032em] text-[#3da898] block">
+              MERCADO ESTUDIANTIL UDC
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-lateral uppercase tracking-normal text-[#171a3d] leading-none">
+              PUBLICAR ARTÍCULO
             </h1>
-            <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-xl">
-              Vende libros, batas, calculadoras o publica tus servicios para que otros estudiantes de tu campus te contacten directamente.
+            <p className="text-xs text-[#171a3d]/70 font-medium">
+              Vende o permuta libros, calculadoras, batas y apuntes con entrega directa en tu claustro.
             </p>
           </div>
 
-          <CardContent className="p-5 sm:p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Image Uploader */}
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                  Fotografías del Artículo *
-                </Label>
-                <ImageUploader images={images} setImages={setImages} maxImages={5} />
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Image Uploader */}
+            <div className="space-y-2">
+              <Label className="text-xs font-bold uppercase tracking-[0.032em] text-[#171a3d]">
+                Fotografías del Artículo *
+              </Label>
+              <ImageUploader images={images} setImages={setImages} maxImages={5} />
+            </div>
 
-              {/* Title */}
+            {/* Title */}
+            <div className="space-y-2">
+              <Label htmlFor="nombre" className="text-xs font-bold uppercase tracking-[0.032em] text-[#000000]">
+                Título o Nombre del Artículo *
+              </Label>
+              <Input
+                id="nombre"
+                placeholder="Ej: Calculadora Casio FX-991LAX, Bata de Laboratorio Talla S..."
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                className="h-10 text-xs font-aeonik font-medium rounded-[1600px] border border-[#000000] bg-[#ffffff] focus-visible:ring-0 focus-visible:bg-[#e9e9e9]"
+                required
+              />
+            </div>
+
+            {/* Price, Sede, Category */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="nombre" className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                  Título de la Publicación *
+                <Label htmlFor="price" className="text-xs font-bold uppercase tracking-[0.032em] text-[#000000]">
+                  Precio ($ COP) *
                 </Label>
                 <Input
-                  id="nombre"
-                  placeholder="Ej: Calculadora Casio FX-991LAX, Bata blanca antifluido Talla S, Libro Cálculo..."
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  className="h-11 rounded-xl focus:border-orange-500 text-xs sm:text-sm"
+                  id="price"
+                  type="number"
+                  placeholder="Ej: 50000"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="h-10 text-xs font-aeonik font-bold rounded-[1600px] border border-[#000000] bg-[#ffffff] focus-visible:ring-0 focus-visible:bg-[#e9e9e9]"
                   required
                 />
               </div>
 
-              {/* Price, Sede, Category Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="price" className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                    Precio ($ COP) *
-                  </Label>
-                  <Input
-                    id="price"
-                    type="number"
-                    placeholder="Ej: 50000"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="h-11 rounded-xl focus:border-orange-500 text-xs sm:text-sm"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="sede" className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                    Campus / Sede *
-                  </Label>
-                  <select
-                    id="sede"
-                    className="w-full h-11 rounded-xl border border-input bg-background px-3 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary"
-                    value={sede}
-                    onChange={(e) => setSede(e.target.value)}
-                    required
-                  >
-                    {UDC_SEDES.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="tipoP" className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                    Categoría *
-                  </Label>
-                  <select
-                    id="tipoP"
-                    className="w-full h-11 rounded-xl border border-input bg-background px-3 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary"
-                    value={tipoP}
-                    onChange={(e) => setTipoP(e.target.value)}
-                    required
-                  >
-                    {CATEGORIAS_PRODUCTO.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Description */}
               <div className="space-y-2">
-                <Label htmlFor="desc" className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                  Descripción Detallada
+                <Label htmlFor="sede" className="text-xs font-bold uppercase tracking-[0.032em] text-[#000000]">
+                  Campus / Sede *
                 </Label>
-                <Textarea
-                  id="desc"
-                  rows={4}
-                  placeholder="Detalla el estado del artículo, tiempo de uso, si incluye accesorios, disponibilidad para entregar en el campus..."
-                  value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                  className="rounded-xl resize-none focus:border-orange-500 text-xs sm:text-sm"
+                <select
+                  id="sede"
+                  className="w-full h-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] px-3 text-xs font-aeonik font-bold text-[#000000] focus:outline-none cursor-pointer"
+                  value={sede}
+                  onChange={(e) => setSede(e.target.value)}
                   required
-                />
+                >
+                  {UDC_SEDES.map((s) => (
+                    <option key={s} value={s}>
+                      Campus {s}
+                    </option>
+                  ))}
+                </select>
               </div>
 
-              {/* Submit CTA */}
-              <div className="pt-4 border-t border-stone-100 flex items-center justify-end gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => navigate(-1)}
-                  className="rounded-full px-6 text-xs sm:text-sm"
+              <div className="space-y-2">
+                <Label htmlFor="tipoP" className="text-xs font-bold uppercase tracking-[0.032em] text-[#000000]">
+                  Categoría *
+                </Label>
+                <select
+                  id="tipoP"
+                  className="w-full h-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] px-3 text-xs font-aeonik font-bold text-[#000000] focus:outline-none cursor-pointer"
+                  value={tipoP}
+                  onChange={(e) => setTipoP(e.target.value)}
+                  required
                 >
-                  Cancelar
-                </Button>
-                <Button
-                  type="submit"
-                  variant="udc"
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="rounded-full px-8 shadow-md text-xs sm:text-sm"
-                >
-                  <PlusCircle className="h-4 w-4 mr-2" />
-                  {isSubmitting ? 'Publicando en backend...' : 'Publicar Ahora'}
-                </Button>
+                  {CATEGORIAS_PRODUCTO.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </form>
-          </CardContent>
-        </Card>
+            </div>
+
+            {/* Description */}
+            <div className="space-y-2">
+              <Label htmlFor="desc" className="text-xs font-bold uppercase tracking-[0.032em] text-[#000000]">
+                Detalles y Estado de Conservación *
+              </Label>
+              <Textarea
+                id="desc"
+                placeholder="Indica el estado del producto (ej: nuevo, usado en buen estado), semestre en que se utilizó y lugar sugerido de entrega dentro del campus..."
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                className="min-h-[120px] text-xs font-aeonik rounded-[20px] border border-[#000000] bg-[#ffffff] p-3 focus-visible:ring-0 focus-visible:bg-[#e9e9e9]"
+                required
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-3">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
+              >
+                {isSubmitting ? (
+                  <span>Publicando en UDC Marketplace...</span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <Plus className="h-4 w-4 stroke-[3]" />
+                    Publicar Aviso en el Mercado
+                  </span>
+                )}
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </PageTransition>
   );

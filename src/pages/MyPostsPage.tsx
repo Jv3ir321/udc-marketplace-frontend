@@ -6,12 +6,10 @@ import { Post } from '@/types';
 import { EditPostDialog } from '@/components/marketplace/EditPostDialog';
 import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { formatCOP, getSedeBadgeColor, getBackendImageUrl } from '@/lib/utils';
+import { formatCOP, getBackendImageUrl } from '@/lib/utils';
 import {
   Package,
-  PlusCircle,
+  Plus,
   Edit2,
   Trash2,
   ExternalLink,
@@ -52,64 +50,46 @@ export const MyPostsPage: React.FC = () => {
   };
 
   return (
-    <PageTransition className="min-h-screen bg-stone-50/50 py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <PageTransition className="min-h-screen bg-[#edf0f7] py-10 px-4 sm:px-6 lg:px-8 font-aeonik text-[#171a3d]">
+      <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-3xl border border-stone-200/80 shadow-xs">
-          <div>
-            <div className="flex items-center gap-2">
-              <Package className="h-6 w-6 text-orange-600" />
-              <h1 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
-                Mis Publicaciones
-              </h1>
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Administra, edita o elimina los anuncios que has publicado en el marketplace.
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#171a3d]/20 pb-5">
+          <div className="space-y-1">
+            <h1 className="text-4xl font-lateral uppercase tracking-normal text-[#171a3d] leading-none">
+              MIS ARTÍCULOS PUBLICADOS
+            </h1>
+            <p className="text-xs text-[#171a3d]/70 font-medium">
+              Administra, edita el precio o retira tus publicaciones en la Universidad de Cartagena
             </p>
           </div>
 
-          <Button asChild variant="udc" className="rounded-full shadow-md text-xs sm:text-sm">
+          <Button
+            asChild
+            className="h-10 px-5 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
+          >
             <Link to="/create">
-              <PlusCircle className="h-4 w-4 mr-1.5" />
-              Publicar Nuevo Anuncio
+              <Plus className="h-4 w-4 mr-1.5 stroke-[3]" />
+              Publicar Nuevo Artículo
             </Link>
           </Button>
         </div>
 
-        {/* Listings */}
-        {myPosts.length === 0 ? (
-          <div className="bg-white rounded-3xl border border-stone-200/80 p-8 sm:p-12 text-center space-y-4">
-            <div className="h-16 w-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto">
-              <Package className="h-8 w-8" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-foreground">
-                Aún no tienes publicaciones activas
-              </h3>
-              <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
-                ¿Tienes libros, una calculadora, una bata o servicios para ofrecer a tus compañeros?
-              </p>
-            </div>
-            <Button asChild variant="udc" className="rounded-full text-xs">
-              <Link to="/create">
-                <PlusCircle className="h-4 w-4 mr-2" />
-                Crear Mi Primer Anuncio
-              </Link>
-            </Button>
-          </div>
-        ) : (
+        {/* List of Posts */}
+        {myPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {myPosts.map((post) => {
               const images = post.imagenes || (post.postIMGs?.map((img) => img.imageURL) || []);
-              const mainImg = images.length > 0 ? getBackendImageUrl(images[0]) : getBackendImageUrl('');
+              const mainImage = images.length > 0 ? getBackendImageUrl(images[0]) : getBackendImageUrl('');
 
               return (
-                <Card key={post.id} className="rounded-3xl border-stone-200/80 overflow-hidden bg-white flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow">
-                  <div>
-                    {/* Top Image */}
-                    <div className="relative aspect-[16/9] overflow-hidden bg-stone-100">
+                <div
+                  key={post.id}
+                  className="rounded-[20px] bg-[#ffffff] border border-[#171a3d] overflow-hidden flex flex-col justify-between shadow-sm"
+                >
+                  <div className="p-3">
+                    <div className="relative aspect-[4/3] w-full rounded-[16px] overflow-hidden border border-[#171a3d] bg-[#f0f2f7]">
                       <img
-                        src={mainImg}
+                        src={mainImage}
                         alt={post.nombre}
                         className="h-full w-full object-cover"
                         onError={(e) => {
@@ -117,67 +97,88 @@ export const MyPostsPage: React.FC = () => {
                             'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80';
                         }}
                       />
-                      <span
-                        className={`absolute top-2.5 left-2.5 text-[10px] font-semibold px-2 py-0.5 rounded-full border backdrop-blur-md ${getSedeBadgeColor(
-                          post.sede
-                        )}`}
-                      >
-                        <MapPin className="h-2.5 w-2.5 inline mr-1 -mt-0.5" />
-                        {post.sede}
-                      </span>
+                      <div className="absolute top-2 left-2">
+                        <span className="bg-[#ffffff] text-[#171a3d] text-[10px] font-bold tracking-[0.030em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px]">
+                          <MapPin className="h-3 w-3 inline mr-1 text-[#df4838]" />
+                          {post.sede}
+                        </span>
+                      </div>
+                      <div className="absolute top-2 right-2">
+                        <span className="bg-[#f2b725] text-[#171a3d] text-[10px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px]">
+                          {post.tipoP}
+                        </span>
+                      </div>
                     </div>
 
-                    <CardContent className="p-4 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg font-black text-stone-900">
-                          {formatCOP(post.price)}
-                        </span>
-                        <Badge variant="outline" className="text-[10px]">
-                          {post.tipoP}
-                        </Badge>
-                      </div>
-
-                      <h3 className="font-bold text-sm text-foreground line-clamp-1">
+                    <div className="p-2 pt-3 space-y-2">
+                      <h3 className="font-bold text-base text-[#171a3d] leading-snug line-clamp-1">
                         {post.nombre}
                       </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-[#171a3d]/70 font-medium line-clamp-2">
                         {post.desc}
                       </p>
-                    </CardContent>
-                  </div>
-
-                  {/* Actions Footer */}
-                  <div className="p-4 pt-0 border-t border-stone-100 flex items-center justify-between gap-2 mt-4">
-                    <Button asChild variant="ghost" size="sm" className="text-xs h-8 px-2 text-stone-600">
-                      <Link to={`/post/${post.id}`}>
-                        <ExternalLink className="h-3.5 w-3.5 mr-1" />
-                        Ver Detalle
-                      </Link>
-                    </Button>
-
-                    <div className="flex items-center gap-1.5">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setEditingPost(post)}
-                        className="text-xs h-8 px-2.5 text-orange-700 border-orange-200 hover:bg-orange-50"
-                      >
-                        <Edit2 className="h-3.5 w-3.5 mr-1" />
-                        Editar
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setPostToDelete(post)}
-                        className="text-xs h-8 px-2 text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </Button>
+                      <div className="pt-1">
+                        <span className="font-lateral text-2xl font-bold text-[#171a3d] leading-none">
+                          {formatCOP(post.price)}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </Card>
+
+                  {/* Actions Strip */}
+                  <div className="p-3 border-t border-[#171a3d]/20 flex items-center justify-between gap-2 bg-[#edf0f7]">
+                    <Link
+                      to={`/post/${post.id}`}
+                      className="h-8 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-xs font-bold text-[#171a3d] flex items-center gap-1.5"
+                    >
+                      <ExternalLink className="h-3 w-3" />
+                      <span>Ver</span>
+                    </Link>
+
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => setEditingPost(post)}
+                        className="h-8 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-xs font-bold text-[#171a3d] flex items-center gap-1"
+                      >
+                        <Edit2 className="h-3 w-3 text-[#3da898]" />
+                        <span>Editar</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPostToDelete(post)}
+                        className="h-8 px-2.5 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#df4838]/10 text-xs font-bold text-[#df4838] flex items-center justify-center"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               );
             })}
+          </div>
+        ) : (
+          <div className="rounded-[24px] bg-[#ffffff] border border-[#171a3d] p-12 text-center space-y-4 shadow-sm">
+            <div className="h-14 w-14 rounded-[1600px] border border-[#171a3d] bg-[#edf0f7] flex items-center justify-center mx-auto text-[#171a3d]">
+              <Package className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-2xl font-lateral uppercase text-[#171a3d]">
+                No tienes artículos publicados todavía
+              </h3>
+              <p className="text-xs text-[#171a3d]/70 font-medium max-w-sm mx-auto">
+                Publica calculadoras, batas de laboratorio, libros o fotocopias para tus compañeros de facultad.
+              </p>
+            </div>
+            <Button
+              asChild
+              className="h-10 px-6 rounded-[1600px] bg-[#171a3d] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] hover:bg-[#252a5c]"
+            >
+              <Link to="/create">
+                <Plus className="h-4 w-4 mr-1.5 stroke-[3]" />
+                Publicar Primer Artículo
+              </Link>
+            </Button>
           </div>
         )}
 
@@ -185,45 +186,45 @@ export const MyPostsPage: React.FC = () => {
         {editingPost && (
           <EditPostDialog
             post={editingPost}
-            isOpen={!!editingPost}
-            onClose={() => setEditingPost(null)}
+            open={!!editingPost}
+            onOpenChange={(open) => !open && setEditingPost(null)}
           />
         )}
 
-        {/* Delete Confirmation Modal */}
-        {postToDelete && (
-          <Dialog open={!!postToDelete} onOpenChange={() => setPostToDelete(null)}>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <div className="h-12 w-12 rounded-full bg-red-100 text-destructive flex items-center justify-center mb-2">
-                  <AlertTriangle className="h-6 w-6" />
-                </div>
-                <DialogTitle>¿Eliminar esta publicación?</DialogTitle>
-                <DialogDescription>
-                  Estás a punto de eliminar <strong>"{postToDelete.nombre}"</strong>. Esta acción llamará al endpoint de eliminación del backend y no se puede deshacer.
-                </DialogDescription>
-              </DialogHeader>
-
-              <DialogFooter className="gap-2 sm:gap-0">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPostToDelete(null)}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={handleDeleteConfirm}
-                  disabled={isDeleting}
-                >
-                  {isDeleting ? 'Eliminando...' : 'Sí, Eliminar Publicación'}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        )}
+        {/* Delete Confirm Dialog */}
+        <Dialog open={!!postToDelete} onOpenChange={(open) => !open && setPostToDelete(null)}>
+          <DialogContent className="rounded-[24px] bg-[#ffffff] border border-[#171a3d] font-aeonik p-6 max-w-sm text-[#171a3d]">
+            <DialogHeader className="space-y-2 text-left">
+              <div className="h-10 w-10 rounded-[1600px] border border-[#171a3d] bg-[#df4838]/10 flex items-center justify-center text-[#df4838]">
+                <AlertTriangle className="h-5 w-5" />
+              </div>
+              <DialogTitle className="text-xl font-lateral uppercase text-[#171a3d]">
+                ¿Eliminar este artículo?
+              </DialogTitle>
+              <DialogDescription className="text-xs text-[#171a3d]/70 font-medium">
+                Esta acción retirará la publicación "{postToDelete?.nombre}" de forma permanente del catálogo.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="pt-4 flex items-center justify-end gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPostToDelete(null)}
+                className="h-9 px-4 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-xs font-bold text-[#171a3d] hover:bg-[#edf0f7]"
+              >
+                Cancelar
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleDeleteConfirm}
+                disabled={isDeleting}
+                className="h-9 px-4 rounded-[1600px] bg-[#df4838] hover:bg-[#c93b2c] text-[#ffffff] text-xs font-bold border border-[#171a3d]"
+              >
+                {isDeleting ? 'Eliminando...' : 'Sí, Eliminar'}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </PageTransition>
   );
