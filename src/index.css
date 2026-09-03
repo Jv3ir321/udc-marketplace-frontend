@@ -144,9 +144,9 @@
   border: 1px solid #171a3d;
 }
 
-/* No Box Shadows as per design rules */
-*, ::before, ::after {
-  box-shadow: none !important;
+/* Smooth scrolling and refined shadows for a professional marketplace finish */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Minimalist UDC navy scrollbar */
@@ -163,3 +163,4 @@
   background: #171a3d;
   border-radius: 1600px;
 }
+

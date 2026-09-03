@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMarketplace } from '@/context/MarketplaceContext';
 import { ProductCard } from '@/components/marketplace/ProductCard';
 import { PageTransition } from '@/components/common/PageTransition';
-import { SlushRibbon } from '@/components/common/SlushRibbon';
-import { SlushSticker } from '@/components/common/SlushSticker';
+import { SlowSlide } from '@/components/common/SlowSlide';
 import { Input } from '@/components/ui/input';
 import {
   ArrowRight,
@@ -14,6 +13,9 @@ import {
   ArrowUp,
   Plus,
   CheckCircle2,
+  BookOpen,
+  MessageCircle,
+  Building2,
 } from 'lucide-react';
 import { CATEGORIAS_PRODUCTO, UDC_SEDES } from '@/lib/utils';
 
@@ -26,7 +28,7 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     const checkScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
+      setShowScrollTop(window.scrollY > 350);
     };
     window.addEventListener('scroll', checkScroll);
     return () => window.removeEventListener('scroll', checkScroll);
@@ -50,287 +52,290 @@ export const HomePage: React.FC = () => {
     : posts.slice(0, 6);
 
   return (
-    <PageTransition className="min-h-screen flex flex-col font-aeonik">
+    <PageTransition className="min-h-screen flex flex-col font-aeonik bg-[#fbfcfd] text-[#171a3d]">
       {/* ========================================================= */}
-      {/* 1. HERO SECTION: Community Identity & Orange Accents       */}
+      {/* 1. HERO SECTION: Professional, Clean & Trustworthy        */}
       {/* ========================================================= */}
-      <section className="relative w-full bg-[#edf0f7] overflow-hidden pt-10 pb-20 sm:pb-28 px-4 sm:px-8 border-b border-[#171a3d]/20">
-        {/* Signature 3D Inflatable Ribbon in Warm UDC Orange (positioned high behind headline) */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-75">
-          <SlushRibbon variant="wave" color="orange" className="w-[140%] max-w-none transform -translate-y-28 sm:-translate-y-36" />
-        </div>
-
-        {/* Floating Illustrated Stickers around the display headline */}
-        <div className="max-w-[1440px] mx-auto relative z-10">
-          {/* Top floating sticker row */}
-          <div className="flex items-center justify-between pointer-events-none mb-6">
-            <div className="pointer-events-auto transform -rotate-3 hover:rotate-0 transition-transform">
-              <SlushSticker type="grad" color="orange" label="UDC 1827" size="md" />
+      <section className="relative w-full bg-gradient-to-b from-[#ffffff] via-[#f5f7fc] to-[#ffffff] border-b border-[#171a3d]/10 pt-10 pb-16 sm:pb-24 px-4 sm:px-8">
+        <div className="max-w-[1280px] mx-auto text-center relative z-10">
+          <SlowSlide direction="up" duration={0.8} distance={24}>
+            {/* Crest and Pill Badge */}
+            <div className="flex flex-col items-center mb-5">
+              <Link to="/" className="inline-flex items-center gap-2 group mb-3">
+                <img
+                  src="/udc-logo.png"
+                  alt="Universidad de Cartagena"
+                  className="h-16 sm:h-20 w-auto object-contain transition-transform group-hover:scale-105"
+                />
+              </Link>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fdf3eb] border border-[#ec8026]/30 text-xs font-semibold text-[#ec8026]">
+                <span className="h-2 w-2 rounded-full bg-[#ec8026] animate-pulse" />
+                <span>Mercado Estudiantil Independiente · Universidad de Cartagena</span>
+              </div>
             </div>
 
-            <div className="pointer-events-auto transform rotate-3 hover:rotate-0 transition-transform">
-              <SlushSticker type="coin" color="orange" label="0% COMISIÓN" size="md" />
-            </div>
-          </div>
-
-          {/* Institutional Crest Logo + Enormous Lateral Display Headline */}
-          <div className="text-center my-2">
-            <Link to="/" className="inline-block group mb-3">
-              <img
-                src="/udc-logo.png"
-                alt="Universidad de Cartagena"
-                className="h-20 sm:h-24 w-auto mx-auto object-contain transition-transform group-hover:scale-105"
-              />
-              <span className="inline-flex items-center gap-1.5 font-aeonik text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.08em] text-[#ec8026] mt-2 px-3 py-0.5 rounded-[1600px] bg-[#ffffff] border border-[#171a3d]">
-                <span>Iniciativa Estudiantil Independiente</span>
+            {/* Headline */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#171a3d] tracking-tight leading-[1.12] max-w-4xl mx-auto">
+              Compra, vende e intercambia en tu{' '}
+              <span className="text-[#ec8026] underline decoration-[#ec8026]/30 decoration-wavy">
+                campus universitario
               </span>
-            </Link>
+            </h1>
 
-            <div className="inline-block relative pb-4 sm:pb-6">
-              <h1 className="font-lateral text-[65px] sm:text-[110px] md:text-[150px] lg:text-[180px] text-[#171a3d] uppercase tracking-normal leading-[0.84] select-none">
-                UDC MARKETPLACE
-              </h1>
+            {/* Subhead */}
+            <p className="text-sm sm:text-lg text-[#171a3d]/75 max-w-2xl mx-auto font-normal leading-relaxed mt-4">
+              Conecta de forma directa con compañeros de facultad en San Agustín, Zaragocilla, Piedra de Bolívar y San Pablo. Libros, batas, calculadoras e insumos sin comisiones.
+            </p>
+          </SlowSlide>
 
-              {/* Overlapping stickers pinned directly on type */}
-              <div className="absolute -top-4 -right-2 sm:right-6 pointer-events-auto transform rotate-12 z-20">
-                <SlushSticker type="star" color="orange" size="md" label="CAMPUS" />
-              </div>
-              <div className="absolute bottom-2 left-2 sm:left-6 pointer-events-auto transform -rotate-12 z-20">
-                <SlushSticker type="check" color="teal" size="sm" label="100% ENTRE ESTUDIANTES" />
-              </div>
-            </div>
-
-            {/* Tagline Subhead with generous clearance */}
-            <div className="pt-6 sm:pt-10 pb-2 relative z-20">
-              <p className="text-base sm:text-xl text-[#171a3d]/90 max-w-2xl mx-auto font-medium tracking-[-0.010em] leading-snug px-4">
-                La plataforma comunitaria e independiente de intercambio y compraventa entre todos los claustros y facultades de Cartagena.
-              </p>
-            </div>
-          </div>
-
-          {/* Search Bar */}
-          <div className="max-w-xl mx-auto mt-8 mb-6">
-            <form onSubmit={handleHeroSearch} className="relative flex items-center">
-              <Input
-                type="text"
-                placeholder="Busca calculadoras, batas, libros, instrumental médico..."
-                className="w-full h-14 pl-12 pr-32 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-sm sm:text-base font-aeonik font-bold text-[#171a3d] placeholder:text-[#171a3d]/45 focus-visible:ring-0 focus-visible:bg-[#ffffff]"
-                value={heroSearch}
-                onChange={(e) => setHeroSearch(e.target.value)}
-              />
-              <Search className="absolute left-4 h-5 w-5 text-[#171a3d]/60 pointer-events-none" />
-              <button
-                type="submit"
-                className="absolute right-2 h-10 px-5 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs sm:text-sm font-aeonik font-bold tracking-[0.032em] transition-transform active:scale-95 shadow-sm"
+          {/* Search Bar with modern card look */}
+          <SlowSlide direction="up" delay={0.15} duration={0.85} distance={28}>
+            <div className="max-w-2xl mx-auto mt-8 mb-6">
+              <form
+                onSubmit={handleHeroSearch}
+                className="relative flex items-center bg-[#ffffff] p-1.5 rounded-full border border-[#171a3d]/20 shadow-sm hover:border-[#ec8026]/60 focus-within:border-[#ec8026] focus-within:ring-2 focus-within:ring-[#ec8026]/20 transition-all"
               >
-                Buscar
-              </button>
-            </form>
-          </div>
+                <div className="pl-4 text-[#171a3d]/50">
+                  <Search className="h-5 w-5" />
+                </div>
+                <Input
+                  type="text"
+                  placeholder="¿Qué necesitas para este semestre? (calculadoras, batas, libros...)"
+                  className="w-full h-11 pl-3 pr-28 border-0 bg-transparent text-sm sm:text-base font-aeonik font-medium text-[#171a3d] placeholder:text-[#171a3d]/45 focus-visible:ring-0 focus-visible:border-0"
+                  value={heroSearch}
+                  onChange={(e) => setHeroSearch(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="h-10 px-6 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs sm:text-sm font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 shadow-sm"
+                >
+                  Buscar
+                </button>
+              </form>
+            </div>
 
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <Link
-              to="/catalog"
-              className="h-12 px-6 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-[#171a3d] font-aeonik font-bold text-sm tracking-[0.032em] flex items-center gap-2 transition-transform active:scale-95"
-            >
-              <span>Explorar Catálogo Completo</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            {/* Action CTAs */}
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <Link
+                to="/catalog"
+                className="h-11 px-6 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#f5f7fc] text-[#171a3d] font-aeonik font-bold text-sm tracking-[0.02em] flex items-center gap-2 transition-all shadow-sm active:scale-95"
+              >
+                <span>Explorar Catálogo</span>
+                <ArrowRight className="h-4 w-4 text-[#ec8026]" />
+              </Link>
 
-            <Link
-              to="/create"
-              className="h-12 px-6 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] flex items-center gap-2 transition-transform active:scale-95 shadow-sm"
-            >
-              <Plus className="h-4 w-4 stroke-[3]" />
-              <span>Publicar Artículo Gratis</span>
-            </Link>
-          </div>
+              <Link
+                to="/create"
+                className="h-11 px-6 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.02em] flex items-center gap-2 transition-all shadow-sm active:scale-95"
+              >
+                <Plus className="h-4 w-4 text-[#ec8026] stroke-[3]" />
+                <span>Publicar un Artículo</span>
+              </Link>
+            </div>
+
+            {/* Trust Highlights Strip */}
+            <div className="mt-10 pt-8 border-t border-[#171a3d]/10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-xs text-[#171a3d]/70 font-medium">
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#ec8026]" />
+                <span>Trato directo sin comisión</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-[#3da898]" />
+                <span>Entrega mano a mano en campus</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <MessageCircle className="h-4 w-4 text-[#44216b]" />
+                <span>Contacto directo por WhatsApp</span>
+              </div>
+            </div>
+          </SlowSlide>
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* 2. SECONDARY SECTION: Full-bleed #ffffff (Paper White)    */}
+      {/* 2. SECONDARY SECTION: Artículos Destacados (Slow Slide)   */}
       {/* ========================================================= */}
-      <section className="w-full bg-[#ffffff] py-16 px-4 sm:px-8 border-b border-[#171a3d]/20">
-        <div className="max-w-[1440px] mx-auto space-y-8">
-          {/* Section Header with Lateral Display Title */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/20 pb-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ec8026] border border-[#171a3d]" />
-                <span className="text-xs font-aeonik font-bold uppercase tracking-[0.032em] text-[#171a3d]">
-                  MERCADO ESTUDIANTIL · UDC
-                </span>
+      <section className="w-full bg-[#ffffff] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
+        <div className="max-w-[1280px] mx-auto space-y-8">
+          <SlowSlide direction="up" duration={0.8} distance={30}>
+            {/* Section Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/10 pb-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="h-2 w-2 rounded-full bg-[#ec8026]" />
+                  <span className="text-xs font-aeonik font-bold uppercase tracking-[0.05em] text-[#ec8026]">
+                    Catálogo Activo
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#171a3d] tracking-tight">
+                  Artículos y publicaciones recientes
+                </h2>
+                <p className="text-xs text-[#171a3d]/65 mt-1 font-medium">
+                  Material publicado por estudiantes de las diversas facultades
+                </p>
               </div>
-              <h2 className="font-lateral text-4xl sm:text-6xl text-[#171a3d] uppercase leading-[0.80]">
-                ARTÍCULOS DESTACADOS
-              </h2>
+
+              <Link
+                to="/catalog"
+                className="h-9 px-4 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#f5f7fc] text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors"
+              >
+                <span>Ver todo el catálogo</span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#ec8026]" />
+              </Link>
             </div>
 
-            <Link
-              to="/catalog"
-              className="h-9 px-4 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-xs font-aeonik font-bold tracking-[0.032em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto"
-            >
-              <span>Ver todos los {posts.length} anuncios</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          {/* Quick Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max">
-            <button
-              type="button"
-              onClick={() => setSelectedCategory('')}
-              className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-transform active:scale-95 ${
-                selectedCategory === ''
-                  ? 'bg-[#ec8026] text-[#ffffff]'
-                  : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
-              }`}
-            >
-              Todos los Artículos
-            </button>
-            {CATEGORIAS_PRODUCTO.map((cat, idx) => {
-              const bgStyles = [
-                'hover:bg-[#ec8026] hover:text-[#ffffff]',
-                'hover:bg-[#3da898] hover:text-[#ffffff]',
-                'hover:bg-[#44216b] hover:text-[#ffffff]',
-                'hover:bg-[#f2b725] hover:text-[#171a3d]',
-                'hover:bg-[#df4838] hover:text-[#ffffff]',
-              ];
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(isSelected ? '' : cat)}
-                  className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-all active:scale-95 ${
-                    isSelected
-                      ? 'bg-[#ec8026] text-[#ffffff]'
-                      : `bg-[#ffffff] text-[#171a3d] ${bgStyles[idx % bgStyles.length]}`
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Product Cards Grid */}
-          {displayPosts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-              {displayPosts.map((post, idx) => {
-                const colors: ('white' | 'lavender' | 'sky' | 'mint')[] = ['white', 'sky', 'lavender', 'white', 'mint', 'white'];
+            {/* Quick Category Filter Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max mt-6">
+              <button
+                type="button"
+                onClick={() => setSelectedCategory('')}
+                className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all active:scale-95 ${
+                  selectedCategory === ''
+                    ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
+                    : 'bg-[#f5f7fc] text-[#171a3d]/80 hover:bg-[#edf0f7]'
+                }`}
+              >
+                Todos los Artículos
+              </button>
+              {CATEGORIAS_PRODUCTO.map((cat) => {
+                const isSelected = selectedCategory === cat;
                 return (
-                  <ProductCard
-                    key={post.id}
-                    post={post}
-                    accentColor={colors[idx % colors.length]}
-                  />
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setSelectedCategory(isSelected ? '' : cat)}
+                    className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all active:scale-95 ${
+                      isSelected
+                        ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
+                        : 'bg-[#f5f7fc] text-[#171a3d]/80 hover:bg-[#edf0f7]'
+                    }`}
+                  >
+                    {cat}
+                  </button>
                 );
               })}
             </div>
-          ) : (
-            <div className="rounded-[20px] bg-[#edf0f7] p-10 text-center border border-[#171a3d] space-y-3">
-              <p className="text-base font-aeonik font-bold text-[#171a3d]">
-                No hay artículos publicados todavía
-              </p>
-              <p className="text-xs font-medium text-[#171a3d]/70 max-w-md mx-auto">
-                Sé el primero en publicar un libro, calculadora, bata o material académico.
-              </p>
-              <div className="pt-2">
-                <Link
-                  to="/create"
-                  className="inline-flex items-center gap-2 h-9 px-4 rounded-[1600px] bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
-                >
-                  <Plus className="h-3.5 w-3.5 stroke-[3]" />
-                  <span>Publicar Artículo</span>
-                </Link>
+          </SlowSlide>
+
+          {/* Product Cards Grid with Slow Slide Transition */}
+          <SlowSlide direction="up" delay={0.2} duration={0.9} distance={36}>
+            {displayPosts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+                {displayPosts.map((post) => (
+                  <ProductCard key={post.id} post={post} />
+                ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <div className="rounded-2xl bg-[#f8fafc] p-12 text-center border border-[#171a3d]/10 space-y-3">
+                <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto">
+                  <BookOpen className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#171a3d]">
+                  No hay artículos publicados todavía
+                </h3>
+                <p className="text-xs font-normal text-[#171a3d]/70 max-w-md mx-auto">
+                  Sé el primero de tu facultad en publicar un libro, calculadora, bata o material académico.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    to="/create"
+                    className="inline-flex items-center gap-2 h-9 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
+                  >
+                    <Plus className="h-3.5 w-3.5 stroke-[3]" />
+                    <span>Publicar Artículo</span>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </SlowSlide>
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* 3. TERTIARY SECTION: Campus Directo & Claustros UDC        */}
+      {/* 3. TERTIARY SECTION: Campus Directo (Slow Slide)           */}
       {/* ========================================================= */}
-      <section className="relative w-full bg-[#edf0f7] py-20 px-4 sm:px-8 border-b border-[#171a3d]/20 overflow-hidden">
-        {/* Signature 3D Ribbon Arcing in Orange */}
-        <div className="absolute -top-10 left-0 right-0 pointer-events-none z-0 opacity-80">
-          <SlushRibbon variant="arc" color="orange" className="w-full max-w-5xl mx-auto" />
-        </div>
+      <section className="w-full bg-[#f5f7fc] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
+        <div className="max-w-[1280px] mx-auto">
+          <SlowSlide direction="up" duration={0.85} distance={32}>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffffff] border border-[#171a3d]/10 text-xs font-semibold text-[#171a3d] mb-3">
+                <Building2 className="h-3.5 w-3.5 text-[#ec8026]" />
+                <span>Intercambio en Sedes UDC</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight">
+                ¿Cómo funciona el mercado universitario?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#171a3d]/70 mt-2 font-normal">
+                Diseñado para que los estudiantes acuerden entregas seguras dentro de su mismo claustro.
+              </p>
+            </div>
 
-        <div className="max-w-[1440px] mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* Left: Headline with Pinned Stickers */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="flex items-center gap-3">
-                <SlushSticker type="check" color="orange" label="CLAUSTROS UDC" size="sm" rotate={-2} />
-                <SlushSticker type="zap" color="yellow" label="SIN INTERMEDIARIOS" size="sm" rotate={3} />
+            {/* 3 Step Process Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-2xl bg-[#ffffff] p-6 border border-[#171a3d]/10 shadow-sm space-y-3">
+                <div className="h-10 w-10 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center font-bold text-sm">
+                  1
+                </div>
+                <h3 className="font-bold text-base text-[#171a3d]">
+                  Explora o publica gratis
+                </h3>
+                <p className="text-xs text-[#171a3d]/70 leading-relaxed font-normal">
+                  Filtra por tu claustro universitario o publica en segundos las guías, libros o batas que ya no uses.
+                </p>
               </div>
 
-              <h2 className="font-lateral text-[60px] sm:text-[90px] md:text-[110px] text-[#171a3d] uppercase leading-[0.76] tracking-normal">
-                CAMPUS DIRECTO
-              </h2>
+              <div className="rounded-2xl bg-[#ffffff] p-6 border border-[#171a3d]/10 shadow-sm space-y-3">
+                <div className="h-10 w-10 rounded-full bg-[#edf7f5] text-[#3da898] flex items-center justify-center font-bold text-sm">
+                  2
+                </div>
+                <h3 className="font-bold text-base text-[#171a3d]">
+                  Pacta directo por WhatsApp
+                </h3>
+                <p className="text-xs text-[#171a3d]/70 leading-relaxed font-normal">
+                  Chatea directamente con el vendedor sin intermediarios, pasarelas de pago externas ni comisiones ocultas.
+                </p>
+              </div>
 
-              <p className="text-base sm:text-xl text-[#171a3d]/85 max-w-xl font-medium tracking-[-0.010em] leading-relaxed">
-                Intercambia libros de medicina en Zaragocilla, calculadoras en Piedra de Bolívar o batas en San Agustín. Todo en tu claustro, mano a mano.
-              </p>
+              <div className="rounded-2xl bg-[#ffffff] p-6 border border-[#171a3d]/10 shadow-sm space-y-3">
+                <div className="h-10 w-10 rounded-full bg-[#f4edf9] text-[#44216b] flex items-center justify-center font-bold text-sm">
+                  3
+                </div>
+                <h3 className="font-bold text-base text-[#171a3d]">
+                  Entrega en mano en campus
+                </h3>
+                <p className="text-xs text-[#171a3d]/70 leading-relaxed font-normal">
+                  Revisa el estado del producto en persona dentro de bibliotecas o cafeterías centrales antes de pagar.
+                </p>
+              </div>
+            </div>
 
-              <div className="pt-2 flex flex-wrap gap-2">
+            {/* Sedes Links */}
+            <div className="mt-10 p-6 rounded-2xl bg-[#ffffff] border border-[#171a3d]/10 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-[#ec8026] shrink-0" />
+                <div>
+                  <h4 className="font-bold text-sm text-[#171a3d]">
+                    Puntos de encuentro sugeridos por claustro
+                  </h4>
+                  <p className="text-xs text-[#171a3d]/65 font-normal">
+                    Filtra publicaciones cercanas a tu facultad:
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
                 {UDC_SEDES.map((sede) => (
                   <Link
                     key={sede}
                     to={`/catalog?sede=${encodeURIComponent(sede)}`}
-                    className="h-8 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#ec8026] hover:text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.032em] text-[#171a3d] flex items-center gap-1.5 transition-colors"
+                    className="h-8 px-3 rounded-full border border-[#171a3d]/15 bg-[#f8fafc] hover:bg-[#ec8026] hover:text-[#ffffff] text-xs font-semibold text-[#171a3d] transition-colors"
                   >
-                    <MapPin className="h-3 w-3 text-[#ec8026]" />
-                    <span>Campus {sede}</span>
+                    Campus {sede}
                   </Link>
                 ))}
               </div>
             </div>
-
-            {/* Right: Campus Information & Safe Trade Cards */}
-            <div className="lg:col-span-5 space-y-4">
-              {/* Direct Hand-off Card in UDC Navy & Orange */}
-              <div className="rounded-[20px] bg-[#171a3d] border border-[#171a3d] p-6 text-[#ffffff] space-y-3 shadow-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-[0.032em] text-[#ec8026] block">
-                    100% ESTUDIANTIL · SIN INTERMEDIARIOS
-                  </span>
-                  <CheckCircle2 className="h-5 w-5 text-[#3da898]" />
-                </div>
-                <h3 className="font-lateral text-3xl uppercase leading-none text-[#ffffff]">
-                  TRATO DIRECTO EN CAMPUS
-                </h3>
-                <p className="text-xs font-medium text-[#ffffff]/85 leading-relaxed">
-                  Pacta el punto de encuentro por WhatsApp con tu compañero de facultad. Revisa el estado del artículo en persona antes de pagar, sin envíos costosos ni comisiones ocultas.
-                </p>
-                <div className="flex items-center gap-2 pt-1 text-[11px] font-bold text-[#ec8026]">
-                  <span>Entrega mano a mano acordada directamente entre estudiantes</span>
-                </div>
-              </div>
-
-              {/* Campus Safe Hand-off Card */}
-              <div className="rounded-[20px] bg-[#ffffff] border border-[#171a3d] p-6 space-y-3">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-aeonik font-bold text-base text-[#171a3d] uppercase tracking-[0.032em]">
-                    PUNTOS DE ENCUENTRO RECOMENDADOS
-                  </h4>
-                  <ShieldCheck className="h-5 w-5 text-[#ec8026]" />
-                </div>
-                <p className="text-xs text-[#171a3d]/80 font-medium leading-relaxed">
-                  Para máxima seguridad, recomendamos realizar el pago y entrega en las bibliotecas centrales o cafeterías de cada campus de la Universidad de Cartagena.
-                </p>
-                <div className="flex items-center gap-2 pt-1 text-[11px] font-bold text-[#171a3d]">
-                  <span className="h-2 w-2 rounded-full bg-[#ec8026] border border-[#171a3d]" />
-                  <span>San Agustín · Zaragocilla · Piedra de Bolívar · San Pablo</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          </SlowSlide>
         </div>
       </section>
 
@@ -339,10 +344,10 @@ export const HomePage: React.FC = () => {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 h-11 w-11 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#171a3d] hover:text-[#ffffff] text-[#171a3d] flex items-center justify-center transition-all active:scale-90"
+          className="fixed bottom-6 right-6 z-50 h-10 w-10 rounded-full bg-[#171a3d] hover:bg-[#ec8026] text-[#ffffff] flex items-center justify-center transition-all shadow-md active:scale-90"
           aria-label="Volver arriba"
         >
-          <ArrowUp className="h-5 w-5" />
+          <ArrowUp className="h-4 w-4" />
         </button>
       )}
     </PageTransition>

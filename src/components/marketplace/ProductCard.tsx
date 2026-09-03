@@ -6,13 +6,9 @@ import { MessageCircle, MapPin } from 'lucide-react';
 
 interface ProductCardProps {
   post: Post;
-  accentColor?: 'white' | 'lavender' | 'sky' | 'mint';
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
-  post,
-  accentColor = 'white',
-}) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
   const images = post.imagenes || (post.postIMGs?.map((img) => img.imageURL) || []);
   const mainImage = images.length > 0 ? getBackendImageUrl(images[0]) : getBackendImageUrl('');
 
@@ -21,28 +17,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". ¿Podemos acordar entrega en campus ${post.sede}?`
   )}`;
 
-  const bgClasses = {
-    white: 'bg-[#ffffff]',
-    lavender: 'bg-[#f4edf9]',
-    sky: 'bg-[#edf0f7]',
-    mint: 'bg-[#edf7f5]',
-  }[accentColor];
-
   return (
-    <article
-      className={`group rounded-[20px] ${bgClasses} text-[#171a3d] border border-[#171a3d] transition-transform duration-200 hover:-translate-y-1 flex flex-col justify-between overflow-hidden font-aeonik shadow-sm`}
-    >
+    <article className="group rounded-2xl bg-[#ffffff] text-[#171a3d] border border-[#171a3d]/15 hover:border-[#ec8026]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col justify-between overflow-hidden font-aeonik">
       <div>
-        {/* Rounded Image with 1px border inside container */}
+        {/* Product Image Container */}
         <div className="p-3 pb-0">
           <Link
             to={`/post/${post.id}`}
-            className="relative block aspect-[4/3] w-full overflow-hidden rounded-[16px] border border-[#171a3d] bg-[#f0f2f7]"
+            className="relative block aspect-[4/3] w-full overflow-hidden rounded-xl border border-[#171a3d]/10 bg-[#f8fafc]"
           >
             <img
               src={mainImage}
               alt={post.nombre}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
@@ -50,72 +37,67 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               }}
             />
 
-            {/* Sticker Campus Badge */}
+            {/* Campus Badge */}
             <div className="absolute top-2.5 left-2.5">
-              <span className="inline-flex items-center gap-1 bg-[#ffffff] text-[#171a3d] text-[11px] font-bold tracking-[0.030em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px] shadow-sm">
+              <span className="inline-flex items-center gap-1 bg-[#ffffff]/95 backdrop-blur-sm text-[#171a3d] text-xs font-semibold px-2.5 py-0.5 border border-[#171a3d]/15 rounded-full shadow-sm">
                 <MapPin className="h-3 w-3 text-[#ec8026]" />
                 {post.sede}
               </span>
             </div>
 
-            {/* Sticker Category Pill in Vibrant Orange */}
+            {/* Category Badge */}
             <div className="absolute top-2.5 right-2.5">
-              <span className="inline-flex items-center bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px] shadow-sm">
+              <span className="inline-flex items-center bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.04em] px-2.5 py-0.5 rounded-full shadow-sm">
                 {post.tipoP}
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Card Content */}
-        <div className="p-4 space-y-2.5">
-          <div className="flex items-start justify-between gap-2">
-            <Link to={`/post/${post.id}`} className="flex-1">
-              <h3 className="font-aeonik font-bold text-[16px] sm:text-[17px] leading-[1.25] text-[#171a3d] line-clamp-2 hover:underline">
-                {post.nombre}
-              </h3>
-            </Link>
-            <span className="shrink-0 bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.032em] px-2 py-0.5 rounded-[1600px] border border-[#171a3d]">
-              ACTIVO
-            </span>
-          </div>
+        {/* Card Body */}
+        <div className="p-4 space-y-2">
+          <Link to={`/post/${post.id}`} className="block">
+            <h3 className="font-bold text-[16px] sm:text-[17px] leading-[1.3] text-[#171a3d] line-clamp-1 group-hover:text-[#ec8026] transition-colors">
+              {post.nombre}
+            </h3>
+          </Link>
 
-          <p className="text-[13px] text-[#171a3d]/75 font-medium leading-snug line-clamp-2">
+          <p className="text-xs text-[#171a3d]/70 font-normal leading-relaxed line-clamp-2">
             {post.desc}
           </p>
 
-          <div className="flex items-center gap-2 text-xs font-bold text-[#171a3d]/60 pt-1">
+          <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#171a3d]/60 pt-1">
             <span className="truncate">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
             <span>·</span>
-            <span className="text-[#ec8026]">Verificado</span>
+            <span className="text-[#ec8026] font-semibold">Comunidad UDC</span>
           </div>
         </div>
       </div>
 
-      {/* Footer Price & WhatsApp Direct Chat */}
-      <div className="px-4 pb-4 pt-2 border-t border-[#171a3d]/15 flex items-center justify-between gap-3">
+      {/* Footer Strip */}
+      <div className="px-4 pb-4 pt-3 border-t border-[#171a3d]/10 flex items-center justify-between gap-3">
         <div>
-          <span className="block text-[10px] font-bold uppercase tracking-[0.032em] text-[#171a3d]/60">
-            PRECIO
+          <span className="block text-[10px] font-semibold uppercase tracking-[0.03em] text-[#171a3d]/50">
+            Precio
           </span>
-          <span className="font-lateral text-2xl font-extrabold text-[#171a3d] leading-none tracking-normal">
+          <span className="text-xl sm:text-2xl font-extrabold text-[#171a3d] leading-none tracking-tight">
             {formatCOP(post.price)}
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             title="Pactar entrega por WhatsApp"
-            className="h-8 w-8 rounded-[1600px] border border-[#171a3d] bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-90 shrink-0 shadow-sm"
+            className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-95 shadow-sm"
           >
             <MessageCircle className="h-4 w-4 fill-current" />
           </a>
           <Link
             to={`/post/${post.id}`}
-            className="h-8 px-3.5 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold tracking-[0.032em] flex items-center justify-center transition-colors shadow-sm"
+            className="h-8 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-sm"
           >
             Ver
           </Link>

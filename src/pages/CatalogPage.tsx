@@ -12,8 +12,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { CATEGORIAS_PRODUCTO } from '@/lib/utils';
-import { SlushRibbon } from '@/components/common/SlushRibbon';
-import { SlushSticker } from '@/components/common/SlushSticker';
+import { SlowSlide } from '@/components/common/SlowSlide';
 
 export const CatalogPage: React.FC = () => {
   const { filteredPosts, isLoading, filters, updateFilter, resetFilters } = useMarketplace();
@@ -32,39 +31,35 @@ export const CatalogPage: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <PageTransition className="min-h-screen bg-[#ffffff] text-[#171a3d] flex flex-col font-aeonik">
-      {/* Header Catalog Title Banner with UDC soft ground */}
-      <div className="relative border-b border-[#171a3d]/20 bg-[#edf0f7] py-12 px-4 sm:px-8 overflow-hidden">
-        <div className="absolute -top-10 right-10 w-96 pointer-events-none opacity-80 hidden md:block">
-          <SlushRibbon variant="loop" color="orange" />
-        </div>
-
-        <div className="max-w-[1440px] mx-auto space-y-3 relative z-10">
-          <div className="flex flex-wrap items-center gap-2">
-            <SlushSticker type="star" color="orange" label="MERCADO UDC" size="sm" rotate={-2} />
-            <span className="text-xs font-bold uppercase tracking-[0.032em] text-[#ec8026]">
-              · Todos los claustros de Cartagena
-            </span>
-          </div>
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-lateral tracking-normal text-[#171a3d] uppercase leading-[0.76]">
-            CATÁLOGO GENERAL
-          </h1>
-          <p className="text-sm sm:text-base text-[#171a3d]/80 max-w-2xl font-medium leading-snug">
-            Explora calculadoras, libros, batas clínicas, tecnología y apuntes académicos con trato directo y sin comisiones.
-          </p>
+    <PageTransition className="min-h-screen bg-[#fbfcfd] text-[#171a3d] flex flex-col font-aeonik">
+      {/* Header Catalog Title Banner */}
+      <div className="border-b border-[#171a3d]/10 bg-gradient-to-b from-[#ffffff] to-[#f5f7fc] py-10 px-4 sm:px-8">
+        <div className="max-w-[1440px] mx-auto space-y-2">
+          <SlowSlide direction="up" duration={0.7} distance={20}>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fdf3eb] border border-[#ec8026]/30 text-xs font-semibold text-[#ec8026] mb-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#ec8026]" />
+              <span>Mercado Estudiantil · Claustros de Cartagena</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#171a3d]">
+              Catálogo de Artículos Universitarios
+            </h1>
+            <p className="text-sm sm:text-base text-[#171a3d]/70 max-w-2xl font-normal leading-relaxed">
+              Explora calculadoras, libros, batas clínicas, tecnología y apuntes académicos con entrega personal en tu campus.
+            </p>
+          </SlowSlide>
         </div>
       </div>
 
       {/* Quick Category Bar */}
-      <section className="border-b border-[#171a3d]/20 bg-[#ffffff] py-3 px-4 sm:px-8 overflow-x-auto">
+      <section className="border-b border-[#171a3d]/10 bg-[#ffffff] py-3 px-4 sm:px-8 overflow-x-auto">
         <div className="max-w-[1440px] mx-auto flex items-center gap-2 min-w-max">
           <button
             type="button"
             onClick={() => updateFilter('category', '')}
-            className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-all ${
+            className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all ${
               !filters.category
-                ? 'bg-[#ec8026] text-[#ffffff]'
-                : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
+                ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
+                : 'bg-[#f5f7fc] text-[#171a3d]/80 hover:bg-[#edf0f7]'
             }`}
           >
             Todo el Catálogo
@@ -74,10 +69,10 @@ export const CatalogPage: React.FC = () => {
               key={cat}
               type="button"
               onClick={() => updateFilter('category', filters.category === cat ? '' : cat)}
-              className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-all ${
+              className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all ${
                 filters.category === cat
-                  ? 'bg-[#ec8026] text-[#ffffff]'
-                  : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
+                  ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
+                  : 'bg-[#f5f7fc] text-[#171a3d]/80 hover:bg-[#edf0f7]'
               }`}
             >
               <span>{cat}</span>
@@ -140,16 +135,9 @@ export const CatalogPage: React.FC = () => {
               </div>
             ) : filteredPosts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredPosts.map((post, idx) => {
-                  const colors: ('white' | 'lavender' | 'sky' | 'mint')[] = ['white', 'sky', 'white', 'lavender'];
-                  return (
-                    <ProductCard
-                      key={post.id}
-                      post={post}
-                      accentColor={colors[idx % colors.length]}
-                    />
-                  );
-                })}
+                {filteredPosts.map((post) => (
+                  <ProductCard key={post.id} post={post} />
+                ))}
               </div>
             ) : (
               <div className="rounded-[20px] bg-[#edf0f7] p-12 text-center border border-[#171a3d] space-y-4">

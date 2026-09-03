@@ -15,12 +15,12 @@ export const ProductFilters: React.FC = () => {
   const { filters, updateFilter, resetFilters, filteredPosts } = useMarketplace();
 
   return (
-    <div className="bg-[#ffffff] text-[#171a3d] rounded-[20px] p-5 border border-[#171a3d] space-y-6 font-aeonik shadow-sm">
-      <div className="flex items-center justify-between pb-3 border-b border-[#171a3d]/20">
+    <div className="bg-[#ffffff] text-[#171a3d] rounded-2xl p-5 border border-[#171a3d]/15 space-y-6 font-aeonik shadow-sm">
+      <div className="flex items-center justify-between pb-3 border-b border-[#171a3d]/10">
         <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-[0.032em]">
-          <SlidersHorizontal className="h-3.5 w-3.5 text-[#3da898]" />
+          <SlidersHorizontal className="h-3.5 w-3.5 text-[#ec8026]" />
           <span>Filtros de Búsqueda</span>
-          <span className="text-[11px] px-2 py-0.5 rounded-[1600px] bg-[#f4edf9] text-[#44216b] border border-[#171a3d]">
+          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#fdf3eb] text-[#ec8026] border border-[#ec8026]/20">
             {filteredPosts.length}
           </span>
         </div>
@@ -29,7 +29,7 @@ export const ProductFilters: React.FC = () => {
             variant="ghost"
             size="sm"
             onClick={resetFilters}
-            className="text-xs h-7 px-2.5 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-[#171a3d] font-aeonik font-bold"
+            className="text-xs h-7 px-2.5 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#edf0f7] text-[#171a3d] font-aeonik font-bold"
           >
             <RotateCcw className="h-3 w-3 mr-1 text-[#df4838]" />
             Limpiar
