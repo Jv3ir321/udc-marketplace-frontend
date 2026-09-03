@@ -34,28 +34,24 @@ export const CatalogPage: React.FC = () => {
     if (queryParam) updateFilter('search', queryParam);
   }, [searchParams]);
 
-  // Bento Box organization pattern based on position
+  // Harmonious Bento Box organization: balanced widths without exaggerated vertical heights
   const getBentoConfig = (index: number) => {
-    const pattern = index % 8;
+    const pattern = index % 6;
     switch (pattern) {
       case 0:
-        return { variant: 'tall' as const, className: 'lg:col-span-1 lg:row-span-2' };
+        return { variant: 'wide' as const, className: 'col-span-1 lg:col-span-2' };
       case 1:
-        return { variant: 'wide' as const, className: 'lg:col-span-2 lg:row-span-1' };
+        return { variant: 'standard' as const, className: 'col-span-1' };
       case 2:
-        return { variant: 'standard' as const, className: 'lg:col-span-1 lg:row-span-1' };
+        return { variant: 'standard' as const, className: 'col-span-1' };
       case 3:
-        return { variant: 'standard' as const, className: 'lg:col-span-1 lg:row-span-1' };
+        return { variant: 'wide' as const, className: 'col-span-1 lg:col-span-2' };
       case 4:
-        return { variant: 'wide' as const, className: 'lg:col-span-2 lg:row-span-1' };
+        return { variant: 'standard' as const, className: 'col-span-1' };
       case 5:
-        return { variant: 'tall' as const, className: 'lg:col-span-1 lg:row-span-2' };
-      case 6:
-        return { variant: 'standard' as const, className: 'lg:col-span-1 lg:row-span-1' };
-      case 7:
-        return { variant: 'standard' as const, className: 'lg:col-span-1 lg:row-span-1' };
+        return { variant: 'standard' as const, className: 'col-span-1' };
       default:
-        return { variant: 'standard' as const, className: 'lg:col-span-1 lg:row-span-1' };
+        return { variant: 'standard' as const, className: 'col-span-1' };
     }
   };
 
