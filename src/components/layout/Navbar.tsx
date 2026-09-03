@@ -16,12 +16,10 @@ import {
 import {
   Search,
   Plus,
-  User,
   LogOut,
   MapPin,
   Menu,
   X,
-  Package,
   Sparkles,
 } from 'lucide-react';
 import { UDC_SEDES } from '@/lib/utils';
@@ -54,7 +52,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#ffffff] border-b border-[#171a3d]/20">
+    <header className="sticky top-0 z-40 w-full bg-[#faf8f5]/95 backdrop-blur-md border-b border-[#171a3d]/10">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-3">
         {/* Left: UDC Logo & UDC Marketplace Title */}
         <div className="flex items-center gap-3">
@@ -65,14 +63,14 @@ export const Navbar: React.FC = () => {
             <img
               src="/udc-logo.png"
               alt="Universidad de Cartagena - Marketplace Estudiantil"
-              className="h-10 sm:h-12 w-auto object-contain shrink-0"
+              className="h-10 sm:h-11 w-auto object-contain shrink-0"
             />
             <div className="flex flex-col">
-              <span className="font-lateral text-2xl sm:text-3xl text-[#171a3d] leading-[0.82] uppercase tracking-normal">
+              <span className="font-aeonik font-black text-xl sm:text-2xl text-[#171a3d] leading-[1.0] uppercase tracking-tight">
                 UDC MARKETPLACE
               </span>
-              <span className="font-aeonik text-[10px] sm:text-[11px] font-bold tracking-[0.032em] text-[#ec8026] uppercase">
-                Mercado Estudiantil UDC
+              <span className="font-aeonik text-[10px] sm:text-[11px] font-bold tracking-[0.04em] text-[#3da898] uppercase">
+                Mercado Estudiantil
               </span>
             </div>
           </Link>
@@ -81,20 +79,20 @@ export const Navbar: React.FC = () => {
           <nav className="hidden lg:flex items-center gap-1.5 ml-4">
             <Link
               to="/"
-              className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-[13px] font-aeonik font-bold tracking-[0.032em] flex items-center transition-colors ${
+              className={`h-9 px-4 rounded-full text-[13px] font-aeonik font-bold tracking-[0.02em] flex items-center transition-colors ${
                 location.pathname === '/'
                   ? 'bg-[#171a3d] text-[#ffffff]'
-                  : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
+                  : 'bg-[#ffffff] text-[#171a3d] border border-[#171a3d]/15 hover:bg-[#edf0f7]'
               }`}
             >
               Inicio
             </Link>
             <Link
               to="/catalog"
-              className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-[13px] font-aeonik font-bold tracking-[0.032em] flex items-center transition-colors ${
+              className={`h-9 px-4 rounded-full text-[13px] font-aeonik font-bold tracking-[0.02em] flex items-center transition-colors ${
                 location.pathname === '/catalog'
                   ? 'bg-[#171a3d] text-[#ffffff]'
-                  : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
+                  : 'bg-[#ffffff] text-[#171a3d] border border-[#171a3d]/15 hover:bg-[#edf0f7]'
               }`}
             >
               Explorar Catálogo
@@ -102,7 +100,7 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Campus selector pill */}
-          <div className="hidden xl:flex items-center gap-1.5 h-9 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-xs font-aeonik font-bold text-[#171a3d]">
+          <div className="hidden xl:flex items-center gap-1.5 h-9 px-3 rounded-full border border-[#171a3d]/15 bg-[#ffffff] text-xs font-aeonik font-bold text-[#171a3d]">
             <MapPin className="h-3.5 w-3.5 text-[#ec8026] shrink-0" />
             <select
               className="bg-transparent font-aeonik font-bold text-xs text-[#171a3d] focus:outline-none cursor-pointer tracking-[0.030em]"
@@ -133,7 +131,7 @@ export const Navbar: React.FC = () => {
             <Input
               type="text"
               placeholder="Buscar artículos o libros..."
-              className="w-full pl-9 pr-8 h-9 text-xs font-aeonik font-medium rounded-[1600px] bg-[#ffffff] border border-[#171a3d] text-[#171a3d] placeholder:text-[#171a3d]/50 focus-visible:bg-[#edf0f7] focus-visible:ring-0 focus-visible:border-[#171a3d] transition-colors"
+              className="w-full pl-9 pr-8 h-9 text-xs font-aeonik font-medium rounded-full bg-[#ffffff] border border-[#171a3d]/15 text-[#171a3d] placeholder:text-[#171a3d]/50 focus-visible:bg-[#edf0f7] focus-visible:ring-0 focus-visible:border-[#171a3d] transition-colors"
               value={navSearch}
               onChange={(e) => setNavSearch(e.target.value)}
             />
@@ -149,13 +147,13 @@ export const Navbar: React.FC = () => {
           </div>
         </form>
 
-        {/* Right Action Buttons */}
+        {/* Right Action Buttons with Navy (#171a3d) and Deep Purple (#44216b) */}
         <div className="flex items-center gap-2">
-          {/* Filled CTA Button ('Publicar') with vibrant Orange */}
+          {/* Filled CTA Button in Deep Purple (#44216b) */}
           <Button
             asChild
             size="sm"
-            className="h-9 px-4 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-[13px] tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
+            className="h-9 px-4 rounded-full bg-[#44216b] hover:bg-[#341853] text-[#ffffff] font-aeonik font-bold text-[13px] tracking-[0.02em] transition-transform active:scale-95 shadow-sm"
           >
             <Link to="/create">
               <Plus className="h-4 w-4 mr-1 stroke-[3]" />
@@ -163,21 +161,21 @@ export const Navbar: React.FC = () => {
             </Link>
           </Button>
 
-          {/* Quick Action circular button */}
+          {/* Quick Action circular button in Dark Navy (#171a3d) */}
           <Link
             to="/catalog"
-            title="Ver todo"
-            className="h-9 w-9 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] flex items-center justify-center text-[#171a3d] transition-colors"
+            title="Ver catálogo"
+            className="h-9 w-9 rounded-full bg-[#171a3d] hover:bg-[#252a5c] flex items-center justify-center text-[#ffffff] transition-colors shadow-sm"
           >
-            <Sparkles className="h-4 w-4 text-[#ec8026] fill-[#ec8026]" />
+            <Sparkles className="h-4 w-4 text-[#3da898] fill-[#3da898]" />
           </Link>
 
           {/* User Profile / Auth State */}
           {isAuthenticated && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="h-9 w-9 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] flex items-center justify-center overflow-hidden focus:outline-none hover:bg-[#edf0f7]">
-                  <Avatar className="h-8 w-8 rounded-[1600px]">
+                <button className="h-9 w-9 rounded-full border border-[#171a3d]/20 bg-[#ffffff] flex items-center justify-center overflow-hidden focus:outline-none hover:bg-[#edf0f7]">
+                  <Avatar className="h-8 w-8 rounded-full">
                     <AvatarFallback className="bg-[#44216b] text-[#ffffff] text-xs font-aeonik font-bold">
                       {getInitials(user.title || user.name)}
                     </AvatarFallback>
@@ -186,7 +184,7 @@ export const Navbar: React.FC = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="end"
-                className="w-56 p-2 bg-[#ffffff] border border-[#171a3d] rounded-[20px] shadow-none space-y-1"
+                className="w-56 p-2 bg-[#ffffff] border border-[#171a3d]/20 rounded-2xl shadow-md space-y-1"
               >
                 <DropdownMenuLabel className="font-aeonik px-2 py-1.5">
                   <div className="flex flex-col">
@@ -201,26 +199,16 @@ export const Navbar: React.FC = () => {
                 <DropdownMenuSeparator className="bg-[#171a3d]/15" />
                 <DropdownMenuItem asChild>
                   <Link
-                    to={`/user/${user.id}`}
-                    className="cursor-pointer font-aeonik text-xs font-medium rounded-[1600px] px-2.5 py-1.5 hover:bg-[#edf0f7]"
-                  >
-                    <User className="mr-2 h-3.5 w-3.5 text-[#171a3d]" />
-                    <span>Mi Perfil Estudiantil</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link
                     to="/my-posts"
-                    className="cursor-pointer font-aeonik text-xs font-medium rounded-[1600px] px-2.5 py-1.5 hover:bg-[#edf0f7]"
+                    className="cursor-pointer font-aeonik text-xs font-bold text-[#171a3d] hover:bg-[#edf0f7] rounded-full px-2.5 py-1.5"
                   >
-                    <Package className="mr-2 h-3.5 w-3.5 text-[#171a3d]" />
-                    <span>Mis Artículos Publicados</span>
+                    Mis Publicaciones
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-[#171a3d]/15" />
                 <DropdownMenuItem
                   onClick={logout}
-                  className="cursor-pointer font-aeonik text-xs font-bold text-[#df4838] hover:bg-[#df4838]/10 rounded-[1600px] px-2.5 py-1.5"
+                  className="cursor-pointer font-aeonik text-xs font-bold text-[#df4838] hover:bg-[#df4838]/10 rounded-full px-2.5 py-1.5"
                 >
                   <LogOut className="mr-2 h-3.5 w-3.5" />
                   <span>Cerrar Sesión</span>
@@ -229,18 +217,19 @@ export const Navbar: React.FC = () => {
             </DropdownMenu>
           ) : (
             <div className="flex items-center gap-1.5">
+              {/* Dark Navy Pill Button */}
               <Button
                 asChild
-                variant="ghost"
                 size="sm"
-                className="h-9 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#edf0f7] text-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em]"
+                className="h-9 px-4 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.02em] shadow-sm"
               >
                 <Link to="/login">Entrar</Link>
               </Button>
+              {/* Deep Purple Pill Button */}
               <Button
                 asChild
                 size="sm"
-                className="hidden xs:inline-flex h-9 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.032em]"
+                className="hidden xs:inline-flex h-9 px-4 rounded-full bg-[#44216b] hover:bg-[#341853] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.02em] shadow-sm"
               >
                 <Link to="/register">Registro</Link>
               </Button>

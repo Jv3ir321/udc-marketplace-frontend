@@ -9,12 +9,10 @@ import {
   ArrowRight,
   Search,
   MapPin,
-  ShieldCheck,
   ArrowUp,
   Plus,
   CheckCircle2,
   BookOpen,
-  MessageCircle,
   Building2,
 } from 'lucide-react';
 import { CATEGORIAS_PRODUCTO, UDC_SEDES } from '@/lib/utils';
@@ -52,126 +50,218 @@ export const HomePage: React.FC = () => {
     : posts.slice(0, 6);
 
   return (
-    <PageTransition className="min-h-screen flex flex-col font-aeonik bg-[#fbfcfd] text-[#171a3d]">
+    <PageTransition className="min-h-screen flex flex-col font-aeonik bg-[#faf8f5] text-[#171a3d]">
       {/* ========================================================= */}
-      {/* 1. HERO SECTION: Professional, Clean & Trustworthy        */}
+      {/* 1. BENTO HERO SECTION: Light Ivory, Bold Sans, Bento Grid */}
       {/* ========================================================= */}
-      <section className="relative w-full bg-gradient-to-b from-[#ffffff] via-[#f5f7fc] to-[#ffffff] border-b border-[#171a3d]/10 pt-10 pb-16 sm:pb-24 px-4 sm:px-8">
-        <div className="max-w-[1280px] mx-auto text-center relative z-10">
-          <SlowSlide direction="up" duration={0.8} distance={24}>
-            {/* Crest and Pill Badge */}
-            <div className="flex flex-col items-center mb-5">
-              <Link to="/" className="inline-flex items-center gap-2 group mb-3">
-                <img
-                  src="/udc-logo.png"
-                  alt="Universidad de Cartagena"
-                  className="h-16 sm:h-20 w-auto object-contain transition-transform group-hover:scale-105"
-                />
-              </Link>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fdf3eb] border border-[#ec8026]/30 text-xs font-semibold text-[#ec8026]">
-                <span className="h-2 w-2 rounded-full bg-[#ec8026] animate-pulse" />
-                <span>Mercado Estudiantil Independiente · Universidad de Cartagena</span>
+      <section className="relative w-full bg-[#faf8f5] pt-12 pb-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
+        <div className="max-w-[1360px] mx-auto space-y-10">
+          {/* Top Hero Typography Block */}
+          <SlowSlide direction="up" duration={0.8} distance={25}>
+            <div className="space-y-4 max-w-4xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ffffff] border border-[#171a3d]/15 text-xs font-bold text-[#44216b] shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-[#3da898] animate-pulse" />
+                <span className="uppercase tracking-[0.06em]">Comunidad Estudiantil UDC</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#171a3d] tracking-tight leading-[1.04] uppercase">
+                REVOLUCIÓN EN EL MERCADO DEL{' '}
+                <span className="text-[#3da898] font-black underline decoration-[#3da898]/40 decoration-wavy">
+                  CAMPUS
+                </span>
+              </h1>
+
+              <p className="text-base sm:text-xl text-[#44216b] font-medium max-w-2xl leading-relaxed pt-1">
+                La plataforma directa e independiente para comprar, vender e intercambiar libros, calculadoras, batas y tecnología entre estudiantes de la Universidad de Cartagena.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-3">
+                <Link
+                  to="/create"
+                  className="h-12 px-7 rounded-full bg-[#44216b] hover:bg-[#341853] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.03em] flex items-center gap-2 transition-all shadow-md active:scale-95 uppercase"
+                >
+                  <Plus className="h-4 w-4 stroke-[3]" />
+                  <span>Publicar Aviso Gratis</span>
+                </Link>
+
+                <Link
+                  to="/catalog"
+                  className="h-12 px-6 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.03em] flex items-center gap-2 transition-all shadow-md active:scale-95 uppercase"
+                >
+                  <span>Explorar Catálogo</span>
+                  <ArrowRight className="h-4 w-4 text-[#3da898]" />
+                </Link>
               </div>
             </div>
-
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#171a3d] tracking-tight leading-[1.12] max-w-4xl mx-auto">
-              Compra, vende e intercambia en tu{' '}
-              <span className="text-[#ec8026] underline decoration-[#ec8026]/30 decoration-wavy">
-                campus universitario
-              </span>
-            </h1>
-
-            {/* Subhead */}
-            <p className="text-sm sm:text-lg text-[#171a3d]/75 max-w-2xl mx-auto font-normal leading-relaxed mt-4">
-              Conecta de forma directa con compañeros de facultad en San Agustín, Zaragocilla, Piedra de Bolívar y San Pablo. Libros, batas, calculadoras e insumos sin comisiones.
-            </p>
           </SlowSlide>
 
-          {/* Search Bar with modern card look */}
-          <SlowSlide direction="up" delay={0.15} duration={0.85} distance={28}>
-            <div className="max-w-2xl mx-auto mt-8 mb-6">
+          {/* Bento Grid Mosaic Lower Section */}
+          <SlowSlide direction="up" delay={0.15} duration={0.85} distance={35}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {/* Module 1: Yellow (#F2BA27 / #f2b725) */}
+              <div className="rounded-[28px] bg-[#f2b725] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#171a3d]/70 block">
+                    Cero Comisiones
+                  </span>
+                  <div className="text-6xl sm:text-7xl font-extrabold tracking-tight text-[#ffffff] leading-none">
+                    98%
+                  </div>
+                </div>
+                <div className="space-y-1 pt-6 border-t border-[#ffffff]/25">
+                  <h4 className="font-bold text-sm text-[#171a3d] uppercase tracking-wide">
+                    Ahorro Directo
+                  </h4>
+                  <p className="text-xs font-medium text-[#171a3d]/85 leading-snug">
+                    Satisfacción comprobada en compras y trueques académicos entre compañeros de aula.
+                  </p>
+                </div>
+              </div>
+
+              {/* Module 2: Orange (#EB8D2F / #ec8026) with photo */}
+              <div className="rounded-[28px] bg-[#ec8026] p-4 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+                <div className="relative h-44 w-full rounded-[20px] overflow-hidden border border-[#ffffff]/20 bg-[#ffffff]/10">
+                  <img
+                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80"
+                    alt="Estudiantes UDC en claustro"
+                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#171a3d]/85 backdrop-blur-sm text-[10px] font-bold text-[#ffffff] uppercase tracking-[0.04em]">
+                      Comunidad
+                    </span>
+                  </div>
+                </div>
+                <div className="p-2 pt-3 space-y-0.5">
+                  <h4 className="font-bold text-base text-[#ffffff] leading-tight">
+                    Entrega Mano a Mano
+                  </h4>
+                  <p className="text-xs font-medium text-[#ffffff]/85 leading-snug">
+                    Pacta el punto de encuentro en la biblioteca o cafetería de tu claustro.
+                  </p>
+                </div>
+              </div>
+
+              {/* Module 3: Red / Coral (#E64E40 / #df4838) */}
+              <div className="rounded-[28px] bg-[#df4838] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#ffffff]/80 block">
+                    Campus Conectados
+                  </span>
+                  <div className="text-6xl sm:text-7xl font-extrabold tracking-tight text-[#ffffff] leading-none">
+                    4
+                  </div>
+                </div>
+                <div className="space-y-1 pt-6 border-t border-[#ffffff]/25">
+                  <h4 className="font-bold text-sm text-[#ffffff] uppercase tracking-wide">
+                    Sedes Universitarias
+                  </h4>
+                  <p className="text-xs font-medium text-[#ffffff]/85 leading-snug">
+                    San Agustín, Zaragocilla, Piedra de Bolívar y San Pablo en una sola red.
+                  </p>
+                </div>
+              </div>
+
+              {/* Module 4: Dark Blue (#1A1B43 / #171a3d) with aquamarine circular graphic */}
+              <div className="rounded-[28px] bg-[#171a3d] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#3da898]">
+                    Seguridad
+                  </span>
+                  <CheckCircle2 className="h-4 w-4 text-[#3da898]" />
+                </div>
+
+                {/* Circular Graphic Component */}
+                <div className="flex items-center justify-center my-2">
+                  <div className="relative flex items-center justify-center">
+                    <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="40"
+                        stroke="#ffffff"
+                        strokeOpacity="0.12"
+                        strokeWidth="9"
+                        fill="none"
+                      />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="40"
+                        stroke="#3da898"
+                        strokeWidth="9"
+                        strokeDasharray="251.2"
+                        strokeDashoffset="25.12"
+                        strokeLinecap="round"
+                        fill="none"
+                      />
+                    </svg>
+                    <div className="absolute flex flex-col items-center justify-center">
+                      <span className="text-xl font-black text-[#3da898] leading-none">100%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-1 pt-3 border-t border-[#ffffff]/15 text-center sm:text-left">
+                  <p className="text-xs font-bold text-[#3da898] leading-snug">
+                    Trato directo y presencial
+                  </p>
+                  <p className="text-[11px] text-[#ffffff]/70 font-medium">
+                    Verifica el estado del artículo en persona antes de pagar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SlowSlide>
+
+          {/* Integrated Search Bar inside Hero */}
+          <SlowSlide direction="up" delay={0.25} duration={0.85} distance={25}>
+            <div className="max-w-2xl mx-auto pt-2">
               <form
                 onSubmit={handleHeroSearch}
-                className="relative flex items-center bg-[#ffffff] p-1.5 rounded-full border border-[#171a3d]/20 shadow-sm hover:border-[#ec8026]/60 focus-within:border-[#ec8026] focus-within:ring-2 focus-within:ring-[#ec8026]/20 transition-all"
+                className="relative flex items-center bg-[#ffffff] p-2 rounded-full border border-[#171a3d]/20 shadow-sm hover:border-[#44216b]/60 focus-within:border-[#44216b] focus-within:ring-2 focus-within:ring-[#44216b]/15 transition-all"
               >
-                <div className="pl-4 text-[#171a3d]/50">
+                <div className="pl-3 text-[#171a3d]/50">
                   <Search className="h-5 w-5" />
                 </div>
                 <Input
                   type="text"
-                  placeholder="¿Qué necesitas para este semestre? (calculadoras, batas, libros...)"
-                  className="w-full h-11 pl-3 pr-28 border-0 bg-transparent text-sm sm:text-base font-aeonik font-medium text-[#171a3d] placeholder:text-[#171a3d]/45 focus-visible:ring-0 focus-visible:border-0"
+                  placeholder="¿Qué buscas hoy? (libros de medicina, calculadoras, batas, instrumental...)"
+                  className="w-full h-10 pl-3 pr-28 border-0 bg-transparent text-xs sm:text-sm font-aeonik font-medium text-[#171a3d] placeholder:text-[#171a3d]/45 focus-visible:ring-0 focus-visible:border-0"
                   value={heroSearch}
                   onChange={(e) => setHeroSearch(e.target.value)}
                 />
                 <button
                   type="submit"
-                  className="h-10 px-6 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs sm:text-sm font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 shadow-sm"
+                  className="h-10 px-6 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.03em] transition-all active:scale-95 shadow-sm uppercase"
                 >
                   Buscar
                 </button>
               </form>
-            </div>
-
-            {/* Action CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <Link
-                to="/catalog"
-                className="h-11 px-6 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#f5f7fc] text-[#171a3d] font-aeonik font-bold text-sm tracking-[0.02em] flex items-center gap-2 transition-all shadow-sm active:scale-95"
-              >
-                <span>Explorar Catálogo</span>
-                <ArrowRight className="h-4 w-4 text-[#ec8026]" />
-              </Link>
-
-              <Link
-                to="/create"
-                className="h-11 px-6 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.02em] flex items-center gap-2 transition-all shadow-sm active:scale-95"
-              >
-                <Plus className="h-4 w-4 text-[#ec8026] stroke-[3]" />
-                <span>Publicar un Artículo</span>
-              </Link>
-            </div>
-
-            {/* Trust Highlights Strip */}
-            <div className="mt-10 pt-8 border-t border-[#171a3d]/10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-xs text-[#171a3d]/70 font-medium">
-              <div className="flex items-center justify-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[#ec8026]" />
-                <span>Trato directo sin comisión</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-[#3da898]" />
-                <span>Entrega mano a mano en campus</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <MessageCircle className="h-4 w-4 text-[#44216b]" />
-                <span>Contacto directo por WhatsApp</span>
-              </div>
             </div>
           </SlowSlide>
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* 2. SECONDARY SECTION: Artículos Destacados (Slow Slide)   */}
+      {/* 2. ARTÍCULOS DESTACADOS: Clean Grid with SlowSlide        */}
       {/* ========================================================= */}
       <section className="w-full bg-[#ffffff] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
-        <div className="max-w-[1280px] mx-auto space-y-8">
+        <div className="max-w-[1360px] mx-auto space-y-8">
           <SlowSlide direction="up" duration={0.8} distance={30}>
-            {/* Section Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/10 pb-4">
               <div>
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="h-2 w-2 rounded-full bg-[#ec8026]" />
-                  <span className="text-xs font-aeonik font-bold uppercase tracking-[0.05em] text-[#ec8026]">
+                  <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ec8026]">
                     Catálogo Activo
                   </span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#171a3d] tracking-tight">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
                   Artículos y publicaciones recientes
                 </h2>
                 <p className="text-xs text-[#171a3d]/65 mt-1 font-medium">
-                  Material publicado por estudiantes de las diversas facultades
+                  Material ofrecido directamente por estudiantes de las diversas facultades
                 </p>
               </div>
 
@@ -191,8 +281,8 @@ export const HomePage: React.FC = () => {
                 onClick={() => setSelectedCategory('')}
                 className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all active:scale-95 ${
                   selectedCategory === ''
-                    ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
-                    : 'bg-[#f5f7fc] text-[#171a3d]/80 hover:bg-[#edf0f7]'
+                    ? 'bg-[#171a3d] text-[#ffffff] shadow-sm'
+                    : 'bg-[#faf8f5] text-[#171a3d]/80 hover:bg-[#edf0f7]'
                 }`}
               >
                 Todos los Artículos
@@ -206,8 +296,8 @@ export const HomePage: React.FC = () => {
                     onClick={() => setSelectedCategory(isSelected ? '' : cat)}
                     className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all active:scale-95 ${
                       isSelected
-                        ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
-                        : 'bg-[#f5f7fc] text-[#171a3d]/80 hover:bg-[#edf0f7]'
+                        ? 'bg-[#171a3d] text-[#ffffff] shadow-sm'
+                        : 'bg-[#faf8f5] text-[#171a3d]/80 hover:bg-[#edf0f7]'
                     }`}
                   >
                     {cat}
@@ -217,8 +307,8 @@ export const HomePage: React.FC = () => {
             </div>
           </SlowSlide>
 
-          {/* Product Cards Grid with Slow Slide Transition */}
-          <SlowSlide direction="up" delay={0.2} duration={0.9} distance={36}>
+          {/* Product Cards Grid with Slow Slide */}
+          <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
             {displayPosts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
                 {displayPosts.map((post) => (
@@ -226,8 +316,8 @@ export const HomePage: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="rounded-2xl bg-[#f8fafc] p-12 text-center border border-[#171a3d]/10 space-y-3">
-                <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto">
+              <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border border-[#171a3d]/10 space-y-3">
+                <div className="h-12 w-12 rounded-full bg-[#ffffff] text-[#ec8026] flex items-center justify-center mx-auto border border-[#171a3d]/15 shadow-sm">
                   <BookOpen className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-[#171a3d]">
@@ -239,10 +329,10 @@ export const HomePage: React.FC = () => {
                 <div className="pt-2">
                   <Link
                     to="/create"
-                    className="inline-flex items-center gap-2 h-9 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
+                    className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#44216b] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#341853] transition-transform active:scale-95 shadow-sm"
                   >
                     <Plus className="h-3.5 w-3.5 stroke-[3]" />
-                    <span>Publicar Artículo</span>
+                    <span>Publicar Primer Artículo</span>
                   </Link>
                 </div>
               </div>
@@ -252,88 +342,46 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ========================================================= */}
-      {/* 3. TERTIARY SECTION: Campus Directo (Slow Slide)           */}
+      {/* 3. TERTIARY SECTION: Campus Directo & Claustros           */}
       {/* ========================================================= */}
-      <section className="w-full bg-[#f5f7fc] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
-        <div className="max-w-[1280px] mx-auto">
-          <SlowSlide direction="up" duration={0.85} distance={32}>
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffffff] border border-[#171a3d]/10 text-xs font-semibold text-[#171a3d] mb-3">
+      <section className="w-full bg-[#faf8f5] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
+        <div className="max-w-[1360px] mx-auto">
+          <SlowSlide direction="up" duration={0.85} distance={30}>
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffffff] border border-[#171a3d]/10 text-xs font-semibold text-[#171a3d] mb-3 shadow-sm">
                 <Building2 className="h-3.5 w-3.5 text-[#ec8026]" />
                 <span>Intercambio en Sedes UDC</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight">
-                ¿Cómo funciona el mercado universitario?
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
+                Puntos de encuentro por Claustro
               </h2>
               <p className="text-xs sm:text-sm text-[#171a3d]/70 mt-2 font-normal">
-                Diseñado para que los estudiantes acuerden entregas seguras dentro de su mismo claustro.
+                Diseñado para que los estudiantes acuerden entregas seguras dentro de su mismo claustro o facultad.
               </p>
             </div>
 
-            {/* 3 Step Process Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="rounded-2xl bg-[#ffffff] p-6 border border-[#171a3d]/10 shadow-sm space-y-3">
-                <div className="h-10 w-10 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center font-bold text-sm">
-                  1
-                </div>
-                <h3 className="font-bold text-base text-[#171a3d]">
-                  Explora o publica gratis
-                </h3>
-                <p className="text-xs text-[#171a3d]/70 leading-relaxed font-normal">
-                  Filtra por tu claustro universitario o publica en segundos las guías, libros o batas que ya no uses.
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-[#ffffff] p-6 border border-[#171a3d]/10 shadow-sm space-y-3">
-                <div className="h-10 w-10 rounded-full bg-[#edf7f5] text-[#3da898] flex items-center justify-center font-bold text-sm">
-                  2
-                </div>
-                <h3 className="font-bold text-base text-[#171a3d]">
-                  Pacta directo por WhatsApp
-                </h3>
-                <p className="text-xs text-[#171a3d]/70 leading-relaxed font-normal">
-                  Chatea directamente con el vendedor sin intermediarios, pasarelas de pago externas ni comisiones ocultas.
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-[#ffffff] p-6 border border-[#171a3d]/10 shadow-sm space-y-3">
-                <div className="h-10 w-10 rounded-full bg-[#f4edf9] text-[#44216b] flex items-center justify-center font-bold text-sm">
-                  3
-                </div>
-                <h3 className="font-bold text-base text-[#171a3d]">
-                  Entrega en mano en campus
-                </h3>
-                <p className="text-xs text-[#171a3d]/70 leading-relaxed font-normal">
-                  Revisa el estado del producto en persona dentro de bibliotecas o cafeterías centrales antes de pagar.
-                </p>
-              </div>
-            </div>
-
-            {/* Sedes Links */}
-            <div className="mt-10 p-6 rounded-2xl bg-[#ffffff] border border-[#171a3d]/10 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-[#ec8026] shrink-0" />
-                <div>
-                  <h4 className="font-bold text-sm text-[#171a3d]">
-                    Puntos de encuentro sugeridos por claustro
-                  </h4>
-                  <p className="text-xs text-[#171a3d]/65 font-normal">
-                    Filtra publicaciones cercanas a tu facultad:
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2">
-                {UDC_SEDES.map((sede) => (
-                  <Link
-                    key={sede}
-                    to={`/catalog?sede=${encodeURIComponent(sede)}`}
-                    className="h-8 px-3 rounded-full border border-[#171a3d]/15 bg-[#f8fafc] hover:bg-[#ec8026] hover:text-[#ffffff] text-xs font-semibold text-[#171a3d] transition-colors"
-                  >
+            {/* Campus selector pill grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {UDC_SEDES.map((sede) => (
+                <Link
+                  key={sede}
+                  to={`/catalog?sede=${encodeURIComponent(sede)}`}
+                  className="p-5 rounded-2xl bg-[#ffffff] border border-[#171a3d]/15 hover:border-[#44216b]/50 transition-all shadow-sm hover:shadow-md hover:-translate-y-1 group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="h-8 w-8 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-[#171a3d]/40 group-hover:text-[#44216b] group-hover:translate-x-1 transition-all" />
+                  </div>
+                  <h4 className="font-bold text-base text-[#171a3d] group-hover:text-[#44216b] transition-colors">
                     Campus {sede}
-                  </Link>
-                ))}
-              </div>
+                  </h4>
+                  <p className="text-xs text-[#171a3d]/60 mt-1">
+                    Ver publicaciones con entrega en este claustro
+                  </p>
+                </Link>
+              ))}
             </div>
           </SlowSlide>
         </div>
@@ -344,7 +392,7 @@ export const HomePage: React.FC = () => {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 h-10 w-10 rounded-full bg-[#171a3d] hover:bg-[#ec8026] text-[#ffffff] flex items-center justify-center transition-all shadow-md active:scale-90"
+          className="fixed bottom-6 right-6 z-50 h-10 w-10 rounded-full bg-[#171a3d] hover:bg-[#44216b] text-[#ffffff] flex items-center justify-center transition-all shadow-md active:scale-90"
           aria-label="Volver arriba"
         >
           <ArrowUp className="h-4 w-4" />
