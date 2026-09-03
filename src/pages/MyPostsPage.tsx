@@ -65,7 +65,7 @@ export const MyPostsPage: React.FC = () => {
 
           <Button
             asChild
-            className="h-10 px-5 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
+            className="h-10 px-5 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
           >
             <Link to="/create">
               <Plus className="h-4 w-4 mr-1.5 stroke-[3]" />
@@ -99,12 +99,12 @@ export const MyPostsPage: React.FC = () => {
                       />
                       <div className="absolute top-2 left-2">
                         <span className="bg-[#ffffff] text-[#171a3d] text-[10px] font-bold tracking-[0.030em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px]">
-                          <MapPin className="h-3 w-3 inline mr-1 text-[#df4838]" />
+                          <MapPin className="h-3 w-3 inline mr-1 text-[#ec8026]" />
                           {post.sede}
                         </span>
                       </div>
                       <div className="absolute top-2 right-2">
-                        <span className="bg-[#f2b725] text-[#171a3d] text-[10px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px]">
+                        <span className="bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px]">
                           {post.tipoP}
                         </span>
                       </div>
@@ -172,7 +172,7 @@ export const MyPostsPage: React.FC = () => {
             </div>
             <Button
               asChild
-              className="h-10 px-6 rounded-[1600px] bg-[#171a3d] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] hover:bg-[#252a5c]"
+              className="h-10 px-6 rounded-[1600px] bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] hover:bg-[#d97018] shadow-sm"
             >
               <Link to="/create">
                 <Plus className="h-4 w-4 mr-1.5 stroke-[3]" />

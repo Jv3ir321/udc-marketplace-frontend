@@ -98,7 +98,7 @@ export const LoginPage: React.FC = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 mt-2"
+              className="w-full h-11 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm mt-2"
             >
               {isLoading ? (
                 <span>Comprobando...</span>
@@ -116,7 +116,7 @@ export const LoginPage: React.FC = () => {
             <button
               type="button"
               onClick={handleDemoFill}
-              className="w-full h-9 rounded-[1600px] border border-[#171a3d] bg-[#f2b725] hover:bg-[#deb11f] text-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] flex items-center justify-center gap-1.5 transition-colors"
+              className="w-full h-9 rounded-[1600px] border border-[#171a3d] bg-[#fdf3eb] hover:bg-[#fce8d7] text-[#ec8026] text-xs font-aeonik font-bold tracking-[0.032em] flex items-center justify-center gap-1.5 transition-colors"
             >
               <Sparkles className="h-3.5 w-3.5 fill-current" />
               <span>Cargar Usuario Demo (UDC)</span>
@@ -125,7 +125,7 @@ export const LoginPage: React.FC = () => {
 
           <div className="pt-2 text-center text-xs font-medium text-[#171a3d]/70">
             ¿No tienes cuenta aún?{' '}
-            <Link to="/register" className="font-bold text-[#171a3d] underline hover:text-[#df4838]">
+            <Link to="/register" className="font-bold text-[#ec8026] underline hover:text-[#d97018]">
               Regístrate aquí
             </Link>
           </div>

@@ -49,7 +49,7 @@ export const ProductFilters: React.FC = () => {
             onClick={() => updateFilter('sede', '')}
             className={`text-xs px-3 py-1 rounded-[1600px] transition-all font-aeonik font-bold tracking-[0.032em] ${
               !filters.sede
-                ? 'bg-[#171a3d] text-[#ffffff] border border-[#171a3d]'
+                ? 'bg-[#ec8026] text-[#ffffff] border border-[#171a3d]'
                 : 'bg-[#ffffff] text-[#171a3d] border border-[#171a3d] hover:bg-[#edf0f7]'
             }`}
           >
@@ -62,7 +62,7 @@ export const ProductFilters: React.FC = () => {
               onClick={() => updateFilter('sede', filters.sede === sede ? '' : sede)}
               className={`text-xs px-3 py-1 rounded-[1600px] transition-all font-aeonik font-bold tracking-[0.032em] ${
                 filters.sede === sede
-                  ? 'bg-[#171a3d] text-[#ffffff] border border-[#171a3d]'
+                  ? 'bg-[#ec8026] text-[#ffffff] border border-[#171a3d]'
                   : 'bg-[#ffffff] text-[#171a3d] border border-[#171a3d] hover:bg-[#edf0f7]'
               }`}
             >
@@ -75,7 +75,7 @@ export const ProductFilters: React.FC = () => {
       {/* Category Filter */}
       <div className="space-y-2.5">
         <label className="text-xs font-bold uppercase tracking-[0.032em] text-[#171a3d]/70 flex items-center gap-1.5">
-          <Tag className="h-3 w-3 text-[#3da898]" />
+          <Tag className="h-3 w-3 text-[#ec8026]" />
           Categoría
         </label>
         <div className="flex flex-col gap-1.5">
@@ -84,7 +84,7 @@ export const ProductFilters: React.FC = () => {
             onClick={() => updateFilter('category', '')}
             className={`text-left text-xs px-3 py-2 rounded-[1600px] transition-all font-aeonik font-bold tracking-[0.032em] flex items-center justify-between border ${
               !filters.category
-                ? 'bg-[#171a3d] text-[#ffffff] border-[#171a3d]'
+                ? 'bg-[#ec8026] text-[#ffffff] border-[#171a3d]'
                 : 'bg-[#ffffff] text-[#171a3d] border-[#171a3d] hover:bg-[#edf0f7]'
             }`}
           >
@@ -97,7 +97,7 @@ export const ProductFilters: React.FC = () => {
               onClick={() => updateFilter('category', filters.category === cat ? '' : cat)}
               className={`text-left text-xs px-3 py-2 rounded-[1600px] transition-all font-aeonik font-bold tracking-[0.032em] flex items-center justify-between border ${
                 filters.category === cat
-                  ? 'bg-[#171a3d] text-[#ffffff] border-[#171a3d]'
+                  ? 'bg-[#ec8026] text-[#ffffff] border-[#171a3d]'
                   : 'bg-[#ffffff] text-[#171a3d] border-[#171a3d] hover:bg-[#edf0f7]'
               }`}
             >

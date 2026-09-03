@@ -36,13 +36,13 @@ export const CatalogPage: React.FC = () => {
       {/* Header Catalog Title Banner with UDC soft ground */}
       <div className="relative border-b border-[#171a3d]/20 bg-[#edf0f7] py-12 px-4 sm:px-8 overflow-hidden">
         <div className="absolute -top-10 right-10 w-96 pointer-events-none opacity-80 hidden md:block">
-          <SlushRibbon variant="loop" color="teal" />
+          <SlushRibbon variant="loop" color="orange" />
         </div>
 
         <div className="max-w-[1440px] mx-auto space-y-3 relative z-10">
           <div className="flex flex-wrap items-center gap-2">
-            <SlushSticker type="star" color="yellow" label="GACETA UDC" size="sm" rotate={-2} />
-            <span className="text-xs font-bold uppercase tracking-[0.032em] text-[#171a3d]/70">
+            <SlushSticker type="star" color="orange" label="MERCADO UDC" size="sm" rotate={-2} />
+            <span className="text-xs font-bold uppercase tracking-[0.032em] text-[#ec8026]">
               · Todos los claustros de Cartagena
             </span>
           </div>
@@ -63,7 +63,7 @@ export const CatalogPage: React.FC = () => {
             onClick={() => updateFilter('category', '')}
             className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-all ${
               !filters.category
-                ? 'bg-[#171a3d] text-[#ffffff]'
+                ? 'bg-[#ec8026] text-[#ffffff]'
                 : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
             }`}
           >
@@ -76,7 +76,7 @@ export const CatalogPage: React.FC = () => {
               onClick={() => updateFilter('category', filters.category === cat ? '' : cat)}
               className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-all ${
                 filters.category === cat
-                  ? 'bg-[#171a3d] text-[#ffffff]'
+                  ? 'bg-[#ec8026] text-[#ffffff]'
                   : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
               }`}
             >

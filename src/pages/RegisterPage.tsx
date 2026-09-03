@@ -189,7 +189,7 @@ export const RegisterPage: React.FC = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 mt-3"
+              className="w-full h-11 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm mt-3"
             >
               {isLoading ? (
                 <span>Creando perfil...</span>
@@ -204,7 +204,7 @@ export const RegisterPage: React.FC = () => {
 
           <div className="pt-2 text-center text-xs font-medium text-[#171a3d]/70">
             ¿Ya tienes una cuenta?{' '}
-            <Link to="/login" className="font-bold text-[#171a3d] underline hover:text-[#df4838]">
+            <Link to="/login" className="font-bold text-[#ec8026] underline hover:text-[#d97018]">
               Inicia sesión
             </Link>
           </div>

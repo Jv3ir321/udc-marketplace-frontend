@@ -52,12 +52,12 @@ export const HomePage: React.FC = () => {
   return (
     <PageTransition className="min-h-screen flex flex-col font-aeonik">
       {/* ========================================================= */}
-      {/* 1. HERO SECTION: Institutional Identity & Official Palette */}
+      {/* 1. HERO SECTION: Community Identity & Orange Accents       */}
       {/* ========================================================= */}
       <section className="relative w-full bg-[#edf0f7] overflow-hidden pt-10 pb-20 sm:pb-28 px-4 sm:px-8 border-b border-[#171a3d]/20">
-        {/* Signature 3D Inflatable Official UDC Teal/Navy Ribbon wrapping behind text */}
+        {/* Signature 3D Inflatable Ribbon in Warm UDC Orange */}
         <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-85">
-          <SlushRibbon variant="wave" color="teal" className="w-[140%] max-w-none transform -translate-y-6" />
+          <SlushRibbon variant="wave" color="orange" className="w-[140%] max-w-none transform -translate-y-6" />
         </div>
 
         {/* Floating Illustrated Stickers around the display headline */}
@@ -65,11 +65,11 @@ export const HomePage: React.FC = () => {
           {/* Top floating sticker row */}
           <div className="flex items-center justify-between pointer-events-none mb-6">
             <div className="pointer-events-auto transform -rotate-3 hover:rotate-0 transition-transform">
-              <SlushSticker type="grad" color="navy" label="UDC 1827" size="md" />
+              <SlushSticker type="grad" color="orange" label="UDC 1827" size="md" />
             </div>
 
             <div className="pointer-events-auto transform rotate-3 hover:rotate-0 transition-transform">
-              <SlushSticker type="coin" color="yellow" label="0% COMISIÓN" size="md" />
+              <SlushSticker type="coin" color="orange" label="0% COMISIÓN" size="md" />
             </div>
           </div>
 
@@ -78,11 +78,11 @@ export const HomePage: React.FC = () => {
             <Link to="/" className="inline-block group">
               <img
                 src="/udc-logo.png"
-                alt="Escudo Oficial Universidad de Cartagena"
+                alt="Universidad de Cartagena"
                 className="h-20 sm:h-24 w-auto mx-auto object-contain transition-transform group-hover:scale-105"
               />
-              <span className="block font-aeonik text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.08em] text-[#171a3d] mt-2">
-                Universidad de Cartagena · Fundada en 1827
+              <span className="inline-flex items-center gap-1.5 font-aeonik text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.08em] text-[#ec8026] mt-2 px-3 py-0.5 rounded-[1600px] bg-[#ffffff] border border-[#171a3d]">
+                <span>Iniciativa Estudiantil Independiente</span>
               </span>
             </Link>
 
@@ -93,16 +93,16 @@ export const HomePage: React.FC = () => {
 
               {/* Overlapping stickers pinned directly on type */}
               <div className="absolute -top-4 -right-2 sm:right-6 pointer-events-auto transform rotate-12">
-                <SlushSticker type="star" color="yellow" size="md" label="CAMPUS" />
+                <SlushSticker type="star" color="orange" size="md" label="CAMPUS" />
               </div>
               <div className="absolute -bottom-6 -left-2 sm:left-8 pointer-events-auto transform -rotate-12">
-                <SlushSticker type="check" color="teal" size="md" label="100% SEGURO" />
+                <SlushSticker type="check" color="teal" size="md" label="100% ENTRE ESTUDIANTES" />
               </div>
             </div>
 
             {/* Tagline Subhead */}
             <p className="text-base sm:text-xl text-[#171a3d]/85 max-w-2xl mx-auto font-medium tracking-[-0.010em] pt-4 leading-snug">
-              La plataforma oficial de intercambio y compraventa estudiantil entre todos los claustros y facultades de Cartagena.
+              La plataforma comunitaria e independiente de intercambio y compraventa entre todos los claustros y facultades de Cartagena.
             </p>
           </div>
 
@@ -119,7 +119,7 @@ export const HomePage: React.FC = () => {
               <Search className="absolute left-4 h-5 w-5 text-[#171a3d]/60 pointer-events-none" />
               <button
                 type="submit"
-                className="absolute right-2 h-10 px-5 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs sm:text-sm font-aeonik font-bold tracking-[0.032em] transition-transform active:scale-95"
+                className="absolute right-2 h-10 px-5 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs sm:text-sm font-aeonik font-bold tracking-[0.032em] transition-transform active:scale-95 shadow-sm"
               >
                 Buscar
               </button>
@@ -138,7 +138,7 @@ export const HomePage: React.FC = () => {
 
             <Link
               to="/create"
-              className="h-12 px-6 rounded-[1600px] border border-[#171a3d] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] flex items-center gap-2 transition-transform active:scale-95"
+              className="h-12 px-6 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] flex items-center gap-2 transition-transform active:scale-95 shadow-sm"
             >
               <Plus className="h-4 w-4 stroke-[3]" />
               <span>Publicar Artículo Gratis</span>
@@ -156,9 +156,9 @@ export const HomePage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/20 pb-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#df4838] border border-[#171a3d]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ec8026] border border-[#171a3d]" />
                 <span className="text-xs font-aeonik font-bold uppercase tracking-[0.032em] text-[#171a3d]">
-                  GACETA DE ANUNCIOS ACTIVOS · UDC
+                  MERCADO ESTUDIANTIL · UDC
                 </span>
               </div>
               <h2 className="font-lateral text-4xl sm:text-6xl text-[#171a3d] uppercase leading-[0.80]">
@@ -175,14 +175,14 @@ export const HomePage: React.FC = () => {
             </Link>
           </div>
 
-          {/* Quick Category Filter Pills in Official UDC Palette */}
+          {/* Quick Category Filter Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max">
             <button
               type="button"
               onClick={() => setSelectedCategory('')}
               className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-transform active:scale-95 ${
                 selectedCategory === ''
-                  ? 'bg-[#171a3d] text-[#ffffff]'
+                  ? 'bg-[#ec8026] text-[#ffffff]'
                   : 'bg-[#ffffff] text-[#171a3d] hover:bg-[#edf0f7]'
               }`}
             >
@@ -190,10 +190,10 @@ export const HomePage: React.FC = () => {
             </button>
             {CATEGORIAS_PRODUCTO.map((cat, idx) => {
               const bgStyles = [
-                'hover:bg-[#f2b725] hover:text-[#171a3d]',
+                'hover:bg-[#ec8026] hover:text-[#ffffff]',
                 'hover:bg-[#3da898] hover:text-[#ffffff]',
                 'hover:bg-[#44216b] hover:text-[#ffffff]',
-                'hover:bg-[#ec8026] hover:text-[#ffffff]',
+                'hover:bg-[#f2b725] hover:text-[#171a3d]',
                 'hover:bg-[#df4838] hover:text-[#ffffff]',
               ];
               const isSelected = selectedCategory === cat;
@@ -204,7 +204,7 @@ export const HomePage: React.FC = () => {
                   onClick={() => setSelectedCategory(isSelected ? '' : cat)}
                   className={`h-9 px-4 rounded-[1600px] border border-[#171a3d] text-xs font-aeonik font-bold tracking-[0.032em] transition-all active:scale-95 ${
                     isSelected
-                      ? 'bg-[#171a3d] text-[#ffffff]'
+                      ? 'bg-[#ec8026] text-[#ffffff]'
                       : `bg-[#ffffff] text-[#171a3d] ${bgStyles[idx % bgStyles.length]}`
                   }`}
                 >
@@ -214,7 +214,7 @@ export const HomePage: React.FC = () => {
             })}
           </div>
 
-          {/* Product Cards Grid: 20px rounded cards with 1px outlines */}
+          {/* Product Cards Grid */}
           {displayPosts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
               {displayPosts.map((post, idx) => {
@@ -239,7 +239,7 @@ export const HomePage: React.FC = () => {
               <div className="pt-2">
                 <Link
                   to="/create"
-                  className="inline-flex items-center gap-2 h-9 px-4 rounded-[1600px] bg-[#171a3d] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#252a5c] transition-transform active:scale-95"
+                  className="inline-flex items-center gap-2 h-9 px-4 rounded-[1600px] bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
                 >
                   <Plus className="h-3.5 w-3.5 stroke-[3]" />
                   <span>Publicar Artículo</span>
@@ -254,9 +254,9 @@ export const HomePage: React.FC = () => {
       {/* 3. TERTIARY SECTION: Campus Directo & Claustros UDC        */}
       {/* ========================================================= */}
       <section className="relative w-full bg-[#edf0f7] py-20 px-4 sm:px-8 border-b border-[#171a3d]/20 overflow-hidden">
-        {/* Signature 3D Ribbon Arcing across section */}
+        {/* Signature 3D Ribbon Arcing in Orange */}
         <div className="absolute -top-10 left-0 right-0 pointer-events-none z-0 opacity-80">
-          <SlushRibbon variant="arc" color="teal" className="w-full max-w-5xl mx-auto" />
+          <SlushRibbon variant="arc" color="orange" className="w-full max-w-5xl mx-auto" />
         </div>
 
         <div className="max-w-[1440px] mx-auto relative z-10">
@@ -264,7 +264,7 @@ export const HomePage: React.FC = () => {
             {/* Left: Headline with Pinned Stickers */}
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-3">
-                <SlushSticker type="check" color="teal" label="CLAUSTROS UDC" size="sm" rotate={-2} />
+                <SlushSticker type="check" color="orange" label="CLAUSTROS UDC" size="sm" rotate={-2} />
                 <SlushSticker type="zap" color="yellow" label="SIN INTERMEDIARIOS" size="sm" rotate={3} />
               </div>
 
@@ -281,9 +281,9 @@ export const HomePage: React.FC = () => {
                   <Link
                     key={sede}
                     to={`/catalog?sede=${encodeURIComponent(sede)}`}
-                    className="h-8 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#171a3d] hover:text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.032em] text-[#171a3d] flex items-center gap-1.5 transition-colors"
+                    className="h-8 px-3 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] hover:bg-[#ec8026] hover:text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.032em] text-[#171a3d] flex items-center gap-1.5 transition-colors"
                   >
-                    <MapPin className="h-3 w-3 text-[#df4838]" />
+                    <MapPin className="h-3 w-3 text-[#ec8026]" />
                     <span>Campus {sede}</span>
                   </Link>
                 ))}
@@ -292,10 +292,10 @@ export const HomePage: React.FC = () => {
 
             {/* Right: Campus Information & Safe Trade Cards */}
             <div className="lg:col-span-5 space-y-4">
-              {/* Direct Hand-off Card in Official UDC Navy & Yellow */}
+              {/* Direct Hand-off Card in UDC Navy & Orange */}
               <div className="rounded-[20px] bg-[#171a3d] border border-[#171a3d] p-6 text-[#ffffff] space-y-3 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-[0.032em] text-[#f2b725] block">
+                  <span className="text-xs font-bold uppercase tracking-[0.032em] text-[#ec8026] block">
                     100% ESTUDIANTIL · SIN INTERMEDIARIOS
                   </span>
                   <CheckCircle2 className="h-5 w-5 text-[#3da898]" />
@@ -306,8 +306,8 @@ export const HomePage: React.FC = () => {
                 <p className="text-xs font-medium text-[#ffffff]/85 leading-relaxed">
                   Pacta el punto de encuentro por WhatsApp con tu compañero de facultad. Revisa el estado del artículo en persona antes de pagar, sin envíos costosos ni comisiones ocultas.
                 </p>
-                <div className="flex items-center gap-2 pt-1 text-[11px] font-bold text-[#f2b725]">
-                  <span>Entrega mano a mano verificada por la comunidad UDC</span>
+                <div className="flex items-center gap-2 pt-1 text-[11px] font-bold text-[#ec8026]">
+                  <span>Entrega mano a mano acordada directamente entre estudiantes</span>
                 </div>
               </div>
 
@@ -315,15 +315,15 @@ export const HomePage: React.FC = () => {
               <div className="rounded-[20px] bg-[#ffffff] border border-[#171a3d] p-6 space-y-3">
                 <div className="flex items-center justify-between">
                   <h4 className="font-aeonik font-bold text-base text-[#171a3d] uppercase tracking-[0.032em]">
-                    PUNTOS DE ENCUENTRO OFICIALES
+                    PUNTOS DE ENCUENTRO RECOMENDADOS
                   </h4>
-                  <ShieldCheck className="h-5 w-5 text-[#3da898]" />
+                  <ShieldCheck className="h-5 w-5 text-[#ec8026]" />
                 </div>
                 <p className="text-xs text-[#171a3d]/80 font-medium leading-relaxed">
                   Para máxima seguridad, recomendamos realizar el pago y entrega en las bibliotecas centrales o cafeterías de cada campus de la Universidad de Cartagena.
                 </p>
                 <div className="flex items-center gap-2 pt-1 text-[11px] font-bold text-[#171a3d]">
-                  <span className="h-2 w-2 rounded-full bg-[#3da898] border border-[#171a3d]" />
+                  <span className="h-2 w-2 rounded-full bg-[#ec8026] border border-[#171a3d]" />
                   <span>San Agustín · Zaragocilla · Piedra de Bolívar · San Pablo</span>
                 </div>
               </div>

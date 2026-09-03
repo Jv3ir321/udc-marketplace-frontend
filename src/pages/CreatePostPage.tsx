@@ -69,7 +69,7 @@ export const CreatePostPage: React.FC = () => {
 
         <div className="rounded-[24px] bg-[#ffffff] border border-[#171a3d] p-6 sm:p-8 space-y-6 shadow-sm">
           <div className="border-b border-[#171a3d]/20 pb-4 space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-[0.032em] text-[#3da898] block">
+            <span className="text-[11px] font-bold uppercase tracking-[0.032em] text-[#ec8026] block">
               MERCADO ESTUDIANTIL UDC
             </span>
             <h1 className="text-3xl sm:text-4xl font-lateral uppercase tracking-normal text-[#171a3d] leading-none">
@@ -180,7 +180,7 @@ export const CreatePostPage: React.FC = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
+                className="w-full h-12 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm"
               >
                 {isSubmitting ? (
                   <span>Publicando en UDC Marketplace...</span>

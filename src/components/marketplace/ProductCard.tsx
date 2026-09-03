@@ -53,14 +53,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {/* Sticker Campus Badge */}
             <div className="absolute top-2.5 left-2.5">
               <span className="inline-flex items-center gap-1 bg-[#ffffff] text-[#171a3d] text-[11px] font-bold tracking-[0.030em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px] shadow-sm">
-                <MapPin className="h-3 w-3 text-[#df4838]" />
+                <MapPin className="h-3 w-3 text-[#ec8026]" />
                 {post.sede}
               </span>
             </div>
 
-            {/* Sticker Category Pill in UDC Yellow */}
+            {/* Sticker Category Pill in Vibrant Orange */}
             <div className="absolute top-2.5 right-2.5">
-              <span className="inline-flex items-center bg-[#f2b725] text-[#171a3d] text-[10px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px] shadow-sm">
+              <span className="inline-flex items-center bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 border border-[#171a3d] rounded-[1600px] shadow-sm">
                 {post.tipoP}
               </span>
             </div>
@@ -75,8 +75,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 {post.nombre}
               </h3>
             </Link>
-            <span className="shrink-0 bg-[#df4838] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.032em] px-2 py-0.5 rounded-[1600px] border border-[#171a3d]">
-              NUEVO
+            <span className="shrink-0 bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.032em] px-2 py-0.5 rounded-[1600px] border border-[#171a3d]">
+              ACTIVO
             </span>
           </div>
 
@@ -87,7 +87,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div className="flex items-center gap-2 text-xs font-bold text-[#171a3d]/60 pt-1">
             <span className="truncate">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
             <span>·</span>
-            <span className="text-[#44216b]">Verificado</span>
+            <span className="text-[#ec8026]">Verificado</span>
           </div>
         </div>
       </div>
@@ -109,13 +109,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             title="Pactar entrega por WhatsApp"
-            className="h-8 w-8 rounded-[1600px] border border-[#171a3d] bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-90 shrink-0"
+            className="h-8 w-8 rounded-[1600px] border border-[#171a3d] bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-90 shrink-0 shadow-sm"
           >
             <MessageCircle className="h-4 w-4 fill-current" />
           </a>
           <Link
             to={`/post/${post.id}`}
-            className="h-8 px-3 rounded-[1600px] border border-[#171a3d] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-bold tracking-[0.032em] flex items-center justify-center transition-colors"
+            className="h-8 px-3.5 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold tracking-[0.032em] flex items-center justify-center transition-colors shadow-sm"
           >
             Ver
           </Link>

@@ -176,7 +176,7 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
               type="submit"
               size="sm"
               disabled={isSubmitting}
-              className="h-9 px-5 rounded-[1600px] bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-bold border border-[#171a3d]"
+              className="h-9 px-5 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold border border-[#171a3d] shadow-sm"
             >
               {isSubmitting ? 'Guardando...' : 'Guardar Cambios'}
             </Button>

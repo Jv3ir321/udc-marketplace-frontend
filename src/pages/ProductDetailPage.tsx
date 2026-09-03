@@ -196,7 +196,7 @@ export const ProductDetailPage: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <span className="bg-[#f2b725] text-[#171a3d] text-[11px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 rounded-[1600px] border border-[#171a3d] inline-block shadow-sm">
+                <span className="bg-[#ec8026] text-[#ffffff] text-[11px] font-bold uppercase tracking-[0.032em] px-2.5 py-0.5 rounded-[1600px] border border-[#171a3d] inline-block shadow-sm">
                   {post.tipoP}
                 </span>
                 <h1 className="text-2xl sm:text-3xl font-aeonik font-bold text-[#171a3d] leading-snug">
@@ -210,7 +210,7 @@ export const ProductDetailPage: React.FC = () => {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-[1600px] bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] transition-transform active:scale-95 border border-[#171a3d] shadow-sm"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] transition-transform active:scale-95 border border-[#171a3d] shadow-sm"
                 >
                   <MessageCircle className="h-4 w-4 fill-current" />
                   <span>Pactar Entrega por WhatsApp</span>
@@ -223,10 +223,10 @@ export const ProductDetailPage: React.FC = () => {
 
               {/* Safe Trade Notice */}
               <div className="border border-[#171a3d] bg-[#edf0f7] rounded-[20px] p-4 flex items-start gap-3 shadow-sm">
-                <ShieldCheck className="h-5 w-5 text-[#3da898] shrink-0 mt-0.5" />
+                <ShieldCheck className="h-5 w-5 text-[#ec8026] shrink-0 mt-0.5" />
                 <div className="text-xs space-y-0.5">
                   <span className="font-bold uppercase tracking-[0.032em] text-[#171a3d] block">
-                    Punto de Encuentro Oficial
+                    Punto de Encuentro Recomendado
                   </span>
                   <p className="text-[#171a3d]/80 font-medium leading-relaxed">
                     Recomendamos encontrarse dentro del campus {post.sede} (en biblioteca o cafetería central) para revisar el artículo en persona.
