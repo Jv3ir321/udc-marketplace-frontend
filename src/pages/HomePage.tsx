@@ -55,9 +55,9 @@ export const HomePage: React.FC = () => {
       {/* 1. HERO SECTION: Community Identity & Orange Accents       */}
       {/* ========================================================= */}
       <section className="relative w-full bg-[#edf0f7] overflow-hidden pt-10 pb-20 sm:pb-28 px-4 sm:px-8 border-b border-[#171a3d]/20">
-        {/* Signature 3D Inflatable Ribbon in Warm UDC Orange */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-85">
-          <SlushRibbon variant="wave" color="orange" className="w-[140%] max-w-none transform -translate-y-6" />
+        {/* Signature 3D Inflatable Ribbon in Warm UDC Orange (positioned behind headline) */}
+        <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-75">
+          <SlushRibbon variant="wave" color="orange" className="w-[140%] max-w-none transform -translate-y-14 sm:-translate-y-20" />
         </div>
 
         {/* Floating Illustrated Stickers around the display headline */}
@@ -92,16 +92,16 @@ export const HomePage: React.FC = () => {
               </h1>
 
               {/* Overlapping stickers pinned directly on type */}
-              <div className="absolute -top-4 -right-2 sm:right-6 pointer-events-auto transform rotate-12">
+              <div className="absolute -top-4 -right-2 sm:right-6 pointer-events-auto transform rotate-12 z-20">
                 <SlushSticker type="star" color="orange" size="md" label="CAMPUS" />
               </div>
-              <div className="absolute -bottom-6 -left-2 sm:left-8 pointer-events-auto transform -rotate-12">
-                <SlushSticker type="check" color="teal" size="md" label="100% ENTRE ESTUDIANTES" />
+              <div className="absolute -bottom-3 -left-2 sm:left-6 pointer-events-auto transform -rotate-12 z-20">
+                <SlushSticker type="check" color="teal" size="sm" label="100% ENTRE ESTUDIANTES" />
               </div>
             </div>
 
-            {/* Tagline Subhead */}
-            <p className="text-base sm:text-xl text-[#171a3d]/85 max-w-2xl mx-auto font-medium tracking-[-0.010em] pt-4 leading-snug">
+            {/* Tagline Subhead with added spacing */}
+            <p className="text-base sm:text-xl text-[#171a3d]/90 max-w-2xl mx-auto font-medium tracking-[-0.010em] mt-7 sm:mt-10 leading-snug px-4">
               La plataforma comunitaria e independiente de intercambio y compraventa entre todos los claustros y facultades de Cartagena.
             </p>
           </div>
