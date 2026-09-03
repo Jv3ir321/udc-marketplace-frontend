@@ -267,24 +267,28 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ========================================================= */}
-      {/* 2. ARTÍCULOS DESTACADOS: Bento Box Grid with SlowSlide     */}
+      {/* 2. ARTÍCULOS DESTACADOS: Tablón de Avisos Estudiantil      */}
       {/* ========================================================= */}
-      <section className="w-full bg-[#ffffff] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
+      <section className="w-full bg-[#faf8f5] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
         <div className="max-w-[1360px] mx-auto space-y-8">
           <SlowSlide direction="up" duration={0.8} distance={30}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/10 pb-4">
               <div>
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="h-2 w-2 rounded-full bg-[#ec8026]" />
+                <div className="flex items-center gap-2.5 mb-1.5">
+                  {/* Glossy 3D Red Pushpin Icon from screenshot */}
+                  <span className="relative flex h-4 w-4 items-center justify-center shrink-0">
+                    <span className="h-4 w-4 rounded-full bg-gradient-to-tr from-[#df4838] via-[#ef4444] to-[#fca5a5] shadow-[0_2px_4px_rgba(0,0,0,0.25)] border border-white/80" />
+                    <span className="absolute top-0.5 left-1 h-1.5 w-1.5 rounded-full bg-white/90" />
+                  </span>
                   <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ec8026]">
-                    Catálogo Activo · Formato Bento Box
+                    Tablón de Avisos · Campus UDC
                   </span>
                 </div>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
-                  Artículos y publicaciones recientes
+                  Publicaciones recientes en el tablón
                 </h2>
-                <p className="text-xs text-[#171a3d]/65 mt-1 font-medium">
-                  Material ofrecido directamente por estudiantes de las diversas facultades
+                <p className="text-xs text-[#171a3d]/70 mt-1 font-medium">
+                  Últimos avisos colgados por estudiantes de la Universidad de Cartagena
                 </p>
               </div>
 
@@ -305,7 +309,7 @@ export const HomePage: React.FC = () => {
                 className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
                   selectedCategory === ''
                     ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
-                    : 'bg-[#faf8f5] text-[#171a3d]/80 hover:bg-[#edf0f7]'
+                    : 'bg-[#ffffff] text-[#171a3d]/80 border border-[#171a3d]/15 hover:bg-[#edf0f7]'
                 }`}
               >
                 Todos los Artículos
@@ -320,7 +324,7 @@ export const HomePage: React.FC = () => {
                     className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
                       isSelected
                         ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
-                        : 'bg-[#faf8f5] text-[#171a3d]/80 hover:bg-[#edf0f7]'
+                        : 'bg-[#ffffff] text-[#171a3d]/80 border border-[#171a3d]/15 hover:bg-[#edf0f7]'
                     }`}
                   >
                     {cat}
@@ -330,41 +334,85 @@ export const HomePage: React.FC = () => {
             </div>
           </SlowSlide>
 
-          {/* Product Cards Bento Grid with Slow Slide */}
+          {/* Pegboard Bulletin Board (Tablón de Avisos de Corcho/Madera) */}
           <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
-            {displayPosts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-2">
-                {displayPosts.map((post, idx) => {
-                  const bento = getBentoConfig(idx);
-                  return (
-                    <div key={post.id} className={bento.className}>
-                      <BentoCard post={post} variant={bento.variant} index={idx} />
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border border-[#171a3d]/10 space-y-3">
-                <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto border border-[#ec8026]/20 shadow-sm">
-                  <BookOpen className="h-6 w-6" />
+            <div
+              className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 border-[6px] sm:border-[8px] border-[#915f36] shadow-[inset_0_4px_24px_rgba(40,20,5,0.38),0_14px_34px_-6px_rgba(23,26,61,0.18)]"
+              style={{
+                backgroundColor: '#b98858',
+                backgroundImage: `
+                  radial-gradient(#6e431e 18%, transparent 20%),
+                  radial-gradient(#855528 18%, transparent 20%)
+                `,
+                backgroundPosition: '0 0, 14px 14px',
+                backgroundSize: '28px 28px',
+              }}
+            >
+              {/* Corner Mounting Screws on Board */}
+              <div className="absolute top-2.5 left-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
+              <div className="absolute top-2.5 right-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
+              <div className="absolute bottom-2.5 left-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
+              <div className="absolute bottom-2.5 right-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
+
+              {displayPosts.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {displayPosts.map((post, idx) => {
+                    const bento = getBentoConfig(idx);
+                    return (
+                      <div key={post.id} className={`${bento.className} relative pt-2 group/pin`}>
+                        {/* Tactile 3D Pushpin on top of each card */}
+                        <div
+                          className="absolute top-0 left-6 z-20 h-4.5 w-4.5 rounded-full shadow-[0_3px_5px_rgba(0,0,0,0.4)] border border-[#ffffff]/90 flex items-center justify-center transition-transform group-hover/pin:scale-110"
+                          style={{
+                            width: '18px',
+                            height: '18px',
+                            background:
+                              idx % 3 === 0
+                                ? 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)'
+                                : idx % 3 === 1
+                                ? 'radial-gradient(circle at 35% 35%, #ffb156, #ec8026 70%, #b35607)'
+                                : 'radial-gradient(circle at 35% 35%, #ffe17d, #f2b725 70%, #b8860c)',
+                          }}
+                        >
+                          <div className="h-1.5 w-1.5 rounded-full bg-[#ffffff]/80" />
+                        </div>
+                        <BentoCard post={post} variant={bento.variant} index={idx} />
+                      </div>
+                    );
+                  })}
                 </div>
-                <h3 className="text-lg font-bold text-[#171a3d]">
-                  No hay artículos publicados todavía
-                </h3>
-                <p className="text-xs font-normal text-[#171a3d]/70 max-w-md mx-auto">
-                  Sé el primero de tu facultad en publicar un libro, calculadora, bata o material académico.
-                </p>
-                <div className="pt-2">
-                  <Link
-                    to="/create"
-                    className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
-                  >
-                    <Plus className="h-3.5 w-3.5 stroke-[3]" />
-                    <span>Publicar Primer Artículo</span>
-                  </Link>
+              ) : (
+                <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border-2 border-dashed border-[#855528]/40 space-y-3 max-w-md mx-auto my-6 shadow-md relative">
+                  {/* Pushpin on empty note */}
+                  <div
+                    className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 rounded-full shadow-md border border-white"
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      background: 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)',
+                    }}
+                  />
+                  <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto border border-[#ec8026]/20 shadow-sm">
+                    <BookOpen className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#171a3d]">
+                    No hay avisos colgados en el tablón
+                  </h3>
+                  <p className="text-xs font-normal text-[#171a3d]/70 max-w-md mx-auto">
+                    Sé el primero de tu facultad en colgar un aviso de libro, bata o calculadora en este claustro.
+                  </p>
+                  <div className="pt-2">
+                    <Link
+                      to="/create"
+                      className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
+                    >
+                      <Plus className="h-3.5 w-3.5 stroke-[3]" />
+                      <span>Colgar Primer Aviso</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </SlowSlide>
         </div>
       </section>
