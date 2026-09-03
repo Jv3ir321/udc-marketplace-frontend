@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMarketplace } from '@/context/MarketplaceContext';
-import { ProductCard } from '@/components/marketplace/ProductCard';
+import { BentoCard } from '@/components/marketplace/BentoCard';
 import { PageTransition } from '@/components/common/PageTransition';
 import { SlowSlide } from '@/components/common/SlowSlide';
 import { Input } from '@/components/ui/input';
@@ -15,7 +15,7 @@ import {
   BookOpen,
   Building2,
 } from 'lucide-react';
-import { CATEGORIAS_PRODUCTO, UDC_SEDES } from '@/lib/utils';
+import { CATEGORIAS_PRODUCTO, UDC_SEDES, formatCampusName } from '@/lib/utils';
 
 export const HomePage: React.FC = () => {
   const { posts } = useMarketplace();
@@ -49,36 +49,57 @@ export const HomePage: React.FC = () => {
     ? posts.filter((p) => p.tipoP === selectedCategory).slice(0, 6)
     : posts.slice(0, 6);
 
+  // Bento Box organization configuration for recent posts
+  const getBentoConfig = (index: number) => {
+    const pattern = index % 6;
+    switch (pattern) {
+      case 0:
+        return { variant: 'wide' as const, className: 'col-span-1 lg:col-span-2' };
+      case 1:
+        return { variant: 'standard' as const, className: 'col-span-1' };
+      case 2:
+        return { variant: 'standard' as const, className: 'col-span-1' };
+      case 3:
+        return { variant: 'wide' as const, className: 'col-span-1 lg:col-span-2' };
+      case 4:
+        return { variant: 'standard' as const, className: 'col-span-1' };
+      case 5:
+        return { variant: 'standard' as const, className: 'col-span-1' };
+      default:
+        return { variant: 'standard' as const, className: 'col-span-1' };
+    }
+  };
+
   return (
     <PageTransition className="min-h-screen flex flex-col font-aeonik bg-[#faf8f5] text-[#171a3d]">
       {/* ========================================================= */}
-      {/* 1. BENTO HERO SECTION: Light Ivory, Bold Sans, Bento Grid */}
+      {/* 1. BENTO HERO SECTION: Light Ivory with Warm Orange Scheme */}
       {/* ========================================================= */}
       <section className="relative w-full bg-[#faf8f5] pt-12 pb-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
         <div className="max-w-[1360px] mx-auto space-y-10">
           {/* Top Hero Typography Block */}
           <SlowSlide direction="up" duration={0.8} distance={25}>
             <div className="space-y-4 max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ffffff] border border-[#171a3d]/15 text-xs font-bold text-[#44216b] shadow-sm">
-                <span className="h-2 w-2 rounded-full bg-[#3da898] animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fdf3eb] border border-[#ec8026]/30 text-xs font-bold text-[#ec8026] shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-[#ec8026] animate-pulse" />
                 <span className="uppercase tracking-[0.06em]">Comunidad Estudiantil UDC</span>
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#171a3d] tracking-tight leading-[1.04] uppercase">
                 REVOLUCIÓN EN EL MERCADO DEL{' '}
-                <span className="text-[#3da898] font-black underline decoration-[#3da898]/40 decoration-wavy">
+                <span className="text-[#ec8026] font-black underline decoration-[#ec8026]/40 decoration-wavy">
                   CAMPUS
                 </span>
               </h1>
 
-              <p className="text-base sm:text-xl text-[#44216b] font-medium max-w-2xl leading-relaxed pt-1">
+              <p className="text-base sm:text-xl text-[#171a3d]/80 font-medium max-w-2xl leading-relaxed pt-1">
                 La plataforma directa e independiente para comprar, vender e intercambiar libros, calculadoras, batas y tecnología entre estudiantes de la Universidad de Cartagena.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-3">
                 <Link
                   to="/create"
-                  className="h-12 px-7 rounded-full bg-[#44216b] hover:bg-[#341853] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.03em] flex items-center gap-2 transition-all shadow-md active:scale-95 uppercase"
+                  className="h-12 px-7 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.03em] flex items-center gap-2 transition-all shadow-md shadow-[#ec8026]/20 active:scale-95 uppercase"
                 >
                   <Plus className="h-4 w-4 stroke-[3]" />
                   <span>Publicar Aviso Gratis</span>
@@ -89,7 +110,7 @@ export const HomePage: React.FC = () => {
                   className="h-12 px-6 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.03em] flex items-center gap-2 transition-all shadow-md active:scale-95 uppercase"
                 >
                   <span>Explorar Catálogo</span>
-                  <ArrowRight className="h-4 w-4 text-[#3da898]" />
+                  <ArrowRight className="h-4 w-4 text-[#ec8026]" />
                 </Link>
               </div>
             </div>
@@ -233,7 +254,7 @@ export const HomePage: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="h-10 px-6 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.03em] transition-all active:scale-95 shadow-sm uppercase"
+                  className="h-10 px-6 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.03em] transition-all active:scale-95 shadow-sm uppercase"
                 >
                   Buscar
                 </button>
@@ -244,7 +265,7 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ========================================================= */}
-      {/* 2. ARTÍCULOS DESTACADOS: Clean Grid with SlowSlide        */}
+      {/* 2. ARTÍCULOS DESTACADOS: Bento Box Grid with SlowSlide     */}
       {/* ========================================================= */}
       <section className="w-full bg-[#ffffff] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
         <div className="max-w-[1360px] mx-auto space-y-8">
@@ -254,7 +275,7 @@ export const HomePage: React.FC = () => {
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="h-2 w-2 rounded-full bg-[#ec8026]" />
                   <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ec8026]">
-                    Catálogo Activo
+                    Catálogo Activo · Formato Bento Box
                   </span>
                 </div>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
@@ -267,7 +288,7 @@ export const HomePage: React.FC = () => {
 
               <Link
                 to="/catalog"
-                className="h-9 px-4 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#f5f7fc] text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors"
+                className="h-9 px-4 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#fdf3eb] hover:border-[#ec8026]/40 text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors shadow-sm"
               >
                 <span>Ver todo el catálogo</span>
                 <ArrowRight className="h-3.5 w-3.5 text-[#ec8026]" />
@@ -279,9 +300,9 @@ export const HomePage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSelectedCategory('')}
-                className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all active:scale-95 ${
+                className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
                   selectedCategory === ''
-                    ? 'bg-[#171a3d] text-[#ffffff] shadow-sm'
+                    ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
                     : 'bg-[#faf8f5] text-[#171a3d]/80 hover:bg-[#edf0f7]'
                 }`}
               >
@@ -294,9 +315,9 @@ export const HomePage: React.FC = () => {
                     key={cat}
                     type="button"
                     onClick={() => setSelectedCategory(isSelected ? '' : cat)}
-                    className={`h-9 px-4 rounded-full text-xs font-aeonik font-semibold tracking-[0.02em] transition-all active:scale-95 ${
+                    className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
                       isSelected
-                        ? 'bg-[#171a3d] text-[#ffffff] shadow-sm'
+                        ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
                         : 'bg-[#faf8f5] text-[#171a3d]/80 hover:bg-[#edf0f7]'
                     }`}
                   >
@@ -307,17 +328,22 @@ export const HomePage: React.FC = () => {
             </div>
           </SlowSlide>
 
-          {/* Product Cards Grid with Slow Slide */}
+          {/* Product Cards Bento Grid with Slow Slide */}
           <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
             {displayPosts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-                {displayPosts.map((post) => (
-                  <ProductCard key={post.id} post={post} />
-                ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
+                {displayPosts.map((post, idx) => {
+                  const bento = getBentoConfig(idx);
+                  return (
+                    <div key={post.id} className={bento.className}>
+                      <BentoCard post={post} variant={bento.variant} index={idx} />
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border border-[#171a3d]/10 space-y-3">
-                <div className="h-12 w-12 rounded-full bg-[#ffffff] text-[#ec8026] flex items-center justify-center mx-auto border border-[#171a3d]/15 shadow-sm">
+                <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto border border-[#ec8026]/20 shadow-sm">
                   <BookOpen className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-[#171a3d]">
@@ -329,7 +355,7 @@ export const HomePage: React.FC = () => {
                 <div className="pt-2">
                   <Link
                     to="/create"
-                    className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#44216b] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#341853] transition-transform active:scale-95 shadow-sm"
+                    className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
                   >
                     <Plus className="h-3.5 w-3.5 stroke-[3]" />
                     <span>Publicar Primer Artículo</span>
@@ -348,15 +374,15 @@ export const HomePage: React.FC = () => {
         <div className="max-w-[1360px] mx-auto">
           <SlowSlide direction="up" duration={0.85} distance={30}>
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffffff] border border-[#171a3d]/10 text-xs font-semibold text-[#171a3d] mb-3 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fdf3eb] border border-[#ec8026]/20 text-xs font-bold text-[#ec8026] mb-3 shadow-sm">
                 <Building2 className="h-3.5 w-3.5 text-[#ec8026]" />
                 <span>Intercambio en Sedes UDC</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
-                Puntos de encuentro por Claustro
+                Puntos de encuentro en Claustro y Sedes
               </h2>
               <p className="text-xs sm:text-sm text-[#171a3d]/70 mt-2 font-normal">
-                Diseñado para que los estudiantes acuerden entregas seguras dentro de su mismo claustro o facultad.
+                Acuerda entregas mano a mano en el Claustro San Agustín o en las sedes Zaragocilla, Piedra de Bolívar y San Pablo.
               </p>
             </div>
 
@@ -366,19 +392,19 @@ export const HomePage: React.FC = () => {
                 <Link
                   key={sede}
                   to={`/catalog?sede=${encodeURIComponent(sede)}`}
-                  className="p-5 rounded-2xl bg-[#ffffff] border border-[#171a3d]/15 hover:border-[#44216b]/50 transition-all shadow-sm hover:shadow-md hover:-translate-y-1 group"
+                  className="p-5 rounded-2xl bg-[#ffffff] border border-[#171a3d]/15 hover:border-[#ec8026]/60 transition-all shadow-sm hover:shadow-md hover:-translate-y-1 group"
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span className="h-8 w-8 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center">
                       <MapPin className="h-4 w-4" />
                     </span>
-                    <ArrowRight className="h-4 w-4 text-[#171a3d]/40 group-hover:text-[#44216b] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="h-4 w-4 text-[#171a3d]/40 group-hover:text-[#ec8026] group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h4 className="font-bold text-base text-[#171a3d] group-hover:text-[#44216b] transition-colors">
-                    Campus {sede}
+                  <h4 className="font-bold text-base text-[#171a3d] group-hover:text-[#ec8026] transition-colors">
+                    {formatCampusName(sede)}
                   </h4>
                   <p className="text-xs text-[#171a3d]/60 mt-1">
-                    Ver publicaciones con entrega en este claustro
+                    Ver publicaciones con entrega en este lugar
                   </p>
                 </Link>
               ))}
@@ -392,7 +418,7 @@ export const HomePage: React.FC = () => {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 h-10 w-10 rounded-full bg-[#171a3d] hover:bg-[#44216b] text-[#ffffff] flex items-center justify-center transition-all shadow-md active:scale-90"
+          className="fixed bottom-6 right-6 z-50 h-10 w-10 rounded-full bg-[#171a3d] hover:bg-[#ec8026] text-[#ffffff] flex items-center justify-center transition-all shadow-md active:scale-90"
           aria-label="Volver arriba"
         >
           <ArrowUp className="h-4 w-4" />

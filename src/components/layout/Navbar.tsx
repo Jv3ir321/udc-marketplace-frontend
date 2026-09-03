@@ -69,7 +69,7 @@ export const Navbar: React.FC = () => {
               <span className="font-aeonik font-black text-xl sm:text-2xl text-[#171a3d] leading-[1.0] uppercase tracking-tight">
                 UDC MARKETPLACE
               </span>
-              <span className="font-aeonik text-[10px] sm:text-[11px] font-bold tracking-[0.04em] text-[#3da898] uppercase">
+              <span className="font-aeonik text-[10px] sm:text-[11px] font-bold tracking-[0.04em] text-[#ec8026] uppercase">
                 Mercado Estudiantil
               </span>
             </div>
@@ -111,21 +111,18 @@ export const Navbar: React.FC = () => {
                 navigate(`/catalog${val ? `?sede=${encodeURIComponent(val)}` : ''}`);
               }}
             >
-              <option value="all">Todos los Campus</option>
+              <option value="all">Claustro y Sedes</option>
               {UDC_SEDES.map((sede) => (
                 <option key={sede} value={sede}>
-                  Campus {sede}
+                  {sede}
                 </option>
               ))}
             </select>
           </div>
         </div>
 
-        {/* Center Search Input */}
-        <form
-          onSubmit={handleSearchSubmit}
-          className="hidden sm:flex items-center relative w-48 md:w-64 lg:w-72"
-        >
+        {/* Center Search Pill */}
+        <form onSubmit={handleSearchSubmit} className="hidden md:flex flex-1 max-w-xs mx-3">
           <div className="relative w-full">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#171a3d]/60" />
             <Input
@@ -147,13 +144,13 @@ export const Navbar: React.FC = () => {
           </div>
         </form>
 
-        {/* Right Action Buttons with Navy (#171a3d) and Deep Purple (#44216b) */}
+        {/* Right Action Buttons */}
         <div className="flex items-center gap-2">
-          {/* Filled CTA Button in Deep Purple (#44216b) */}
+          {/* Filled CTA Button in Vibrant Orange (#ec8026) */}
           <Button
             asChild
             size="sm"
-            className="h-9 px-4 rounded-full bg-[#44216b] hover:bg-[#341853] text-[#ffffff] font-aeonik font-bold text-[13px] tracking-[0.02em] transition-transform active:scale-95 shadow-sm"
+            className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-[13px] tracking-[0.02em] transition-transform active:scale-95 shadow-sm shadow-[#ec8026]/20"
           >
             <Link to="/create">
               <Plus className="h-4 w-4 mr-1 stroke-[3]" />
@@ -167,7 +164,7 @@ export const Navbar: React.FC = () => {
             title="Ver catálogo"
             className="h-9 w-9 rounded-full bg-[#171a3d] hover:bg-[#252a5c] flex items-center justify-center text-[#ffffff] transition-colors shadow-sm"
           >
-            <Sparkles className="h-4 w-4 text-[#3da898] fill-[#3da898]" />
+            <Sparkles className="h-4 w-4 text-[#ec8026] fill-[#ec8026]" />
           </Link>
 
           {/* User Profile / Auth State */}
