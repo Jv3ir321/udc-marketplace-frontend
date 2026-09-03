@@ -6,10 +6,10 @@ import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { formatCOP, getBackendImageUrl, formatCampusName } from '@/lib/utils';
+import WhatsappIcon from '@/components/ui/whatsapp-icon';
 import {
   ArrowLeft,
   MapPin,
-  MessageCircle,
   Share2,
   Calendar,
   ShieldCheck,
@@ -211,9 +211,9 @@ export const ProductDetailPage: React.FC = () => {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] transition-transform active:scale-95 border border-[#171a3d] shadow-sm"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] transition-transform active:scale-95 border border-[#171a3d] shadow-sm group/wa"
                 >
-                  <MessageCircle className="h-4 w-4 fill-current" />
+                  <WhatsappIcon size={20} strokeWidth={2.2} color="#ffffff" />
                   <span>Pactar Entrega por WhatsApp</span>
                 </a>
 

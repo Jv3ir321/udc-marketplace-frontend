@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Post } from '@/types';
 import { formatCOP, getBackendImageUrl, formatCampusName } from '@/lib/utils';
-import { MessageCircle, MapPin } from 'lucide-react';
+import WhatsappIcon from '@/components/ui/whatsapp-icon';
+import { MapPin } from 'lucide-react';
 
 interface ProductCardProps {
   post: Post;
@@ -92,9 +93,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
             target="_blank"
             rel="noopener noreferrer"
             title="Pactar entrega por WhatsApp"
-            className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-95 shadow-sm"
+            className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-95 shadow-sm group/wa"
           >
-            <MessageCircle className="h-4 w-4 fill-current" />
+            <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
           </a>
           <Link
             to={`/post/${post.id}`}

@@ -49,22 +49,24 @@ export const HomePage: React.FC = () => {
     ? posts.filter((p) => p.tipoP === selectedCategory).slice(0, 6)
     : posts.slice(0, 6);
 
-  // Bento Box organization configuration for recent posts
+  // Bento Box organization with the exact same 4-column rules as the Hero Bento Box
+  // Row 1: [Wide: 2 cols] + [Standard: 1 col] + [Standard: 1 col] = 4 cols
+  // Row 2: [Standard: 1 col] + [Standard: 1 col] + [Wide: 2 cols] = 4 cols
   const getBentoConfig = (index: number) => {
     const pattern = index % 6;
     switch (pattern) {
       case 0:
-        return { variant: 'wide' as const, className: 'col-span-1 lg:col-span-2' };
+        return { variant: 'wide' as const, className: 'col-span-1 sm:col-span-2 lg:col-span-2' };
       case 1:
         return { variant: 'standard' as const, className: 'col-span-1' };
       case 2:
         return { variant: 'standard' as const, className: 'col-span-1' };
       case 3:
-        return { variant: 'wide' as const, className: 'col-span-1 lg:col-span-2' };
+        return { variant: 'standard' as const, className: 'col-span-1' };
       case 4:
         return { variant: 'standard' as const, className: 'col-span-1' };
       case 5:
-        return { variant: 'standard' as const, className: 'col-span-1' };
+        return { variant: 'wide' as const, className: 'col-span-1 sm:col-span-2 lg:col-span-2' };
       default:
         return { variant: 'standard' as const, className: 'col-span-1' };
     }
@@ -331,7 +333,7 @@ export const HomePage: React.FC = () => {
           {/* Product Cards Bento Grid with Slow Slide */}
           <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
             {displayPosts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-2">
                 {displayPosts.map((post, idx) => {
                   const bento = getBentoConfig(idx);
                   return (

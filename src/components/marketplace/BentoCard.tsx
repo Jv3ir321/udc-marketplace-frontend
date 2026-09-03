@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Post } from '@/types';
 import { formatCOP, getBackendImageUrl, formatCampusName } from '@/lib/utils';
-import { MessageCircle, MapPin, ArrowRight } from 'lucide-react';
+import WhatsappIcon from '@/components/ui/whatsapp-icon';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 interface BentoCardProps {
   post: Post;
@@ -26,26 +27,26 @@ export const BentoCard: React.FC<BentoCardProps> = ({
 
   // Accent theme for category badges and subtle hover states
   const accents = [
-    { badge: 'bg-[#ec8026]', text: 'text-[#ec8026]', border: 'hover:border-[#ec8026]/40' },
-    { badge: 'bg-[#44216b]', text: 'text-[#44216b]', border: 'hover:border-[#44216b]/40' },
-    { badge: 'bg-[#3da898]', text: 'text-[#3da898]', border: 'hover:border-[#3da898]/40' },
-    { badge: 'bg-[#df4838]', text: 'text-[#df4838]', border: 'hover:border-[#df4838]/40' },
-    { badge: 'bg-[#f2b725]', text: 'text-[#f2b725]', border: 'hover:border-[#f2b725]/40' },
+    { badge: 'bg-[#ec8026]', text: 'text-[#ec8026]', border: 'hover:border-[#ec8026]/50' },
+    { badge: 'bg-[#44216b]', text: 'text-[#44216b]', border: 'hover:border-[#44216b]/50' },
+    { badge: 'bg-[#3da898]', text: 'text-[#3da898]', border: 'hover:border-[#3da898]/50' },
+    { badge: 'bg-[#df4838]', text: 'text-[#df4838]', border: 'hover:border-[#df4838]/50' },
+    { badge: 'bg-[#f2b725]', text: 'text-[#f2b725]', border: 'hover:border-[#f2b725]/50' },
   ];
   const accent = accents[index % accents.length];
 
   // =========================================================================
-  // 1. WIDE BENTO CARD (Spans 2 columns, perfectly balanced row height)
+  // 1. WIDE BENTO CARD (Constrained, balanced proportions - no exaggeration)
   // =========================================================================
   if (variant === 'wide') {
     return (
       <article
-        className={`group rounded-2xl bg-[#ffffff] border border-[#171a3d]/15 ${accent.border} transition-all duration-300 hover:shadow-md flex flex-col sm:flex-row overflow-hidden font-aeonik h-full p-3.5 gap-4`}
+        className={`group rounded-2xl bg-[#ffffff] border border-[#171a3d]/15 ${accent.border} transition-all duration-300 hover:shadow-md flex flex-col sm:flex-row overflow-hidden font-aeonik h-full p-3.5 gap-3.5`}
       >
-        {/* Left: Balanced Image Container */}
+        {/* Left: Compact Image (approx 38% on desktop, never oversized) */}
         <Link
           to={`/post/${post.id}`}
-          className="relative block w-full sm:w-[42%] aspect-[4/3] sm:aspect-auto sm:min-h-[190px] overflow-hidden rounded-xl bg-[#f5f7fc] border border-[#171a3d]/10 shrink-0"
+          className="relative block w-full sm:w-[38%] aspect-[4/3] sm:aspect-auto sm:h-full sm:min-h-[170px] overflow-hidden rounded-xl bg-[#f5f7fc] border border-[#171a3d]/10 shrink-0"
         >
           <img
             src={mainImage}
@@ -57,18 +58,18 @@ export const BentoCard: React.FC<BentoCardProps> = ({
                 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80';
             }}
           />
-          {/* Campus Pill Badge (Clean single badge on image) */}
+          {/* Campus Badge alone on image */}
           <div className="absolute top-2.5 left-2.5">
             <span className="inline-flex items-center gap-1 bg-[#ffffff]/95 backdrop-blur-sm text-[#171a3d] text-[11px] font-bold px-2.5 py-0.5 border border-[#171a3d]/15 rounded-full shadow-sm">
               <MapPin className="h-3 w-3 text-[#ec8026]" />
-              <span className="truncate max-w-[140px]">{campusLabel}</span>
+              <span className="truncate max-w-[130px]">{campusLabel}</span>
             </span>
           </div>
         </Link>
 
         {/* Right: Content details */}
-        <div className="flex-1 flex flex-col justify-between py-1 min-w-0">
-          <div className="space-y-2">
+        <div className="flex-1 flex flex-col justify-between py-0.5 min-w-0">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <span
                 className={`inline-flex items-center ${accent.badge} text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.04em] px-2.5 py-0.5 rounded-full shadow-sm`}
@@ -81,7 +82,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
             </div>
 
             <Link to={`/post/${post.id}`} className="block">
-              <h3 className="font-extrabold text-base sm:text-lg text-[#171a3d] leading-snug group-hover:text-[#ec8026] transition-colors line-clamp-2">
+              <h3 className="font-extrabold text-[15px] sm:text-base text-[#171a3d] leading-snug group-hover:text-[#ec8026] transition-colors line-clamp-2">
                 {post.nombre}
               </h3>
             </Link>
@@ -92,12 +93,12 @@ export const BentoCard: React.FC<BentoCardProps> = ({
           </div>
 
           {/* Price & Action Row */}
-          <div className="pt-3 border-t border-[#171a3d]/10 flex items-center justify-between gap-2 mt-2">
+          <div className="pt-2.5 border-t border-[#171a3d]/10 flex items-center justify-between gap-2 mt-2">
             <div>
               <span className="block text-[10px] font-bold uppercase tracking-[0.03em] text-[#171a3d]/50">
                 Precio
               </span>
-              <span className="text-xl sm:text-2xl font-black text-[#171a3d] tracking-tight">
+              <span className="text-lg sm:text-xl font-black text-[#171a3d] tracking-tight">
                 {formatCOP(post.price)}
               </span>
             </div>
@@ -108,9 +109,9 @@ export const BentoCard: React.FC<BentoCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Pactar por WhatsApp"
-                className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] flex items-center justify-center transition-transform active:scale-95 shadow-sm"
+                className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] flex items-center justify-center transition-transform active:scale-95 shadow-sm group/wa"
               >
-                <MessageCircle className="h-4 w-4 fill-current" />
+                <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
               </a>
               <Link
                 to={`/post/${post.id}`}
@@ -127,13 +128,13 @@ export const BentoCard: React.FC<BentoCardProps> = ({
   }
 
   // =========================================================================
-  // 2. STANDARD BENTO CARD (1 column, perfectly proportioned)
+  // 2. STANDARD BENTO CARD (1 column, harmonious proportions)
   // =========================================================================
   return (
     <article
       className={`group rounded-2xl bg-[#ffffff] border border-[#171a3d]/15 ${accent.border} transition-all duration-300 hover:shadow-md flex flex-col justify-between overflow-hidden font-aeonik h-full p-3.5`}
     >
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {/* Image Frame with controlled aspect ratio */}
         <Link
           to={`/post/${post.id}`}
@@ -149,17 +150,17 @@ export const BentoCard: React.FC<BentoCardProps> = ({
                 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80';
             }}
           />
-          {/* Campus Badge alone on image to avoid collision */}
+          {/* Campus Badge alone on image */}
           <div className="absolute top-2.5 left-2.5">
             <span className="inline-flex items-center gap-1 bg-[#ffffff]/95 backdrop-blur-sm text-[#171a3d] text-[11px] font-bold px-2.5 py-0.5 border border-[#171a3d]/15 rounded-full shadow-sm">
               <MapPin className="h-3 w-3 text-[#ec8026]" />
-              <span className="truncate max-w-[150px]">{campusLabel}</span>
+              <span className="truncate max-w-[140px]">{campusLabel}</span>
             </span>
           </div>
         </Link>
 
         {/* Content details */}
-        <div className="space-y-1.5 px-0.5">
+        <div className="space-y-1 px-0.5">
           <div className="flex items-center justify-between gap-2">
             <span
               className={`inline-flex items-center ${accent.badge} text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.04em] px-2 py-0.5 rounded-full shadow-sm`}
@@ -172,7 +173,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
           </div>
 
           <Link to={`/post/${post.id}`} className="block">
-            <h3 className="font-extrabold text-base text-[#171a3d] leading-snug group-hover:text-[#ec8026] transition-colors line-clamp-1">
+            <h3 className="font-extrabold text-[15px] text-[#171a3d] leading-snug group-hover:text-[#ec8026] transition-colors line-clamp-1">
               {post.nombre}
             </h3>
           </Link>
@@ -184,12 +185,12 @@ export const BentoCard: React.FC<BentoCardProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="pt-3 mt-2 border-t border-[#171a3d]/10 flex items-center justify-between gap-2">
+      <div className="pt-2.5 mt-2 border-t border-[#171a3d]/10 flex items-center justify-between gap-2">
         <div>
           <span className="block text-[10px] font-bold uppercase tracking-[0.03em] text-[#171a3d]/50">
             Precio
           </span>
-          <span className="text-xl font-black text-[#171a3d] tracking-tight">
+          <span className="text-lg sm:text-xl font-black text-[#171a3d] tracking-tight">
             {formatCOP(post.price)}
           </span>
         </div>
@@ -200,13 +201,13 @@ export const BentoCard: React.FC<BentoCardProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             title="Pactar por WhatsApp"
-            className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] flex items-center justify-center transition-transform active:scale-95 shadow-sm"
+            className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] flex items-center justify-center transition-transform active:scale-95 shadow-sm group/wa"
           >
-            <MessageCircle className="h-4 w-4 fill-current" />
+            <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
           </a>
           <Link
             to={`/post/${post.id}`}
-            className="h-8 px-3.5 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-bold flex items-center transition-colors shadow-sm"
+            className="h-8 px-3 rounded-full bg-[#171a3d] hover:bg-[#252a5c] text-[#ffffff] text-xs font-bold flex items-center transition-colors shadow-sm"
           >
             Ver
           </Link>

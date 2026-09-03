@@ -10,8 +10,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import {
   MapPin,
   ArrowLeft,
-  MessageCircle,
 } from 'lucide-react';
+import WhatsappIcon from '@/components/ui/whatsapp-icon';
 
 export const UserProfilePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -129,9 +129,9 @@ export const UserProfilePage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleWhatsAppContact}
-                className="h-10 px-5 rounded-[1600px] border border-[#171a3d] bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] text-xs font-bold tracking-[0.032em] flex items-center gap-2 transition-transform active:scale-95 shadow-sm"
+                className="h-10 px-5 rounded-[1600px] border border-[#171a3d] bg-[#3da898] hover:bg-[#328e81] text-[#ffffff] text-xs font-bold tracking-[0.032em] flex items-center gap-2 transition-transform active:scale-95 shadow-sm group/wa"
               >
-                <MessageCircle className="h-4 w-4 fill-current" />
+                <WhatsappIcon size={18} strokeWidth={2.2} color="#ffffff" />
                 <span>Contactar por WhatsApp</span>
               </button>
             )}
