@@ -237,181 +237,319 @@ export const HomePage: React.FC = () => {
             </div>
           </SlowSlide>
 
-          {/* Integrated Search Bar inside Hero */}
-          <SlowSlide direction="up" delay={0.25} duration={0.85} distance={25}>
-            <div className="max-w-2xl mx-auto pt-2">
-              <form
-                onSubmit={handleHeroSearch}
-                className="relative flex items-center bg-[#ffffff] p-2 rounded-full border border-[#171a3d]/20 shadow-sm hover:border-[#44216b]/60 focus-within:border-[#44216b] focus-within:ring-2 focus-within:ring-[#44216b]/15 transition-all"
-              >
-                <div className="pl-3 text-[#171a3d]/50">
-                  <Search className="h-5 w-5" />
-                </div>
-                <Input
-                  type="text"
-                  placeholder="¿Qué buscas hoy? (libros de medicina, calculadoras, batas, instrumental...)"
-                  className="w-full h-10 pl-3 pr-28 border-0 bg-transparent text-xs sm:text-sm font-aeonik font-medium text-[#171a3d] placeholder:text-[#171a3d]/45 focus-visible:ring-0 focus-visible:border-0"
-                  value={heroSearch}
-                  onChange={(e) => setHeroSearch(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className="h-10 px-6 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-aeonik font-bold tracking-[0.03em] transition-all active:scale-95 shadow-sm uppercase"
-                >
-                  Buscar
-                </button>
-              </form>
-            </div>
-          </SlowSlide>
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* 2. ARTÍCULOS DESTACADOS: Tablón de Avisos Estudiantil      */}
+      {/* 2. TABLÓN DE ANUNCIOS ESTUDIANTIL COMPLETO                */}
       {/* ========================================================= */}
-      <section className="w-full bg-[#faf8f5] py-16 px-4 sm:px-8 border-b border-[#171a3d]/10">
-        <div className="max-w-[1360px] mx-auto space-y-8">
-          <SlowSlide direction="up" duration={0.8} distance={30}>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/10 pb-4">
-              <div>
-                <div className="flex items-center gap-2.5 mb-1.5">
-                  {/* Glossy 3D Red Pushpin Icon from screenshot */}
-                  <span className="relative flex h-4 w-4 items-center justify-center shrink-0">
-                    <span className="h-4 w-4 rounded-full bg-gradient-to-tr from-[#df4838] via-[#ef4444] to-[#fca5a5] shadow-[0_2px_4px_rgba(0,0,0,0.25)] border border-white/80" />
-                    <span className="absolute top-0.5 left-1 h-1.5 w-1.5 rounded-full bg-white/90" />
-                  </span>
-                  <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ec8026]">
-                    Tablón de Avisos · Campus UDC
-                  </span>
-                </div>
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
-                  Publicaciones recientes en el tablón
-                </h2>
-                <p className="text-xs text-[#171a3d]/70 mt-1 font-medium">
-                  Últimos avisos colgados por estudiantes de la Universidad de Cartagena
-                </p>
-              </div>
-
-              <Link
-                to="/catalog"
-                className="h-9 px-4 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#fdf3eb] hover:border-[#ec8026]/40 text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors shadow-sm"
-              >
-                <span>Ver todo el catálogo</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#ec8026]" />
-              </Link>
-            </div>
-
-            {/* Quick Category Filter Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max mt-6">
-              <button
-                type="button"
-                onClick={() => setSelectedCategory('')}
-                className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
-                  selectedCategory === ''
-                    ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
-                    : 'bg-[#ffffff] text-[#171a3d]/80 border border-[#171a3d]/15 hover:bg-[#edf0f7]'
-                }`}
-              >
-                Todos los Artículos
-              </button>
-              {CATEGORIAS_PRODUCTO.map((cat) => {
-                const isSelected = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setSelectedCategory(isSelected ? '' : cat)}
-                    className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
-                      isSelected
-                        ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
-                        : 'bg-[#ffffff] text-[#171a3d]/80 border border-[#171a3d]/15 hover:bg-[#edf0f7]'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
-          </SlowSlide>
-
-          {/* Pegboard Bulletin Board (Tablón de Avisos de Corcho/Madera) */}
-          <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
+      <section className="w-full bg-[#faf8f5] py-14 px-4 sm:px-8 border-b border-[#171a3d]/10">
+        <div className="max-w-[1360px] mx-auto">
+          <SlowSlide direction="up" duration={0.85} distance={30}>
+            {/* Pegboard Main Board Container (Tablón Perforado de Madera y Corcho) */}
             <div
-              className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 border-[6px] sm:border-[8px] border-[#915f36] shadow-[inset_0_4px_24px_rgba(40,20,5,0.38),0_14px_34px_-6px_rgba(23,26,61,0.18)]"
+              className="relative rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 md:p-12 border-[6px] sm:border-[10px] border-[#915f36] shadow-[inset_0_4px_30px_rgba(40,20,5,0.45),0_18px_45px_-8px_rgba(23,26,61,0.22)] overflow-hidden"
               style={{
                 backgroundColor: '#b98858',
                 backgroundImage: `
-                  radial-gradient(#6e431e 18%, transparent 20%),
-                  radial-gradient(#855528 18%, transparent 20%)
+                  radial-gradient(#6a3e1b 18%, transparent 20%),
+                  radial-gradient(#825126 18%, transparent 20%)
                 `,
                 backgroundPosition: '0 0, 14px 14px',
                 backgroundSize: '28px 28px',
               }}
             >
               {/* Corner Mounting Screws on Board */}
-              <div className="absolute top-2.5 left-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
-              <div className="absolute top-2.5 right-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
-              <div className="absolute bottom-2.5 left-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
-              <div className="absolute bottom-2.5 right-2.5 h-3 w-3 rounded-full bg-[#4e2c0e] border border-[#d6a575]/40 shadow-inner" />
+              <div className="absolute top-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+              </div>
+              <div className="absolute top-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+              </div>
+              <div className="absolute bottom-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+              </div>
+              <div className="absolute bottom-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+              </div>
 
-              {displayPosts.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                  {displayPosts.map((post, idx) => {
-                    const bento = getBentoConfig(idx);
-                    return (
-                      <div key={post.id} className={`${bento.className} relative pt-2 group/pin`}>
-                        {/* Tactile 3D Pushpin on top of each card */}
-                        <div
-                          className="absolute top-0 left-6 z-20 h-4.5 w-4.5 rounded-full shadow-[0_3px_5px_rgba(0,0,0,0.4)] border border-[#ffffff]/90 flex items-center justify-center transition-transform group-hover/pin:scale-110"
-                          style={{
-                            width: '18px',
-                            height: '18px',
-                            background:
-                              idx % 3 === 0
-                                ? 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)'
-                                : idx % 3 === 1
-                                ? 'radial-gradient(circle at 35% 35%, #ffb156, #ec8026 70%, #b35607)'
-                                : 'radial-gradient(circle at 35% 35%, #ffe17d, #f2b725 70%, #b8860c)',
-                          }}
-                        >
-                          <div className="h-1.5 w-1.5 rounded-full bg-[#ffffff]/80" />
-                        </div>
-                        <BentoCard post={post} variant={bento.variant} index={idx} />
+              {/* ----------------------------------------------------------------- */}
+              {/* PARTE 1: ENCABEZADO Y NOTAS FIJADAS (Fiel a la captura del usuario) */}
+              {/* ----------------------------------------------------------------- */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                {/* Columna Izquierda: Titular, Caja de Descripción, Buscador y Sedes */}
+                <div className="lg:col-span-7 space-y-6">
+                  {/* Tira de papel superior con chincheta dorada */}
+                  <div className="relative inline-flex items-center gap-2.5 bg-[#fcfaf5] text-[#171a3d] text-xs font-bold px-4 py-1.5 rounded-sm shadow-md border border-[#171a3d]/15">
+                    {/* Chincheta Dorada 3D */}
+                    <span className="relative flex h-3.5 w-3.5 items-center justify-center shrink-0">
+                      <span className="h-3.5 w-3.5 rounded-full bg-gradient-to-tr from-[#f2b725] via-[#fbbf24] to-[#fef08a] shadow-[0_2px_3px_rgba(0,0,0,0.3)] border border-white" />
+                      <span className="absolute top-0.5 left-0.5 h-1 w-1 rounded-full bg-white/90" />
+                    </span>
+                    <span className="tracking-wide">Tablón de anuncios estudiantil • Universidad de Cartagena</span>
+                  </div>
+
+                  {/* Titular Grande con Subrayado Aguamarina */}
+                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#ffffff] leading-[1.05] tracking-tight uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
+                    Lo que necesitas para tu semestre,{' '}
+                    <span className="underline decoration-[#3da898] decoration-[5px] underline-offset-8">
+                      en tu propio campus.
+                    </span>
+                  </h2>
+
+                  {/* Caja Oscura de Explicación */}
+                  <div className="bg-[#171a3d]/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 text-[#ffffff]/90 text-sm sm:text-base font-normal leading-relaxed border border-[#ffffff]/15 shadow-xl max-w-xl">
+                    Compra, vende o intercambia libros, batas médicas, calculadoras y tecnología directamente con compañeros de clase en el Claustro San Agustín o en las sedes Zaragocilla, Piedra de Bolívar y San Pablo.
+                  </div>
+
+                  {/* Buscador dentro del Tablón */}
+                  <form
+                    onSubmit={handleHeroSearch}
+                    className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 bg-[#ffffff] p-2 rounded-xl border border-[#171a3d]/20 shadow-xl max-w-xl"
+                  >
+                    <div className="flex items-center flex-1 px-2">
+                      <Search className="h-5 w-5 text-[#171a3d]/40 shrink-0 mr-2" />
+                      <Input
+                        type="text"
+                        placeholder="¿Qué estás buscando? (ej. Guyton, bata blanca, Casio...)"
+                        className="w-full h-10 border-0 bg-transparent text-xs sm:text-sm font-aeonik font-medium text-[#171a3d] placeholder:text-[#171a3d]/45 focus-visible:ring-0 focus-visible:border-0 p-0 shadow-none"
+                        value={heroSearch}
+                        onChange={(e) => setHeroSearch(e.target.value)}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="h-11 px-6 rounded-lg bg-[#3da898] hover:bg-[#2e8f82] text-[#ffffff] font-aeonik font-bold text-xs sm:text-sm tracking-[0.02em] transition-all active:scale-95 shadow-md flex items-center justify-center gap-2 whitespace-nowrap uppercase"
+                    >
+                      <span>Buscar en el tablón</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </form>
+
+                  {/* Etiquetas de Sedes al pie del buscador */}
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                    <span className="bg-[#171a3d] text-[#ffffff] text-xs font-bold px-3 py-1.5 rounded-md shadow-sm">
+                      Sedes:
+                    </span>
+                    {UDC_SEDES.map((sede) => (
+                      <Link
+                        key={sede}
+                        to={`/catalog?sede=${encodeURIComponent(sede)}`}
+                        className="bg-[#fcfaf5] hover:bg-[#ffffff] text-[#171a3d] text-xs font-bold px-3 py-1.5 rounded-md shadow-sm border border-[#171a3d]/15 transition-transform hover:-translate-y-0.5"
+                      >
+                        {sede}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Columna Derecha: 3 Notas Clavadas en el Corcho */}
+                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-2 lg:pt-0">
+                  {/* Nota 1: Comunidad universitaria (Chincheta Roja) */}
+                  <div className="relative rounded-2xl bg-[#fcfaf5] p-5 shadow-lg border border-[#171a3d]/10 transform sm:-rotate-1 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between min-h-[200px]">
+                    {/* Chincheta Roja 3D */}
+                    <div
+                      className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 rounded-full shadow-[0_2px_5px_rgba(0,0,0,0.35)] border border-white"
+                      style={{
+                        width: '18px',
+                        height: '18px',
+                        background: 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)',
+                      }}
+                    >
+                      <div className="h-1 w-1 rounded-full bg-white/80 absolute top-1 left-1" />
+                    </div>
+
+                    <div className="space-y-2.5 pt-1">
+                      <div className="h-9 w-9 rounded-full bg-[#f0fdf4] text-[#3da898] border border-[#3da898]/20 flex items-center justify-center">
+                        <CheckCircle2 className="h-5 w-5" />
                       </div>
+                      <h4 className="font-extrabold text-base text-[#171a3d] leading-snug">
+                        Comunidad universitaria
+                      </h4>
+                      <p className="text-xs text-[#171a3d]/75 font-medium leading-relaxed">
+                        Perfiles vinculados con código estudiantil, sede y reputación con estrellas otorgada por otros compañeros.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Nota 2: Entregas en campus (Chincheta Dorada) */}
+                  <div className="relative rounded-2xl bg-[#fcfaf5] p-5 shadow-lg border border-[#171a3d]/10 transform sm:rotate-1 hover:rotate-0 transition-transform duration-300 flex flex-col justify-between min-h-[200px]">
+                    {/* Chincheta Dorada 3D */}
+                    <div
+                      className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 rounded-full shadow-[0_2px_5px_rgba(0,0,0,0.35)] border border-white"
+                      style={{
+                        width: '18px',
+                        height: '18px',
+                        background: 'radial-gradient(circle at 35% 35%, #ffe17d, #f2b725 70%, #b8860c)',
+                      }}
+                    >
+                      <div className="h-1 w-1 rounded-full bg-white/80 absolute top-1 left-1" />
+                    </div>
+
+                    <div className="space-y-2.5 pt-1">
+                      <div className="h-9 w-9 rounded-full bg-[#f0fdf9] text-[#3da898] border border-[#3da898]/20 flex items-center justify-center">
+                        <MapPin className="h-5 w-5" />
+                      </div>
+                      <h4 className="font-extrabold text-base text-[#171a3d] leading-snug">
+                        Entregas en campus
+                      </h4>
+                      <p className="text-xs text-[#171a3d]/75 font-medium leading-relaxed">
+                        Coordina puntos de entrega seguros en las bibliotecas o plazoletas de tu propia sede universitaria.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Nota 3: ¿Tienes cosas del semestre pasado? (Cinta adhesiva naranja) */}
+                  <div className="sm:col-span-2 relative rounded-2xl bg-[#fcfaf5] p-6 shadow-lg border border-[#171a3d]/10 transform sm:-rotate-0.5 hover:rotate-0 transition-transform duration-300">
+                    {/* Cinta adhesiva naranja / Washi tape */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 h-5 w-20 bg-[#ec8026]/90 shadow-sm backdrop-blur-sm border-x border-white/40 transform -rotate-1 rounded-sm" />
+
+                    <div className="flex items-center justify-between gap-2 mb-2 pt-1">
+                      <div className="h-8 w-8 rounded-full bg-[#f0fdf9] text-[#3da898] border border-[#3da898]/20 flex items-center justify-center">
+                        <Plus className="h-4 w-4 stroke-[3]" />
+                      </div>
+                      <Link
+                        to="/create"
+                        className="text-xs font-bold text-[#3da898] hover:text-[#2e8f82] flex items-center gap-1 transition-colors group/link"
+                      >
+                        <span>Publicar aviso</span>
+                        <ArrowRight className="h-3.5 w-3.5 group-hover/link:translate-x-0.5 transition-transform" />
+                      </Link>
+                    </div>
+
+                    <h4 className="font-extrabold text-base text-[#171a3d] leading-snug">
+                      ¿Tienes cosas del semestre pasado?
+                    </h4>
+                    <p className="text-xs text-[#171a3d]/75 font-medium leading-relaxed mt-1">
+                      Pega tu aviso en la cartelera en menos de 2 minutos y conéctate directamente con compañeros interesados por WhatsApp o correo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ----------------------------------------------------------------- */}
+              {/* PARTE 2: AVISOS CLAVADOS RECIENTES (Catálogo Bento en el Tablón) */}
+              {/* ----------------------------------------------------------------- */}
+              <div className="mt-14 pt-10 border-t-2 border-dashed border-[#855528]/45 space-y-7">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <span className="relative flex h-4 w-4 items-center justify-center shrink-0">
+                        <span className="h-4 w-4 rounded-full bg-gradient-to-tr from-[#df4838] via-[#ef4444] to-[#fca5a5] shadow-[0_2px_4px_rgba(0,0,0,0.25)] border border-white/80" />
+                        <span className="absolute top-0.5 left-1 h-1.5 w-1.5 rounded-full bg-white/90" />
+                      </span>
+                      <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ffffff]/90">
+                        Avisos Estudiantiles Activos
+                      </span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-[#ffffff] tracking-tight uppercase drop-shadow-sm">
+                      Publicaciones recientes en el tablón
+                    </h3>
+                    <p className="text-xs text-[#ffffff]/80 mt-1 font-medium">
+                      Últimos avisos colgados por estudiantes de la Universidad de Cartagena
+                    </p>
+                  </div>
+
+                  <Link
+                    to="/catalog"
+                    className="h-9 px-4 rounded-full border border-white/25 bg-[#ffffff]/95 hover:bg-[#ffffff] text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors shadow-sm"
+                  >
+                    <span>Ver todo el catálogo</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-[#ec8026]" />
+                  </Link>
+                </div>
+
+                {/* Filtro Rápido por Categorías */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory('')}
+                    className={`h-8 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
+                      selectedCategory === ''
+                        ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
+                        : 'bg-[#ffffff]/90 text-[#171a3d]/80 hover:bg-[#ffffff]'
+                    }`}
+                  >
+                    Todos los Artículos
+                  </button>
+                  {CATEGORIAS_PRODUCTO.map((cat) => {
+                    const isSelected = selectedCategory === cat;
+                    return (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => setSelectedCategory(isSelected ? '' : cat)}
+                        className={`h-8 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
+                          isSelected
+                            ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
+                            : 'bg-[#ffffff]/90 text-[#171a3d]/80 hover:bg-[#ffffff]'
+                        }`}
+                      >
+                        {cat}
+                      </button>
                     );
                   })}
                 </div>
-              ) : (
-                <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border-2 border-dashed border-[#855528]/40 space-y-3 max-w-md mx-auto my-6 shadow-md relative">
-                  {/* Pushpin on empty note */}
-                  <div
-                    className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 rounded-full shadow-md border border-white"
-                    style={{
-                      width: '20px',
-                      height: '20px',
-                      background: 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)',
-                    }}
-                  />
-                  <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto border border-[#ec8026]/20 shadow-sm">
-                    <BookOpen className="h-6 w-6" />
+
+                {/* Cuadrícula de Avisos Bento Clavados */}
+                {displayPosts.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {displayPosts.map((post, idx) => {
+                      const bento = getBentoConfig(idx);
+                      return (
+                        <div key={post.id} className={`${bento.className} relative pt-2 group/pin`}>
+                          {/* Chincheta 3D sobre la tarjeta */}
+                          <div
+                            className="absolute top-0 left-6 z-20 rounded-full shadow-[0_3px_5px_rgba(0,0,0,0.4)] border border-[#ffffff]/90 flex items-center justify-center transition-transform group-hover/pin:scale-110"
+                            style={{
+                              width: '18px',
+                              height: '18px',
+                              background:
+                                idx % 3 === 0
+                                  ? 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)'
+                                  : idx % 3 === 1
+                                  ? 'radial-gradient(circle at 35% 35%, #ffb156, #ec8026 70%, #b35607)'
+                                  : 'radial-gradient(circle at 35% 35%, #ffe17d, #f2b725 70%, #b8860c)',
+                            }}
+                          >
+                            <div className="h-1.5 w-1.5 rounded-full bg-[#ffffff]/80" />
+                          </div>
+                          <BentoCard post={post} variant={bento.variant} index={idx} />
+                        </div>
+                      );
+                    })}
                   </div>
-                  <h3 className="text-lg font-bold text-[#171a3d]">
-                    No hay avisos colgados en el tablón
-                  </h3>
-                  <p className="text-xs font-normal text-[#171a3d]/70 max-w-md mx-auto">
-                    Sé el primero de tu facultad en colgar un aviso de libro, bata o calculadora en este claustro.
-                  </p>
-                  <div className="pt-2">
-                    <Link
-                      to="/create"
-                      className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
-                    >
-                      <Plus className="h-3.5 w-3.5 stroke-[3]" />
-                      <span>Colgar Primer Aviso</span>
-                    </Link>
+                ) : (
+                  <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border-2 border-dashed border-[#855528]/40 space-y-3 max-w-md mx-auto my-6 shadow-md relative">
+                    <div
+                      className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 rounded-full shadow-md border border-white"
+                      style={{
+                        width: '20px',
+                        height: '20px',
+                        background: 'radial-gradient(circle at 35% 35%, #ff7666, #df4838 70%, #9e1f13)',
+                      }}
+                    />
+                    <div className="h-12 w-12 rounded-full bg-[#fdf3eb] text-[#ec8026] flex items-center justify-center mx-auto border border-[#ec8026]/20 shadow-sm">
+                      <BookOpen className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#171a3d]">
+                      No hay avisos colgados en el tablón
+                    </h3>
+                    <p className="text-xs font-normal text-[#171a3d]/70 max-w-md mx-auto">
+                      Sé el primero de tu facultad en colgar un aviso de libro, bata o calculadora en este claustro.
+                    </p>
+                    <div className="pt-2">
+                      <Link
+                        to="/create"
+                        className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
+                      >
+                        <Plus className="h-3.5 w-3.5 stroke-[3]" />
+                        <span>Colgar Primer Aviso</span>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </SlowSlide>
         </div>
