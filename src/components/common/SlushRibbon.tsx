@@ -116,7 +116,7 @@ export const SlushRibbon: React.FC<SlushRibbonProps> = ({
     );
   }
 
-  // Default 'wave'
+  // Default 'wave' - crests upwards in the center to stay clear of subheadings
   return (
     <svg
       viewBox="0 0 1200 400"
@@ -125,33 +125,33 @@ export const SlushRibbon: React.FC<SlushRibbonProps> = ({
       className={`w-full h-auto pointer-events-none select-none ${className}`}
     >
       <path
-        d="M 40 220 C 280 40, 520 380, 820 110 C 980 -20, 1100 80, 1160 210"
+        d="M 40 220 C 300 280, 580 80, 840 160 C 980 220, 1100 120, 1160 160"
         stroke={c.base}
         strokeWidth="80"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M 40 220 C 280 40, 520 380, 820 110 C 980 -20, 1100 80, 1160 210"
+        d="M 40 220 C 300 280, 580 80, 840 160 C 980 220, 1100 120, 1160 160"
         stroke={c.dark}
         strokeWidth="74"
         strokeLinecap="round"
       />
       <path
-        d="M 40 220 C 280 40, 520 380, 820 110 C 980 -20, 1100 80, 1160 210"
+        d="M 40 220 C 300 280, 580 80, 840 160 C 980 220, 1100 120, 1160 160"
         stroke={c.main}
         strokeWidth="66"
         strokeLinecap="round"
       />
       <path
-        d="M 60 208 C 280 50, 525 365, 810 115 C 960 5, 1080 80, 1140 198"
+        d="M 60 208 C 300 268, 580 68, 840 148 C 980 208, 1100 108, 1140 148"
         stroke={c.light}
         strokeWidth="20"
         strokeLinecap="round"
         strokeOpacity="0.9"
       />
       <path
-        d="M 90 185 C 275 75, 480 310, 770 125 C 930 25, 1040 85, 1110 175"
+        d="M 90 190 C 310 250, 580 52, 840 132 C 980 192, 1100 92, 1110 132"
         stroke="#ffffff"
         strokeWidth="7"
         strokeLinecap="round"

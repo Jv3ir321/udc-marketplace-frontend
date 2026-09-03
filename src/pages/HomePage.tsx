@@ -55,9 +55,9 @@ export const HomePage: React.FC = () => {
       {/* 1. HERO SECTION: Community Identity & Orange Accents       */}
       {/* ========================================================= */}
       <section className="relative w-full bg-[#edf0f7] overflow-hidden pt-10 pb-20 sm:pb-28 px-4 sm:px-8 border-b border-[#171a3d]/20">
-        {/* Signature 3D Inflatable Ribbon in Warm UDC Orange (positioned behind headline) */}
+        {/* Signature 3D Inflatable Ribbon in Warm UDC Orange (positioned high behind headline) */}
         <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-75">
-          <SlushRibbon variant="wave" color="orange" className="w-[140%] max-w-none transform -translate-y-14 sm:-translate-y-20" />
+          <SlushRibbon variant="wave" color="orange" className="w-[140%] max-w-none transform -translate-y-28 sm:-translate-y-36" />
         </div>
 
         {/* Floating Illustrated Stickers around the display headline */}
@@ -73,9 +73,9 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Institutional Crest Logo + Enormous Crushed Lateral 800 Display Headline */}
-          <div className="text-center space-y-3 my-2">
-            <Link to="/" className="inline-block group">
+          {/* Institutional Crest Logo + Enormous Lateral Display Headline */}
+          <div className="text-center my-2">
+            <Link to="/" className="inline-block group mb-3">
               <img
                 src="/udc-logo.png"
                 alt="Universidad de Cartagena"
@@ -86,8 +86,8 @@ export const HomePage: React.FC = () => {
               </span>
             </Link>
 
-            <div className="inline-block relative">
-              <h1 className="font-lateral text-[65px] sm:text-[110px] md:text-[150px] lg:text-[180px] text-[#171a3d] uppercase tracking-normal leading-[0.76] select-none">
+            <div className="inline-block relative pb-4 sm:pb-6">
+              <h1 className="font-lateral text-[65px] sm:text-[110px] md:text-[150px] lg:text-[180px] text-[#171a3d] uppercase tracking-normal leading-[0.84] select-none">
                 UDC MARKETPLACE
               </h1>
 
@@ -95,15 +95,17 @@ export const HomePage: React.FC = () => {
               <div className="absolute -top-4 -right-2 sm:right-6 pointer-events-auto transform rotate-12 z-20">
                 <SlushSticker type="star" color="orange" size="md" label="CAMPUS" />
               </div>
-              <div className="absolute -bottom-3 -left-2 sm:left-6 pointer-events-auto transform -rotate-12 z-20">
+              <div className="absolute bottom-2 left-2 sm:left-6 pointer-events-auto transform -rotate-12 z-20">
                 <SlushSticker type="check" color="teal" size="sm" label="100% ENTRE ESTUDIANTES" />
               </div>
             </div>
 
-            {/* Tagline Subhead with added spacing */}
-            <p className="text-base sm:text-xl text-[#171a3d]/90 max-w-2xl mx-auto font-medium tracking-[-0.010em] mt-7 sm:mt-10 leading-snug px-4">
-              La plataforma comunitaria e independiente de intercambio y compraventa entre todos los claustros y facultades de Cartagena.
-            </p>
+            {/* Tagline Subhead with generous clearance */}
+            <div className="pt-6 sm:pt-10 pb-2 relative z-20">
+              <p className="text-base sm:text-xl text-[#171a3d]/90 max-w-2xl mx-auto font-medium tracking-[-0.010em] leading-snug px-4">
+                La plataforma comunitaria e independiente de intercambio y compraventa entre todos los claustros y facultades de Cartagena.
+              </p>
+            </div>
           </div>
 
           {/* Search Bar */}
