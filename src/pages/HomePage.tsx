@@ -6,6 +6,7 @@ import { BentoCard } from '@/components/marketplace/BentoCard';
 import { PageTransition } from '@/components/common/PageTransition';
 import { SlowSlide } from '@/components/common/SlowSlide';
 import { Input } from '@/components/ui/input';
+import WhatsappIcon from '@/components/ui/whatsapp-icon';
 import {
   ArrowRight,
   Search,
@@ -15,6 +16,7 @@ import {
   CheckCircle2,
   BookOpen,
   Building2,
+  Sparkles,
 } from 'lucide-react';
 import { CATEGORIAS_PRODUCTO, UDC_SEDES, formatCampusName } from '@/lib/utils';
 
@@ -152,120 +154,157 @@ export const HomePage: React.FC = () => {
             </div>
           </SlowSlide>
 
-          {/* Bento Grid Mosaic Lower Section */}
+          {/* Bento Grid Mosaic Lower Section: 4 Core Services */}
           <SlowSlide direction="up" delay={0.15} duration={0.85} distance={35}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {/* Module 1: Yellow (#F2BA27 / #f2b725) */}
-              <div className="rounded-[28px] bg-[#f2b725] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
-                <div className="space-y-1">
-                  <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#171a3d]/70 block">
-                    Comisión por Venta
-                  </span>
-                  <div className="text-6xl sm:text-7xl font-extrabold tracking-tight text-[#ffffff] leading-none">
-                    0%
+              {/* Service 1: Yellow (#f2b725) - Compra y Venta Académica */}
+              <div className="rounded-[28px] bg-[#f2b725] p-6 sm:p-7 text-[#171a3d] flex flex-col justify-between min-h-[300px] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-full bg-[#171a3d] text-[#ffffff] text-[10px] font-extrabold uppercase tracking-[0.06em]">
+                      Catálogo Académico
+                    </span>
+                    <div className="h-8 w-8 rounded-full bg-[#ffffff]/30 flex items-center justify-center text-[#171a3d]">
+                      <BookOpen className="h-4 w-4" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#171a3d] leading-tight uppercase tracking-tight">
+                      Compra y Venta de Material
+                    </h3>
+                    <p className="text-xs text-[#171a3d]/85 font-medium leading-relaxed mt-2">
+                      Libros de texto universitarios, batas antifluidos, instrumental odontológico, calculadoras científicas y tecnología entre compañeros.
+                    </p>
                   </div>
                 </div>
-                <div className="space-y-1 pt-6 border-t border-[#ffffff]/25">
-                  <h4 className="font-bold text-sm text-[#171a3d] uppercase tracking-wide">
-                    Ahorro Total Directo
-                  </h4>
-                  <p className="text-xs font-medium text-[#171a3d]/85 leading-snug">
-                    Sin tarifas ni cobros sorpresa. El 100% del pago acordado queda entre compañeros de facultad.
-                  </p>
-                </div>
-              </div>
 
-              {/* Module 2: Orange (#EB8D2F / #ec8026) with photo */}
-              <div className="rounded-[28px] bg-[#ec8026] p-4 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                <div className="relative h-44 w-full rounded-[20px] overflow-hidden border border-[#ffffff]/20 bg-[#ffffff]/10">
-                  <img
-                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80"
-                    alt="Estudiantes UDC en claustro"
-                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#171a3d]/85 backdrop-blur-sm text-[10px] font-bold text-[#ffffff] uppercase tracking-[0.04em]">
-                      Comunidad
+                <div className="pt-4 border-t border-[#171a3d]/15">
+                  <div className="flex flex-wrap gap-1.5">
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/50 text-[10px] font-bold text-[#171a3d]">
+                      Libros & Guías
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/50 text-[10px] font-bold text-[#171a3d]">
+                      Batas & Instrumental
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/50 text-[10px] font-bold text-[#171a3d]">
+                      Calculadoras
                     </span>
                   </div>
                 </div>
-                <div className="p-2 pt-3 space-y-0.5">
-                  <h4 className="font-bold text-base text-[#ffffff] leading-tight">
-                    Entrega Mano a Mano
-                  </h4>
-                  <p className="text-xs font-medium text-[#ffffff]/85 leading-snug">
-                    Pacta el punto de encuentro en la biblioteca o cafetería de tu claustro.
-                  </p>
-                </div>
               </div>
 
-              {/* Module 3: Red / Coral (#E64E40 / #df4838) */}
-              <div className="rounded-[28px] bg-[#df4838] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
-                <div className="space-y-1">
-                  <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#ffffff]/80 block">
-                    Campus Conectados
-                  </span>
-                  <div className="text-6xl sm:text-7xl font-extrabold tracking-tight text-[#ffffff] leading-none">
-                    4
-                  </div>
-                </div>
-                <div className="space-y-1 pt-6 border-t border-[#ffffff]/25">
-                  <h4 className="font-bold text-sm text-[#ffffff] uppercase tracking-wide">
-                    Sedes Universitarias
-                  </h4>
-                  <p className="text-xs font-medium text-[#ffffff]/85 leading-snug">
-                    San Agustín, Zaragocilla, Piedra de Bolívar y San Pablo en una sola red.
-                  </p>
-                </div>
-              </div>
-
-              {/* Module 4: Dark Blue (#1A1B43 / #171a3d) with aquamarine circular graphic */}
-              <div className="rounded-[28px] bg-[#171a3d] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#3da898]">
-                    Seguridad
-                  </span>
-                  <CheckCircle2 className="h-4 w-4 text-[#3da898]" />
-                </div>
-
-                {/* Circular Graphic Component */}
-                <div className="flex items-center justify-center my-2">
-                  <div className="relative flex items-center justify-center">
-                    <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="40"
-                        stroke="#ffffff"
-                        strokeOpacity="0.12"
-                        strokeWidth="9"
-                        fill="none"
-                      />
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="40"
-                        stroke="#3da898"
-                        strokeWidth="9"
-                        strokeDasharray="251.2"
-                        strokeDashoffset="25.12"
-                        strokeLinecap="round"
-                        fill="none"
-                      />
-                    </svg>
-                    <div className="absolute flex flex-col items-center justify-center">
-                      <span className="text-xl font-black text-[#3da898] leading-none">100%</span>
+              {/* Service 2: Orange (#ec8026) - Contacto Inmediato WhatsApp */}
+              <div className="rounded-[28px] bg-[#ec8026] p-6 sm:p-7 text-[#ffffff] flex flex-col justify-between min-h-[300px] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-full bg-[#171a3d] text-[#ffffff] text-[10px] font-extrabold uppercase tracking-[0.06em]">
+                      Trato Directo
+                    </span>
+                    <div className="h-8 w-8 rounded-full bg-[#ffffff]/25 flex items-center justify-center text-[#ffffff]">
+                      <WhatsappIcon size={18} />
                     </div>
                   </div>
+
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#ffffff] leading-tight uppercase tracking-tight">
+                      Contacto por WhatsApp en 1 Clic
+                    </h3>
+                    <p className="text-xs text-[#ffffff]/90 font-medium leading-relaxed mt-2">
+                      Sin pasarelas engorrosas ni formularios lentos. Chatea directamente con el estudiante vendedor para negociar y acordar entrega de inmediato.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="space-y-1 pt-3 border-t border-[#ffffff]/15 text-center sm:text-left">
-                  <p className="text-xs font-bold text-[#3da898] leading-snug">
-                    Trato directo y presencial
-                  </p>
-                  <p className="text-[11px] text-[#ffffff]/70 font-medium">
-                    Verifica el estado del artículo en persona antes de pagar.
-                  </p>
+                <div className="pt-4 border-t border-[#ffffff]/20">
+                  <div className="flex flex-wrap gap-1.5">
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      Chat directo
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      Sin intermediarios
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      Respuesta rápida
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Service 3: Red / Coral (#df4838) - Entregas en Sede Oficial */}
+              <div className="rounded-[28px] bg-[#df4838] p-6 sm:p-7 text-[#ffffff] flex flex-col justify-between min-h-[300px] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-full bg-[#171a3d] text-[#ffffff] text-[10px] font-extrabold uppercase tracking-[0.06em]">
+                      Puntos Seguros
+                    </span>
+                    <div className="h-8 w-8 rounded-full bg-[#ffffff]/25 flex items-center justify-center text-[#ffffff]">
+                      <MapPin className="h-4 w-4" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#ffffff] leading-tight uppercase tracking-tight">
+                      Entregas en Sedes y Claustro
+                    </h3>
+                    <p className="text-xs text-[#ffffff]/90 font-medium leading-relaxed mt-2">
+                      Acuerda puntos de entrega físicos en las bibliotecas o plazoletas de San Agustín, Zaragocilla, Piedra de Bolívar o San Pablo con total tranquilidad.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-[#ffffff]/20">
+                  <div className="flex flex-wrap gap-1.5">
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      San Agustín
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      Zaragocilla
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      Piedra Bolívar
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/20 text-[10px] font-bold text-[#ffffff]">
+                      San Pablo
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Service 4: Deep UDC Navy Slate (#171a3d) - Publicación Gratuita 0% Comisiones */}
+              <div className="rounded-[28px] bg-[#171a3d] p-6 sm:p-7 text-[#ffffff] flex flex-col justify-between min-h-[300px] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group border border-[#ffffff]/10">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-full bg-[#ec8026] text-[#ffffff] text-[10px] font-extrabold uppercase tracking-[0.06em]">
+                      0% Tarifas
+                    </span>
+                    <div className="h-8 w-8 rounded-full bg-[#ffffff]/10 flex items-center justify-center text-[#ec8026]">
+                      <Sparkles className="h-4 w-4" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#ffffff] leading-tight uppercase tracking-tight">
+                      Publica Gratis y Sin Comisiones
+                    </h3>
+                    <p className="text-xs text-[#ffffff]/75 font-medium leading-relaxed mt-2">
+                      Sube tus fotos, describe tu aviso en 2 minutos y recibe ofertas. El 100% del dinero acordado es para ti por Nequi, Daviplata o efectivo.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-[#ffffff]/15">
+                  <div className="flex flex-wrap gap-1.5">
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/10 text-[10px] font-bold text-[#3da898]">
+                      100% Gratuito
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/10 text-[10px] font-bold text-[#ffffff]/90">
+                      Nequi / Efectivo
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#ffffff]/10 text-[10px] font-bold text-[#ffffff]/90">
+                      Aviso en 2 min
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
