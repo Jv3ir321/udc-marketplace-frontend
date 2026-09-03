@@ -32,14 +32,10 @@ export function formatDate(dateString?: string): string {
 }
 
 export const UDC_SEDES = [
-  'Zaragocilla',
   'San Agustín',
+  'Zaragocilla',
   'Piedra de Bolívar',
   'San Pablo',
-  'Ceres Turbaco',
-  'Ceres Magangué',
-  'Ceres Carmen de Bolívar',
-  'Otra / Virtual',
 ] as const;
 
 export const CATEGORIAS_PRODUCTO = [
