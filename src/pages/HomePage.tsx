@@ -280,30 +280,30 @@ export const HomePage: React.FC = () => {
       <section className="w-full bg-[#faf8f5] py-14 px-4 sm:px-8 border-b border-[#171a3d]/10">
         <div className="max-w-[1360px] mx-auto">
           <SlowSlide direction="up" duration={0.85} distance={30}>
-            {/* Tablero Estudiantil en Azul Marino UDC Sobrio */}
+            {/* Tablero Estudiantil en Gris Carbón / Pizarra Sobria */}
             <div
-              className="relative rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 md:p-12 border-[6px] sm:border-[8px] border-[#252a5c] shadow-[inset_0_4px_35px_rgba(0,0,0,0.5),0_18px_45px_-8px_rgba(23,26,61,0.22)] overflow-hidden"
+              className="relative rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 md:p-12 border-[6px] sm:border-[8px] border-[#373c47] shadow-[inset_0_4px_35px_rgba(0,0,0,0.55),0_18px_45px_-8px_rgba(23,26,61,0.18)] overflow-hidden"
               style={{
-                backgroundColor: '#171a3d',
+                backgroundColor: '#22262e',
                 backgroundImage: `
-                  radial-gradient(ellipse at 50% 25%, rgba(45, 52, 118, 0.45), transparent 70%),
-                  radial-gradient(circle at 85% 85%, rgba(16, 18, 45, 0.7), transparent 60%),
+                  radial-gradient(ellipse at 50% 25%, rgba(68, 76, 92, 0.45), transparent 70%),
+                  radial-gradient(circle at 85% 85%, rgba(20, 22, 28, 0.75), transparent 60%),
                   repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 2px, transparent 2px, transparent 8px)
                 `,
               }}
             >
-              {/* Remaches de fijación en las esquinas */}
-              <div className="absolute top-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#171a3d] rotate-45" />
+              {/* Remaches de fijación metálicos en las esquinas */}
+              <div className="absolute top-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#1c1e24] rotate-45" />
               </div>
-              <div className="absolute top-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#171a3d] -rotate-45" />
+              <div className="absolute top-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#1c1e24] -rotate-45" />
               </div>
-              <div className="absolute bottom-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#171a3d] -rotate-45" />
+              <div className="absolute bottom-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#1c1e24] -rotate-45" />
               </div>
-              <div className="absolute bottom-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#171a3d] rotate-45" />
+              <div className="absolute bottom-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#1c1e24] rotate-45" />
               </div>
 
               {/* ----------------------------------------------------------------- */}
@@ -529,31 +529,31 @@ export const HomePage: React.FC = () => {
               </div>
             </SlowSlide>
 
-            {/* TABLÓN 2: Cartelera de Avisos Recientes UDC Navy */}
+            {/* TABLÓN 2: Cartelera de Avisos Recientes en Gris Carbón */}
             <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
               <div
-                className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 border-[6px] sm:border-[8px] border-[#252a5c] shadow-[inset_0_4px_35px_rgba(0,0,0,0.5),0_18px_45px_-8px_rgba(23,26,61,0.22)] overflow-hidden mt-6"
+                className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 border-[6px] sm:border-[8px] border-[#373c47] shadow-[inset_0_4px_35px_rgba(0,0,0,0.55),0_18px_45px_-8px_rgba(23,26,61,0.18)] overflow-hidden mt-6"
                 style={{
-                  backgroundColor: '#171a3d',
+                  backgroundColor: '#22262e',
                   backgroundImage: `
-                    radial-gradient(ellipse at 50% 25%, rgba(45, 52, 118, 0.45), transparent 70%),
-                    radial-gradient(circle at 85% 85%, rgba(16, 18, 45, 0.7), transparent 60%),
+                    radial-gradient(ellipse at 50% 25%, rgba(68, 76, 92, 0.45), transparent 70%),
+                    radial-gradient(circle at 85% 85%, rgba(20, 22, 28, 0.75), transparent 60%),
                     repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 2px, transparent 2px, transparent 8px)
                   `,
                 }}
               >
-                {/* Remaches de fijación en Tablero 2 */}
-                <div className="absolute top-3 left-3 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#171a3d] rotate-45" />
+                {/* Remaches de fijación metálicos en Tablero 2 */}
+                <div className="absolute top-3 left-3 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#1c1e24] rotate-45" />
                 </div>
-                <div className="absolute top-3 right-3 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#171a3d] -rotate-45" />
+                <div className="absolute top-3 right-3 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#1c1e24] -rotate-45" />
                 </div>
-                <div className="absolute bottom-3 left-3 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#171a3d] -rotate-45" />
+                <div className="absolute bottom-3 left-3 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#1c1e24] -rotate-45" />
                 </div>
-                <div className="absolute bottom-3 right-3 h-3.5 w-3.5 rounded-full bg-[#2a306c] border border-[#ffffff]/20 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#171a3d] rotate-45" />
+                <div className="absolute bottom-3 right-3 h-3.5 w-3.5 rounded-full bg-[#424855] border border-[#ffffff]/25 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#1c1e24] rotate-45" />
                 </div>
 
                 {/* Cuadrícula de Avisos Bento Clavados */}
