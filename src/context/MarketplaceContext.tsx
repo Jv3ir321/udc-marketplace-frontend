@@ -134,7 +134,11 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
       // Sede filter
       if (filters.sede && filters.sede !== 'all') {
-        if (post.sede?.toLowerCase() !== filters.sede.toLowerCase()) {
+        const pSede = (post.sede || '').toLowerCase();
+        const fSede = filters.sede.toLowerCase();
+        const baseP = pSede.replace(/^(claustro|sede)\s*(de\s*)?/i, '').trim();
+        const baseF = fSede.replace(/^(claustro|sede)\s*(de\s*)?/i, '').trim();
+        if (pSede !== fSede && !pSede.includes(baseF) && !fSede.includes(baseP)) {
           return false;
         }
       }

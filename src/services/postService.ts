@@ -2,13 +2,13 @@ import api from './api';
 import { Post, CreatePostDTO, UpdatePostDTO, Valoration } from '@/types';
 import { INITIAL_POSTS } from './mockData';
 
-const LOCAL_STORAGE_KEY = 'udc_marketplace_posts_v2';
+const LOCAL_STORAGE_KEY = 'udc_marketplace_posts_v4';
 
-// Clear legacy mock data key if present
+// Clear legacy mock data keys if present
 try {
-  if (localStorage.getItem('udc_marketplace_posts')) {
-    localStorage.removeItem('udc_marketplace_posts');
-  }
+  localStorage.removeItem('udc_marketplace_posts');
+  localStorage.removeItem('udc_marketplace_posts_v2');
+  localStorage.removeItem('udc_marketplace_posts_v3');
 } catch {
   // ignore
 }

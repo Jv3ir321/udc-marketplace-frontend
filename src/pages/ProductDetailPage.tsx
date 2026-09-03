@@ -5,7 +5,7 @@ import { ValorationSection } from '@/components/marketplace/ValorationSection';
 import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { formatCOP, getBackendImageUrl } from '@/lib/utils';
+import { formatCOP, getBackendImageUrl, formatCampusName } from '@/lib/utils';
 import {
   ArrowLeft,
   MapPin,
@@ -51,8 +51,9 @@ export const ProductDetailPage: React.FC = () => {
   const displayImages = images.length > 0 ? images.map(getBackendImageUrl) : [getBackendImageUrl('')];
 
   const sellerPhone = post.user?.cellphone || '3000000000';
+  const campusDisplay = formatCampusName(post.sede);
   const whatsappUrl = `https://wa.me/57${sellerPhone.replace(/\D/g, '')}?text=${encodeURIComponent(
-    `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". Quisiera acordar la entrega en el campus ${post.sede}.`
+    `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". Quisiera acordar la entrega en ${campusDisplay}.`
   )}`;
 
   const handleShare = () => {
@@ -126,7 +127,7 @@ export const ProductDetailPage: React.FC = () => {
                 <div className="absolute top-3 left-3">
                   <span className="bg-[#ffffff] text-[#171a3d] font-aeonik font-bold text-xs px-3 py-1 border border-[#171a3d] rounded-[1600px] shadow-sm">
                     <MapPin className="h-3 w-3 mr-1 inline text-[#df4838]" />
-                    Campus {post.sede}
+                    {campusDisplay}
                   </span>
                 </div>
               </div>
@@ -229,7 +230,7 @@ export const ProductDetailPage: React.FC = () => {
                     Punto de Encuentro Recomendado
                   </span>
                   <p className="text-[#171a3d]/80 font-medium leading-relaxed">
-                    Recomendamos encontrarse dentro del campus {post.sede} (en biblioteca o cafetería central) para revisar el artículo en persona.
+                    Recomendamos encontrarse dentro de {campusDisplay} (en biblioteca o cafetería central) para revisar el artículo en persona.
                   </p>
                 </div>
               </div>

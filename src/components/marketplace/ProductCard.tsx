@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Post } from '@/types';
-import { formatCOP, getBackendImageUrl } from '@/lib/utils';
+import { formatCOP, getBackendImageUrl, formatCampusName } from '@/lib/utils';
 import { MessageCircle, MapPin } from 'lucide-react';
 
 interface ProductCardProps {
@@ -13,8 +13,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
   const mainImage = images.length > 0 ? getBackendImageUrl(images[0]) : getBackendImageUrl('');
 
   const phone = post.user?.cellphone || '3000000000';
+  const campusLabel = formatCampusName(post.sede);
   const whatsappUrl = `https://wa.me/57${phone.replace(/\D/g, '')}?text=${encodeURIComponent(
-    `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". ¿Podemos acordar entrega en campus ${post.sede}?`
+    `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". ¿Podemos acordar entrega en ${campusLabel}?`
   )}`;
 
   return (
@@ -41,7 +42,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
             <div className="absolute top-2.5 left-2.5">
               <span className="inline-flex items-center gap-1 bg-[#ffffff]/95 backdrop-blur-sm text-[#171a3d] text-xs font-semibold px-2.5 py-0.5 border border-[#171a3d]/15 rounded-full shadow-sm">
                 <MapPin className="h-3 w-3 text-[#ec8026]" />
-                {post.sede}
+                {campusLabel}
               </span>
             </div>
 

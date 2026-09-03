@@ -32,11 +32,23 @@ export function formatDate(dateString?: string): string {
 }
 
 export const UDC_SEDES = [
-  'San Agustín',
-  'Zaragocilla',
-  'Piedra de Bolívar',
-  'San Pablo',
+  'Claustro San Agustín',
+  'Sede Zaragocilla',
+  'Sede Piedra de Bolívar',
+  'Sede San Pablo',
 ] as const;
+
+export const formatCampusName = (sede?: string): string => {
+  if (!sede) return '';
+  const s = sede.trim();
+  if (s.toLowerCase().includes('agustín') || s.toLowerCase().includes('agustin')) {
+    return 'Claustro San Agustín';
+  }
+  if (s.toLowerCase().startsWith('sede ') || s.toLowerCase().startsWith('claustro ')) {
+    return s;
+  }
+  return `Sede ${s}`;
+};
 
 export const CATEGORIAS_PRODUCTO = [
   'Libros y Fotocopias',
