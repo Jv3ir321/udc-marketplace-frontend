@@ -426,69 +426,102 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </SlowSlide>
 
-              {/* ----------------------------------------------------------------- */}
-              {/* PARTE 2: AVISOS CLAVADOS RECIENTES (Catálogo Bento en el Tablón) */}
-              {/* ----------------------------------------------------------------- */}
-              <div className="mt-14 pt-10 border-t-2 border-dashed border-[#855528]/45 space-y-7">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-2.5 mb-1.5">
-                      <span className="relative flex h-4 w-4 items-center justify-center shrink-0">
-                        <span className="h-4 w-4 rounded-full bg-gradient-to-tr from-[#df4838] via-[#ef4444] to-[#fca5a5] shadow-[0_2px_4px_rgba(0,0,0,0.25)] border border-white/80" />
-                        <span className="absolute top-0.5 left-1 h-1.5 w-1.5 rounded-full bg-white/90" />
-                      </span>
-                      <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ffffff]/90">
-                        Avisos Estudiantiles Activos
-                      </span>
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-[#ffffff] tracking-tight uppercase drop-shadow-sm">
-                      Publicaciones recientes en el tablón
-                    </h3>
-                    <p className="text-xs text-[#ffffff]/80 mt-1 font-medium">
-                      Últimos avisos colgados por estudiantes de la Universidad de Cartagena
-                    </p>
+          {/* ========================================================= */}
+          {/* SEPARACIÓN ENTRE LOS 2 TABLONES: Encabezado y Filtros     */}
+          {/* ========================================================= */}
+          <div className="pt-16 space-y-6">
+            <SlowSlide direction="up" duration={0.8} distance={25}>
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#171a3d]/10 pb-4">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-1.5">
+                    {/* Glossy 3D Red Pushpin Icon from screenshot */}
+                    <span className="relative flex h-4 w-4 items-center justify-center shrink-0">
+                      <span className="h-4 w-4 rounded-full bg-gradient-to-tr from-[#df4838] via-[#ef4444] to-[#fca5a5] shadow-[0_2px_4px_rgba(0,0,0,0.25)] border border-white/80" />
+                      <span className="absolute top-0.5 left-1 h-1.5 w-1.5 rounded-full bg-white/90" />
+                    </span>
+                    <span className="text-xs font-aeonik font-bold uppercase tracking-[0.06em] text-[#ec8026]">
+                      Avisos Estudiantiles Activos
+                    </span>
                   </div>
-
-                  <Link
-                    to="/catalog"
-                    className="h-9 px-4 rounded-full border border-white/25 bg-[#ffffff]/95 hover:bg-[#ffffff] text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors shadow-sm"
-                  >
-                    <span>Ver todo el catálogo</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-[#ec8026]" />
-                  </Link>
+                  <h3 className="text-2xl sm:text-4xl font-extrabold text-[#171a3d] tracking-tight uppercase">
+                    Publicaciones recientes en el tablón
+                  </h3>
+                  <p className="text-xs text-[#171a3d]/70 mt-1 font-medium">
+                    Últimos avisos colgados por estudiantes de la Universidad de Cartagena
+                  </p>
                 </div>
 
-                {/* Filtro Rápido por Categorías */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCategory('')}
-                    className={`h-8 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
-                      selectedCategory === ''
-                        ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
-                        : 'bg-[#ffffff]/90 text-[#171a3d]/80 hover:bg-[#ffffff]'
-                    }`}
-                  >
-                    Todos los Artículos
-                  </button>
-                  {CATEGORIAS_PRODUCTO.map((cat) => {
-                    const isSelected = selectedCategory === cat;
-                    return (
-                      <button
-                        key={cat}
-                        type="button"
-                        onClick={() => setSelectedCategory(isSelected ? '' : cat)}
-                        className={`h-8 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
-                          isSelected
-                            ? 'bg-[#ec8026] text-[#ffffff] shadow-sm'
-                            : 'bg-[#ffffff]/90 text-[#171a3d]/80 hover:bg-[#ffffff]'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    );
-                  })}
+                <Link
+                  to="/catalog"
+                  className="h-9 px-4 rounded-full border border-[#171a3d]/20 bg-[#ffffff] hover:bg-[#fdf3eb] hover:border-[#ec8026]/40 text-xs font-aeonik font-bold tracking-[0.02em] text-[#171a3d] inline-flex items-center gap-2 self-start md:self-auto transition-colors shadow-sm"
+                >
+                  <span>Ver todo el catálogo</span>
+                  <ArrowRight className="h-3.5 w-3.5 text-[#ec8026]" />
+                </Link>
+              </div>
+
+              {/* Filtro Rápido por Categorías */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 min-w-max mt-4">
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory('')}
+                  className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
+                    selectedCategory === ''
+                      ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
+                      : 'bg-[#ffffff] text-[#171a3d]/80 border border-[#171a3d]/15 hover:bg-[#edf0f7]'
+                  }`}
+                >
+                  Todos los Artículos
+                </button>
+                {CATEGORIAS_PRODUCTO.map((cat) => {
+                  const isSelected = selectedCategory === cat;
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setSelectedCategory(isSelected ? '' : cat)}
+                      className={`h-9 px-4 rounded-full text-xs font-aeonik font-bold tracking-[0.02em] transition-all active:scale-95 ${
+                        isSelected
+                          ? 'bg-[#ec8026] text-[#ffffff] shadow-sm shadow-[#ec8026]/20'
+                          : 'bg-[#ffffff] text-[#171a3d]/80 border border-[#171a3d]/15 hover:bg-[#edf0f7]'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+            </SlowSlide>
+
+            {/* TABLÓN 2: Segundo Tablero con los Avisos Clavados */}
+            <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
+              <div
+                className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 border-[6px] sm:border-[10px] border-[#915f36] shadow-[inset_0_4px_30px_rgba(40,20,5,0.42),0_16px_40px_-8px_rgba(23,26,61,0.2)] overflow-hidden mt-6"
+                style={{
+                  backgroundColor: '#b98858',
+                  backgroundImage: `
+                    radial-gradient(#6a3e1b 18%, transparent 20%),
+                    radial-gradient(#825126 18%, transparent 20%)
+                  `,
+                  backgroundPosition: '0 0, 14px 14px',
+                  backgroundSize: '28px 28px',
+                }}
+              >
+                {/* Corner Mounting Screws on Board 2 */}
+                <div className="absolute top-3 left-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+                </div>
+                <div className="absolute top-3 right-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+                </div>
+                <div className="absolute bottom-3 left-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+                </div>
+                <div className="absolute bottom-3 right-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
                 </div>
 
                 {/* Cuadrícula de Avisos Bento Clavados */}
@@ -550,8 +583,8 @@ export const HomePage: React.FC = () => {
                   </div>
                 )}
               </div>
-            </div>
-          </SlowSlide>
+            </SlowSlide>
+          </div>
         </div>
       </section>
 
