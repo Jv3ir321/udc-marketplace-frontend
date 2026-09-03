@@ -280,31 +280,40 @@ export const HomePage: React.FC = () => {
       <section className="w-full bg-[#faf8f5] py-14 px-4 sm:px-8 border-b border-[#171a3d]/10">
         <div className="max-w-[1360px] mx-auto">
           <SlowSlide direction="up" duration={0.85} distance={30}>
-            {/* Pegboard Main Board Container (Tablón Perforado de Madera y Corcho) */}
+            {/* Tablero Verde de Tiza Universitario (Pizarra de Cátedra) */}
             <div
-              className="relative rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 md:p-12 border-[6px] sm:border-[10px] border-[#915f36] shadow-[inset_0_4px_30px_rgba(40,20,5,0.45),0_18px_45px_-8px_rgba(23,26,61,0.22)] overflow-hidden"
+              className="relative rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 md:p-12 pb-10 sm:pb-14 border-[7px] sm:border-[11px] border-[#7a4b22] shadow-[inset_0_4px_40px_rgba(0,0,0,0.65),0_18px_45px_-8px_rgba(23,26,61,0.22)] overflow-hidden"
               style={{
-                backgroundColor: '#b98858',
+                backgroundColor: '#1b3b2b',
                 backgroundImage: `
-                  radial-gradient(#6a3e1b 18%, transparent 20%),
-                  radial-gradient(#825126 18%, transparent 20%)
+                  radial-gradient(ellipse at 50% 30%, rgba(45, 90, 68, 0.45), transparent 70%),
+                  radial-gradient(circle at 15% 85%, rgba(18, 42, 31, 0.6), transparent 50%),
+                  radial-gradient(circle at 85% 20%, rgba(35, 75, 56, 0.35), transparent 50%),
+                  repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 2px, transparent 2px, transparent 8px)
                 `,
-                backgroundPosition: '0 0, 14px 14px',
-                backgroundSize: '28px 28px',
               }}
             >
-              {/* Corner Mounting Screws on Board */}
-              <div className="absolute top-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+              {/* Tornillos de latón dorado en las esquinas */}
+              <div className="absolute top-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#422006] rotate-45" />
               </div>
-              <div className="absolute top-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+              <div className="absolute top-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#422006] -rotate-45" />
               </div>
-              <div className="absolute bottom-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+              <div className="absolute bottom-3.5 left-3.5 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#422006] -rotate-45" />
               </div>
-              <div className="absolute bottom-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+              <div className="absolute bottom-3.5 right-3.5 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                <div className="h-2 w-0.5 bg-[#422006] rotate-45" />
+              </div>
+
+              {/* Repisa para tizas inferior (Detalle realista de pizarra universitaria) */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-2.5 px-5 py-1 rounded-t-md bg-[#5c3514] border-t border-x border-[#8b5321] shadow-inner">
+                <span className="w-6 h-1.5 rounded-full bg-[#ffffff]/90 shadow-sm" title="Tiza Blanca" />
+                <span className="w-5 h-1.5 rounded-full bg-[#fef08a]/90 shadow-sm" title="Tiza Amarilla" />
+                <span className="px-2 py-0.5 rounded-sm bg-[#3a200a] border border-[#6d3e18] text-[9px] font-mono text-[#ffffff]/60 font-bold tracking-wider">
+                  UDC BORRADOR
+                </span>
               </div>
 
               {/* ----------------------------------------------------------------- */}
@@ -324,15 +333,15 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   {/* Titular Grande con Subrayado Aguamarina */}
-                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#ffffff] leading-[1.05] tracking-tight uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#ffffff] leading-[1.05] tracking-tight uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
                     Lo que necesitas para tu semestre,{' '}
                     <span className="underline decoration-[#3da898] decoration-[5px] underline-offset-8">
                       en tu propio campus.
                     </span>
                   </h2>
 
-                  {/* Caja Oscura de Explicación */}
-                  <div className="bg-[#171a3d]/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 text-[#ffffff]/90 text-sm sm:text-base font-normal leading-relaxed border border-[#ffffff]/15 shadow-xl max-w-xl">
+                  {/* Caja de Explicación en tono pizarra oscura */}
+                  <div className="bg-[#0f241a]/85 backdrop-blur-md rounded-2xl p-5 sm:p-6 text-[#ffffff]/95 text-sm sm:text-base font-normal leading-relaxed border border-[#ffffff]/20 shadow-xl max-w-xl">
                     Compra, vende o intercambia libros, batas médicas, calculadoras y tecnología directamente con compañeros de clase en el Claustro San Agustín o en las sedes Zaragocilla, Piedra de Bolívar y San Pablo.
                   </div>
 
@@ -530,32 +539,38 @@ export const HomePage: React.FC = () => {
               </div>
             </SlowSlide>
 
-            {/* TABLÓN 2: Segundo Tablero con los Avisos Clavados */}
+            {/* TABLÓN 2: Segundo Tablero Verde de Tiza con los Avisos Clavados */}
             <SlowSlide direction="up" delay={0.2} duration={0.85} distance={35}>
               <div
-                className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 border-[6px] sm:border-[10px] border-[#915f36] shadow-[inset_0_4px_30px_rgba(40,20,5,0.42),0_16px_40px_-8px_rgba(23,26,61,0.2)] overflow-hidden mt-6"
+                className="relative rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 md:p-8 pb-8 sm:pb-10 border-[7px] sm:border-[11px] border-[#7a4b22] shadow-[inset_0_4px_40px_rgba(0,0,0,0.65),0_18px_45px_-8px_rgba(23,26,61,0.22)] overflow-hidden mt-6"
                 style={{
-                  backgroundColor: '#b98858',
+                  backgroundColor: '#1b3b2b',
                   backgroundImage: `
-                    radial-gradient(#6a3e1b 18%, transparent 20%),
-                    radial-gradient(#825126 18%, transparent 20%)
+                    radial-gradient(ellipse at 50% 30%, rgba(45, 90, 68, 0.45), transparent 70%),
+                    radial-gradient(circle at 15% 85%, rgba(18, 42, 31, 0.6), transparent 50%),
+                    radial-gradient(circle at 85% 20%, rgba(35, 75, 56, 0.35), transparent 50%),
+                    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 2px, transparent 2px, transparent 8px)
                   `,
-                  backgroundPosition: '0 0, 14px 14px',
-                  backgroundSize: '28px 28px',
                 }}
               >
-                {/* Corner Mounting Screws on Board 2 */}
-                <div className="absolute top-3 left-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+                {/* Tornillos de latón dorado en Tablero 2 */}
+                <div className="absolute top-3 left-3 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#422006] rotate-45" />
                 </div>
-                <div className="absolute top-3 right-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+                <div className="absolute top-3 right-3 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#422006] -rotate-45" />
                 </div>
-                <div className="absolute bottom-3 left-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#2c1706] -rotate-45" />
+                <div className="absolute bottom-3 left-3 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#422006] -rotate-45" />
                 </div>
-                <div className="absolute bottom-3 right-3 h-3 w-3 rounded-full bg-[#4a280c] border border-[#d6a575]/40 shadow-inner flex items-center justify-center">
-                  <div className="h-2 w-0.5 bg-[#2c1706] rotate-45" />
+                <div className="absolute bottom-3 right-3 h-3.5 w-3.5 rounded-full bg-[#b8860b] border border-[#fef08a]/60 shadow-inner flex items-center justify-center">
+                  <div className="h-2 w-0.5 bg-[#422006] rotate-45" />
+                </div>
+
+                {/* Repisa para tizas inferior en Tablero 2 */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-2 px-4 py-0.5 rounded-t-md bg-[#5c3514] border-t border-x border-[#8b5321] shadow-inner">
+                  <span className="w-5 h-1.5 rounded-full bg-[#ffffff]/90 shadow-sm" />
+                  <span className="w-4 h-1.5 rounded-full bg-[#fef08a]/90 shadow-sm" />
                 </div>
 
                 {/* Cuadrícula de Avisos Bento Clavados */}
@@ -587,7 +602,7 @@ export const HomePage: React.FC = () => {
                     })}
                   </div>
                 ) : (
-                  <div className="rounded-2xl bg-[#faf8f5] p-12 text-center border-2 border-dashed border-[#855528]/40 space-y-3 max-w-md mx-auto my-6 shadow-md relative">
+                  <div className="rounded-2xl bg-[#fcfaf5] p-12 text-center border-2 border-dashed border-[#1b3b2b]/40 space-y-3 max-w-md mx-auto my-6 shadow-md relative">
                     <div
                       className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 rounded-full shadow-md border border-white"
                       style={{
