@@ -102,18 +102,18 @@ export const HomePage: React.FC = () => {
               <div className="rounded-[28px] bg-[#f2b725] p-7 text-[#ffffff] flex flex-col justify-between min-h-[280px] shadow-sm hover:shadow-md transition-shadow">
                 <div className="space-y-1">
                   <span className="text-xs font-bold uppercase tracking-[0.05em] text-[#171a3d]/70 block">
-                    Cero Comisiones
+                    Comisión por Venta
                   </span>
                   <div className="text-6xl sm:text-7xl font-extrabold tracking-tight text-[#ffffff] leading-none">
-                    98%
+                    0%
                   </div>
                 </div>
                 <div className="space-y-1 pt-6 border-t border-[#ffffff]/25">
                   <h4 className="font-bold text-sm text-[#171a3d] uppercase tracking-wide">
-                    Ahorro Directo
+                    Ahorro Total Directo
                   </h4>
                   <p className="text-xs font-medium text-[#171a3d]/85 leading-snug">
-                    Satisfacción comprobada en compras y trueques académicos entre compañeros de aula.
+                    Sin tarifas ni cobros sorpresa. El 100% del pago acordado queda entre compañeros de facultad.
                   </p>
                 </div>
               </div>
