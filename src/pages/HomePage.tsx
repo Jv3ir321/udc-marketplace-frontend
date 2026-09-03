@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Lenis from 'lenis';
 import { useMarketplace } from '@/context/MarketplaceContext';
 import { BentoCard } from '@/components/marketplace/BentoCard';
 import { PageTransition } from '@/components/common/PageTransition';
@@ -22,18 +23,51 @@ export const HomePage: React.FC = () => {
   const [heroSearch, setHeroSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const lenisRef = useRef<Lenis | null>(null);
   const navigate = useNavigate();
 
+  // Soft Momentum Scroll (Lenis) for Landing Page
   useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.5,
+      infinite: false,
+    });
+    lenisRef.current = lenis;
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
     const checkScroll = () => {
       setShowScrollTop(window.scrollY > 350);
     };
+    lenis.on('scroll', checkScroll);
     window.addEventListener('scroll', checkScroll);
-    return () => window.removeEventListener('scroll', checkScroll);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.off('scroll', checkScroll);
+      window.removeEventListener('scroll', checkScroll);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleHeroSearch = (e: React.FormEvent) => {
