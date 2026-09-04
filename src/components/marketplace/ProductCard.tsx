@@ -20,18 +20,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
   )}`;
 
   return (
-    <article className="group rounded-2xl bg-[#ffffff] text-[#171a3d] border border-[#171a3d]/15 hover:border-[#ec8026]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col justify-between overflow-hidden font-aeonik">
+    <article className="group rounded-3xl bg-white text-[#171a3d] shadow-[0_12px_32px_rgba(23,26,61,0.09),0_2px_6px_rgba(23,26,61,0.04)] hover:shadow-[0_24px_48px_rgba(23,26,61,0.18)] ring-1 ring-black/[0.04] transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden font-aeonik">
       <div>
         {/* Product Image Container */}
-        <div className="p-3 pb-0">
+        <div className="p-3.5 pb-0">
           <Link
             to={`/post/${post.id}`}
-            className="relative block aspect-[4/3] w-full overflow-hidden rounded-xl border border-[#171a3d]/10 bg-[#f8fafc]"
+            className="relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-tr from-slate-100 via-slate-50 to-amber-50/20 shadow-inner"
           >
             <img
               src={mainImage}
               alt={post.nombre}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
@@ -41,15 +41,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
 
             {/* Campus Badge */}
             <div className="absolute top-2.5 left-2.5">
-              <span className="inline-flex items-center gap-1 bg-[#ffffff]/95 backdrop-blur-sm text-[#171a3d] text-xs font-semibold px-2.5 py-0.5 border border-[#171a3d]/15 rounded-full shadow-sm">
+              <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-md text-[#171a3d] text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-black/5">
                 <MapPin className="h-3 w-3 text-[#ec8026]" />
-                {campusLabel}
+                <span className="truncate max-w-[130px]">{campusLabel}</span>
               </span>
             </div>
 
             {/* Category Badge */}
             <div className="absolute top-2.5 right-2.5">
-              <span className="inline-flex items-center bg-[#ec8026] text-[#ffffff] text-[10px] font-bold uppercase tracking-[0.04em] px-2.5 py-0.5 rounded-full shadow-sm">
+              <span className="inline-flex items-center bg-[#fdf3eb] text-[#ec8026] text-[10px] font-extrabold uppercase tracking-[0.04em] px-2.5 py-1 rounded-full shadow-sm">
                 {post.tipoP}
               </span>
             </div>
@@ -59,16 +59,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
         {/* Card Body */}
         <div className="p-4 space-y-2">
           <Link to={`/post/${post.id}`} className="block">
-            <h3 className="font-bold text-[16px] sm:text-[17px] leading-[1.3] text-[#171a3d] line-clamp-1 group-hover:text-[#ec8026] transition-colors">
+            <h3 className="font-extrabold text-[16px] sm:text-[17px] leading-[1.3] text-[#171a3d] line-clamp-1 group-hover:text-[#ec8026] transition-colors">
               {post.nombre}
             </h3>
           </Link>
 
-          <p className="text-xs text-[#171a3d]/70 font-normal leading-relaxed line-clamp-2">
+          <p className="text-xs text-slate-500 font-normal leading-relaxed line-clamp-2">
             {post.desc}
           </p>
 
-          <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#171a3d]/60 pt-1">
+          <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-400 pt-0.5">
             <span className="truncate">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
             <span>·</span>
             <span className="text-[#ec8026] font-semibold">Comunidad UDC</span>
@@ -77,12 +77,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
       </div>
 
       {/* Footer Strip */}
-      <div className="px-4 pb-4 pt-3 border-t border-[#171a3d]/10 flex items-center justify-between gap-3">
+      <div className="px-4 pb-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
         <div>
-          <span className="block text-[10px] font-semibold uppercase tracking-[0.03em] text-[#171a3d]/50">
+          <span className="block text-[10px] font-bold uppercase tracking-[0.04em] text-slate-400">
             Precio
           </span>
-          <span className="text-xl sm:text-2xl font-extrabold text-[#171a3d] leading-none tracking-tight">
+          <span className="text-xl sm:text-2xl font-black text-[#171a3d] leading-none tracking-tight">
             {formatCOP(post.price)}
           </span>
         </div>
@@ -93,13 +93,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
             target="_blank"
             rel="noopener noreferrer"
             title="Pactar entrega por WhatsApp"
-            className="h-8 w-8 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-95 shadow-sm group/wa"
+            className="h-9 w-9 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-95 shadow-md shadow-[#3da898]/20 group/wa"
           >
             <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
           </a>
           <Link
             to={`/post/${post.id}`}
-            className="h-8 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-sm"
+            className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-md shadow-[#ec8026]/20"
           >
             Ver
           </Link>

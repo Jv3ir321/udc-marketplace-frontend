@@ -42,10 +42,10 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   return (
     <div className="space-y-3 font-aeonik">
       <div
-        className={`border-2 border-dashed rounded-[20px] p-6 text-center transition-all cursor-pointer ${
+        className={`border-2 border-dashed rounded-3xl p-7 text-center transition-all duration-200 cursor-pointer ${
           dragActive
-            ? 'border-[#000000] bg-[#dceeff]'
-            : 'border-[#000000]/40 hover:border-[#000000] bg-[#dceeff]/30'
+            ? 'border-[#ec8026] bg-[#fdf3eb]'
+            : 'border-slate-200 hover:border-[#ec8026]/60 bg-slate-50/80 hover:bg-slate-100/70'
         }`}
         onDragOver={(e) => {
           e.preventDefault();
@@ -68,19 +68,19 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           onChange={(e) => handleFiles(e.target.files)}
         />
 
-        <div className="flex flex-col items-center justify-center gap-2">
-          <div className="h-10 w-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] flex items-center justify-center text-[#000000]">
-            <UploadCloud className="h-5 w-5 text-[#fb4903]" />
+        <div className="flex flex-col items-center justify-center gap-2.5">
+          <div className="h-12 w-12 rounded-2xl bg-white shadow-md shadow-[#ec8026]/10 flex items-center justify-center text-[#ec8026]">
+            <UploadCloud className="h-6 w-6 stroke-[2.2]" />
           </div>
-          <div>
-            <p className="text-xs font-bold text-[#000000]">
+          <div className="space-y-0.5">
+            <p className="text-xs font-bold text-[#171a3d]">
               Haz clic o arrastra fotos del artículo aquí
             </p>
-            <p className="text-[11px] text-[#000000]/60 font-medium">
+            <p className="text-[11px] text-slate-500 font-medium">
               PNG, JPG o WEBP hasta 5MB por foto (Máx. {maxImages} fotos)
             </p>
           </div>
-          <span className="h-7 px-3 rounded-[1600px] border border-[#000000] bg-[#ffffff] text-[11px] font-bold text-[#000000] inline-flex items-center">
+          <span className="h-8 px-4 rounded-full bg-white text-xs font-bold text-[#171a3d] inline-flex items-center shadow-sm hover:shadow transition-all">
             Seleccionar Archivos
           </span>
         </div>
@@ -94,7 +94,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
             return (
               <div
                 key={idx}
-                className="relative aspect-square rounded-[16px] overflow-hidden border border-[#000000] bg-[#ffffff]"
+                className="relative aspect-square rounded-2xl overflow-hidden shadow-sm bg-slate-100 group"
               >
                 <img
                   src={previewUrl}
@@ -107,9 +107,9 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
                     e.stopPropagation();
                     removeImage(idx);
                   }}
-                  className="absolute top-1 right-1 h-6 w-6 rounded-[1600px] bg-[#000000] text-[#ffffff] flex items-center justify-center hover:bg-[#fb4903] transition-colors"
+                  className="absolute top-1.5 right-1.5 h-6 w-6 rounded-full bg-black/70 hover:bg-rose-500 text-white flex items-center justify-center shadow-md transition-colors"
                 >
-                  <X className="h-3 w-3" />
+                  <X className="h-3.5 w-3.5" />
                 </button>
               </div>
             );

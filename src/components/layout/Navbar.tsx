@@ -152,7 +152,7 @@ export const Navbar: React.FC = () => {
             size="sm"
             className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-[13px] tracking-[0.02em] transition-transform active:scale-95 shadow-sm shadow-[#ec8026]/20"
           >
-            <Link to="/create">
+            <Link to="/catalog?create=true">
               <Plus className="h-4 w-4 mr-1 stroke-[3]" />
               Publicar
             </Link>
@@ -276,7 +276,7 @@ export const Navbar: React.FC = () => {
               Explorar Catálogo Completo
             </Link>
             <Link
-              to="/create"
+              to="/catalog?create=true"
               onClick={() => setMobileMenuOpen(false)}
               className="h-10 px-4 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] text-[#ffffff] flex items-center justify-center gap-2"
             >

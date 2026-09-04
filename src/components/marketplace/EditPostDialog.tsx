@@ -69,35 +69,35 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={(val) => !val && handleClose()}>
-      <DialogContent className="sm:max-w-lg rounded-[24px] bg-[#ffffff] border border-[#171a3d] p-6 font-aeonik text-[#171a3d]">
+      <DialogContent className="sm:max-w-lg rounded-3xl bg-white border-0 p-6 sm:p-8 font-aeonik text-[#171a3d] shadow-2xl">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <DialogHeader className="border-b border-[#171a3d]/20 pb-3">
-            <DialogTitle className="flex items-center gap-2 font-lateral text-2xl uppercase text-[#171a3d]">
+          <DialogHeader className="border-b border-slate-100 pb-3">
+            <DialogTitle className="flex items-center gap-2 text-xl font-extrabold uppercase tracking-tight text-[#171a3d]">
               <Edit3 className="h-5 w-5 text-[#3da898]" />
               Editar Publicación
             </DialogTitle>
-            <DialogDescription className="text-xs text-[#171a3d]/70 font-medium">
+            <DialogDescription className="text-xs text-slate-500 font-normal">
               Modifica los detalles de tu artículo en UDC Marketplace.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3.5 pt-1">
             <div className="space-y-1.5">
-              <Label htmlFor="edit-nombre" className="text-xs font-bold uppercase tracking-[0.032em]">
+              <Label htmlFor="edit-nombre" className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Título del Producto *
               </Label>
               <Input
                 id="edit-nombre"
                 value={formData.nombre}
                 onChange={(e) => setFormData((prev) => ({ ...prev, nombre: e.target.value }))}
-                className="h-10 text-xs rounded-[1600px] border border-[#000000] bg-[#ffffff] focus-visible:ring-0"
+                className="h-10 text-xs rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 transition-all"
                 required
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="edit-price" className="text-xs font-bold uppercase tracking-[0.032em]">
+                <Label htmlFor="edit-price" className="text-xs font-bold uppercase tracking-wider text-slate-700">
                   Precio ($ COP) *
                 </Label>
                 <Input
@@ -105,18 +105,18 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
                   type="number"
                   value={formData.price}
                   onChange={(e) => setFormData((prev) => ({ ...prev, price: e.target.value }))}
-                  className="h-10 text-xs font-bold rounded-[1600px] border border-[#000000] bg-[#ffffff] focus-visible:ring-0"
+                  className="h-10 text-xs font-bold rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 transition-all"
                   required
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="edit-sede" className="text-xs font-bold uppercase tracking-[0.032em]">
+                <Label htmlFor="edit-sede" className="text-xs font-bold uppercase tracking-wider text-slate-700">
                   Campus / Sede *
                 </Label>
                 <select
                   id="edit-sede"
-                  className="w-full h-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] px-3 text-xs font-bold text-[#000000] focus:outline-none cursor-pointer"
+                  className="w-full h-10 rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 px-3 text-xs font-bold text-[#171a3d] cursor-pointer transition-all outline-none"
                   value={formData.sede}
                   onChange={(e) => setFormData((prev) => ({ ...prev, sede: e.target.value }))}
                 >
@@ -130,12 +130,12 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="edit-tipoP" className="text-xs font-bold uppercase tracking-[0.032em]">
+              <Label htmlFor="edit-tipoP" className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Categoría *
               </Label>
               <select
                 id="edit-tipoP"
-                className="w-full h-10 rounded-[1600px] border border-[#000000] bg-[#ffffff] px-3 text-xs font-bold text-[#000000] focus:outline-none cursor-pointer"
+                className="w-full h-10 rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 px-3 text-xs font-bold text-[#171a3d] cursor-pointer transition-all outline-none"
                 value={formData.tipoP}
                 onChange={(e) => setFormData((prev) => ({ ...prev, tipoP: e.target.value }))}
               >
@@ -148,7 +148,7 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="edit-desc" className="text-xs font-bold uppercase tracking-[0.032em]">
+              <Label htmlFor="edit-desc" className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Descripción *
               </Label>
               <Textarea
@@ -156,19 +156,19 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
                 value={formData.desc}
                 onChange={(e) => setFormData((prev) => ({ ...prev, desc: e.target.value }))}
                 rows={3}
-                className="text-xs rounded-[20px] border border-[#000000] bg-[#ffffff] p-3 focus-visible:ring-0"
+                className="text-xs rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 p-3.5 transition-all text-[#171a3d] leading-relaxed resize-none"
                 required
               />
             </div>
           </div>
 
-          <DialogFooter className="pt-3 border-t border-[#171a3d]/20 flex items-center justify-end gap-2">
+          <DialogFooter className="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={handleClose}
-              className="h-9 px-4 rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-xs font-bold text-[#171a3d] hover:bg-[#edf0f7]"
+              className="h-9 px-4 rounded-full border-0 bg-slate-100 text-xs font-bold text-slate-700 hover:bg-slate-200"
             >
               Cancelar
             </Button>
@@ -176,7 +176,7 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
               type="submit"
               size="sm"
               disabled={isSubmitting}
-              className="h-9 px-5 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold border border-[#171a3d] shadow-sm"
+              className="h-9 px-5 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white text-xs font-bold shadow-md shadow-[#ec8026]/20 transition-all"
             >
               {isSubmitting ? 'Guardando...' : 'Guardar Cambios'}
             </Button>

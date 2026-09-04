@@ -136,7 +136,7 @@ export const HomePage: React.FC = () => {
 
               <div className="flex flex-wrap items-center gap-3 pt-3">
                 <Link
-                  to="/create"
+                  to="/catalog?create=true"
                   className="h-12 px-7 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.03em] flex items-center gap-2 transition-all shadow-md shadow-[#ec8026]/20 active:scale-95 uppercase"
                 >
                   <Plus className="h-4 w-4 stroke-[3]" />
@@ -481,7 +481,7 @@ export const HomePage: React.FC = () => {
                         <Plus className="h-4 w-4 stroke-[3]" />
                       </div>
                       <Link
-                        to="/create"
+                        to="/catalog?create=true"
                         className="text-xs font-bold text-[#3da898] hover:text-[#2e8f82] flex items-center gap-1 transition-colors group/link"
                       >
                         <span>Publicar aviso</span>
@@ -644,7 +644,7 @@ export const HomePage: React.FC = () => {
                     </p>
                     <div className="pt-2">
                       <Link
-                        to="/create"
+                        to="/catalog?create=true"
                         className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-xs hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
                       >
                         <Plus className="h-3.5 w-3.5 stroke-[3]" />

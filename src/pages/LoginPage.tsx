@@ -5,7 +5,7 @@ import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Lock, Mail, ArrowRight, Sparkles } from 'lucide-react';
+import { Lock, Mail, ArrowRight } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -25,71 +25,73 @@ export const LoginPage: React.FC = () => {
     }
   };
 
-  const handleDemoFill = () => {
-    setMail('jcuesta@unicartagena.edu.co');
-    setPassword('123456');
-  };
-
   return (
-    <PageTransition className="flex-1 w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center px-4 py-12 bg-[#edf0f7] font-aeonik">
+    <PageTransition className="flex-1 w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center px-4 py-12 bg-[#faf8f5] font-aeonik">
       <div className="w-full max-w-sm space-y-6">
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <Link to="/" className="inline-flex flex-col items-center gap-2 group">
+          <Link to="/" className="inline-flex flex-col items-center gap-2.5 group">
             <img
               src="/udc-logo.png"
               alt="Universidad de Cartagena"
               className="h-16 w-auto object-contain transition-transform group-hover:scale-105"
             />
-            <span className="font-lateral text-3xl tracking-normal text-[#171a3d] leading-none uppercase">
-              UDC MARKETPLACE
-            </span>
+            <div className="flex flex-col items-center">
+              <span className="font-aeonik font-black text-2xl text-[#171a3d] leading-none uppercase tracking-tight">
+                UDC MARKETPLACE
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#ec8026] mt-0.5">
+                Mercado Estudiantil
+              </span>
+            </div>
           </Link>
         </div>
 
-        {/* Card */}
-        <div className="rounded-[24px] bg-[#ffffff] border border-[#171a3d] p-6 sm:p-7 space-y-5 shadow-sm">
-          <div className="space-y-1 text-center border-b border-[#171a3d]/20 pb-4">
-            <h1 className="text-3xl font-lateral uppercase tracking-normal text-[#171a3d] leading-none">
-              INICIAR SESIÓN
+        {/* Login Card */}
+        <div className="rounded-3xl bg-[#ffffff] border border-[#171a3d]/12 p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="space-y-1 text-center border-b border-[#171a3d]/10 pb-4">
+            <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-[#171a3d]">
+              Iniciar Sesión
             </h1>
-            <p className="text-xs text-[#171a3d]/70 font-medium">
-              Ingresa con tus credenciales de la Universidad de Cartagena
+            <p className="text-xs text-[#171a3d]/70 font-normal leading-relaxed">
+              Ingresa con tu correo y contraseña institucional de la Universidad de Cartagena
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
-              <Label htmlFor="mail" className="text-xs font-bold uppercase tracking-[0.032em] text-[#171a3d]">
+              <Label htmlFor="mail" className="text-xs font-bold text-[#171a3d]">
                 Correo Electrónico
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#171a3d]/60 pointer-events-none" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#171a3d]/45 pointer-events-none" />
                 <Input
                   id="mail"
                   type="email"
                   placeholder="estudiante@unicartagena.edu.co"
                   value={mail}
                   onChange={(e) => setMail(e.target.value)}
-                  className="pl-9 h-10 text-xs font-aeonik font-medium rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-[#171a3d] focus-visible:ring-0 focus-visible:bg-[#edf0f7]"
+                  className="pl-10 h-10 text-xs font-aeonik font-medium rounded-xl border border-[#171a3d]/15 bg-[#ffffff] text-[#171a3d] placeholder:text-[#171a3d]/40 focus-visible:ring-0 focus-visible:border-[#ec8026] focus-visible:bg-[#fdfbf7] transition-colors"
                   required
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-xs font-bold uppercase tracking-[0.032em] text-[#171a3d]">
-                Contraseña
-              </Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password" className="text-xs font-bold text-[#171a3d]">
+                  Contraseña
+                </Label>
+              </div>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#171a3d]/60 pointer-events-none" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#171a3d]/45 pointer-events-none" />
                 <Input
                   id="password"
                   type="password"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-9 h-10 text-xs font-aeonik font-medium rounded-[1600px] border border-[#171a3d] bg-[#ffffff] text-[#171a3d] focus-visible:ring-0 focus-visible:bg-[#edf0f7]"
+                  className="pl-10 h-10 text-xs font-aeonik font-medium rounded-xl border border-[#171a3d]/15 bg-[#ffffff] text-[#171a3d] placeholder:text-[#171a3d]/40 focus-visible:ring-0 focus-visible:border-[#ec8026] focus-visible:bg-[#fdfbf7] transition-colors"
                   required
                 />
               </div>
@@ -98,34 +100,22 @@ export const LoginPage: React.FC = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 rounded-[1600px] bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#171a3d] transition-transform active:scale-95 shadow-sm mt-2"
+              className="w-full h-11 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.02em] transition-transform active:scale-95 shadow-sm shadow-[#ec8026]/20 mt-2"
             >
               {isLoading ? (
-                <span>Comprobando...</span>
+                <span>Comprobando acceso...</span>
               ) : (
-                <span className="flex items-center justify-center gap-1.5">
+                <span className="flex items-center justify-center gap-2">
                   <span>Acceder al Mercado</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-4 w-4" />
                 </span>
               )}
             </Button>
           </form>
 
-          {/* Quick Demo Pill */}
-          <div className="pt-2 border-t border-[#171a3d]/20">
-            <button
-              type="button"
-              onClick={handleDemoFill}
-              className="w-full h-9 rounded-[1600px] border border-[#171a3d] bg-[#fdf3eb] hover:bg-[#fce8d7] text-[#ec8026] text-xs font-aeonik font-bold tracking-[0.032em] flex items-center justify-center gap-1.5 transition-colors"
-            >
-              <Sparkles className="h-3.5 w-3.5 fill-current" />
-              <span>Cargar Usuario Demo (UDC)</span>
-            </button>
-          </div>
-
-          <div className="pt-2 text-center text-xs font-medium text-[#171a3d]/70">
+          <div className="pt-2 border-t border-[#171a3d]/10 text-center text-xs font-normal text-[#171a3d]/70">
             ¿No tienes cuenta aún?{' '}
-            <Link to="/register" className="font-bold text-[#ec8026] underline hover:text-[#d97018]">
+            <Link to="/register" className="font-bold text-[#ec8026] hover:underline">
               Regístrate aquí
             </Link>
           </div>

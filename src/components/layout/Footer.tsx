@@ -5,30 +5,10 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import { UDC_SEDES } from '@/lib/utils';
-import { SlushSticker } from '@/components/common/SlushSticker';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t border-[#171a3d]/20 bg-[#f4f6fa] text-[#171a3d] font-aeonik">
-      {/* Top Banner with Orange & Student Community Accents */}
-      <div className="border-b border-[#171a3d]/20 bg-[#ffffff] py-8 px-4 sm:px-8">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <SlushSticker type="grad" color="orange" label="UDC 1827" size="md" rotate={-3} />
-            <SlushSticker type="check" color="teal" label="Entrega Segura" size="md" rotate={2} />
-            <SlushSticker type="coin" color="orange" label="Sin Comisiones" size="md" rotate={-2} />
-            <SlushSticker type="rocket" color="orange" label="Campus Directo" size="md" rotate={4} />
-          </div>
-
-          <Link
-            to="/create"
-            className="h-11 px-6 rounded-[1600px] border border-[#171a3d] bg-[#ec8026] text-[#ffffff] font-aeonik font-bold text-sm tracking-[0.032em] flex items-center gap-2 hover:bg-[#d97018] transition-transform active:scale-95 shadow-sm"
-          >
-            <span>Publicar en UDC Marketplace</span>
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
+    <footer className="w-full border-t border-[#171a3d]/10 bg-[#faf8f5] text-[#171a3d] font-aeonik">
 
       {/* Main Footer Body */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-14">
@@ -140,7 +120,7 @@ export const Footer: React.FC = () => {
               Catálogo General
             </Link>
             <span>·</span>
-            <Link to="/create" className="underline hover:text-[#ec8026]">
+            <Link to="/catalog?create=true" className="underline hover:text-[#ec8026]">
               Crear Aviso
             </Link>
             <span>·</span>
