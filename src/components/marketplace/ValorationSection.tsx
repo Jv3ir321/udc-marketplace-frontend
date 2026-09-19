@@ -45,13 +45,13 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
   };
 
   return (
-    <div className="space-y-6 font-aeonik">
-      <div className="flex items-center justify-between border-b border-[#000000]/20 pb-3">
-        <h3 className="text-xl font-lateral uppercase text-[#000000] flex items-center gap-2">
-          <MessageSquare className="h-5 w-5 text-[#5c4ade]" />
-          Valoraciones y Preguntas
+    <div className="space-y-6 font-aeonik text-[#171a3d] dark:text-[#e2e8f0]">
+      <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/10 pb-3">
+        <h3 className="text-lg font-bold text-[#171a3d] dark:text-white flex items-center gap-2">
+          <MessageSquare className="h-5 w-5 text-[#ec8026]" />
+          <span>Preguntas y Valoraciones</span>
         </h3>
-        <span className="text-xs font-bold text-[#000000] bg-[#e9ccff] px-3 py-0.5 rounded-[1600px] border border-[#000000]">
+        <span className="text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-[#161b38] px-3 py-0.5 rounded-full border border-slate-200/50 dark:border-white/10">
           {valorations.length} {valorations.length === 1 ? 'comentario' : 'comentarios'}
         </span>
       </div>
@@ -60,39 +60,40 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
       {isAuthenticated ? (
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="flex items-start gap-3">
-            <Avatar className="h-9 w-9 rounded-[1600px] border border-[#000000]">
-              <AvatarFallback className="bg-[#ffd731] text-[#000000] text-xs font-bold">
+            <Avatar className="h-9 w-9 rounded-full border border-slate-200 dark:border-white/10 shrink-0">
+              <AvatarFallback className="bg-[#171a3d] text-white text-xs font-bold">
                 {getInitials(user?.title || user?.name)}
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 space-y-2">
               <Textarea
-                placeholder="Pregunta sobre la edición, detalles o propone un punto de entrega en el campus..."
+                placeholder="Pregunta sobre detalles del artículo o propone un punto de entrega en tu sede..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className="text-xs rounded-[20px] border border-[#000000] bg-[#ffffff] p-3 focus-visible:ring-0 min-h-[70px]"
+                className="text-xs rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 focus-visible:ring-1 focus-visible:ring-[#ec8026] min-h-[70px] shadow-subtle"
                 rows={2}
               />
               <div className="flex justify-end">
                 <Button
                   type="submit"
                   size="sm"
+                  variant="udc"
                   disabled={isSubmitting || !comment.trim()}
-                  className="h-9 px-5 rounded-[1600px] bg-[#000000] hover:bg-[#222222] text-[#ffffff] font-aeonik font-bold text-xs tracking-[0.032em] border border-[#000000]"
+                  className="rounded-full px-5 text-xs font-bold shadow-subtle hover:shadow-elevation"
                 >
                   <Send className="h-3.5 w-3.5 mr-1.5" />
-                  Publicar Comentario
+                  Enviar Pregunta
                 </Button>
               </div>
             </div>
           </div>
         </form>
       ) : (
-        <div className="rounded-[20px] bg-[#dceeff]/50 border border-[#000000] p-4 text-center space-y-2">
-          <p className="text-xs font-medium text-[#000000]/80">
-            Debes iniciar sesión con tu cuenta estudiantil para enviar preguntas o valorar el artículo.
+        <div className="rounded-2xl bg-slate-50 dark:bg-[#161b38]/60 border border-slate-200/70 dark:border-white/10 p-4 text-center space-y-2">
+          <p className="text-xs text-slate-600 dark:text-slate-300">
+            Inicia sesión con tu cuenta institucional para hacer preguntas o acordar entregas.
           </p>
-          <Button asChild size="sm" className="h-8 px-4 rounded-[1600px] bg-[#000000] text-[#ffffff] text-xs font-bold border border-[#000000]">
+          <Button asChild size="sm" variant="outline" className="rounded-full px-4 text-xs font-bold border-slate-200 dark:border-white/10 bg-white dark:bg-[#11162e] text-[#171a3d] dark:text-white">
             <Link to="/login">Iniciar Sesión</Link>
           </Button>
         </div>
@@ -104,37 +105,37 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
           valorations.map((val) => (
             <div
               key={val.id}
-              className="p-4 rounded-[20px] bg-[#ffffff] border border-[#000000] space-y-2"
+              className="p-4 rounded-2xl bg-white dark:bg-[#11162e] border border-slate-200/70 dark:border-white/10 shadow-subtle space-y-2"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <Avatar className="h-7 w-7 rounded-[1600px] border border-[#000000]">
-                    <AvatarFallback className="bg-[#e9ccff] text-[#000000] text-[10px] font-bold">
+                  <Avatar className="h-7 w-7 rounded-full border border-slate-200 dark:border-white/10">
+                    <AvatarFallback className="bg-slate-100 dark:bg-[#161b38] text-[#171a3d] dark:text-white text-[10px] font-bold">
                       {getInitials(val.user?.title || val.user?.name)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <span className="text-xs font-bold text-[#000000] block leading-none">
+                    <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
                       {val.user?.title || val.user?.name || 'Estudiante UDC'}
                     </span>
-                    <span className="text-[10px] text-[#000000]/60 font-medium">
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
                       Campus {val.user?.sede || 'Cartagena'}
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-0.5 text-[#ffd731]">
-                  <Star className="h-3.5 w-3.5 fill-[#ffd731] text-[#000000]" />
-                  <span className="text-xs font-bold text-[#000000]">5.0</span>
+                <div className="flex items-center gap-0.5 text-amber-500">
+                  <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">5.0</span>
                 </div>
               </div>
-              <p className="text-xs text-[#000000]/85 font-medium pl-9 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 pl-9 leading-relaxed">
                 {val.valoration}
               </p>
             </div>
           ))
         ) : (
-          <div className="text-center py-6 text-xs text-[#000000]/60 font-medium">
-            No hay comentarios aún. ¡Sé el primero en consultar por este artículo!
+          <div className="text-center py-6 text-xs text-slate-400 dark:text-slate-500 font-medium">
+            No hay preguntas aún. ¡Sé el primero en consultar por este artículo!
           </div>
         )}
       </div>

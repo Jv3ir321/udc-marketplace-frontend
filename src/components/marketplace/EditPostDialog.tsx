@@ -69,35 +69,35 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={(val) => !val && handleClose()}>
-      <DialogContent className="sm:max-w-lg rounded-3xl bg-white border-0 p-6 sm:p-8 font-aeonik text-[#171a3d] shadow-2xl">
+      <DialogContent className="sm:max-w-lg rounded-3xl bg-white dark:bg-[#11162e] border border-slate-100 dark:border-white/10 p-6 sm:p-8 font-aeonik text-[#171a3d] dark:text-[#e2e8f0] shadow-2xl">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <DialogHeader className="border-b border-slate-100 pb-3">
-            <DialogTitle className="flex items-center gap-2 text-xl font-extrabold uppercase tracking-tight text-[#171a3d]">
+          <DialogHeader className="border-b border-slate-100 dark:border-white/10 pb-3">
+            <DialogTitle className="flex items-center gap-2 text-xl font-extrabold uppercase tracking-tight text-[#171a3d] dark:text-white">
               <Edit3 className="h-5 w-5 text-[#3da898]" />
               Editar Publicación
             </DialogTitle>
-            <DialogDescription className="text-xs text-slate-500 font-normal">
+            <DialogDescription className="text-xs text-slate-500 dark:text-slate-400 font-normal">
               Modifica los detalles de tu artículo en UDC Marketplace.
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-3.5 pt-1">
             <div className="space-y-1.5">
-              <Label htmlFor="edit-nombre" className="text-xs font-bold uppercase tracking-wider text-slate-700">
+              <Label htmlFor="edit-nombre" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Título del Producto *
               </Label>
               <Input
                 id="edit-nombre"
                 value={formData.nombre}
                 onChange={(e) => setFormData((prev) => ({ ...prev, nombre: e.target.value }))}
-                className="h-10 text-xs rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 transition-all"
+                className="h-10 text-xs rounded-2xl border border-slate-200/50 dark:border-white/10 bg-slate-100/90 dark:bg-[#161b38] focus:bg-white dark:focus:bg-[#1c2246] focus:ring-2 focus:ring-[#3da898]/30 transition-all text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-subtle"
                 required
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="edit-price" className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                <Label htmlFor="edit-price" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   Precio ($ COP) *
                 </Label>
                 <Input
@@ -105,23 +105,23 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
                   type="number"
                   value={formData.price}
                   onChange={(e) => setFormData((prev) => ({ ...prev, price: e.target.value }))}
-                  className="h-10 text-xs font-bold rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 transition-all"
+                  className="h-10 text-xs font-bold rounded-2xl border border-slate-200/50 dark:border-white/10 bg-slate-100/90 dark:bg-[#161b38] focus:bg-white dark:focus:bg-[#1c2246] focus:ring-2 focus:ring-[#3da898]/30 transition-all text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-subtle"
                   required
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="edit-sede" className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                <Label htmlFor="edit-sede" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   Campus / Sede *
                 </Label>
                 <select
                   id="edit-sede"
-                  className="w-full h-10 rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 px-3 text-xs font-bold text-[#171a3d] cursor-pointer transition-all outline-none"
+                  className="w-full h-10 rounded-2xl border border-slate-200/50 dark:border-white/10 bg-slate-100/90 dark:bg-[#161b38] focus:bg-white dark:focus:bg-[#1c2246] focus:ring-2 focus:ring-[#3da898]/30 px-3 text-xs font-bold text-[#171a3d] dark:text-white cursor-pointer transition-all outline-none shadow-subtle"
                   value={formData.sede}
                   onChange={(e) => setFormData((prev) => ({ ...prev, sede: e.target.value }))}
                 >
                   {UDC_SEDES.map((s) => (
-                    <option key={s} value={s}>
+                    <option key={s} value={s} className="bg-white dark:bg-[#161b38] text-[#171a3d] dark:text-white">
                       Campus {s}
                     </option>
                   ))}
@@ -130,17 +130,17 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="edit-tipoP" className="text-xs font-bold uppercase tracking-wider text-slate-700">
+              <Label htmlFor="edit-tipoP" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Categoría *
               </Label>
               <select
                 id="edit-tipoP"
-                className="w-full h-10 rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 px-3 text-xs font-bold text-[#171a3d] cursor-pointer transition-all outline-none"
+                className="w-full h-10 rounded-2xl border border-slate-200/50 dark:border-white/10 bg-slate-100/90 dark:bg-[#161b38] focus:bg-white dark:focus:bg-[#1c2246] focus:ring-2 focus:ring-[#3da898]/30 px-3 text-xs font-bold text-[#171a3d] dark:text-white cursor-pointer transition-all outline-none shadow-subtle"
                 value={formData.tipoP}
                 onChange={(e) => setFormData((prev) => ({ ...prev, tipoP: e.target.value }))}
               >
                 {CATEGORIAS_PRODUCTO.map((c) => (
-                  <option key={c} value={c}>
+                  <option key={c} value={c} className="bg-white dark:bg-[#161b38] text-[#171a3d] dark:text-white">
                     {c}
                   </option>
                 ))}
@@ -148,7 +148,7 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="edit-desc" className="text-xs font-bold uppercase tracking-wider text-slate-700">
+              <Label htmlFor="edit-desc" className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Descripción *
               </Label>
               <Textarea
@@ -156,19 +156,19 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
                 value={formData.desc}
                 onChange={(e) => setFormData((prev) => ({ ...prev, desc: e.target.value }))}
                 rows={3}
-                className="text-xs rounded-2xl border-0 bg-slate-100/90 focus:bg-white focus:ring-2 focus:ring-[#3da898]/20 p-3.5 transition-all text-[#171a3d] leading-relaxed resize-none"
+                className="text-xs rounded-2xl border border-slate-200/50 dark:border-white/10 bg-slate-100/90 dark:bg-[#161b38] focus:bg-white dark:focus:bg-[#1c2246] focus:ring-2 focus:ring-[#3da898]/30 p-3.5 transition-all text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 leading-relaxed resize-none shadow-subtle"
                 required
               />
             </div>
           </div>
 
-          <DialogFooter className="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
+          <DialogFooter className="pt-3 border-t border-slate-100 dark:border-white/10 flex items-center justify-end gap-2">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={handleClose}
-              className="h-9 px-4 rounded-full border-0 bg-slate-100 text-xs font-bold text-slate-700 hover:bg-slate-200"
+              className="h-9 px-4 rounded-full border border-slate-200/60 dark:border-white/10 bg-slate-100 dark:bg-[#161b38] text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-[#1c2246]"
             >
               Cancelar
             </Button>
@@ -176,7 +176,7 @@ export const EditPostDialog: React.FC<EditPostDialogProps> = ({
               type="submit"
               size="sm"
               disabled={isSubmitting}
-              className="h-9 px-5 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white text-xs font-bold shadow-md shadow-[#ec8026]/20 transition-all"
+              className="h-9 px-5 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white text-xs font-bold shadow-md shadow-[#ec8026]/20 transition-all active:scale-95"
             >
               {isSubmitting ? 'Guardando...' : 'Guardar Cambios'}
             </Button>

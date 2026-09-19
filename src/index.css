@@ -28,62 +28,92 @@
     --color-voltage-violet: #44216b;
 
     /* Typography font variables */
-    --font-lateral: 'Antonio', 'Bowlby One', 'Impact', sans-serif;
     --font-aeonik-pro: 'Plus Jakarta Sans', 'Inter', sans-serif;
 
     /* Base theme colors */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 0 0% 0%;
+    --primary: 222 47% 11%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 100%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 0 0% 91%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 40%;
 
-    --accent: 211 100% 65%;
+    --accent: 25 86% 54%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 17 98% 50%;
+    --destructive: 6 72% 54%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 0%;
-    --input: 0 0% 0%;
-    --ring: 0 0% 0%;
+    --border: 214 24% 88%;
+    --input: 214 24% 88%;
+    --ring: 25 86% 54%;
 
     --radius: 20px;
+  }
+
+  .dark {
+    --color-carbon: #f8fafc;
+    --color-paper-white: #11162e;
+    --color-sky-wash: #1a2042;
+    --color-concrete-gray: #242b54;
+    --color-soft-mist: #161b38;
+
+    --background: 233 45% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 233 42% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 233 42% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 233 45% 8%;
+
+    --secondary: 233 35% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 233 30% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 25 86% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 6 72% 54%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 233 30% 20%;
+    --input: 233 30% 20%;
+    --ring: 25 86% 54%;
   }
 }
 
 @layer base {
-  * {
-    border-color: #171a3d;
-  }
   body {
-    background-color: var(--color-paper-white);
-    color: var(--color-carbon);
+    background-color: #f1f3f6;
+    color: #0f172a;
     font-family: var(--font-aeonik-pro);
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.010em;
     overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  /* Display headlines Lateral 800 with crushed line-height */
-  .font-lateral {
-    font-family: var(--font-lateral);
-    font-weight: 800;
-    line-height: 0.76;
-    letter-spacing: normal;
+  .dark body {
+    background-color: #0b0e1e;
+    color: #f8fafc;
   }
 
   .font-aeonik {
@@ -91,74 +121,43 @@
   }
 }
 
-/* UDC Marquee animation */
-@keyframes slush-marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+/* Enhanced tactile shadows and depth utilities with crisp contrast */
+.shadow-subtle {
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05), 0 1px 3px 0 rgba(15, 23, 42, 0.06);
 }
 
-.animate-slush-marquee {
-  display: flex;
-  width: max-content;
-  animation: slush-marquee 28s linear infinite;
+.shadow-elevation {
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 6px 16px -2px rgba(15, 23, 42, 0.08);
 }
 
-.animate-slush-marquee:hover {
-  animation-play-state: paused;
+.shadow-lifted {
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
 }
 
-/* Sticker hand-cut border & transform classes */
-.slush-sticker {
-  border: 1px solid #171a3d;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+.dark .shadow-subtle {
+  box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
-.slush-sticker:hover {
-  transform: scale(1.06) rotate(3deg);
+.dark .shadow-elevation {
+  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
 }
 
-/* UDC pill navigation & buttons */
-.slush-pill {
-  border-radius: 1600px;
-  border: 1px solid #171a3d;
-  letter-spacing: 0.032em;
-  font-family: var(--font-aeonik-pro);
-  font-weight: 700;
+.dark .shadow-lifted {
+  box-shadow: 0 18px 42px -4px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 
-/* UDC Card */
-.slush-card {
-  border-radius: 20px;
-  border: 1px solid #171a3d;
-  background-color: #ffffff;
-}
-
-.slush-card-elevated {
-  border-radius: 40px;
-  border: 1px solid #171a3d;
-}
-
-/* Smooth scrolling and refined shadows for a professional marketplace finish */
+/* Smooth scrolling and refined scrollbar */
 html {
   scroll-behavior: smooth;
 }
 
-/* Minimalist UDC navy scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -166,3 +165,6 @@ html {
   border-radius: 1600px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #3a4275;
+}

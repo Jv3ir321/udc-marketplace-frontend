@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Post } from '@/types';
-import { formatCOP, getBackendImageUrl, formatCampusName } from '@/lib/utils';
+import { formatCOP, getBackendImageUrl, formatCampusName, getCategoryMeta } from '@/lib/utils';
 import WhatsappIcon from '@/components/ui/whatsapp-icon';
 import { MapPin } from 'lucide-react';
 
@@ -15,18 +15,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
 
   const phone = post.user?.cellphone || '3000000000';
   const campusLabel = formatCampusName(post.sede);
+  const categoryMeta = getCategoryMeta(post.tipoP);
   const whatsappUrl = `https://wa.me/57${phone.replace(/\D/g, '')}?text=${encodeURIComponent(
     `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". ¿Podemos acordar entrega en ${campusLabel}?`
   )}`;
 
   return (
-    <article className="group rounded-3xl bg-white text-[#171a3d] shadow-[0_12px_32px_rgba(23,26,61,0.09),0_2px_6px_rgba(23,26,61,0.04)] hover:shadow-[0_24px_48px_rgba(23,26,61,0.18)] ring-1 ring-black/[0.04] transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden font-aeonik">
+    <article className="group rounded-3xl bg-white dark:bg-[#11162e] text-[#0f172a] dark:text-white border border-slate-200/90 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 shadow-elevation hover:shadow-lifted transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden font-aeonik">
       <div>
         {/* Product Image Container */}
         <div className="p-3.5 pb-0">
           <Link
             to={`/post/${post.id}`}
-            className="relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-tr from-slate-100 via-slate-50 to-amber-50/20 shadow-inner"
+            className="relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-tr from-slate-100 via-slate-50 to-slate-100 dark:from-slate-900 dark:to-[#161b38] shadow-inner"
           >
             <img
               src={mainImage}
@@ -39,50 +40,52 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
               }}
             />
 
-            {/* Campus Badge */}
+            {/* Campus Badge with Glass and Shadow */}
             <div className="absolute top-2.5 left-2.5">
-              <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-md text-[#171a3d] text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-black/5">
+              <span className="inline-flex items-center gap-1.5 bg-white/95 dark:bg-[#0b0e1e]/95 backdrop-blur-md text-[#0f172a] dark:text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-black/10 border border-slate-200/80 dark:border-white/10">
                 <MapPin className="h-3 w-3 text-[#ec8026]" />
                 <span className="truncate max-w-[130px]">{campusLabel}</span>
               </span>
             </div>
 
-            {/* Category Badge */}
+            {/* Distinctive Category Badge */}
             <div className="absolute top-2.5 right-2.5">
-              <span className="inline-flex items-center bg-[#fdf3eb] text-[#ec8026] text-[10px] font-extrabold uppercase tracking-[0.04em] px-2.5 py-1 rounded-full shadow-sm">
-                {post.tipoP}
+              <span
+                className={`inline-flex items-center text-[10px] font-extrabold uppercase tracking-[0.04em] px-2.5 py-1 rounded-full shadow-sm border backdrop-blur-xs ${categoryMeta.badgeLight} ${categoryMeta.badgeDark}`}
+              >
+                {post.tipoP || 'Artículo'}
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Card Body */}
+        {/* Card Body with High Contrast */}
         <div className="p-4 space-y-2">
           <Link to={`/post/${post.id}`} className="block">
-            <h3 className="font-extrabold text-[16px] sm:text-[17px] leading-[1.3] text-[#171a3d] line-clamp-1 group-hover:text-[#ec8026] transition-colors">
+            <h3 className="font-extrabold text-[16px] sm:text-[17px] leading-[1.3] text-[#0f172a] dark:text-white line-clamp-1 group-hover:text-[#ec8026] dark:group-hover:text-[#ec8026] transition-colors">
               {post.nombre}
             </h3>
           </Link>
 
-          <p className="text-xs text-slate-500 font-normal leading-relaxed line-clamp-2">
+          <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed line-clamp-2">
             {post.desc}
           </p>
 
-          <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-400 pt-0.5">
-            <span className="truncate">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 pt-0.5">
+            <span className="truncate text-slate-700 dark:text-slate-300">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
             <span>·</span>
-            <span className="text-[#ec8026] font-semibold">Comunidad UDC</span>
+            <span className="text-[#ec8026] font-bold">Comunidad UDC</span>
           </div>
         </div>
       </div>
 
       {/* Footer Strip */}
-      <div className="px-4 pb-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+      <div className="px-4 pb-4 pt-3 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3 bg-slate-50/50 dark:bg-transparent">
         <div>
-          <span className="block text-[10px] font-bold uppercase tracking-[0.04em] text-slate-400">
+          <span className="block text-[10px] font-bold uppercase tracking-[0.04em] text-slate-500 dark:text-slate-400">
             Precio
           </span>
-          <span className="text-xl sm:text-2xl font-black text-[#171a3d] leading-none tracking-tight">
+          <span className="text-xl sm:text-2xl font-black text-[#0f172a] dark:text-white leading-none tracking-tight">
             {formatCOP(post.price)}
           </span>
         </div>
@@ -93,13 +96,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
             target="_blank"
             rel="noopener noreferrer"
             title="Pactar entrega por WhatsApp"
-            className="h-9 w-9 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-[#ffffff] transition-transform active:scale-95 shadow-md shadow-[#3da898]/20 group/wa"
+            className="h-9 w-9 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-white transition-transform active:scale-95 shadow-md shadow-[#3da898]/30 group/wa"
           >
             <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
           </a>
           <Link
             to={`/post/${post.id}`}
-            className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-[#ffffff] text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-md shadow-[#ec8026]/20"
+            className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-md shadow-[#ec8026]/30 active:scale-95"
           >
             Ver
           </Link>

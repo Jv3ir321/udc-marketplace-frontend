@@ -59,6 +59,23 @@ export interface PublicUserProfile {
   receivedValorations: Valoration[];
 }
 
+export interface UserProfile {
+  id: number;
+  title?: string;
+  name?: string;
+  mail?: string;
+  sede?: string;
+  role?: string;
+  codEst?: string;
+  cellphone?: string;
+  created_at?: string;
+  postsCount?: number;
+  ratingAvg?: number;
+  ratingCount?: number;
+  posts?: Post[];
+  receivedValorations?: Valoration[];
+}
+
 export interface CreatePostDTO {
   nombre: string;
   desc: string;

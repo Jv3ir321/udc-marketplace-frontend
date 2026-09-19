@@ -9,17 +9,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-[#171a3d] text-white shadow-sm hover:bg-[#252a5c] active:scale-95",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-[#df4838] text-white shadow-sm hover:bg-[#c93b2d] active:scale-95",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-slate-200 bg-white text-[#171a3d] shadow-2xs hover:bg-slate-50 hover:border-slate-300",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        udc: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        gold: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-slate-100 text-[#171a3d] hover:bg-slate-200/80 active:scale-95",
+        ghost: "hover:bg-slate-100 text-[#171a3d]",
+        link: "text-[#ec8026] underline-offset-4 hover:underline",
+        udc: "bg-[#ec8026] text-white shadow-sm hover:bg-[#d97018] active:scale-95",
+        navy: "bg-[#171a3d] text-white shadow-sm hover:bg-[#252a5c] active:scale-95",
+        teal: "bg-[#3da898] text-white shadow-sm hover:bg-[#338e80] active:scale-95",
+        gold: "bg-[#f2b725] text-[#171a3d] shadow-sm hover:bg-[#e0a71d] active:scale-95",
       },
       size: {
         default: "h-9 px-4 py-2",

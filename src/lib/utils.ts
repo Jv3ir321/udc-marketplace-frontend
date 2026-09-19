@@ -61,6 +61,152 @@ export const CATEGORIAS_PRODUCTO = [
   'Otros',
 ] as const;
 
+export interface CategoryMeta {
+  name: string;
+  shortName: string;
+  color: string;
+  // Light Mode Badges
+  badgeLight: string;
+  // Dark Mode Badges
+  badgeDark: string;
+  // Landing Page Card
+  cardLight: string;
+  cardDark: string;
+  // Icon styling
+  iconBgLight: string;
+  iconBgDark: string;
+  iconColor: string;
+  desc: string;
+}
+
+export const CATEGORY_CONFIG: Record<string, CategoryMeta> = {
+  'Libros y Fotocopias': {
+    name: 'Libros y Fotocopias',
+    shortName: 'Libros',
+    color: '#ea580c',
+    badgeLight: 'bg-orange-50 text-orange-800 border-orange-200/80',
+    badgeDark: 'dark:bg-orange-950/60 dark:text-orange-300 dark:border-orange-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-orange-50 text-orange-600 border border-orange-200/60',
+    iconBgDark: 'dark:bg-orange-950/80 dark:text-orange-300 dark:border-orange-800/40',
+    iconColor: 'text-orange-600 dark:text-orange-400',
+    desc: 'Guías, libros de texto y apuntes',
+  },
+  'Calculadoras y Tecnología': {
+    name: 'Calculadoras y Tecnología',
+    shortName: 'Tecnología',
+    color: '#4f46e5',
+    badgeLight: 'bg-indigo-50 text-indigo-800 border-indigo-200/80',
+    badgeDark: 'dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-indigo-50 text-indigo-600 border border-indigo-200/60',
+    iconBgDark: 'dark:bg-indigo-950/80 dark:text-indigo-300 dark:border-indigo-800/40',
+    iconColor: 'text-indigo-600 dark:text-indigo-400',
+    desc: 'Calculadoras, periféricos y tablets',
+  },
+  'Uniformes y Batas': {
+    name: 'Uniformes y Batas',
+    shortName: 'Uniformes',
+    color: '#059669',
+    badgeLight: 'bg-emerald-50 text-emerald-800 border-emerald-200/80',
+    badgeDark: 'dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-emerald-50 text-emerald-600 border border-emerald-200/60',
+    iconBgDark: 'dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-800/40',
+    iconColor: 'text-emerald-600 dark:text-emerald-400',
+    desc: 'Batas de laboratorio y salud',
+  },
+  'Habitaciones y Alquiler': {
+    name: 'Habitaciones y Alquiler',
+    shortName: 'Alquiler',
+    color: '#e11d48',
+    badgeLight: 'bg-rose-50 text-rose-800 border-rose-200/80',
+    badgeDark: 'dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-rose-50 text-rose-600 border border-rose-200/60',
+    iconBgDark: 'dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-800/40',
+    iconColor: 'text-rose-600 dark:text-rose-400',
+    desc: 'Alojamientos cercanos a sedes',
+  },
+  'Servicios y Tutorías': {
+    name: 'Servicios y Tutorías',
+    shortName: 'Tutorías',
+    color: '#7c3aed',
+    badgeLight: 'bg-purple-50 text-purple-800 border-purple-200/80',
+    badgeDark: 'dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-purple-50 text-purple-600 border border-purple-200/60',
+    iconBgDark: 'dark:bg-purple-950/80 dark:text-purple-300 dark:border-purple-800/40',
+    iconColor: 'text-purple-600 dark:text-purple-400',
+    desc: 'Clases particulares y asesorías',
+  },
+  'Snacks y Alimentación': {
+    name: 'Snacks y Alimentación',
+    shortName: 'Snacks',
+    color: '#d97706',
+    badgeLight: 'bg-amber-50 text-amber-800 border-amber-200/80',
+    badgeDark: 'dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-amber-50 text-amber-600 border border-amber-200/60',
+    iconBgDark: 'dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-800/40',
+    iconColor: 'text-amber-600 dark:text-amber-400',
+    desc: 'Snacks, postres y comida en campus',
+  },
+  'Instrumentos y Salud': {
+    name: 'Instrumentos y Salud',
+    shortName: 'Salud',
+    color: '#0d9488',
+    badgeLight: 'bg-teal-50 text-teal-800 border-teal-200/80',
+    badgeDark: 'dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800/50',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-teal-50 text-teal-600 border border-teal-200/60',
+    iconBgDark: 'dark:bg-teal-950/80 dark:text-teal-300 dark:border-teal-800/40',
+    iconColor: 'text-teal-600 dark:text-teal-400',
+    desc: 'Fonendos, tensiómetros e insumos',
+  },
+  'Otros': {
+    name: 'Otros',
+    shortName: 'Otros',
+    color: '#475569',
+    badgeLight: 'bg-slate-100 text-slate-800 border-slate-300/80',
+    badgeDark: 'dark:bg-slate-800/80 dark:text-slate-200 dark:border-slate-700/60',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-slate-100 text-slate-600 border border-slate-200/80',
+    iconBgDark: 'dark:bg-slate-800 dark:text-slate-300 dark:border-white/10',
+    iconColor: 'text-slate-600 dark:text-slate-400',
+    desc: 'Accesorios y otros artículos',
+  },
+};
+
+export function getCategoryMeta(name?: string): CategoryMeta {
+  if (!name) return CATEGORY_CONFIG['Otros'];
+  const found = Object.entries(CATEGORY_CONFIG).find(([k]) =>
+    k.toLowerCase().trim() === name.toLowerCase().trim()
+  );
+  if (found) return found[1];
+  return {
+    name: name,
+    shortName: name,
+    color: '#475569',
+    badgeLight: 'bg-slate-100 text-slate-800 border-slate-300/80',
+    badgeDark: 'dark:bg-slate-800/80 dark:text-slate-200 dark:border-slate-700/60',
+    cardLight: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-slate-300 shadow-elevation hover:shadow-lifted',
+    cardDark: 'dark:bg-[#11162e] dark:hover:bg-[#151a36] dark:border-white/10 dark:hover:border-white/20',
+    iconBgLight: 'bg-slate-100 text-slate-600 border border-slate-200/80',
+    iconBgDark: 'dark:bg-slate-800 dark:text-slate-300 dark:border-white/10',
+    iconColor: 'text-slate-600 dark:text-slate-400',
+    desc: 'Publicación general UDC',
+  };
+}
+
 export const ROLES_UDC = [
   'Estudiante',
   'Docente',

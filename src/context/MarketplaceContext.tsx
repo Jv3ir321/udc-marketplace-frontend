@@ -17,6 +17,7 @@ interface MarketplaceContextType {
   deletePost: (id: number) => Promise<boolean>;
   sendValoration: (postId: number, text: string) => Promise<boolean>;
   getPostById: (id: number) => Post | undefined;
+  getPostsByUser: (userId: number) => Post[];
 }
 
 const initialFilters: FilterState = {
@@ -118,6 +119,10 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
     return posts.find((p) => p.id === id);
   };
 
+  const getPostsByUser = (userId: number): Post[] => {
+    return posts.filter((p) => p.userId === userId || p.user?.id === userId);
+  };
+
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       // Search text match
@@ -192,6 +197,7 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
         deletePost,
         sendValoration,
         getPostById,
+        getPostsByUser,
       }}
     >
       {children}
