@@ -63,74 +63,74 @@ export const HomePage: React.FC = () => {
       name: 'Libros y Fotocopias',
       icon: <BookOpen className="h-5 w-5 text-orange-600 dark:text-orange-400" />,
       config: CATEGORY_CONFIG['Libros y Fotocopias'],
-      desc: 'Guías, libros de texto y apuntes',
+      desc: 'Guías, libros y apuntes',
     },
     {
       name: 'Calculadoras y Tecnología',
       icon: <Laptop className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />,
       config: CATEGORY_CONFIG['Calculadoras y Tecnología'],
-      desc: 'Calculadoras, periféricos y tablets',
+      desc: 'Calculadoras y tablets',
     },
     {
       name: 'Uniformes y Batas',
       icon: <Shirt className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />,
       config: CATEGORY_CONFIG['Uniformes y Batas'],
-      desc: 'Batas de laboratorio y salud',
+      desc: 'Batas clínicas y salud',
     },
     {
       name: 'Habitaciones y Alquiler',
       icon: <HomeIcon className="h-5 w-5 text-rose-600 dark:text-rose-400" />,
       config: CATEGORY_CONFIG['Habitaciones y Alquiler'],
-      desc: 'Alojamientos cercanos a sedes',
+      desc: 'Alojamientos cerca a sedes',
     },
     {
       name: 'Servicios y Tutorías',
       icon: <GraduationCap className="h-5 w-5 text-purple-600 dark:text-purple-400" />,
       config: CATEGORY_CONFIG['Servicios y Tutorías'],
-      desc: 'Clases particulares y asesorías',
+      desc: 'Clases y asesorías',
     },
     {
       name: 'Snacks y Alimentación',
       icon: <Coffee className="h-5 w-5 text-amber-600 dark:text-amber-400" />,
       config: CATEGORY_CONFIG['Snacks y Alimentación'],
-      desc: 'Postres, snacks y comida',
+      desc: 'Postres y snacks',
     },
     {
       name: 'Instrumentos y Salud',
       icon: <Stethoscope className="h-5 w-5 text-teal-600 dark:text-teal-400" />,
       config: CATEGORY_CONFIG['Instrumentos y Salud'],
-      desc: 'Tensiómetros y fonendoscopios',
+      desc: 'Tensiómetros y salud',
     },
     {
       name: 'Otros',
       icon: <Tag className="h-5 w-5 text-slate-600 dark:text-slate-400" />,
       config: CATEGORY_CONFIG['Otros'],
-      desc: 'Accesorios y artículos varios',
+      desc: 'Artículos varios',
     },
   ];
 
   const campusList = [
     {
       name: 'Claustro San Agustín',
-      faculties: 'Derecho y Ciencias Económicas · Centro Histórico',
+      faculties: 'Derecho y Ciencias Económicas · Centro',
       border: 'border-slate-200/90 hover:border-slate-300 bg-white hover:bg-slate-50/70 dark:border-white/10 dark:hover:border-white/20 dark:bg-[#11162e] dark:hover:bg-[#151a36]',
       badge: 'bg-slate-100 text-slate-800 dark:bg-white/10 dark:text-slate-200',
     },
     {
       name: 'Sede Zaragocilla',
-      faculties: 'Medicina, Enfermería, Odontología y Química',
+      faculties: 'Medicina, Enfermería y Odontología',
       border: 'border-slate-200/90 hover:border-slate-300 bg-white hover:bg-slate-50/70 dark:border-white/10 dark:hover:border-white/20 dark:bg-[#11162e] dark:hover:bg-[#151a36]',
       badge: 'bg-slate-100 text-slate-800 dark:bg-white/10 dark:text-slate-200',
     },
     {
       name: 'Sede Piedra de Bolívar',
-      faculties: 'Ingenierías, Arquitectura y Ciencias Exactas',
+      faculties: 'Ingenierías, Arquitectura y Ciencias',
       border: 'border-slate-200/90 hover:border-slate-300 bg-white hover:bg-slate-50/70 dark:border-white/10 dark:hover:border-white/20 dark:bg-[#11162e] dark:hover:bg-[#151a36]',
       badge: 'bg-slate-100 text-slate-800 dark:bg-white/10 dark:text-slate-200',
     },
     {
       name: 'Sede San Pablo',
-      faculties: 'Ciencias Sociales, Humanidades y Educación',
+      faculties: 'Ciencias Sociales y Educación',
       border: 'border-slate-200/90 hover:border-slate-300 bg-white hover:bg-slate-50/70 dark:border-white/10 dark:hover:border-white/20 dark:bg-[#11162e] dark:hover:bg-[#151a36]',
       badge: 'bg-slate-100 text-slate-800 dark:bg-white/10 dark:text-slate-200',
     },
@@ -140,21 +140,21 @@ export const HomePage: React.FC = () => {
     {
       step: '01',
       title: 'Publica en 1 minuto',
-      desc: 'Sube fotos de tus libros, calculadoras o batas, añade tu precio y selecciona tu sede.',
+      desc: 'Sube fotos, define el precio y selecciona tu sede.',
       icon: <Zap className="h-5 w-5 text-[#ec8026]" />,
       badgeBg: 'bg-orange-50 dark:bg-orange-950/60 text-[#ec8026] border border-orange-200/60',
     },
     {
       step: '02',
       title: 'Conecta por WhatsApp',
-      desc: 'Compañeros interesados te escribirán directamente a tu WhatsApp sin comisiones ni intermediarios.',
+      desc: 'Trato directo e inmediato sin comisiones ni intermediarios.',
       icon: <Users className="h-5 w-5 text-[#3da898]" />,
       badgeBg: 'bg-teal-50 dark:bg-teal-950/60 text-[#3da898] border border-teal-200/60',
     },
     {
       step: '03',
       title: 'Entrega en tu Campus',
-      desc: 'Acuerden encontrarse en la biblioteca, pasillos o cafetería de su facultad de forma 100% segura.',
+      desc: 'Encuéntrense en la biblioteca o cafetería de su facultad.',
       icon: <ShieldCheck className="h-5 w-5 text-[#171a3d] dark:text-sky-300" />,
       badgeBg: 'bg-indigo-50 dark:bg-indigo-950/60 text-[#171a3d] dark:text-sky-300 border border-indigo-200/60',
     },
@@ -165,17 +165,17 @@ export const HomePage: React.FC = () => {
       {/* 
         Hero Section Minimalista, con alto contraste y sombras ricas
       */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-[#f1f3f6] dark:from-[#0b0e1e] dark:via-[#10142c] dark:to-[#0b0e1e] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 dark:border-white/10">
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-[#f1f3f6] dark:from-[#0b0e1e] dark:via-[#10142c] dark:to-[#0b0e1e] py-9 sm:py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 dark:border-white/10">
         {/* Glow sutil */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 bg-gradient-to-tr from-orange-500/10 via-teal-500/5 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-        <div className="max-w-4xl mx-auto w-full relative z-10 text-center space-y-5">
+        <div className="max-w-4xl mx-auto w-full relative z-10 text-center space-y-4">
           {/* Badge institucional */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-[#11162e] border border-slate-300/80 dark:border-white/15 text-xs font-bold text-[#0f172a] dark:text-slate-200 shadow-subtle"
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white dark:bg-[#11162e] border border-slate-300/80 dark:border-white/15 text-xs font-bold text-[#0f172a] dark:text-slate-200 shadow-subtle"
           >
             <span className="h-2.5 w-2.5 rounded-full bg-[#3da898] animate-pulse" />
             <span>Comunidad Universitaria · Universidad de Cartagena</span>
@@ -199,9 +199,9 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.1 }}
-            className="text-xs sm:text-base text-slate-700 dark:text-slate-300 max-w-xl mx-auto leading-relaxed font-medium"
+            className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-w-xl mx-auto leading-relaxed font-medium"
           >
-            El espacio exclusivo para toda la comunidad de la Universidad de Cartagena. Intercambia libros, calculadoras, batas y tutorías mano a mano en tu facultad.
+            Intercambia libros, calculadoras, batas y tutorías mano a mano en tu facultad de forma directa y segura.
           </motion.p>
 
           {/* Buscador Interactivo Elevado */}
@@ -234,13 +234,13 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.2 }}
-            className="flex flex-wrap items-center justify-center gap-3 pt-2"
+            className="flex flex-wrap items-center justify-center gap-3 pt-1"
           >
             <Button
               asChild
               size="default"
               variant="navy"
-              className="rounded-full h-11 px-6 text-xs sm:text-sm font-extrabold shadow-elevation dark:bg-white dark:text-[#0b0e1e] dark:hover:bg-slate-100"
+              className="rounded-full h-10 px-6 text-xs sm:text-sm font-extrabold shadow-elevation dark:bg-white dark:text-[#0b0e1e] dark:hover:bg-slate-100"
             >
               <Link to="/catalog">
                 <ShoppingBag className="h-4 w-4 mr-1.5 shrink-0" />
@@ -252,7 +252,7 @@ export const HomePage: React.FC = () => {
               asChild
               size="default"
               variant="outline"
-              className="rounded-full h-11 px-6 text-xs sm:text-sm font-extrabold bg-white dark:bg-[#11162e] border-slate-200 hover:border-slate-300 dark:border-white/15 text-[#171a3d] dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 shadow-subtle"
+              className="rounded-full h-10 px-6 text-xs sm:text-sm font-extrabold bg-white dark:bg-[#11162e] border-slate-200 hover:border-slate-300 dark:border-white/15 text-[#171a3d] dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 shadow-subtle"
             >
               <Link to="/catalog?create=true">
                 <Plus className="h-4 w-4 text-[#ec8026] stroke-[2.5] mr-1.5 shrink-0" />
@@ -266,7 +266,7 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.25 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 max-w-2xl mx-auto border-t border-slate-200/80 dark:border-white/10"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 max-w-2xl mx-auto border-t border-slate-200/80 dark:border-white/10"
           >
             <div className="flex items-center justify-center gap-2 text-xs text-slate-600 dark:text-slate-300 font-medium">
               <CheckCircle2 className="h-4 w-4 text-[#3da898] shrink-0" />
@@ -287,8 +287,8 @@ export const HomePage: React.FC = () => {
       {/* 
         Categorías Principales (Cuadrícula Homogénea Diferenciada)
       */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-2 mb-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9 w-full">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-2 mb-3.5">
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-50 dark:bg-orange-950/50 text-[#ec8026] text-[11px] font-bold mb-1 border border-orange-200/60 dark:border-orange-800/40">
               <Sparkles className="h-3 w-3" />
@@ -307,7 +307,7 @@ export const HomePage: React.FC = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3.5 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-2.5 sm:gap-3">
           {categoryCards.map((cat, idx) => (
             <motion.div
               key={cat.name}
@@ -318,13 +318,13 @@ export const HomePage: React.FC = () => {
             >
               <Link
                 to={`/catalog?category=${encodeURIComponent(cat.name)}`}
-                className={`p-4 rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center justify-center block h-full ${cat.config.cardLight} ${cat.config.cardDark}`}
+                className={`p-3.5 rounded-3xl border transition-all duration-300 hover:-translate-y-1 flex flex-col items-center text-center justify-center block h-full ${cat.config.cardLight} ${cat.config.cardDark}`}
               >
-                <div className={`h-11 w-11 rounded-2xl shadow-xs flex items-center justify-center mb-2.5 ${cat.config.iconBgLight} ${cat.config.iconBgDark}`}>
+                <div className={`h-10 w-10 rounded-2xl shadow-xs flex items-center justify-center mb-2 ${cat.config.iconBgLight} ${cat.config.iconBgDark}`}>
                   {cat.icon}
                 </div>
                 <h3 className="font-extrabold text-xs text-[#0f172a] dark:text-white leading-snug">{cat.name}</h3>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-tight font-medium">{cat.desc}</p>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-tight font-medium">{cat.desc}</p>
               </Link>
             </motion.div>
           ))}
@@ -334,8 +334,8 @@ export const HomePage: React.FC = () => {
       {/* 
         Publicaciones Recientes (Cuadrícula Homogénea de 3 Columnas)
       */}
-      <section className="bg-[#e8ebf0]/70 dark:bg-[#0e1226] py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-y border-slate-200/90 dark:border-white/10 transition-colors">
-        <div className="max-w-7xl mx-auto space-y-6">
+      <section className="bg-[#e8ebf0]/70 dark:bg-[#0e1226] py-7 sm:py-9 px-4 sm:px-6 lg:px-8 border-y border-slate-200/90 dark:border-white/10 transition-colors">
+        <div className="max-w-7xl mx-auto space-y-4">
           <div className="flex items-center justify-between gap-3">
             <div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#161b38] text-[#0f172a] dark:text-slate-200 text-[11px] font-bold mb-1 border border-slate-200/80 dark:border-white/10">
@@ -356,17 +356,17 @@ export const HomePage: React.FC = () => {
           </div>
 
           {featuredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {featuredPosts.map((post) => (
                 <ProductCard key={post.id} post={post} />
               ))}
             </div>
           ) : (
-            <div className="bg-white dark:bg-[#11162e] rounded-3xl border border-slate-200 dark:border-white/10 p-8 text-center space-y-3 shadow-elevation">
-              <ShoppingBag className="h-10 w-10 text-[#ec8026] mx-auto opacity-70" />
+            <div className="bg-white dark:bg-[#11162e] rounded-3xl border border-slate-200 dark:border-white/10 p-7 text-center space-y-2.5 shadow-elevation">
+              <ShoppingBag className="h-9 w-9 text-[#ec8026] mx-auto opacity-70" />
               <h3 className="font-bold text-[#0f172a] dark:text-white text-sm">No hay publicaciones registradas aún</h3>
               <p className="text-xs text-slate-600 dark:text-slate-400">Sé el primero de tu facultad en publicar un artículo.</p>
-              <Button asChild variant="udc" size="sm" className="rounded-full mt-2 shadow-md shadow-[#ec8026]/20">
+              <Button asChild variant="udc" size="sm" className="rounded-full mt-1.5 shadow-md shadow-[#ec8026]/20">
                 <Link to="/catalog?create=true">Publicar Aviso</Link>
               </Button>
             </div>
@@ -377,39 +377,39 @@ export const HomePage: React.FC = () => {
       {/* 
         Cómo Funciona (3 Pasos Secuenciales con Elevación y Contraste)
       */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
-        <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10 space-y-1.5">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9 w-full">
+        <div className="text-center max-w-xl mx-auto mb-4 sm:mb-6 space-y-1">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-[#161b38] text-teal-800 dark:text-teal-300 text-[11px] font-bold border border-teal-200/80 dark:border-white/10">
             <ShieldCheck className="h-3 w-3 text-[#3da898]" />
             <span>Intercambio Seguro</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#0f172a] dark:text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-[#0f172a] dark:text-white tracking-tight">
             Cómo Funciona UDC Marketplace
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+          <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
             Comercio seguro y directo entre estudiantes y profesores de la Universidad
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           {steps.map((s, idx) => (
             <motion.div
               key={s.step}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: idx * 0.1 }}
-              className="bg-white dark:bg-[#11162e] rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 shadow-elevation hover:shadow-lifted transition-all duration-300 space-y-3 relative overflow-hidden"
+              transition={{ duration: 0.3, delay: idx * 0.08 }}
+              className="bg-white dark:bg-[#11162e] rounded-3xl p-5 border border-slate-200/90 dark:border-white/10 shadow-elevation hover:shadow-lifted transition-all duration-300 space-y-2 relative overflow-hidden"
             >
               <div className="flex items-center justify-between">
-                <div className={`h-11 w-11 rounded-2xl flex items-center justify-center shadow-xs ${s.badgeBg}`}>
+                <div className={`h-10 w-10 rounded-2xl flex items-center justify-center shadow-xs ${s.badgeBg}`}>
                   {s.icon}
                 </div>
-                <span className="font-black text-3xl text-slate-200 dark:text-slate-700/80 select-none">
+                <span className="font-black text-2xl sm:text-3xl text-slate-200 dark:text-slate-700/80 select-none">
                   {s.step}
                 </span>
               </div>
-              <h3 className="text-base font-extrabold text-[#0f172a] dark:text-white">
+              <h3 className="text-sm sm:text-base font-extrabold text-[#0f172a] dark:text-white">
                 {s.title}
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
@@ -423,8 +423,8 @@ export const HomePage: React.FC = () => {
       {/* 
         Sedes & Claustros UDC
       */}
-      <section className="bg-[#e8ebf0]/70 dark:bg-[#0e1226] py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-t border-slate-200/90 dark:border-white/10 transition-colors">
-        <div className="max-w-7xl mx-auto space-y-6">
+      <section className="bg-[#e8ebf0]/70 dark:bg-[#0e1226] py-7 sm:py-9 px-4 sm:px-6 lg:px-8 border-t border-slate-200/90 dark:border-white/10 transition-colors">
+        <div className="max-w-7xl mx-auto space-y-4">
           <div className="text-center max-w-lg mx-auto space-y-1">
             <h2 className="text-xl sm:text-2xl font-black text-[#0f172a] dark:text-white">
               Presentes en Todos los Campus UDC
@@ -434,14 +434,14 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             {campusList.map((campus) => (
               <Link
                 key={campus.name}
                 to={`/catalog?sede=${encodeURIComponent(campus.name)}`}
-                className={`p-4 rounded-3xl border shadow-subtle hover:shadow-elevation transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between ${campus.border}`}
+                className={`p-3.5 rounded-3xl border shadow-subtle hover:shadow-elevation transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between ${campus.border}`}
               >
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   <div className="flex items-center gap-1.5 text-xs font-extrabold text-[#0f172a] dark:text-white">
                     <MapPin className="h-3.5 w-3.5 text-[#ec8026] shrink-0" />
                     <span>{campus.name}</span>
@@ -450,7 +450,7 @@ export const HomePage: React.FC = () => {
                     {campus.faculties}
                   </p>
                 </div>
-                <div className="pt-3 flex items-center text-[11px] font-extrabold text-[#ec8026] gap-1">
+                <div className="pt-2 flex items-center text-[11px] font-extrabold text-[#ec8026] gap-1">
                   <span>Ver artículos</span>
                   <ArrowRight className="h-3 w-3" />
                 </div>
@@ -463,10 +463,10 @@ export const HomePage: React.FC = () => {
       {/* 
         Llamado a la Acción (CTA) Final
       */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 w-full">
-        <div className="rounded-3xl bg-[#171a3d] dark:bg-[#11162e] p-8 sm:p-12 text-white border border-[#171a3d] dark:border-white/15 shadow-lifted text-center space-y-4 relative overflow-hidden">
-          <div className="relative z-10 max-w-xl mx-auto space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-white">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-10 w-full">
+        <div className="rounded-3xl bg-[#171a3d] dark:bg-[#11162e] p-6 sm:p-8 text-white border border-[#171a3d] dark:border-white/15 shadow-lifted text-center space-y-3 relative overflow-hidden">
+          <div className="relative z-10 max-w-xl mx-auto space-y-1.5">
+            <h2 className="text-xl sm:text-2xl font-black text-white">
               ¿Tienes libros o artículos que ya no usas?
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
@@ -474,7 +474,7 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="relative z-10 pt-2 flex flex-wrap justify-center gap-3">
+          <div className="relative z-10 pt-1 flex flex-wrap justify-center gap-3">
             <Button
               asChild
               size="default"
