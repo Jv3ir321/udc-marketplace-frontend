@@ -285,6 +285,49 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* 
+        Publicaciones Recientes (Novedades Primero)
+      */}
+      <section className="bg-[#e8ebf0]/70 dark:bg-[#0e1226] py-7 sm:py-9 px-4 sm:px-6 lg:px-8 border-b border-slate-200/90 dark:border-white/10 transition-colors">
+        <div className="max-w-7xl mx-auto space-y-4">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#161b38] text-[#0f172a] dark:text-slate-200 text-[11px] font-bold mb-1 border border-slate-200/80 dark:border-white/10">
+                <ShoppingBag className="h-3 w-3 text-[#ec8026]" />
+                <span>Novedades</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black text-[#0f172a] dark:text-white tracking-tight">
+                Publicaciones Recientes
+              </h2>
+            </div>
+
+            <Button asChild variant="outline" size="sm" className="rounded-full font-bold text-xs border-slate-300 dark:border-white/15 bg-white dark:bg-[#11162e] text-[#0f172a] dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 shadow-subtle">
+              <Link to="/catalog">
+                Ver Catálogo
+                <ArrowRight className="h-3.5 w-3.5 ml-1" />
+              </Link>
+            </Button>
+          </div>
+
+          {featuredPosts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {featuredPosts.map((post) => (
+                <ProductCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white dark:bg-[#11162e] rounded-3xl border border-slate-200 dark:border-white/10 p-7 text-center space-y-2.5 shadow-elevation">
+              <ShoppingBag className="h-9 w-9 text-[#ec8026] mx-auto opacity-70" />
+              <h3 className="font-bold text-[#0f172a] dark:text-white text-sm">No hay publicaciones registradas aún</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Sé el primero de tu facultad en publicar un artículo.</p>
+              <Button asChild variant="udc" size="sm" className="rounded-full mt-1.5 shadow-md shadow-[#ec8026]/20">
+                <Link to="/catalog?create=true">Publicar Aviso</Link>
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 
         Categorías Principales (Cuadrícula Homogénea Diferenciada)
       */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9 w-full">
@@ -328,49 +371,6 @@ export const HomePage: React.FC = () => {
               </Link>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* 
-        Publicaciones Recientes (Cuadrícula Homogénea de 3 Columnas)
-      */}
-      <section className="bg-[#e8ebf0]/70 dark:bg-[#0e1226] py-7 sm:py-9 px-4 sm:px-6 lg:px-8 border-y border-slate-200/90 dark:border-white/10 transition-colors">
-        <div className="max-w-7xl mx-auto space-y-4">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#161b38] text-[#0f172a] dark:text-slate-200 text-[11px] font-bold mb-1 border border-slate-200/80 dark:border-white/10">
-                <ShoppingBag className="h-3 w-3 text-[#ec8026]" />
-                <span>Novedades</span>
-              </div>
-              <h2 className="text-xl sm:text-2xl font-black text-[#0f172a] dark:text-white tracking-tight">
-                Publicaciones Recientes
-              </h2>
-            </div>
-
-            <Button asChild variant="outline" size="sm" className="rounded-full font-bold text-xs border-slate-300 dark:border-white/15 bg-white dark:bg-[#11162e] text-[#0f172a] dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 shadow-subtle">
-              <Link to="/catalog">
-                Ver Catálogo
-                <ArrowRight className="h-3.5 w-3.5 ml-1" />
-              </Link>
-            </Button>
-          </div>
-
-          {featuredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {featuredPosts.map((post) => (
-                <ProductCard key={post.id} post={post} />
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white dark:bg-[#11162e] rounded-3xl border border-slate-200 dark:border-white/10 p-7 text-center space-y-2.5 shadow-elevation">
-              <ShoppingBag className="h-9 w-9 text-[#ec8026] mx-auto opacity-70" />
-              <h3 className="font-bold text-[#0f172a] dark:text-white text-sm">No hay publicaciones registradas aún</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400">Sé el primero de tu facultad en publicar un artículo.</p>
-              <Button asChild variant="udc" size="sm" className="rounded-full mt-1.5 shadow-md shadow-[#ec8026]/20">
-                <Link to="/catalog?create=true">Publicar Aviso</Link>
-              </Button>
-            </div>
-          )}
         </div>
       </section>
 
