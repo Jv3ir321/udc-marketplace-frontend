@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
 import { MarketplaceProvider } from '@/context/MarketplaceContext';
@@ -8,7 +8,6 @@ import { HomePage } from '@/pages/HomePage';
 import { CatalogPage } from '@/pages/CatalogPage';
 import { ProductDetailPage } from '@/pages/ProductDetailPage';
 import { UserProfilePage } from '@/pages/UserProfilePage';
-import { CreatePostPage } from '@/pages/CreatePostPage';
 import { MyPostsPage } from '@/pages/MyPostsPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
@@ -39,14 +38,10 @@ export function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                {/* Protected authenticated routes */}
+                {/* Redirect /create to catalog popup modal */}
                 <Route
                   path="/create"
-                  element={
-                    <ProtectedRoute>
-                      <CreatePostPage />
-                    </ProtectedRoute>
-                  }
+                  element={<Navigate to="/catalog?create=true" replace />}
                 />
                 <Route
                   path="/my-posts"

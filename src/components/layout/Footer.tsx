@@ -1,95 +1,127 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, MapPin } from 'lucide-react';
+import { ShieldCheck, ArrowRight, MapPin } from 'lucide-react';
 import { UDC_SEDES } from '@/lib/utils';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-stone-900 text-stone-300 border-t border-stone-800 ">
-      {/* Safety Banner */}
-      <div className="bg-stone-950 border-b border-stone-800/80 py-6 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-orange-500/15 text-orange-400 flex items-center justify-center shrink-0">
-              <ShieldCheck className="h-5 w-5" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-white text-sm">Consejo de Seguridad Universitaria</h4>
-              <p className="text-xs text-stone-400">
-                Realiza tus entregas e intercambios siempre dentro de los campus de la UDC o lugares concurridos.
-              </p>
-            </div>
-          </div>
-          <Link
-            to="/register"
-            className="text-xs text-orange-400 hover:text-orange-300 font-semibold underline underline-offset-2 shrink-0"
-          >
-            Únete con tu correo institucional →
-          </Link>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand Col */}
-          <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-2xl bg-white p-1 flex items-center justify-center shadow-md shadow-orange-500/10 border border-orange-200/80 shrink-0">
-                <img
-                  src="/udc-logo.png"
-                  alt="Logo Universidad de Cartagena"
-                  className="h-full w-full object-contain"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/favicon.svg';
-                  }}
-                />
+    <footer className="w-full border-t border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#080a15] text-[#171a3d] dark:text-slate-100 font-aeonik transition-colors">
+      {/* Main Footer Body */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          {/* Brand Colophon */}
+          <div className="md:col-span-4 space-y-4">
+            <Link to="/" className="flex items-center gap-3 group">
+              <img
+                src="/udc-logo.png"
+                alt="Universidad de Cartagena"
+                className="h-10 w-auto object-contain drop-shadow-xs"
+              />
+              <div>
+                <span className="font-extrabold text-xl text-[#171a3d] dark:text-white leading-none block tracking-tight">
+                  UDC MARKETPLACE
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#ec8026] mt-0.5 block">
+                  Comunidad Universitaria UDC
+                </span>
               </div>
-              <span className="font-bold text-lg text-white">UDC Marketplace</span>
-            </div>
-            <p className="text-xs text-stone-400 leading-relaxed">
-              Plataforma comunitaria para la compra, venta, alquiler e intercambio de bienes y servicios académicos entre estudiantes, profesores y egresados de la Universidad de Cartagena.
+            </Link>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm font-normal leading-relaxed">
+              Plataforma comunitaria de compraventa e intercambio para estudiantes y docentes de la Universidad de Cartagena. Libros, batas, calculadoras y tutorías mano a mano en tu campus.
             </p>
+            <div className="flex items-center gap-2 pt-1">
+              <span className="h-2 w-2 rounded-full bg-[#3da898] inline-block shadow-xs" />
+              <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                Iniciativa Estudiantil · Cartagena de Indias
+              </span>
+            </div>
           </div>
 
-          {/* Sedes */}
-          <div className="space-y-3">
-            <h5 className="text-xs font-bold uppercase tracking-wider text-orange-400">Sedes Universitarias</h5>
-            <ul className="space-y-2 text-xs text-stone-400">
-              {UDC_SEDES.slice(0, 5).map((sede) => (
-                <li key={sede} className="flex items-center gap-1.5 hover:text-white transition-colors">
-                  <MapPin className="h-3 w-3 text-orange-500" />
-                  <span>Campus {sede}</span>
-                </li>
+          {/* Sedes / Claustros */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-[#171a3d] dark:text-white">
+              Sedes & Claustros
+            </h4>
+            <div className="flex flex-col gap-2">
+              {UDC_SEDES.map((sede) => (
+                <Link
+                  key={sede}
+                  to={`/catalog?sede=${encodeURIComponent(sede)}`}
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-[#ec8026] dark:hover:text-[#ec8026] flex items-center gap-1.5 transition-colors"
+                >
+                  <MapPin className="h-3 w-3 text-[#ec8026]" />
+                  <span>{sede}</span>
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* Categories */}
-          <div className="space-y-3">
-            <h5 className="text-xs font-bold uppercase tracking-wider text-orange-400">Categorías Populares</h5>
-            <ul className="space-y-2 text-xs text-stone-400">
-              <li><Link to="/" className="hover:text-white transition-colors">Calculadoras & Tecnología</Link></li>
-              <li><Link to="/" className="hover:text-white transition-colors">Batas de Laboratorio & Uniformes</Link></li>
-              <li><Link to="/" className="hover:text-white transition-colors">Libros de Cálculo & Medicina</Link></li>
-              <li><Link to="/" className="hover:text-white transition-colors">Habitaciones & Residencias Estudiantiles</Link></li>
-              <li><Link to="/" className="hover:text-white transition-colors">Tutorías & Clases Particulares</Link></li>
-            </ul>
+          {/* Categorías Clave */}
+          <div className="md:col-span-2 space-y-3">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-[#171a3d] dark:text-white">
+              Categorías
+            </h4>
+            <div className="flex flex-col gap-2 text-xs text-slate-600 dark:text-slate-400">
+              <Link to="/catalog?category=Calculadoras%20y%20Tecnología" className="hover:text-[#ec8026] transition-colors">
+                Tecnología & Calculadoras
+              </Link>
+              <Link to="/catalog?category=Libros%20y%20Fotocopias" className="hover:text-[#ec8026] transition-colors">
+                Libros & Guías
+              </Link>
+              <Link to="/catalog?category=Uniformes%20y%20Batas" className="hover:text-[#ec8026] transition-colors">
+                Batas & Uniformes
+              </Link>
+              <Link to="/catalog?category=Habitaciones%20y%20Alquiler" className="hover:text-[#ec8026] transition-colors">
+                Habitaciones
+              </Link>
+              <Link to="/catalog?category=Servicios%20y%20Tutorías" className="hover:text-[#ec8026] transition-colors">
+                Tutorías & Asesorías
+              </Link>
+            </div>
           </div>
 
-          {/* Fast Links */}
-          <div className="space-y-3">
-            <h5 className="text-xs font-bold uppercase tracking-wider text-orange-400">Acceso Rápido</h5>
-            <ul className="space-y-2 text-xs text-stone-400">
-              <li><Link to="/login" className="hover:text-white transition-colors">Iniciar Sesión</Link></li>
-              <li><Link to="/register" className="hover:text-white transition-colors">Crear Cuenta Estudiantil</Link></li>
-              <li><Link to="/create" className="hover:text-white transition-colors">Publicar un Anuncio</Link></li>
-              <li><Link to="/my-posts" className="hover:text-white transition-colors">Administrar Mis Anuncios</Link></li>
-            </ul>
+          {/* Campus Safe Trade Card */}
+          <div className="md:col-span-3">
+            <div className="rounded-3xl bg-[#171a3d] dark:bg-[#11162e] border border-transparent dark:border-white/10 p-5 text-white space-y-3 shadow-elevation">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#ec8026]">
+                  Entregas Seguras
+                </span>
+                <ShieldCheck className="h-4 w-4 text-[#3da898]" />
+              </div>
+              <h5 className="font-extrabold text-lg text-white leading-snug">
+                En tu Propio Claustro
+              </h5>
+              <p className="text-xs text-slate-300 dark:text-slate-300 leading-relaxed font-normal">
+                Coordina entregas personales en bibliotecas o cafeterías de tu facultad. Sin gastos de envío ni intermediarios.
+              </p>
+              <div className="pt-1">
+                <Link
+                  to="/catalog"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#ec8026] hover:underline"
+                >
+                  <span>Explorar catálogo</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
-          <p>© {new Date().getFullYear()} UDC Marketplace - Universidad de Cartagena.</p>
+        {/* Bottom Strip */}
+        <div className="mt-10 pt-6 border-t border-slate-100 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400 font-medium">
+          <p>© {new Date().getFullYear()} UDC Marketplace · Plataforma comunitaria no oficial</p>
+          <div className="flex items-center gap-4">
+            <Link to="/catalog" className="hover:text-[#ec8026] transition-colors">
+              Catálogo General
+            </Link>
+            <span>·</span>
+            <Link to="/catalog?create=true" className="hover:text-[#ec8026] transition-colors">
+              Publicar Artículo
+            </Link>
+            <span>·</span>
+            <span>Cartagena, Colombia</span>
+          </div>
         </div>
       </div>
     </footer>
