@@ -1,14 +1,14 @@
 import api from './api';
 import { Post, CreatePostDTO, UpdatePostDTO, Valoration } from '@/types';
-import { INITIAL_POSTS } from './mockData';
 
-const LOCAL_STORAGE_KEY = 'udc_marketplace_posts_v4';
+const LOCAL_STORAGE_KEY = 'udc_marketplace_posts_v5';
 
 // Clear legacy mock data keys if present
 try {
   localStorage.removeItem('udc_marketplace_posts');
   localStorage.removeItem('udc_marketplace_posts_v2');
   localStorage.removeItem('udc_marketplace_posts_v3');
+  localStorage.removeItem('udc_marketplace_posts_v4');
 } catch {
   // ignore
 }
@@ -25,9 +25,9 @@ function getLocalPosts(): Post[] {
   } catch (e) {
     console.warn('Error al leer posts de almacenamiento local:', e);
   }
-  // Initialize with empty posts
-  saveLocalPosts(INITIAL_POSTS);
-  return INITIAL_POSTS;
+  // Initialize with empty array
+  saveLocalPosts([]);
+  return [];
 }
 
 function saveLocalPosts(posts: Post[]): void {
