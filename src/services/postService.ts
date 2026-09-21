@@ -40,9 +40,18 @@ function saveLocalPosts(posts: Post[]): void {
 
 export const postService = {
   // GET all posts directly from backend with local fallback
-  async getAll(): Promise<Post[]> {
+  async getAll(params?: {
+    sede?: string;
+    tipoP?: string;
+    search?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    sortBy?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<Post[]> {
     try {
-      const response = await api.get('/post');
+      const response = await api.get('/post', { params });
       if (response.data && Array.isArray(response.data)) {
         saveLocalPosts(response.data);
         return response.data;
@@ -66,13 +75,13 @@ export const postService = {
     return local.find((p) => p.id === Number(id)) || null;
   },
 
-  // POST /post/create with multipart/form-data & local fallback
+  // POST /post (Standard REST) with multipart/form-data & local fallback
   async create(data: CreatePostDTO): Promise<{ message: string; post: Post }> {
     try {
       const formData = new FormData();
       formData.append('nombre', data.nombre);
       formData.append('desc', data.desc);
-      formData.append('price', data.price);
+      formData.append('price', String(data.price));
       formData.append('sede', data.sede);
       formData.append('tipoP', data.tipoP);
 
@@ -80,11 +89,14 @@ export const postService = {
         formData.append('images', image);
       });
 
-      const response = await api.post('/post/create', formData);
+      const response = await api.post('/post', formData);
       if (response.data && response.data.post) {
         return response.data;
       }
-    } catch (backendError) {
+    } catch (backendError: any) {
+      if (backendError.response?.data?.error || backendError.response?.data?.message) {
+        throw backendError;
+      }
       console.warn('Backend creación no disponible, guardando localmente:', backendError);
     }
 
@@ -141,10 +153,10 @@ export const postService = {
     };
   },
 
-  // PUT /post/:id/update
+  // PUT /post/:id (Standard REST)
   async update(id: number, data: UpdatePostDTO): Promise<{ message: string; post: Partial<Post> }> {
     try {
-      const response = await api.put(`/post/${id}/update`, {
+      const response = await api.put(`/post/${id}`, {
         nombre: data.nombre,
         desc: data.desc,
         price: data.price,
@@ -154,7 +166,10 @@ export const postService = {
       if (response.data) {
         return response.data;
       }
-    } catch (e) {
+    } catch (e: any) {
+      if (e.response?.data?.error || e.response?.data?.message) {
+        throw e;
+      }
       console.warn('Backend update no disponible, actualizando localmente:', e);
     }
 
@@ -179,14 +194,17 @@ export const postService = {
     };
   },
 
-  // DELETE /post/:id/delete
+  // DELETE /post/:id (Standard REST)
   async delete(id: number): Promise<{ message: string }> {
     try {
-      const response = await api.delete(`/post/${id}/delete`);
+      const response = await api.delete(`/post/${id}`);
       if (response.data) {
         return response.data;
       }
-    } catch (e) {
+    } catch (e: any) {
+      if (e.response?.data?.error || e.response?.data?.message) {
+        throw e;
+      }
       console.warn('Backend delete no disponible, eliminando localmente:', e);
     }
 
@@ -196,17 +214,25 @@ export const postService = {
     return { message: 'Publicación eliminada correctamente' };
   },
 
-  // POST /valoration/send
-  async sendValoration(postId: number, valorationText: string): Promise<{ message: string; valoration: Valoration }> {
+  // POST /valoration (Standard REST)
+  async sendValoration(
+    postId: number,
+    valorationText: string,
+    rating: number = 5
+  ): Promise<{ message: string; valoration: Valoration }> {
     try {
-      const response = await api.post('/valoration/send', {
+      const response = await api.post('/valoration', {
         postId: postId,
         valoration: valorationText,
+        rating: rating,
       });
-      if (response.data) {
+      if (response.data && response.data.valoration) {
         return response.data;
       }
-    } catch (e) {
+    } catch (e: any) {
+      if (e.response?.data?.error || e.response?.data?.message) {
+        throw e;
+      }
       console.warn('Backend valoración no disponible, guardando localmente:', e);
     }
 
@@ -215,6 +241,7 @@ export const postService = {
     const newValoration: Valoration = {
       id: Date.now(),
       valoration: valorationText,
+      rating: rating,
       postId: Number(postId),
       userId: currentUser.id || 1,
       user: {

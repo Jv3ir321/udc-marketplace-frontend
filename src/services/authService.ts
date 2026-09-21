@@ -29,11 +29,13 @@ export const authService = {
         password: data.password,
         sede: data.sede,
         codEst: data.codEst,
-        role: data.role,
         cellphone: data.cellphone,
       });
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response?.data?.error || error.response?.data?.message) {
+        throw error;
+      }
       console.warn('Backend registro no disponible, registrando usuario localmente:', error);
     }
 
@@ -48,7 +50,7 @@ export const authService = {
       password: data.password,
       sede: data.sede,
       codEst: data.codEst,
-      role: data.role,
+      role: data.role || 'Estudiante',
       cellphone: data.cellphone,
     };
     users.push(newUser);
@@ -77,7 +79,10 @@ export const authService = {
 
       localStorage.setItem('udc_current_user', JSON.stringify(user));
       return { token, user };
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response?.status === 401 || error.response?.status === 400 || error.response?.status === 404) {
+        throw error;
+      }
       console.warn('Backend login no disponible, autenticando localmente:', error);
     }
 

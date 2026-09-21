@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // Store registration preferences locally so subsequent login has user profile details
       localStorage.setItem('udc_user_codEst', data.codEst);
       localStorage.setItem('udc_user_sede', data.sede);
-      localStorage.setItem('udc_user_role', data.role);
+      localStorage.setItem('udc_user_role', data.role || 'Estudiante');
       localStorage.setItem('udc_user_phone', data.cellphone);
 
       const res = await authService.register(data);

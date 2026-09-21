@@ -33,7 +33,7 @@ export const UserProfilePage: React.FC = () => {
       if (!id) return;
       setIsLoading(true);
       try {
-        const response = await api.get(`/users/${id}/profile`);
+        const response = await api.get(`/user/${id}`);
         setProfile(response.data);
       } catch {
         const localPosts = getPostsByUser(Number(id));

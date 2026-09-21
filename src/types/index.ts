@@ -20,6 +20,7 @@ export interface PostIMG {
 export interface Valoration {
   id: number;
   valoration: string;
+  rating?: number;
   postId: number;
   userId: number;
   user?: User;
@@ -30,7 +31,7 @@ export interface Post {
   id: number;
   nombre: string;
   desc: string;
-  price: string;
+  price: string | number;
   sede: string;
   tipoP: string;
   userId: number;
@@ -79,7 +80,7 @@ export interface UserProfile {
 export interface CreatePostDTO {
   nombre: string;
   desc: string;
-  price: string;
+  price: string | number;
   sede: string;
   tipoP: string;
   images: File[];
@@ -88,18 +89,18 @@ export interface CreatePostDTO {
 export interface UpdatePostDTO {
   nombre: string;
   desc: string;
-  price: string;
+  price: string | number;
   sede: string;
   tipoP: string;
 }
 
 export interface RegisterDTO {
-  title: string; // Backend expects 'title' for User Name
+  title: string;
   mail: string;
   password: string;
   sede: string;
   codEst: string;
-  role: string;
+  role?: string;
   cellphone: string;
 }
 

@@ -20,6 +20,7 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
   const { isAuthenticated, user } = useAuth();
   const { sendValoration } = useMarketplace();
   const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(5);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,9 +28,10 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
     if (!comment.trim()) return;
 
     setIsSubmitting(true);
-    const success = await sendValoration(postId, comment.trim());
+    const success = await sendValoration(postId, comment.trim(), rating);
     if (success) {
       setComment('');
+      setRating(5);
     }
     setIsSubmitting(false);
   };
@@ -65,7 +67,35 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
                 {getInitials(user?.title || user?.name)}
               </AvatarFallback>
             </Avatar>
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
+                  Calificación:
+                </span>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setRating(star)}
+                      className="p-0.5 hover:scale-110 transition-transform text-amber-400"
+                      aria-label={`Calificar con ${star} estrellas`}
+                    >
+                      <Star
+                        className={`h-4 w-4 ${
+                          star <= rating
+                            ? 'fill-amber-400 text-amber-400'
+                            : 'text-slate-300 dark:text-slate-600'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300 ml-1">
+                    {rating}.0
+                  </span>
+                </div>
+              </div>
+
               <Textarea
                 placeholder="Pregunta sobre detalles del artículo o propone un punto de entrega en tu sede..."
                 value={comment}
@@ -82,7 +112,7 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
                   className="rounded-full px-5 text-xs font-bold shadow-subtle hover:shadow-elevation"
                 >
                   <Send className="h-3.5 w-3.5 mr-1.5" />
-                  Enviar Pregunta
+                  Enviar Valoración
                 </Button>
               </div>
             </div>
@@ -102,37 +132,40 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
       {/* List of comments */}
       <div className="space-y-3 pt-2">
         {valorations.length > 0 ? (
-          valorations.map((val) => (
-            <div
-              key={val.id}
-              className="p-4 rounded-2xl bg-white dark:bg-[#11162e] border border-slate-200/70 dark:border-white/10 shadow-subtle space-y-2"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <Avatar className="h-7 w-7 rounded-full border border-slate-200 dark:border-white/10">
-                    <AvatarFallback className="bg-slate-100 dark:bg-[#161b38] text-[#171a3d] dark:text-white text-[10px] font-bold">
-                      {getInitials(val.user?.title || val.user?.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
-                      {val.user?.title || val.user?.name || 'Estudiante UDC'}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
-                      Campus {val.user?.sede || 'Cartagena'}
-                    </span>
+          valorations.map((val) => {
+            const displayRating = val.rating && val.rating >= 1 && val.rating <= 5 ? val.rating : 5;
+            return (
+              <div
+                key={val.id}
+                className="p-4 rounded-2xl bg-white dark:bg-[#11162e] border border-slate-200/70 dark:border-white/10 shadow-subtle space-y-2"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <Avatar className="h-7 w-7 rounded-full border border-slate-200 dark:border-white/10">
+                      <AvatarFallback className="bg-slate-100 dark:bg-[#161b38] text-[#171a3d] dark:text-white text-[10px] font-bold">
+                        {getInitials(val.user?.title || val.user?.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
+                        {val.user?.title || val.user?.name || 'Estudiante UDC'}
+                      </span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                        Campus {val.user?.sede || 'Cartagena'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-0.5 text-amber-500">
+                    <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{displayRating}.0</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-0.5 text-amber-500">
-                  <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">5.0</span>
-                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 pl-9 leading-relaxed">
+                  {val.valoration}
+                </p>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 pl-9 leading-relaxed">
-                {val.valoration}
-              </p>
-            </div>
-          ))
+            );
+          })
         ) : (
           <div className="text-center py-6 text-xs text-slate-400 dark:text-slate-500 font-medium">
             No hay preguntas aún. ¡Sé el primero en consultar por este artículo!
