@@ -9,6 +9,14 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: LoginDTO) => Promise<boolean>;
+  loginWithGoogle: (payload: {
+    credential?: string;
+    idToken?: string;
+    code?: string;
+    accessToken?: string;
+    email?: string;
+    name?: string;
+  }) => Promise<boolean>;
   register: (data: RegisterDTO) => Promise<boolean>;
   logout: () => void;
 }
@@ -42,7 +50,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       toast.success(`¡Bienvenido de vuelta, ${res.user.title || res.user.name || 'Estudiante'}!`);
       return true;
     } catch (error: any) {
-      const msg = error.response?.data?.message || error.response?.data?.error || 'Error al iniciar sesión';
+      const msg = error.response?.data?.message || error.response?.data?.error || error.message || 'Error al iniciar sesión';
+      toast.error(msg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loginWithGoogle = async (payload: {
+    credential?: string;
+    idToken?: string;
+    code?: string;
+    accessToken?: string;
+    email?: string;
+    name?: string;
+  }): Promise<boolean> => {
+    try {
+      setIsLoading(true);
+      const res = await authService.loginWithGoogle(payload);
+      setToken(res.token);
+      setUser(res.user);
+      toast.success(`¡Sesión institucional iniciada! Bienvenido, ${res.user.title || res.user.name || 'Estudiante UDC'}`);
+      return true;
+    } catch (error: any) {
+      const msg =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message ||
+        'Error al iniciar sesión con cuenta institucional de Google';
       toast.error(msg);
       return false;
     } finally {
@@ -86,6 +122,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated: !!token && !!user,
         isLoading,
         login,
+        loginWithGoogle,
         register,
         logout,
       }}

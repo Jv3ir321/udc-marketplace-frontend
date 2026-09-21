@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { PageTransition } from '@/components/common/PageTransition';
+import { GoogleAuthButton } from '@/components/auth/GoogleAuthButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { UDC_SEDES, ROLES_UDC } from '@/lib/utils';
-import { Lock, Mail, User, Phone, ArrowRight, Building2, GraduationCap } from 'lucide-react';
+import { Lock, Mail, User, Phone, ArrowRight, Building2, GraduationCap, ShieldCheck } from 'lucide-react';
+import { toast } from 'sonner';
 
 export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -22,12 +24,30 @@ export const RegisterPage: React.FC = () => {
     cellphone: '',
   });
 
+  const [habeasDataAccepted, setHabeasDataAccepted] = useState(true);
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleOAuthSuccess = () => {
+    navigate('/');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!habeasDataAccepted) {
+      toast.error('Debes aceptar la autorización de tratamiento de datos personales (Habeas Data)');
+      return;
+    }
+
+    const cleanMail = formData.mail.trim().toLowerCase();
+    if (!cleanMail.endsWith('@unicartagena.edu.co')) {
+      toast.error('Acceso exclusivo: el correo debe ser institucional (@unicartagena.edu.co)');
+      return;
+    }
+
     const success = await register(formData);
     if (success) {
       navigate('/login');
@@ -57,7 +77,7 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         {/* Register Card */}
-        <div className="rounded-3xl bg-white dark:bg-[#11162e] border border-slate-200/80 dark:border-white/10 p-6 sm:p-8 space-y-6 shadow-lifted">
+        <div className="rounded-3xl bg-white dark:bg-[#11162e] border border-slate-200/80 dark:border-white/10 p-6 sm:p-8 space-y-5 shadow-lifted">
           <div className="space-y-1 text-center border-b border-slate-100 dark:border-white/10 pb-4">
             <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-[#171a3d] dark:text-white">
               Crear Cuenta
@@ -65,6 +85,22 @@ export const RegisterPage: React.FC = () => {
             <p className="text-xs text-slate-500 dark:text-slate-400 font-normal leading-relaxed">
               Únete a la comunidad de compraventa de la Universidad de Cartagena
             </p>
+          </div>
+
+          {/* 1-Click Institutional Google OAuth Option */}
+          <div className="space-y-3">
+            <GoogleAuthButton
+              variant="register"
+              text="Registro Rápido con Google UDC"
+              onSuccess={handleOAuthSuccess}
+            />
+
+            <div className="relative flex items-center justify-center">
+              <div className="border-t border-slate-200 dark:border-white/10 w-full" />
+              <span className="bg-white dark:bg-[#11162e] px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0">
+                o completa el formulario
+              </span>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -195,11 +231,28 @@ export const RegisterPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Habeas Data Consent Checkbox */}
+            <div className="pt-2 pb-1">
+              <label className="flex items-start gap-2.5 cursor-pointer text-xs text-slate-600 dark:text-slate-300 select-none">
+                <input
+                  type="checkbox"
+                  checked={habeasDataAccepted}
+                  onChange={(e) => setHabeasDataAccepted(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#ec8026] focus:ring-[#ec8026] cursor-pointer shrink-0"
+                  required
+                />
+                <span className="leading-snug">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 inline mr-1" />
+                  Autorizo el tratamiento de mis datos personales de acuerdo con la <strong>Ley 1581 de 2012 (Habeas Data)</strong> para fines de contacto en el mercado universitario UDC.
+                </span>
+              </label>
+            </div>
+
             <Button
               type="submit"
               variant="udc"
-              disabled={isLoading}
-              className="w-full h-11 rounded-full font-bold text-xs tracking-wider shadow-md shadow-[#ec8026]/25 mt-3"
+              disabled={isLoading || !habeasDataAccepted}
+              className="w-full h-11 rounded-full font-bold text-xs tracking-wider shadow-md shadow-[#ec8026]/25 mt-1"
             >
               {isLoading ? (
                 <span>Creando perfil...</span>

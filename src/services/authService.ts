@@ -136,6 +136,72 @@ export const authService = {
     return { token: mockToken, user };
   },
 
+  async loginWithGoogle(payload: {
+    credential?: string;
+    idToken?: string;
+    code?: string;
+    accessToken?: string;
+    email?: string;
+    name?: string;
+  }): Promise<{ token: string; user: User }> {
+    // 1. Enforce institutional domain client-side if email is provided directly
+    if (payload.email) {
+      const clean = payload.email.toLowerCase().trim();
+      if (!clean.endsWith('@unicartagena.edu.co')) {
+        throw new Error('Solo se permiten cuentas institucionales con dominio @unicartagena.edu.co');
+      }
+    }
+
+    try {
+      const response = await api.post('/user/auth/google', payload);
+      if (response.data && response.data.token) {
+        const token = response.data.token;
+        const user = response.data.user;
+
+        localStorage.setItem('udc_auth_token', token);
+        localStorage.setItem('udc_current_user', JSON.stringify(user));
+        return { token, user };
+      }
+    } catch (error: any) {
+      if (error.response?.data?.error || error.response?.data?.message) {
+        throw error;
+      }
+      console.warn('Backend OAuth no disponible, autenticando institucionalmente de respaldo:', error);
+    }
+
+    // Local Fallback for offline / demo mode with strict institutional validation
+    const email = payload.email || 'estudiante@unicartagena.edu.co';
+    if (!email.toLowerCase().trim().endsWith('@unicartagena.edu.co')) {
+      throw new Error('Solo se permiten cuentas institucionales con dominio @unicartagena.edu.co');
+    }
+
+    const name = payload.name || email.split('@')[0].replace(/[._]/g, ' ').toUpperCase();
+    const user: User = {
+      id: 99,
+      title: name,
+      name: name,
+      mail: email,
+      codEst: '0222010099',
+      sede: 'Claustro San Agustín',
+      role: 'Estudiante',
+      cellphone: '',
+    };
+
+    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+    const jwtPayload = btoa(
+      JSON.stringify({
+        user_id: user.id,
+        username: user.title,
+        exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60,
+      })
+    );
+    const mockToken = `${header}.${jwtPayload}.mockGoogleSignature`;
+
+    localStorage.setItem('udc_auth_token', mockToken);
+    localStorage.setItem('udc_current_user', JSON.stringify(user));
+    return { token: mockToken, user };
+  },
+
   logout(): void {
     localStorage.removeItem('udc_auth_token');
     localStorage.removeItem('udc_current_user');

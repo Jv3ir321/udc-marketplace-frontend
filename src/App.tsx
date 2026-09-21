@@ -11,6 +11,7 @@ import { UserProfilePage } from '@/pages/UserProfilePage';
 import { MyPostsPage } from '@/pages/MyPostsPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
+import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
@@ -37,6 +38,7 @@ export function App() {
                 <Route path="/profile/:id" element={<UserProfilePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
                 {/* Redirect /create to catalog popup modal */}
                 <Route

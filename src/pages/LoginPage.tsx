@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { PageTransition } from '@/components/common/PageTransition';
+import { GoogleAuthButton } from '@/components/auth/GoogleAuthButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Lock, Mail, ArrowRight } from 'lucide-react';
+import { Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,11 +18,15 @@ export const LoginPage: React.FC = () => {
 
   const from = location.state?.from?.pathname || '/';
 
+  const handleLoginSuccess = () => {
+    navigate(from, { replace: true });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const success = await login({ mail, password });
     if (success) {
-      navigate(from, { replace: true });
+      handleLoginSuccess();
     }
   };
 
@@ -48,14 +53,30 @@ export const LoginPage: React.FC = () => {
         </div>
 
         {/* Login Card */}
-        <div className="rounded-3xl bg-white dark:bg-[#11162e] border border-slate-200/80 dark:border-white/10 p-6 sm:p-8 space-y-6 shadow-lifted">
+        <div className="rounded-3xl bg-white dark:bg-[#11162e] border border-slate-200/80 dark:border-white/10 p-6 sm:p-8 space-y-5 shadow-lifted">
           <div className="space-y-1 text-center border-b border-slate-100 dark:border-white/10 pb-4">
             <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-[#171a3d] dark:text-white">
               Iniciar Sesión
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-normal leading-relaxed">
-              Ingresa con tu correo y contraseña institucional de la Universidad de Cartagena
+              Ingresa con tu correo institucional de la Universidad de Cartagena
             </p>
+          </div>
+
+          {/* 1-Click Institutional Google OAuth */}
+          <div className="space-y-3">
+            <GoogleAuthButton
+              variant="login"
+              text="Ingresar con Google UDC"
+              onSuccess={handleLoginSuccess}
+            />
+
+            <div className="relative flex items-center justify-center">
+              <div className="border-t border-slate-200 dark:border-white/10 w-full" />
+              <span className="bg-white dark:bg-[#11162e] px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0">
+                o con contraseña
+              </span>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -113,6 +134,12 @@ export const LoginPage: React.FC = () => {
               )}
             </Button>
           </form>
+
+          {/* Habeas Data notice */}
+          <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 font-medium text-center">
+            <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <span>Protección de datos conforme a la Ley 1581 de 2012</span>
+          </div>
 
           <div className="pt-2 border-t border-slate-100 dark:border-white/10 text-center text-xs font-normal text-slate-500 dark:text-slate-400">
             ¿No tienes cuenta aún?{' '}
