@@ -14,7 +14,7 @@ import {
   Plus,
   MapPin,
 } from 'lucide-react';
-import { CATEGORIAS_PRODUCTO, formatCampusName, getCategoryMeta } from '@/lib/utils';
+import { formatCampusName } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
 export const CatalogPage: React.FC = () => {
@@ -91,46 +91,6 @@ export const CatalogPage: React.FC = () => {
               <span>Publicar Artículo</span>
             </Button>
           </div>
-        </div>
-      </section>
-
-      {/* Quick Horizontal Category Bar with Distinct Color Indicators */}
-      <section className="bg-white/95 dark:bg-[#0e1226]/90 backdrop-blur-md py-3 px-4 sm:px-8 sticky top-15 z-20 border-b border-slate-200/90 dark:border-white/10 shadow-xs overflow-x-auto scrollbar-none transition-colors">
-        <div className="max-w-[1440px] mx-auto flex items-center gap-2 min-w-max">
-          <button
-            type="button"
-            onClick={() => updateFilter('category', '')}
-            className={`h-9 px-4 rounded-full text-xs font-extrabold transition-all flex items-center gap-2 border shadow-subtle ${
-              !filters.category
-                ? 'bg-[#171a3d] dark:bg-white text-white dark:text-[#0b0e1e] border-[#171a3d] dark:border-white shadow-md'
-                : 'bg-white dark:bg-[#161b38] text-slate-700 dark:text-slate-200 border-slate-200 hover:border-slate-300 dark:border-white/10 dark:hover:border-white/25 hover:bg-slate-50 dark:hover:bg-[#1a2042]'
-            }`}
-          >
-            <span className={`h-2.5 w-2.5 rounded-full ${!filters.category ? 'bg-[#ec8026]' : 'bg-slate-400'}`} />
-            <span>Todo el Catálogo</span>
-          </button>
-          {CATEGORIAS_PRODUCTO.map((cat) => {
-            const meta = getCategoryMeta(cat);
-            const isSelected = filters.category === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => updateFilter('category', isSelected ? '' : cat)}
-                className={`h-9 px-4 rounded-full text-xs font-extrabold transition-all flex items-center gap-2 border shadow-subtle ${
-                  isSelected
-                    ? 'bg-[#171a3d] dark:bg-white text-white dark:text-[#0b0e1e] border-[#171a3d] dark:border-white shadow-md'
-                    : 'bg-white dark:bg-[#161b38] text-slate-700 dark:text-slate-200 border-slate-200 hover:border-slate-300 dark:border-white/10 dark:hover:border-white/25 hover:bg-slate-50 dark:hover:bg-[#1a2042]'
-                }`}
-              >
-                <span
-                  className="h-2.5 w-2.5 rounded-full shrink-0"
-                  style={{ backgroundColor: meta.color }}
-                />
-                <span>{cat}</span>
-              </button>
-            );
-          })}
         </div>
       </section>
 
