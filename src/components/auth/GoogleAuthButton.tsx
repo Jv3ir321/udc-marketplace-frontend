@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 interface GoogleAuthButtonProps {
   onSuccess?: () => void;
   text?: string;
-  variant?: 'login' | 'register';
   className?: string;
 }
 
@@ -34,7 +33,7 @@ export const GoogleIcon: React.FC<{ className?: string }> = ({ className = 'h-4 
 
 export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
   onSuccess,
-  text = 'Continuar con Google Institucional',
+  text = 'Continuar con Google',
   className = '',
 }) => {
   const { loginWithGoogle, isLoading } = useAuth();
@@ -143,13 +142,10 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
       variant="outline"
       onClick={handleButtonClick}
       disabled={isLoading || isAuthenticating}
-      className={`w-full h-12 rounded-2xl border-2 border-slate-200 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-[#1f254e] text-[#171a3d] dark:text-white font-aeonik font-bold text-xs sm:text-sm shadow-subtle hover:shadow-elevation transition-all active:scale-95 flex items-center justify-center gap-3 ${className}`}
+      className={`w-full h-11 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-[#1f254e] text-[#171a3d] dark:text-white font-aeonik font-bold text-xs shadow-xs hover:shadow-subtle transition-all active:scale-98 flex items-center justify-center gap-2.5 ${className}`}
     >
-      <GoogleIcon className="h-5 w-5 shrink-0" />
-      <span className="truncate">{text}</span>
-      <span className="hidden sm:inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-[#fdf3eb] dark:bg-[#ec8026]/15 text-[#ec8026] border border-[#ec8026]/20 shrink-0">
-        @unicartagena.edu.co
-      </span>
+      <GoogleIcon className="h-4 w-4 shrink-0" />
+      <span>{text}</span>
     </Button>
   );
 };
