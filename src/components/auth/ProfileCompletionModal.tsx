@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { UDC_SEDES } from '@/lib/utils';
+import { UDC_SEDES, getApiBaseUrl } from '@/lib/utils';
 import WhatsappIcon from '@/components/ui/whatsapp-icon';
 import {
   Sparkles,
@@ -136,7 +136,7 @@ export const ProfileCompletionModal: React.FC = () => {
 
   if (!isOpen) return null;
 
-  const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+  const apiBaseUrl = getApiBaseUrl();
   const resolvedAvatarSrc = avatarPreview
     ? avatarPreview.startsWith('http') || avatarPreview.startsWith('blob:')
       ? avatarPreview

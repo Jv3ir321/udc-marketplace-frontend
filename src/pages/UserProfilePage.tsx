@@ -7,7 +7,7 @@ import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { UserProfile, Post } from '@/types';
-import { formatCampusName } from '@/lib/utils';
+import { formatCampusName, getBackendImageUrl } from '@/lib/utils';
 import WhatsappIcon from '@/components/ui/whatsapp-icon';
 import {
   ArrowLeft,
@@ -152,11 +152,7 @@ export const UserProfilePage: React.FC = () => {
               <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-[#ec8026]/30 shadow-md bg-[#f4edf9] dark:bg-purple-950/40 shrink-0">
                 {profile.picture && (
                   <AvatarImage
-                    src={
-                      profile.picture.startsWith('http') || profile.picture.startsWith('blob:')
-                        ? profile.picture
-                        : `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}${profile.picture}`
-                    }
+                    src={getBackendImageUrl(profile.picture)}
                     alt={displayName}
                     className="object-cover"
                   />

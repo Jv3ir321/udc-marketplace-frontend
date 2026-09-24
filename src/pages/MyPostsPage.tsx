@@ -82,11 +82,7 @@ export const MyPostsPage: React.FC = () => {
               <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-[#ec8026]/30 shadow-md bg-[#fdf3eb] dark:bg-orange-950/40 shrink-0">
                 {user?.picture && (
                   <AvatarImage
-                    src={
-                      user.picture.startsWith('http') || user.picture.startsWith('blob:')
-                        ? user.picture
-                        : `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}${user.picture}`
-                    }
+                    src={getBackendImageUrl(user.picture)}
                     alt={displayName}
                     className="object-cover"
                   />
