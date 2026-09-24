@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { ShieldCheck, Mail, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
+import { api } from '@/services/api';
+import { toast } from 'sonner';
 
 interface GoogleAuthButtonProps {
   onSuccess?: () => void;
@@ -43,23 +35,18 @@ export const GoogleIcon: React.FC<{ className?: string }> = ({ className = 'h-4 
 export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
   onSuccess,
   text = 'Continuar con Google Institucional',
-  variant = 'login',
   className = '',
 }) => {
   const { loginWithGoogle, isLoading } = useAuth();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [institutionalEmail, setInstitutionalEmail] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     if (isLoading || isAuthenticating) return;
 
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     const hasGIS = typeof window !== 'undefined' && (window as any).google?.accounts?.oauth2;
 
-    // 1. If Google Identity Services SDK is loaded with a valid Client ID, use Google's native GIS popup
+    // 1. Google Identity Services (GIS) Native Popup
     if (clientId && hasGIS) {
       try {
         setIsAuthenticating(true);
@@ -90,7 +77,7 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
       }
     }
 
-    // 2. If Client ID is set but GIS SDK not ready, open standard OAuth2 centered popup window
+    // 2. Direct Popup OAuth2 Fallback
     if (clientId) {
       const redirectUri = `${window.location.origin}/auth/callback`;
       const width = 500;
@@ -112,16 +99,18 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
       );
 
       if (popup) {
+        setIsAuthenticating(true);
         const handleMessage = async (event: MessageEvent) => {
           if (event.origin !== window.location.origin) return;
           if (event.data?.type === 'GOOGLE_OAUTH_RESPONSE') {
             window.removeEventListener('message', handleMessage);
             const { code, accessToken, idToken } = event.data;
             if (accessToken || idToken || code) {
-              setIsAuthenticating(true);
               const ok = await loginWithGoogle({ accessToken, idToken, code });
               setIsAuthenticating(false);
               if (ok && onSuccess) onSuccess();
+            } else {
+              setIsAuthenticating(false);
             }
           }
         };
@@ -131,149 +120,36 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
       }
     }
 
-    // 3. Fallback: If no VITE_GOOGLE_CLIENT_ID is configured in .env, open development simulation modal
-    setModalOpen(true);
-    setErrorMessage('');
-  };
-
-  const handleInstitutionalSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
-
-    const cleanEmail = institutionalEmail.trim().toLowerCase();
-    if (!cleanEmail) {
-      setErrorMessage('Por favor ingresa tu correo institucional');
-      return;
+    // 3. Backend OAuth URL Fallback
+    try {
+      setIsAuthenticating(true);
+      const res = await api.get('/user/auth/google/url');
+      if (res.data?.url) {
+        window.location.href = res.data.url;
+        return;
+      }
+    } catch (err) {
+      console.warn('No se pudo obtener URL OAuth de Google:', err);
+    } finally {
+      setIsAuthenticating(false);
     }
 
-    // STRICT VALIDATION: Must end with @unicartagena.edu.co
-    if (!cleanEmail.endsWith('@unicartagena.edu.co')) {
-      setErrorMessage('Acceso denegado: El correo debe terminar estrictamente en @unicartagena.edu.co (no se admiten cuentas @gmail.com, @hotmail.com, etc.)');
-      return;
-    }
-
-    setIsAuthenticating(true);
-    const success = await loginWithGoogle({
-      email: cleanEmail,
-      name: fullName.trim(),
-    });
-    setIsAuthenticating(false);
-
-    if (success) {
-      setModalOpen(false);
-      if (onSuccess) onSuccess();
-    }
+    toast.error('No se pudo iniciar la autenticación con Google. Por favor intenta nuevamente.');
   };
 
   return (
-    <>
-      <Button
-        type="button"
-        variant="outline"
-        onClick={handleButtonClick}
-        disabled={isLoading || isAuthenticating}
-        className={`w-full h-11 rounded-full border border-slate-200 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-[#1f254e] text-[#171a3d] dark:text-white font-aeonik font-bold text-xs shadow-subtle hover:shadow-elevation transition-all active:scale-95 flex items-center justify-center gap-2.5 ${className}`}
-      >
-        <GoogleIcon className="h-4 w-4 shrink-0" />
-        <span className="truncate">{text}</span>
-        <span className="hidden sm:inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-[#fdf3eb] dark:bg-[#ec8026]/15 text-[#ec8026] border border-[#ec8026]/20">
-          @unicartagena.edu.co
-        </span>
-      </Button>
-
-      {/* Institutional Google OAuth Authentication Modal */}
-      <Dialog open={modalOpen} onOpenChange={(open) => !open && setModalOpen(false)}>
-        <DialogContent className="sm:max-w-md rounded-3xl bg-white dark:bg-[#11162e] border border-slate-200 dark:border-white/10 p-6 sm:p-8 font-aeonik text-[#171a3d] dark:text-white shadow-2xl">
-          <DialogHeader className="space-y-2 text-center pb-3 border-b border-slate-100 dark:border-white/10">
-            <div className="mx-auto h-12 w-12 rounded-2xl bg-[#fdf3eb] dark:bg-[#161b38] flex items-center justify-center border border-[#ec8026]/20 shadow-xs">
-              <GoogleIcon className="h-6 w-6" />
-            </div>
-            <DialogTitle className="text-xl font-extrabold uppercase tracking-tight text-[#171a3d] dark:text-white">
-              Google Workspace UDC
-            </DialogTitle>
-            <DialogDescription className="text-xs text-slate-500 dark:text-slate-400 font-normal">
-              Acceso institucional con cuenta <strong>@unicartagena.edu.co</strong>.
-              <span className="block mt-1 text-[11px] text-[#ec8026] dark:text-[#ec8026]/90 font-medium">
-                (Nota: La ventana emergente nativa de Google se abre automáticamente al configurar <code className="bg-slate-100 dark:bg-white/10 px-1 py-0.5 rounded">VITE_GOOGLE_CLIENT_ID</code> en el .env)
-              </span>
-            </DialogDescription>
-          </DialogHeader>
-
-          <form onSubmit={handleInstitutionalSubmit} className="space-y-4 pt-2">
-            <div className="space-y-1.5">
-              <Label htmlFor="oauth-mail" className="text-xs font-bold text-[#171a3d] dark:text-slate-200 flex items-center gap-1.5">
-                <Mail className="h-3.5 w-3.5 text-[#ec8026]" />
-                <span>Correo Institucional *</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="oauth-mail"
-                  type="email"
-                  placeholder="usuario@unicartagena.edu.co"
-                  value={institutionalEmail}
-                  onChange={(e) => {
-                    setInstitutionalEmail(e.target.value);
-                    if (errorMessage) setErrorMessage('');
-                  }}
-                  className="h-11 px-3.5 text-xs font-aeonik font-bold rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-[#ec8026] transition-colors"
-                  required
-                />
-              </div>
-              <p className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
-                Debe terminar obligatoriamente en <strong className="text-[#ec8026]">@unicartagena.edu.co</strong>
-              </p>
-            </div>
-
-            {variant === 'register' && (
-              <div className="space-y-1.5">
-                <Label htmlFor="oauth-name" className="text-xs font-bold text-[#171a3d] dark:text-slate-200">
-                  Nombre Completo (Opcional)
-                </Label>
-                <Input
-                  id="oauth-name"
-                  placeholder="Ej: Laura Castro"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="h-11 px-3.5 text-xs font-aeonik font-medium rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-[#ec8026] transition-colors"
-                />
-              </div>
-            )}
-
-            {/* Live Domain Restriction Banner */}
-            <div className="rounded-2xl p-3 bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 flex items-start gap-2.5 text-xs">
-              <ShieldCheck className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-              <div className="text-amber-900 dark:text-amber-200 leading-relaxed font-normal">
-                <strong className="font-bold block">Filtro de Seguridad UDC:</strong>
-                Solo miembros activos con cuenta <strong>@unicartagena.edu.co</strong> pueden interactuar en el marketplace.
-              </div>
-            </div>
-
-            {errorMessage && (
-              <div className="rounded-2xl p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/50 flex items-start gap-2 text-xs text-rose-600 dark:text-rose-400 font-semibold animate-shake">
-                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                <span>{errorMessage}</span>
-              </div>
-            )}
-
-            <Button
-              type="submit"
-              variant="udc"
-              disabled={isAuthenticating}
-              className="w-full h-11 rounded-full font-bold text-xs tracking-wider shadow-md shadow-[#ec8026]/25 mt-2"
-            >
-              {isAuthenticating ? (
-                <span>Validando credenciales institucionales...</span>
-              ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <Sparkles className="h-4 w-4" />
-                  <span>Verificar e Ingresar con UDC</span>
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              )}
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
-    </>
+    <Button
+      type="button"
+      variant="outline"
+      onClick={handleButtonClick}
+      disabled={isLoading || isAuthenticating}
+      className={`w-full h-12 rounded-2xl border-2 border-slate-200 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-[#1f254e] text-[#171a3d] dark:text-white font-aeonik font-bold text-xs sm:text-sm shadow-subtle hover:shadow-elevation transition-all active:scale-95 flex items-center justify-center gap-3 ${className}`}
+    >
+      <GoogleIcon className="h-5 w-5 shrink-0" />
+      <span className="truncate">{text}</span>
+      <span className="hidden sm:inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-[#fdf3eb] dark:bg-[#ec8026]/15 text-[#ec8026] border border-[#ec8026]/20 shrink-0">
+        @unicartagena.edu.co
+      </span>
+    </Button>
   );
 };
