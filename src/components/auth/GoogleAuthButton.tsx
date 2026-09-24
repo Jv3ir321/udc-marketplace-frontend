@@ -54,28 +54,38 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const handleButtonClick = () => {
+    if (isLoading || isAuthenticating) return;
+
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     const hasGIS = typeof window !== 'undefined' && (window as any).google?.accounts?.oauth2;
 
     // 1. If Google Identity Services SDK is loaded with a valid Client ID, use Google's native GIS popup
     if (clientId && hasGIS) {
       try {
+        setIsAuthenticating(true);
         const client = (window as any).google.accounts.oauth2.initTokenClient({
           client_id: clientId,
           scope: 'openid email profile',
           hd: 'unicartagena.edu.co',
           callback: async (response: any) => {
-            if (response.access_token) {
-              setIsAuthenticating(true);
-              const ok = await loginWithGoogle({ accessToken: response.access_token });
+            try {
+              if (response.access_token) {
+                const ok = await loginWithGoogle({ accessToken: response.access_token });
+                if (ok && onSuccess) onSuccess();
+              }
+            } finally {
               setIsAuthenticating(false);
-              if (ok && onSuccess) onSuccess();
             }
+          },
+          error_callback: (err: any) => {
+            console.warn('Error en popup de Google GIS:', err);
+            setIsAuthenticating(false);
           },
         });
         client.requestAccessToken({ prompt: 'select_account' });
         return;
       } catch (err) {
+        setIsAuthenticating(false);
         console.warn('Error al invocar Google GIS client:', err);
       }
     }
