@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { PageTransition } from '@/components/common/PageTransition';
 import { GoogleAuthButton } from '@/components/auth/GoogleAuthButton';
-import { ShieldCheck, ArrowLeft, Mail } from 'lucide-react';
+import { ShieldCheck, ArrowLeft } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -47,22 +47,14 @@ export const LoginPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Google Button */}
-          <div className="pt-1">
+          {/* Google Button & Domain Note */}
+          <div className="space-y-2 pt-1 text-center">
             <GoogleAuthButton
               text="Ingresar con Google"
               onSuccess={handleLoginSuccess}
             />
-          </div>
-
-          {/* Simple Domain Info */}
-          <div className="rounded-xl p-3 bg-slate-50 dark:bg-[#161b38] border border-slate-100 dark:border-white/5 space-y-1 text-center">
-            <div className="flex items-center justify-center gap-1.5 text-xs text-slate-600 dark:text-slate-300">
-              <Mail className="h-3.5 w-3.5 text-[#ec8026]" />
-              <span className="font-semibold">Dominio requerido:</span>
-            </div>
-            <p className="font-mono text-xs text-[#ec8026] font-bold">
-              @unicartagena.edu.co
+            <p className="text-[11px] text-slate-400 dark:text-slate-500">
+              Requiere correo institucional <span className="font-semibold text-slate-600 dark:text-slate-300">@unicartagena.edu.co</span>
             </p>
           </div>
 
