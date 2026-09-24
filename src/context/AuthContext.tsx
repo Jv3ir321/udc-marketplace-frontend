@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, LoginDTO, RegisterDTO } from '@/types';
 import { authService } from '@/services/authService';
+import { userService } from '@/services/userService';
 import { toast } from 'sonner';
 
 interface AuthContextType {
@@ -18,6 +19,8 @@ interface AuthContextType {
     name?: string;
   }) => Promise<boolean>;
   register: (data: RegisterDTO) => Promise<boolean>;
+  updateUser: (userData: User) => void;
+  updateUserProfile: (data: Partial<User> | FormData) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -89,17 +92,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (data: RegisterDTO): Promise<boolean> => {
     try {
       setIsLoading(true);
-      // Store registration preferences locally so subsequent login has user profile details
-      localStorage.setItem('udc_user_codEst', data.codEst);
       localStorage.setItem('udc_user_sede', data.sede);
       localStorage.setItem('udc_user_role', data.role || 'Estudiante');
       localStorage.setItem('udc_user_phone', data.cellphone);
+      if (data.picture) localStorage.setItem('udc_user_picture', data.picture);
 
       const res = await authService.register(data);
       toast.success(res.message || 'Registro exitoso. Ahora puedes iniciar sesión.');
       return true;
     } catch (error: any) {
       const msg = error.response?.data?.message || error.response?.data?.error || 'Error al registrar el usuario';
+      toast.error(msg);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateUser = (userData: User) => {
+    setUser(userData);
+    localStorage.setItem('udc_current_user', JSON.stringify(userData));
+  };
+
+  const updateUserProfile = async (data: Partial<User> | FormData): Promise<boolean> => {
+    try {
+      setIsLoading(true);
+      const updatedUser = await userService.updateProfile(data as any);
+      updateUser(updatedUser);
+      toast.success('Perfil actualizado correctamente');
+      return true;
+    } catch (error: any) {
+      const msg = error.response?.data?.message || error.response?.data?.error || 'Error al actualizar el perfil';
       toast.error(msg);
       return false;
     } finally {
@@ -124,6 +147,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         loginWithGoogle,
         register,
+        updateUser,
+        updateUserProfile,
         logout,
       }}
     >

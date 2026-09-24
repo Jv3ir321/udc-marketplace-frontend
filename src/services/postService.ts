@@ -131,11 +131,12 @@ export const postService = {
       user: {
         id: currentUser.id || 7,
         title: currentUser.title || currentUser.name || 'Estudiante UDC',
+        name: currentUser.name || currentUser.title || 'Estudiante UDC',
         mail: currentUser.mail || 'estudiante@unicartagena.edu.co',
-        codEst: currentUser.codEst || '022190001',
         sede: data.sede,
         role: currentUser.role || 'Estudiante',
         cellphone: currentUser.cellphone || '3001234567',
+        picture: currentUser.picture || '',
       },
       imagenes:
         imageUrls.length > 0
@@ -247,11 +248,12 @@ export const postService = {
       user: {
         id: currentUser.id || 1,
         title: currentUser.title || currentUser.name || 'Estudiante UDC',
+        name: currentUser.name || currentUser.title || 'Estudiante UDC',
         mail: currentUser.mail || 'estudiante@unicartagena.edu.co',
-        codEst: currentUser.codEst || '02220100',
         sede: currentUser.sede || 'UDC',
         role: currentUser.role || 'Estudiante',
         cellphone: currentUser.cellphone || '3000000000',
+        picture: currentUser.picture || '',
       },
       created_at: new Date().toISOString(),
     };

@@ -19,7 +19,6 @@ export const RegisterPage: React.FC = () => {
     mail: '',
     password: '',
     sede: 'Zaragocilla',
-    codEst: '',
     role: 'Estudiante',
     cellphone: '',
   });
@@ -200,34 +199,20 @@ export const RegisterPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label htmlFor="codEst" className="text-xs font-bold text-[#171a3d] dark:text-slate-200">
-                  Código Estudiantil
-                </Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="cellphone" className="text-xs font-bold text-[#171a3d] dark:text-slate-200 flex items-center gap-1">
+                <Phone className="h-3 w-3 text-[#3da898]" />
+                <span>WhatsApp / Celular (Opcional)</span>
+              </Label>
+              <div className="relative">
+                <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
                 <Input
-                  id="codEst"
-                  placeholder="Ej: 022191004"
-                  value={formData.codEst}
-                  onChange={(e) => handleChange('codEst', e.target.value)}
-                  className="h-10 text-xs font-aeonik font-medium rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-[#ec8026] focus-visible:bg-white dark:focus-visible:bg-[#1a2042] transition-colors"
+                  id="cellphone"
+                  placeholder="Ej: 3001234567"
+                  value={formData.cellphone}
+                  onChange={(e) => handleChange('cellphone', e.target.value)}
+                  className="pl-10 h-10 text-xs font-aeonik font-medium rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-[#ec8026] focus-visible:bg-white dark:focus-visible:bg-[#1a2042] transition-colors"
                 />
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="cellphone" className="text-xs font-bold text-[#171a3d] dark:text-slate-200">
-                  WhatsApp / Celular
-                </Label>
-                <div className="relative">
-                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
-                  <Input
-                    id="cellphone"
-                    placeholder="3001234567"
-                    value={formData.cellphone}
-                    onChange={(e) => handleChange('cellphone', e.target.value)}
-                    className="pl-10 h-10 text-xs font-aeonik font-medium rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-[#ec8026] focus-visible:bg-white dark:focus-visible:bg-[#1a2042] transition-colors"
-                  />
-                </div>
               </div>
             </div>
 

@@ -5,7 +5,7 @@ import { useMarketplace } from '@/context/MarketplaceContext';
 import { ProductCard } from '@/components/marketplace/ProductCard';
 import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { UserProfile, Post } from '@/types';
 import { formatCampusName } from '@/lib/utils';
 import WhatsappIcon from '@/components/ui/whatsapp-icon';
@@ -18,14 +18,17 @@ import {
   GraduationCap,
   Plus,
   PackageCheck,
+  UserCog,
 } from 'lucide-react';
 import { api } from '@/services/api';
+import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
 
 export const UserProfilePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user: currentUser } = useAuth();
   const { getPostsByUser } = useMarketplace();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -146,8 +149,19 @@ export const UserProfilePage: React.FC = () => {
         <div className="rounded-3xl bg-white dark:bg-[#11162e] p-6 sm:p-8 space-y-6 border border-slate-200/80 dark:border-white/10 shadow-elevation">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-white/10">
             <div className="flex items-center gap-4 sm:gap-5">
-              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-[#f4edf9] dark:bg-purple-950/40 shadow-inner shrink-0">
-                <AvatarFallback className="text-2xl sm:text-3xl font-bold font-aeonik text-[#171a3d] dark:text-white bg-[#171a3d] dark:bg-[#ec8026] text-white">
+              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-[#ec8026]/30 shadow-md bg-[#f4edf9] dark:bg-purple-950/40 shrink-0">
+                {profile.picture && (
+                  <AvatarImage
+                    src={
+                      profile.picture.startsWith('http') || profile.picture.startsWith('blob:')
+                        ? profile.picture
+                        : `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}${profile.picture}`
+                    }
+                    alt={displayName}
+                    className="object-cover"
+                  />
+                )}
+                <AvatarFallback className="text-2xl sm:text-3xl font-bold font-aeonik text-white bg-[#171a3d] dark:bg-[#ec8026]">
                   {getInitials(displayName)}
                 </AvatarFallback>
               </Avatar>
@@ -176,17 +190,30 @@ export const UserProfilePage: React.FC = () => {
 
             <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
               {isOwnProfile ? (
-                <Button
-                  asChild
-                  size="sm"
-                  variant="udc"
-                  className="h-10 px-5 rounded-full font-bold text-xs shadow-md shadow-[#ec8026]/20"
-                >
-                  <Link to="/catalog?create=true">
-                    <Plus className="h-4 w-4 mr-1.5 stroke-[3]" />
-                    <span>Publicar Artículo</span>
-                  </Link>
-                </Button>
+                <>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setEditProfileOpen(true)}
+                    className="h-10 px-4 rounded-full border border-slate-200 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-white/10 text-[#171a3d] dark:text-white font-aeonik font-bold text-xs shadow-2xs transition-all flex items-center gap-1.5"
+                  >
+                    <UserCog className="h-3.5 w-3.5 text-[#ec8026]" />
+                    <span>Editar Perfil</span>
+                  </Button>
+
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="udc"
+                    className="h-10 px-5 rounded-full font-bold text-xs shadow-md shadow-[#ec8026]/20"
+                  >
+                    <Link to="/catalog?create=true">
+                      <Plus className="h-4 w-4 mr-1.5 stroke-[3]" />
+                      <span>Publicar Artículo</span>
+                    </Link>
+                  </Button>
+                </>
               ) : (
                 profile.cellphone && (
                   <button
@@ -268,6 +295,12 @@ export const UserProfilePage: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* Edit Profile Dialog */}
+        <EditProfileDialog
+          open={editProfileOpen}
+          onOpenChange={setEditProfileOpen}
+        />
       </div>
     </PageTransition>
   );

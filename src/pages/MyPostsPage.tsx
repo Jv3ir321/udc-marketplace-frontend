@@ -5,7 +5,7 @@ import { useMarketplace } from '@/context/MarketplaceContext';
 import { PageTransition } from '@/components/common/PageTransition';
 import { EditPostDialog } from '@/components/marketplace/EditPostDialog';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Dialog,
   DialogContent,
@@ -29,14 +29,17 @@ import {
   GraduationCap,
   Package,
   AlertTriangle,
+  UserCog,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
 
 export const MyPostsPage: React.FC = () => {
   const { user } = useAuth();
   const { getPostsByUser, deletePost } = useMarketplace();
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [postToDelete, setPostToDelete] = useState<Post | null>(null);
+  const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const myPosts = user?.id ? getPostsByUser(user.id) : [];
@@ -76,7 +79,18 @@ export const MyPostsPage: React.FC = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-white/10">
             {/* Avatar & Personal Identity */}
             <div className="flex items-center gap-4 sm:gap-5">
-              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-[#fdf3eb] dark:bg-orange-950/40 shadow-inner shrink-0">
+              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-[#ec8026]/30 shadow-md bg-[#fdf3eb] dark:bg-orange-950/40 shrink-0">
+                {user?.picture && (
+                  <AvatarImage
+                    src={
+                      user.picture.startsWith('http') || user.picture.startsWith('blob:')
+                        ? user.picture
+                        : `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}${user.picture}`
+                    }
+                    alt={displayName}
+                    className="object-cover"
+                  />
+                )}
                 <AvatarFallback className="bg-[#171a3d] dark:bg-[#ec8026] text-white font-bold font-aeonik text-2xl sm:text-3xl">
                   {getInitials(displayName)}
                 </AvatarFallback>
@@ -101,7 +115,7 @@ export const MyPostsPage: React.FC = () => {
                   <span>·</span>
                   <span className="flex items-center gap-1 text-[#44216b] dark:text-purple-400">
                     <GraduationCap className="h-3.5 w-3.5" />
-                    <span>Cód. {user?.codEst || 'Estudiante'}</span>
+                    <span>Miembro UDC</span>
                   </span>
                 </div>
 
@@ -124,6 +138,17 @@ export const MyPostsPage: React.FC = () => {
 
             {/* Profile Action Buttons */}
             <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setEditProfileOpen(true)}
+                className="h-10 px-4 rounded-full border border-slate-200 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-white/10 text-[#171a3d] dark:text-white font-aeonik font-bold text-xs shadow-2xs transition-all flex items-center gap-1.5"
+              >
+                <UserCog className="h-3.5 w-3.5 text-[#ec8026]" />
+                <span>Editar Perfil</span>
+              </Button>
+
               {user?.id && (
                 <Button
                   asChild
@@ -388,6 +413,12 @@ export const MyPostsPage: React.FC = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+
+        {/* Edit Profile Dialog */}
+        <EditProfileDialog
+          open={editProfileOpen}
+          onOpenChange={setEditProfileOpen}
+        />
       </div>
     </PageTransition>
   );

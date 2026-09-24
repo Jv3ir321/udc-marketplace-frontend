@@ -5,7 +5,7 @@ import { useMarketplace } from '@/context/MarketplaceContext';
 import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,13 +22,16 @@ import {
   Menu,
   X,
   User,
+  UserCog,
 } from 'lucide-react';
 import { UDC_SEDES } from '@/lib/utils';
+import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
 
 export const Navbar: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const { filters, updateFilter } = useMarketplace();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [navSearch, setNavSearch] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -169,6 +172,17 @@ export const Navbar: React.FC = () => {
               <DropdownMenuTrigger asChild>
                 <button className="h-9 w-9 rounded-full border border-slate-200 hover:border-slate-300 dark:border-white/15 dark:hover:border-white/30 bg-white dark:bg-[#11162e] flex items-center justify-center p-0.5 focus:outline-none transition-all shadow-2xs hover:shadow-subtle active:scale-95 shrink-0">
                   <Avatar className="h-8 w-8 rounded-full">
+                    {user.picture && (
+                      <AvatarImage
+                        src={
+                          user.picture.startsWith('http') || user.picture.startsWith('blob:')
+                            ? user.picture
+                            : `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}${user.picture}`
+                        }
+                        alt={user.title || user.name || 'Avatar'}
+                        className="object-cover"
+                      />
+                    )}
                     <AvatarFallback className="bg-[#171a3d] dark:bg-[#ec8026] text-white text-xs font-bold">
                       {getInitials(user.title || user.name)}
                     </AvatarFallback>
@@ -197,6 +211,13 @@ export const Navbar: React.FC = () => {
                   >
                     Mis Publicaciones
                   </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setEditProfileOpen(true)}
+                  className="cursor-pointer text-xs font-bold text-[#171a3d] dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/10 rounded-xl px-2.5 py-1.5 flex items-center gap-2"
+                >
+                  <UserCog className="h-3.5 w-3.5 text-[#ec8026]" />
+                  <span>Editar Perfil</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-slate-100 dark:bg-white/10" />
                 <DropdownMenuItem
@@ -285,6 +306,12 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Edit Profile Dialog */}
+      <EditProfileDialog
+        open={editProfileOpen}
+        onOpenChange={setEditProfileOpen}
+      />
     </header>
   );
 };

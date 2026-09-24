@@ -28,8 +28,8 @@ export const authService = {
         mail: data.mail,
         password: data.password,
         sede: data.sede,
-        codEst: data.codEst,
         cellphone: data.cellphone,
+        picture: data.picture || '',
       });
       return response.data;
     } catch (error: any) {
@@ -49,9 +49,9 @@ export const authService = {
       mail: data.mail,
       password: data.password,
       sede: data.sede,
-      codEst: data.codEst,
       role: data.role || 'Estudiante',
       cellphone: data.cellphone,
+      picture: data.picture || '',
     };
     users.push(newUser);
     localStorage.setItem('udc_registered_users', JSON.stringify(users));
@@ -62,19 +62,20 @@ export const authService = {
     try {
       const response = await api.post('/user/login', credentials);
       const token = response.data.token;
+      const userFromBackend = response.data.user;
 
       localStorage.setItem('udc_auth_token', token);
 
       const payload = parseJwt(token);
-      const user: User = {
+      const user: User = userFromBackend || {
         id: payload?.user_id || 1,
         title: payload?.username || 'Estudiante UDC',
         name: payload?.username || 'Estudiante UDC',
         mail: credentials.mail,
-        codEst: 'Verificado',
-        sede: 'UDC',
+        sede: 'Claustro San Agustín',
         role: 'Estudiante',
         cellphone: '',
+        picture: '',
       };
 
       localStorage.setItem('udc_current_user', JSON.stringify(user));
@@ -100,10 +101,10 @@ export const authService = {
         title: found.title || found.name,
         name: found.name || found.title,
         mail: found.mail,
-        codEst: found.codEst || '0221910045',
         sede: found.sede || 'Piedra de Bolívar',
         role: found.role || 'Estudiante',
         cellphone: found.cellphone || '3015489210',
+        picture: found.picture || '',
       };
     } else {
       // Demo accounts or generic user
@@ -113,10 +114,10 @@ export const authService = {
         title: credentials.mail.includes('jcuesta') ? 'Javier Cuesta' : (nameFromMail ? nameFromMail.toUpperCase() : 'Estudiante UDC'),
         name: credentials.mail.includes('jcuesta') ? 'Javier Cuesta' : (nameFromMail ? nameFromMail.toUpperCase() : 'Estudiante UDC'),
         mail: credentials.mail,
-        codEst: '0221710001',
-        sede: 'San Agustín',
+        sede: 'Claustro San Agustín',
         role: 'Estudiante',
         cellphone: '3045678901',
+        picture: '',
       };
     }
 
@@ -181,10 +182,10 @@ export const authService = {
       title: name,
       name: name,
       mail: email,
-      codEst: '0222010099',
       sede: 'Claustro San Agustín',
       role: 'Estudiante',
       cellphone: '',
+      picture: '',
     };
 
     const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));

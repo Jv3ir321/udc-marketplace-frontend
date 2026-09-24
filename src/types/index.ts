@@ -3,10 +3,10 @@ export interface User {
   title?: string;
   name?: string;
   mail: string;
-  codEst: string;
   sede: string;
   role: string;
   cellphone: string;
+  picture?: string;
   created_at?: string;
 }
 
@@ -50,8 +50,8 @@ export interface PublicUserProfile {
   mail: string;
   sede: string;
   role: string;
-  codEst: string;
   cellphone: string;
+  picture?: string;
   created_at?: string;
   postsCount: number;
   ratingAvg: number;
@@ -67,8 +67,8 @@ export interface UserProfile {
   mail?: string;
   sede?: string;
   role?: string;
-  codEst?: string;
   cellphone?: string;
+  picture?: string;
   created_at?: string;
   postsCount?: number;
   ratingAvg?: number;
@@ -99,9 +99,18 @@ export interface RegisterDTO {
   mail: string;
   password: string;
   sede: string;
-  codEst: string;
   role?: string;
   cellphone: string;
+  picture?: string;
+}
+
+export interface UpdateProfileDTO {
+  name?: string;
+  title?: string;
+  sede?: string;
+  cellphone?: string;
+  picture?: string;
+  avatar?: File;
 }
 
 export interface LoginDTO {

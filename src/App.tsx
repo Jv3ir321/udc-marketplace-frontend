@@ -14,6 +14,7 @@ import { RegisterPage } from '@/pages/RegisterPage';
 import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
+import { ProfileCompletionModal } from '@/components/auth/ProfileCompletionModal';
 
 export function App() {
   return (
@@ -27,6 +28,9 @@ export function App() {
               closeButton
               theme="light"
             />
+            {/* Global Post-OAuth2 Profile Completion Guard */}
+            <ProfileCompletionModal />
+            
             <Navbar />
             <div className="flex-1 flex flex-col">
               <Routes>
