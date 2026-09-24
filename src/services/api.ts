@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+import { getApiBaseUrl } from '@/lib/utils';
 
 export const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: import.meta.env.VITE_API_URL ? 10000 : 2500,
+  baseURL: getApiBaseUrl(),
+  timeout: 15000,
 });
 
 // Interceptor to inject Authorization Bearer Token

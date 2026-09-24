@@ -246,8 +246,22 @@ export function getBackendImageUrl(url?: string): string {
     return url;
   }
 
-  // Prepend backend URL (default http://localhost:4000)
-  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+  // Prepend backend URL
+  const apiBase = getApiBaseUrl();
   const cleanUrl = url.startsWith('/') ? url : `/${url}`;
   return `${apiBase}${cleanUrl}`;
+}
+
+export function getApiBaseUrl(): string {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  if (
+    typeof window !== 'undefined' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1'
+  ) {
+    return 'https://api.udcmarketplace.lat';
+  }
+  return 'http://localhost:4000';
 }

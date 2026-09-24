@@ -24,7 +24,7 @@ import {
   User,
   UserCog,
 } from 'lucide-react';
-import { UDC_SEDES } from '@/lib/utils';
+import { UDC_SEDES, getBackendImageUrl } from '@/lib/utils';
 import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
 
 export const Navbar: React.FC = () => {
@@ -174,11 +174,7 @@ export const Navbar: React.FC = () => {
                   <Avatar className="h-8 w-8 rounded-full">
                     {user.picture && (
                       <AvatarImage
-                        src={
-                          user.picture.startsWith('http') || user.picture.startsWith('blob:')
-                            ? user.picture
-                            : `${import.meta.env.VITE_API_URL || 'http://localhost:4000'}${user.picture}`
-                        }
+                        src={getBackendImageUrl(user.picture)}
                         alt={user.title || user.name || 'Avatar'}
                         className="object-cover"
                       />
