@@ -1,104 +1,170 @@
+@import 'lenis/dist/lenis.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: #f97316 transparent;
-  }
-
   :root {
-    --background: 30 30% 99%;
-    --foreground: 20 14.3% 10%;
+    /* Official UDC Palette Tokens (Universidad de Cartagena - Fundada en 1827) */
+    --color-udc-navy: #171a3d;
+    --color-udc-purple: #44216b;
+    --color-udc-teal: #3da898;
+    --color-udc-yellow: #f2b725;
+    --color-udc-orange: #ec8026;
+    --color-udc-red: #df4838;
+
+    /* Theme tokens aligned with official palette */
+    --color-carbon: #171a3d;
+    --color-paper-white: #ffffff;
+    --color-sky-wash: #edf0f7;
+    --color-concrete-gray: #e2e6ef;
+    --color-soft-mist: #f4f6fa;
+    --color-electric-blue: #3da898;
+    --color-mint-pop: #3da898;
+    --color-lavender: #f4edf9;
+    --color-ember: #df4838;
+    --color-sunburst: #f2b725;
+    --color-voltage-violet: #44216b;
+
+    /* Typography font variables */
+    --font-aeonik-pro: 'Plus Jakarta Sans', 'Inter', sans-serif;
+
+    /* Base theme colors */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 10%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 10%;
+    --popover-foreground: 222 47% 11%;
 
-    /* UDC Vibrant Warm Orange */
-    --primary: 24 95% 50%;
+    --primary: 222 47% 11%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 25% 95%;
-    --secondary-foreground: 24 95% 30%;
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 30 20% 95%;
-    --muted-foreground: 25 10% 45%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 40%;
 
-    --accent: 30 40% 94%;
-    --accent-foreground: 24 95% 30%;
+    --accent: 25 86% 54%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 6 72% 54%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 90%;
-    --input: 30 20% 90%;
-    --ring: 24 95% 50%;
+    --border: 214 24% 88%;
+    --input: 214 24% 88%;
+    --ring: 25 86% 54%;
 
-    --radius: 0.75rem;
+    --radius: 20px;
   }
 
   .dark {
-    --background: 20 20% 6%;
-    --foreground: 30 30% 98%;
+    --color-carbon: #f8fafc;
+    --color-paper-white: #11162e;
+    --color-sky-wash: #1a2042;
+    --color-concrete-gray: #242b54;
+    --color-soft-mist: #161b38;
 
-    --card: 20 20% 8%;
-    --card-foreground: 30 30% 98%;
+    --background: 233 45% 8%;
+    --foreground: 210 40% 98%;
 
-    --popover: 20 20% 8%;
-    --popover-foreground: 30 30% 98%;
+    --card: 233 42% 12%;
+    --card-foreground: 210 40% 98%;
 
-    --primary: 24 95% 53%;
-    --primary-foreground: 0 0% 100%;
+    --popover: 233 42% 12%;
+    --popover-foreground: 210 40% 98%;
 
-    --secondary: 20 15% 15%;
-    --secondary-foreground: 30 30% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 233 45% 8%;
 
-    --muted: 20 15% 15%;
-    --muted-foreground: 30 10% 65%;
+    --secondary: 233 35% 18%;
+    --secondary-foreground: 210 40% 98%;
 
-    --accent: 20 20% 16%;
-    --accent-foreground: 30 30% 98%;
+    --muted: 233 30% 18%;
+    --muted-foreground: 215 20% 65%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --accent: 25 86% 54%;
+    --accent-foreground: 0 0% 100%;
 
-    --border: 20 15% 18%;
-    --input: 20 15% 18%;
-    --ring: 24 95% 53%;
+    --destructive: 6 72% 54%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 233 30% 20%;
+    --input: 233 30% 20%;
+    --ring: 25 86% 54%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f1f3f6;
+    color: #0f172a;
+    font-family: var(--font-aeonik-pro);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.010em;
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .dark body {
+    background-color: #0b0e1e;
+    color: #f8fafc;
+  }
+
+  .font-aeonik {
+    font-family: var(--font-aeonik-pro);
   }
 }
 
-/* Sleek UDC Custom Scrollbar with brand synergy */
+/* Enhanced tactile shadows and depth utilities with crisp contrast */
+.shadow-subtle {
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05), 0 1px 3px 0 rgba(15, 23, 42, 0.06);
+}
+
+.shadow-elevation {
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 6px 16px -2px rgba(15, 23, 42, 0.08);
+}
+
+.shadow-lifted {
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
+}
+
+.dark .shadow-subtle {
+  box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.dark .shadow-elevation {
+  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .shadow-lifted {
+  box-shadow: 0 18px 42px -4px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Smooth scrolling and refined scrollbar */
+html {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(249, 115, 22, 0.03);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ea580c;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #171a3d;
+  border-radius: 1600px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #c2410c;
+.dark ::-webkit-scrollbar-thumb {
+  background: #3a4275;
 }

@@ -20,6 +20,7 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
   const { isAuthenticated, user } = useAuth();
   const { sendValoration } = useMarketplace();
   const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(5);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,9 +28,10 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
     if (!comment.trim()) return;
 
     setIsSubmitting(true);
-    const success = await sendValoration(postId, comment.trim());
+    const success = await sendValoration(postId, comment.trim(), rating);
     if (success) {
       setComment('');
+      setRating(5);
     }
     setIsSubmitting(false);
   };
@@ -45,105 +47,129 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-        <h3 className="font-bold text-lg text-foreground flex items-center gap-2">
-          <MessageSquare className="h-5 w-5 text-primary" />
-          Valoraciones y Reseñas de Estudiantes
+    <div className="space-y-6 font-aeonik text-[#171a3d] dark:text-[#e2e8f0]">
+      <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/10 pb-3">
+        <h3 className="text-lg font-bold text-[#171a3d] dark:text-white flex items-center gap-2">
+          <MessageSquare className="h-5 w-5 text-[#ec8026]" />
+          <span>Preguntas y Valoraciones</span>
         </h3>
-        <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-          {valorations.length} {valorations.length === 1 ? 'reseña' : 'reseñas'}
+        <span className="text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-[#161b38] px-3 py-0.5 rounded-full border border-slate-200/50 dark:border-white/10">
+          {valorations.length} {valorations.length === 1 ? 'comentario' : 'comentarios'}
         </span>
       </div>
 
       {/* Submit Form */}
       {isAuthenticated ? (
-        <form onSubmit={handleSubmit} className="bg-slate-50/80 rounded-2xl p-4 border border-slate-200/80 space-y-3">
-          <div className="flex items-center gap-2">
-            <Avatar className="h-7 w-7">
-              <AvatarFallback className="text-xs bg-primary/10 text-primary font-bold">
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="flex items-start gap-3">
+            <Avatar className="h-9 w-9 rounded-full border border-slate-200 dark:border-white/10 shrink-0">
+              <AvatarFallback className="bg-[#171a3d] text-white text-xs font-bold">
                 {getInitials(user?.title || user?.name)}
               </AvatarFallback>
             </Avatar>
-            <span className="text-xs font-semibold text-slate-700">
-              {user?.title || user?.name} • Deja tu comentario o valoración:
-            </span>
-          </div>
+            <div className="flex-1 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
+                  Calificación:
+                </span>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setRating(star)}
+                      className="p-0.5 hover:scale-110 transition-transform text-amber-400"
+                      aria-label={`Calificar con ${star} estrellas`}
+                    >
+                      <Star
+                        className={`h-4 w-4 ${
+                          star <= rating
+                            ? 'fill-amber-400 text-amber-400'
+                            : 'text-slate-300 dark:text-slate-600'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300 ml-1">
+                    {rating}.0
+                  </span>
+                </div>
+              </div>
 
-          <Textarea
-            placeholder="¿Compraste este producto o tomaste este servicio? Comparte tu experiencia con el vendedor..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="min-h-[80px] text-xs bg-white resize-none"
-            maxLength={300}
-            required
-          />
-
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] text-muted-foreground">
-              {comment.length}/300 caracteres
-            </span>
-            <Button
-              type="submit"
-              size="sm"
-              variant="udc"
-              disabled={isSubmitting || !comment.trim()}
-              className="text-xs"
-            >
-              <Send className="h-3.5 w-3.5 mr-1.5" />
-              {isSubmitting ? 'Enviando...' : 'Publicar Valoración'}
-            </Button>
+              <Textarea
+                placeholder="Pregunta sobre detalles del artículo o propone un punto de entrega en tu sede..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className="text-xs rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-[#161b38] text-[#171a3d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 focus-visible:ring-1 focus-visible:ring-[#ec8026] min-h-[70px] shadow-subtle"
+                rows={2}
+              />
+              <div className="flex justify-end">
+                <Button
+                  type="submit"
+                  size="sm"
+                  variant="udc"
+                  disabled={isSubmitting || !comment.trim()}
+                  className="rounded-full px-5 text-xs font-bold shadow-subtle hover:shadow-elevation"
+                >
+                  <Send className="h-3.5 w-3.5 mr-1.5" />
+                  Enviar Valoración
+                </Button>
+              </div>
+            </div>
           </div>
         </form>
       ) : (
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-center">
-          <p className="text-xs text-blue-900 font-medium">
-            Inicia sesión para dejar una reseña sobre este producto o servicio.
+        <div className="rounded-2xl bg-slate-50 dark:bg-[#161b38]/60 border border-slate-200/70 dark:border-white/10 p-4 text-center space-y-2">
+          <p className="text-xs text-slate-600 dark:text-slate-300">
+            Inicia sesión con tu cuenta institucional para hacer preguntas o acordar entregas.
           </p>
-          <Button asChild size="sm" variant="outline" className="mt-2 text-xs border-blue-300 text-blue-800">
+          <Button asChild size="sm" variant="outline" className="rounded-full px-4 text-xs font-bold border-slate-200 dark:border-white/10 bg-white dark:bg-[#11162e] text-[#171a3d] dark:text-white">
             <Link to="/login">Iniciar Sesión</Link>
           </Button>
         </div>
       )}
 
-      {/* Valorations List */}
-      <div className="space-y-3">
-        {valorations.length === 0 ? (
-          <div className="text-center py-6 text-slate-400 text-xs">
-            Aún no hay valoraciones para este anuncio. ¡Sé el primero en comentar!
-          </div>
-        ) : (
-          valorations.map((v) => (
-            <div
-              key={v.id}
-              className="bg-white rounded-xl p-4 border border-slate-100 shadow-2xs space-y-2"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Avatar className="h-7 w-7">
-                    <AvatarFallback className="text-[10px] bg-slate-100 text-slate-700 font-bold">
-                      {getInitials(v.user?.title || v.user?.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <span className="text-xs font-bold text-slate-800 block leading-tight">
-                      {v.user?.title || v.user?.name || 'Estudiante UDC'}
-                    </span>
-                    <span className="text-[10px] text-slate-400">
-                      {v.user?.sede || 'Campus UDC'}
-                    </span>
+      {/* List of comments */}
+      <div className="space-y-3 pt-2">
+        {valorations.length > 0 ? (
+          valorations.map((val) => {
+            const displayRating = val.rating && val.rating >= 1 && val.rating <= 5 ? val.rating : 5;
+            return (
+              <div
+                key={val.id}
+                className="p-4 rounded-2xl bg-white dark:bg-[#11162e] border border-slate-200/70 dark:border-white/10 shadow-subtle space-y-2"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <Avatar className="h-7 w-7 rounded-full border border-slate-200 dark:border-white/10">
+                      <AvatarFallback className="bg-slate-100 dark:bg-[#161b38] text-[#171a3d] dark:text-white text-[10px] font-bold">
+                        {getInitials(val.user?.title || val.user?.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
+                        {val.user?.title || val.user?.name || 'Estudiante UDC'}
+                      </span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                        Campus {val.user?.sede || 'Cartagena'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-0.5 text-amber-500">
+                    <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{displayRating}.0</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-amber-500 text-xs">
-                  <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-[10px] text-slate-400">Verificado</span>
-                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 pl-9 leading-relaxed">
+                  {val.valoration}
+                </p>
               </div>
-              <p className="text-xs text-slate-700 leading-relaxed pl-9">
-                {v.valoration}
-              </p>
-            </div>
-          ))
+            );
+          })
+        ) : (
+          <div className="text-center py-6 text-xs text-slate-400 dark:text-slate-500 font-medium">
+            No hay preguntas aún. ¡Sé el primero en consultar por este artículo!
+          </div>
         )}
       </div>
     </div>

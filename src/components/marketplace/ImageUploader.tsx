@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, X, Image as ImageIcon, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { UploadCloud, X } from 'lucide-react';
 
 interface ImageUploaderProps {
   images: File[];
@@ -41,12 +40,12 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 font-aeonik">
       <div
-        className={`border-2 border-dashed rounded-2xl p-6 text-center transition-all cursor-pointer ${
+        className={`border-2 border-dashed rounded-3xl p-7 text-center transition-all duration-200 cursor-pointer ${
           dragActive
-            ? 'border-primary bg-primary/5'
-            : 'border-slate-300 hover:border-primary/60 bg-slate-50/50'
+            ? 'border-[#ec8026] bg-[#fdf3eb] dark:bg-[#ec8026]/10'
+            : 'border-slate-200 dark:border-white/15 hover:border-[#ec8026]/60 dark:hover:border-[#ec8026]/60 bg-slate-50/80 dark:bg-[#11162e]/60 hover:bg-slate-100/70 dark:hover:bg-[#161b38]/80'
         }`}
         onDragOver={(e) => {
           e.preventDefault();
@@ -69,72 +68,52 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           onChange={(e) => handleFiles(e.target.files)}
         />
 
-        <div className="flex flex-col items-center justify-center gap-2">
-          <div className="h-12 w-12 rounded-full bg-blue-100 text-primary flex items-center justify-center shadow-xs">
-            <UploadCloud className="h-6 w-6" />
+        <div className="flex flex-col items-center justify-center gap-2.5">
+          <div className="h-12 w-12 rounded-2xl bg-white dark:bg-[#161b38] shadow-md shadow-[#ec8026]/10 dark:shadow-black/30 border border-slate-100 dark:border-white/10 flex items-center justify-center text-[#ec8026]">
+            <UploadCloud className="h-6 w-6 stroke-[2.2]" />
           </div>
-          <div>
-            <p className="text-sm font-semibold text-foreground">
-              Haz clic o arrastra fotos de tu producto aquí
+          <div className="space-y-0.5">
+            <p className="text-xs font-bold text-[#171a3d] dark:text-white">
+              Haz clic o arrastra fotos del artículo aquí
             </p>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              PNG, JPG o WEBP (Máx. {maxImages} fotos, hasta 5MB c/u)
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              PNG, JPG o WEBP hasta 5MB por foto (Máx. {maxImages} fotos)
             </p>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="mt-2 text-xs rounded-full"
-            onClick={(e) => {
-              e.stopPropagation();
-              fileInputRef.current?.click();
-            }}
-          >
-            <ImageIcon className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Seleccionar desde tu dispositivo
-          </Button>
+          <span className="h-8 px-4 rounded-full bg-white dark:bg-[#161b38] text-xs font-bold text-[#171a3d] dark:text-white inline-flex items-center shadow-subtle hover:shadow-elevation border border-slate-200/60 dark:border-white/10 transition-all">
+            Seleccionar Archivos
+          </span>
         </div>
       </div>
 
-      {/* Previews Grid */}
+      {/* Previews */}
       {images.length > 0 && (
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 pt-2">
-          {images.map((file, index) => {
+          {images.map((file, idx) => {
             const previewUrl = URL.createObjectURL(file);
             return (
               <div
-                key={index}
-                className="relative aspect-square rounded-xl overflow-hidden border border-slate-200 group bg-slate-100 shadow-2xs"
+                key={idx}
+                className="relative aspect-square rounded-2xl overflow-hidden shadow-elevation bg-slate-100 dark:bg-[#161b38] border border-slate-200/60 dark:border-white/10 group"
               >
                 <img
                   src={previewUrl}
-                  alt={`Preview ${index + 1}`}
+                  alt={`Subida ${idx + 1}`}
                   className="h-full w-full object-cover"
                 />
                 <button
                   type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-1 right-1 bg-destructive text-white p-1 rounded-full opacity-90 hover:opacity-100 shadow-sm transition-opacity"
-                  title="Eliminar foto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeImage(idx);
+                  }}
+                  className="absolute top-1.5 right-1.5 h-6 w-6 rounded-full bg-black/70 hover:bg-rose-500 text-white flex items-center justify-center shadow-md transition-colors"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
-                {index === 0 && (
-                  <span className="absolute bottom-1 left-1 bg-blue-900/80 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded">
-                    Principal
-                  </span>
-                )}
               </div>
             );
           })}
-        </div>
-      )}
-
-      {images.length === 0 && (
-        <div className="flex items-center gap-1.5 text-xs text-amber-600">
-          <AlertCircle className="h-3.5 w-3.5 shrink-0" />
-          <span>El backend requiere al menos una imagen para crear la publicación.</span>
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
 import { MarketplaceProvider } from '@/context/MarketplaceContext';
@@ -8,12 +8,13 @@ import { HomePage } from '@/pages/HomePage';
 import { CatalogPage } from '@/pages/CatalogPage';
 import { ProductDetailPage } from '@/pages/ProductDetailPage';
 import { UserProfilePage } from '@/pages/UserProfilePage';
-import { CreatePostPage } from '@/pages/CreatePostPage';
 import { MyPostsPage } from '@/pages/MyPostsPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
+import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
+import { ProfileCompletionModal } from '@/components/auth/ProfileCompletionModal';
 
 export function App() {
   return (
@@ -27,6 +28,9 @@ export function App() {
               closeButton
               theme="light"
             />
+            {/* Global Post-OAuth2 Profile Completion Guard */}
+            <ProfileCompletionModal />
+            
             <Navbar />
             <div className="flex-1 flex flex-col">
               <Routes>
@@ -38,15 +42,12 @@ export function App() {
                 <Route path="/profile/:id" element={<UserProfilePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
-                {/* Protected authenticated routes */}
+                {/* Redirect /create to catalog popup modal */}
                 <Route
                   path="/create"
-                  element={
-                    <ProtectedRoute>
-                      <CreatePostPage />
-                    </ProtectedRoute>
-                  }
+                  element={<Navigate to="/catalog?create=true" replace />}
                 />
                 <Route
                   path="/my-posts"

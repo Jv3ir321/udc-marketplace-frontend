@@ -15,8 +15,9 @@ interface MarketplaceContextType {
   createPost: (data: CreatePostDTO) => Promise<boolean>;
   updatePost: (id: number, data: UpdatePostDTO) => Promise<boolean>;
   deletePost: (id: number) => Promise<boolean>;
-  sendValoration: (postId: number, text: string) => Promise<boolean>;
+  sendValoration: (postId: number, text: string, rating?: number) => Promise<boolean>;
   getPostById: (id: number) => Post | undefined;
+  getPostsByUser: (userId: number) => Post[];
 }
 
 const initialFilters: FilterState = {
@@ -101,14 +102,14 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   };
 
-  const sendValoration = async (postId: number, text: string): Promise<boolean> => {
+  const sendValoration = async (postId: number, text: string, rating: number = 5): Promise<boolean> => {
     try {
-      await postService.sendValoration(postId, text);
+      await postService.sendValoration(postId, text, rating);
       toast.success('¡Valoración publicada!');
       await refreshPosts();
       return true;
     } catch (error: any) {
-      const msg = error.response?.data?.error || 'Error al enviar la valoración';
+      const msg = error.response?.data?.error || error.response?.data?.message || 'Error al enviar la valoración';
       toast.error(msg);
       return false;
     }
@@ -116,6 +117,10 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
   const getPostById = (id: number) => {
     return posts.find((p) => p.id === id);
+  };
+
+  const getPostsByUser = (userId: number): Post[] => {
+    return posts.filter((p) => p.userId === userId || p.user?.id === userId);
   };
 
   const filteredPosts = useMemo(() => {
@@ -134,7 +139,11 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
       // Sede filter
       if (filters.sede && filters.sede !== 'all') {
-        if (post.sede?.toLowerCase() !== filters.sede.toLowerCase()) {
+        const pSede = (post.sede || '').toLowerCase();
+        const fSede = filters.sede.toLowerCase();
+        const baseP = pSede.replace(/^(claustro|sede)\s*(de\s*)?/i, '').trim();
+        const baseF = fSede.replace(/^(claustro|sede)\s*(de\s*)?/i, '').trim();
+        if (pSede !== fSede && !pSede.includes(baseF) && !fSede.includes(baseP)) {
           return false;
         }
       }
@@ -188,6 +197,7 @@ export const MarketplaceProvider: React.FC<{ children: React.ReactNode }> = ({ c
         deletePost,
         sendValoration,
         getPostById,
+        getPostsByUser,
       }}
     >
       {children}

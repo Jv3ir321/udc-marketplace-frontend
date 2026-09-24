@@ -1,5 +1,5 @@
 import api from './api';
-import { PublicUserProfile, Post, Valoration } from '@/types';
+import { PublicUserProfile, Post, Valoration, User, UpdateProfileDTO } from '@/types';
 import { postService } from './postService';
 
 export const userService = {
@@ -25,11 +25,12 @@ export const userService = {
     const baseUser = isCurrentUser ? currentUser : (firstPost?.user || {
       id: id,
       title: 'Estudiante UDC',
+      name: 'Estudiante UDC',
       mail: `estudiante${id}@unicartagena.edu.co`,
-      sede: firstPost?.sede || 'Zaragocilla',
+      sede: firstPost?.sede || 'Claustro San Agustín',
       role: 'Estudiante',
-      codEst: `02220100${id}`,
       cellphone: '3001234567',
+      picture: '',
     });
 
     const receivedValorations: Valoration[] = [];
@@ -44,10 +45,10 @@ export const userService = {
       title: baseUser.title || baseUser.name || 'Estudiante UDC',
       name: baseUser.name || baseUser.title,
       mail: baseUser.mail || `estudiante${id}@unicartagena.edu.co`,
-      sede: baseUser.sede || firstPost?.sede || 'Zaragocilla',
+      sede: baseUser.sede || firstPost?.sede || 'Claustro San Agustín',
       role: baseUser.role || 'Estudiante',
-      codEst: baseUser.codEst || `02220100${id}`,
-      cellphone: baseUser.cellphone || '3001234567',
+      cellphone: baseUser.cellphone || '',
+      picture: baseUser.picture || '',
       created_at: baseUser.created_at || new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
       postsCount: userPosts.length,
       ratingAvg: 4.9,
@@ -55,5 +56,27 @@ export const userService = {
       posts: userPosts,
       receivedValorations: receivedValorations,
     };
+  },
+
+  async updateProfile(data: UpdateProfileDTO | FormData): Promise<User> {
+    let response;
+    if (data instanceof FormData) {
+      response = await api.put('/user/profile', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } else {
+      response = await api.put('/user/profile', data);
+    }
+
+    const updatedUser = response.data?.user || response.data;
+    if (updatedUser) {
+      localStorage.setItem('udc_current_user', JSON.stringify(updatedUser));
+      if (updatedUser.sede) localStorage.setItem('udc_user_sede', updatedUser.sede);
+      if (updatedUser.cellphone) localStorage.setItem('udc_user_phone', updatedUser.cellphone);
+      if (updatedUser.picture) localStorage.setItem('udc_user_picture', updatedUser.picture);
+    }
+    return updatedUser;
   },
 };

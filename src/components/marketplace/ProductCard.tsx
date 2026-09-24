@@ -1,172 +1,113 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Post } from '@/types';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { formatCOP, getSedeBadgeColor, getBackendImageUrl } from '@/lib/utils';
-import { MapPin, MessageCircle, Star, Image as ImageIcon, User as UserIcon } from 'lucide-react';
+import { formatCOP, getBackendImageUrl, formatCampusName, getCategoryMeta } from '@/lib/utils';
+import WhatsappIcon from '@/components/ui/whatsapp-icon';
+import { MapPin } from 'lucide-react';
 
 interface ProductCardProps {
   post: Post;
-  dark?: boolean;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ post, dark = false }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
   const images = post.imagenes || (post.postIMGs?.map((img) => img.imageURL) || []);
   const mainImage = images.length > 0 ? getBackendImageUrl(images[0]) : getBackendImageUrl('');
-  const valorationsCount = post.valorations?.length || 0;
 
   const phone = post.user?.cellphone || '3000000000';
+  const campusLabel = formatCampusName(post.sede);
+  const categoryMeta = getCategoryMeta(post.tipoP);
   const whatsappUrl = `https://wa.me/57${phone.replace(/\D/g, '')}?text=${encodeURIComponent(
-    `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". ¿Sigue disponible?`
+    `Hola! Vi tu publicación en UDC Marketplace: "${post.nombre}". ¿Podemos acordar entrega en ${campusLabel}?`
   )}`;
 
   return (
-    <Card
-      className={`group overflow-hidden transition-all duration-300 flex flex-col rounded-3xl ${
-        dark
-          ? 'bg-stone-900/80 backdrop-blur-md border-white/15 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-500/10 text-white'
-          : 'bg-white border-stone-200 hover:border-orange-400/80 hover:shadow-lg hover:shadow-orange-500/5 text-stone-900'
-      }`}
-    >
-      {/* Image Container */}
-      <Link to={`/post/${post.id}`} className="relative block aspect-[4/3] overflow-hidden bg-stone-950/40">
-        <img
-          src={mainImage}
-          alt={post.nombre}
-          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src =
-              'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80';
-          }}
-        />
-
-        {/* Floating Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
-          <span
-            className={`text-[11px] font-bold px-3 py-1 rounded-full border shadow-xs backdrop-blur-md ${getSedeBadgeColor(
-              post.sede
-            )}`}
+    <article className="group rounded-3xl bg-white dark:bg-[#11162e] text-[#0f172a] dark:text-white border border-slate-200/90 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 shadow-elevation hover:shadow-lifted transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden font-aeonik">
+      <div>
+        {/* Product Image Container */}
+        <div className="p-3.5 pb-0">
+          <Link
+            to={`/post/${post.id}`}
+            className="relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-tr from-slate-100 via-slate-50 to-slate-100 dark:from-slate-900 dark:to-[#161b38] shadow-inner"
           >
-            <MapPin className="h-3 w-3 inline mr-1 -mt-0.5" />
-            {post.sede}
-          </span>
-        </div>
+            <img
+              src={mainImage}
+              alt={post.nombre}
+              className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src =
+                  'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80';
+              }}
+            />
 
-        {images.length > 1 && (
-          <div className="absolute bottom-3 right-3 bg-stone-950/80 backdrop-blur-md text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-            <ImageIcon className="h-3 w-3" />
-            <span>{images.length} fotos</span>
-          </div>
-        )}
-
-        <div className="absolute top-3 right-3">
-          <Badge
-            variant="secondary"
-            className={`text-[10px] font-semibold shadow-xs border-0 ${
-              dark ? 'bg-black/60 backdrop-blur-md text-orange-300' : 'bg-white/95 text-stone-800'
-            }`}
-          >
-            {post.tipoP}
-          </Badge>
-        </div>
-      </Link>
-
-      {/* Content */}
-      <CardContent className="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          {/* Price */}
-          <div className="flex items-baseline justify-between mb-2">
-            <span
-              className={`text-2xl font-black tracking-tight ${
-                dark ? 'text-white' : 'text-stone-900'
-              }`}
-            >
-              {formatCOP(post.price)}
-            </span>
-            {valorationsCount > 0 && (
-              <span
-                className={`flex items-center gap-1 text-xs font-bold px-2.5 py-0.5 rounded-full border ${
-                  dark
-                    ? 'text-amber-300 bg-amber-500/10 border-amber-500/30'
-                    : 'text-amber-700 bg-amber-50 border-amber-200'
-                }`}
-              >
-                <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                {valorationsCount} {valorationsCount === 1 ? 'reseña' : 'reseñas'}
+            {/* Campus Badge with Glass and Shadow */}
+            <div className="absolute top-2.5 left-2.5">
+              <span className="inline-flex items-center gap-1.5 bg-white/95 dark:bg-[#0b0e1e]/95 backdrop-blur-md text-[#0f172a] dark:text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-black/10 border border-slate-200/80 dark:border-white/10">
+                <MapPin className="h-3 w-3 text-[#ec8026]" />
+                <span className="truncate max-w-[130px]">{campusLabel}</span>
               </span>
-            )}
-          </div>
+            </div>
 
-          {/* Title */}
-          <Link to={`/post/${post.id}`}>
-            <h3
-              className={`font-bold text-sm line-clamp-2 hover:text-orange-400 transition-colors leading-snug ${
-                dark ? 'text-stone-100' : 'text-foreground'
-              }`}
-            >
+            {/* Distinctive Category Badge */}
+            <div className="absolute top-2.5 right-2.5">
+              <span
+                className={`inline-flex items-center text-[10px] font-extrabold uppercase tracking-[0.04em] px-2.5 py-1 rounded-full shadow-sm border backdrop-blur-xs ${categoryMeta.badgeLight} ${categoryMeta.badgeDark}`}
+              >
+                {post.tipoP || 'Artículo'}
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        {/* Card Body with High Contrast */}
+        <div className="p-4 space-y-2">
+          <Link to={`/post/${post.id}`} className="block">
+            <h3 className="font-extrabold text-[16px] sm:text-[17px] leading-[1.3] text-[#0f172a] dark:text-white line-clamp-1 group-hover:text-[#ec8026] dark:group-hover:text-[#ec8026] transition-colors">
               {post.nombre}
             </h3>
           </Link>
 
-          {/* Description Snippet */}
-          <p
-            className={`text-xs mt-1.5 line-clamp-2 leading-relaxed ${
-              dark ? 'text-stone-400' : 'text-muted-foreground'
-            }`}
-          >
+          <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed line-clamp-2">
             {post.desc}
           </p>
+
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 pt-0.5">
+            <span className="truncate text-slate-700 dark:text-slate-300">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
+            <span>·</span>
+            <span className="text-[#ec8026] font-bold">Comunidad UDC</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Strip */}
+      <div className="px-4 pb-4 pt-3 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3 bg-slate-50/50 dark:bg-transparent">
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-[0.04em] text-slate-500 dark:text-slate-400">
+            Precio
+          </span>
+          <span className="text-xl sm:text-2xl font-black text-[#0f172a] dark:text-white leading-none tracking-tight">
+            {formatCOP(post.price)}
+          </span>
         </div>
 
-        {/* Footer info with link to Seller Profile & WhatsApp Button */}
-        <div
-          className={`mt-5 pt-3.5 flex items-center justify-between gap-2 border-t ${
-            dark ? 'border-white/10' : 'border-stone-100'
-          }`}
-        >
-          <Link
-            to={`/user/${post.userId}`}
-            className="flex items-center gap-2 group/seller truncate hover:opacity-80 transition-opacity"
-            title="Ver perfil del estudiante vendedor"
-          >
-            <div
-              className={`h-7 w-7 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0 border ${
-                dark
-                  ? 'bg-orange-500/20 text-orange-300 border-orange-500/30'
-                  : 'bg-orange-100 text-orange-700 border-orange-200'
-              }`}
-            >
-              <UserIcon className="h-3.5 w-3.5" />
-            </div>
-            <div className="text-[11px] truncate">
-              <span
-                className={`font-bold block truncate transition-colors ${
-                  dark
-                    ? 'text-stone-200 group-hover/seller:text-orange-400'
-                    : 'text-stone-900 group-hover/seller:text-orange-600'
-                }`}
-              >
-                {post.user?.title || post.user?.name || 'Estudiante UDC'}
-              </span>
-              <span className="text-[10px] text-stone-400 block truncate">
-                {post.user?.role || 'Comunidad UDC'}
-              </span>
-            </div>
-          </Link>
-
+        <div className="flex items-center gap-2">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center p-2.5 rounded-2xl bg-emerald-600/90 text-white hover:bg-emerald-500 border border-emerald-500/30 transition-all shadow-md shadow-emerald-950/40 shrink-0"
-            title="Contactar al vendedor por WhatsApp"
+            title="Pactar entrega por WhatsApp"
+            className="h-9 w-9 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-white transition-transform active:scale-95 shadow-md shadow-[#3da898]/30 group/wa"
           >
-            <MessageCircle className="h-4 w-4" />
+            <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
           </a>
+          <Link
+            to={`/post/${post.id}`}
+            className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-md shadow-[#ec8026]/30 active:scale-95"
+          >
+            Ver
+          </Link>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </article>
   );
 };

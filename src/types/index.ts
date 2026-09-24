@@ -3,10 +3,10 @@ export interface User {
   title?: string;
   name?: string;
   mail: string;
-  codEst: string;
   sede: string;
   role: string;
   cellphone: string;
+  picture?: string;
   created_at?: string;
 }
 
@@ -20,6 +20,7 @@ export interface PostIMG {
 export interface Valoration {
   id: number;
   valoration: string;
+  rating?: number;
   postId: number;
   userId: number;
   user?: User;
@@ -30,7 +31,7 @@ export interface Post {
   id: number;
   nombre: string;
   desc: string;
-  price: string;
+  price: string | number;
   sede: string;
   tipoP: string;
   userId: number;
@@ -49,8 +50,8 @@ export interface PublicUserProfile {
   mail: string;
   sede: string;
   role: string;
-  codEst: string;
   cellphone: string;
+  picture?: string;
   created_at?: string;
   postsCount: number;
   ratingAvg: number;
@@ -59,10 +60,27 @@ export interface PublicUserProfile {
   receivedValorations: Valoration[];
 }
 
+export interface UserProfile {
+  id: number;
+  title?: string;
+  name?: string;
+  mail?: string;
+  sede?: string;
+  role?: string;
+  cellphone?: string;
+  picture?: string;
+  created_at?: string;
+  postsCount?: number;
+  ratingAvg?: number;
+  ratingCount?: number;
+  posts?: Post[];
+  receivedValorations?: Valoration[];
+}
+
 export interface CreatePostDTO {
   nombre: string;
   desc: string;
-  price: string;
+  price: string | number;
   sede: string;
   tipoP: string;
   images: File[];
@@ -71,19 +89,28 @@ export interface CreatePostDTO {
 export interface UpdatePostDTO {
   nombre: string;
   desc: string;
-  price: string;
+  price: string | number;
   sede: string;
   tipoP: string;
 }
 
 export interface RegisterDTO {
-  title: string; // Backend expects 'title' for User Name
+  title: string;
   mail: string;
   password: string;
   sede: string;
-  codEst: string;
-  role: string;
+  role?: string;
   cellphone: string;
+  picture?: string;
+}
+
+export interface UpdateProfileDTO {
+  name?: string;
+  title?: string;
+  sede?: string;
+  cellphone?: string;
+  picture?: string;
+  avatar?: File;
 }
 
 export interface LoginDTO {
