@@ -231,20 +231,12 @@ export const Navbar: React.FC = () => {
                 asChild
                 size="sm"
                 variant="outline"
-                className="h-9 px-3.5 rounded-full text-xs font-bold border-slate-200 hover:border-slate-300 dark:border-white/15 bg-white dark:bg-[#11162e] text-[#171a3d] dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 shadow-2xs flex items-center gap-1.5 shrink-0"
+                className="h-9 px-4 rounded-full text-xs font-bold border-slate-200 hover:border-slate-300 dark:border-white/15 bg-white dark:bg-[#11162e] text-[#171a3d] dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 shadow-2xs flex items-center gap-2 shrink-0"
               >
                 <Link to="/login">
-                  <User className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
-                  <span>Entrar</span>
+                  <User className="h-3.5 w-3.5 text-[#ec8026]" />
+                  <span>Ingresar con UDC</span>
                 </Link>
-              </Button>
-              <Button
-                asChild
-                size="sm"
-                variant="navy"
-                className="hidden xs:inline-flex h-9 px-3.5 rounded-full text-xs font-bold shadow-2xs dark:bg-white dark:text-[#0b0e1e] dark:hover:bg-slate-100 shrink-0"
-              >
-                <Link to="/register">Registro</Link>
               </Button>
             </div>
           )}
