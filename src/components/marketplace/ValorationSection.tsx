@@ -155,9 +155,22 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-0.5 text-amber-500">
-                    <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{displayRating}.0</span>
+                  <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-0.5">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Star
+                          key={s}
+                          className={`h-3.5 w-3.5 ${
+                            s <= displayRating
+                              ? 'fill-amber-400 text-amber-400'
+                              : 'text-slate-200 dark:text-slate-700'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300 ml-1">
+                      {displayRating}.0
+                    </span>
                   </div>
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-300 pl-9 leading-relaxed">

@@ -239,18 +239,26 @@ export const UserProfilePage: React.FC = () => {
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
                 Calificación
               </span>
-              <div className="flex items-center gap-1">
-                <span className="font-aeonik text-3xl font-black text-[#d97706] dark:text-amber-400 leading-none">
-                  {profile.ratingAvg && profile.ratingAvg > 0 ? profile.ratingAvg.toFixed(1) : '5.0'}
-                </span>
-                <Star className="h-5 w-5 text-amber-500 fill-amber-500" />
-              </div>
+              {profile.ratingCount && profile.ratingCount > 0 && profile.ratingAvg && profile.ratingAvg > 0 ? (
+                <div className="flex items-center gap-1">
+                  <span className="font-aeonik text-3xl font-black text-[#d97706] dark:text-amber-400 leading-none">
+                    {profile.ratingAvg.toFixed(1)}
+                  </span>
+                  <Star className="h-5 w-5 text-amber-500 fill-amber-500" />
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 pt-1">
+                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
+                    Sin valoraciones
+                  </span>
+                </div>
+              )}
             </div>
             <div className="rounded-2xl p-4 bg-[#f4edf9]/80 dark:bg-purple-950/40 border border-purple-200/50 dark:border-purple-800/30 space-y-1 shadow-2xs">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
                 Reseñas
               </span>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <span className="font-aeonik text-3xl font-black text-[#44216b] dark:text-purple-300 leading-none">
                   {profile.ratingCount || profile.receivedValorations?.length || 0}
                 </span>
@@ -259,10 +267,10 @@ export const UserProfilePage: React.FC = () => {
             </div>
             <div className="rounded-2xl p-4 bg-[#edf7f5]/80 dark:bg-teal-950/40 border border-teal-200/50 dark:border-teal-800/30 space-y-1 shadow-2xs">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
-                Estado
+                Campus Principal
               </span>
-              <span className="text-xs font-bold text-[#3da898] dark:text-teal-300 block mt-1">
-                Verificado UDC
+              <span className="text-xs font-bold text-[#0f766e] dark:text-teal-300 block truncate mt-1">
+                {formatCampusName(profile.sede || 'Claustro San Agustín')}
               </span>
             </div>
           </div>
@@ -291,6 +299,59 @@ export const UserProfilePage: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* Received Valorations Section */}
+        {profile.receivedValorations && profile.receivedValorations.length > 0 && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between pb-2">
+              <h2 className="text-xl sm:text-2xl font-extrabold uppercase tracking-tight text-[#171a3d] dark:text-white">
+                Reseñas y Opiniones Recibidas
+              </h2>
+              <span className="text-xs font-bold px-3.5 py-1.5 rounded-full bg-white dark:bg-[#11162e] border border-slate-200/80 dark:border-white/10 shadow-2xs text-slate-700 dark:text-slate-300">
+                {profile.receivedValorations.length} {profile.receivedValorations.length === 1 ? 'opinión' : 'opiniones'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {profile.receivedValorations.map((val) => {
+                const displayRating = val.rating && val.rating >= 1 && val.rating <= 5 ? val.rating : 5;
+                return (
+                  <div
+                    key={val.id}
+                    className="p-5 rounded-3xl bg-white dark:bg-[#11162e] border border-slate-200/80 dark:border-white/10 shadow-subtle space-y-3"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Avatar className="h-8 w-8 rounded-full border border-slate-200 dark:border-white/10">
+                          <AvatarFallback className="bg-[#171a3d] text-white text-xs font-bold">
+                            {getInitials(val.user?.title || val.user?.name)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
+                            {val.user?.title || val.user?.name || 'Estudiante UDC'}
+                          </span>
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                            {val.user?.sede || 'Cartagena'}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 text-amber-500">
+                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                          {displayRating}.0
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {val.valoration}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Edit Profile Dialog */}
         <EditProfileDialog
