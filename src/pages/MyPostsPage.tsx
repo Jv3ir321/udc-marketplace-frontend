@@ -30,6 +30,7 @@ import {
   Package,
   AlertTriangle,
   UserCog,
+  MessageSquare,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
@@ -43,6 +44,11 @@ export const MyPostsPage: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const myPosts = user?.id ? getPostsByUser(user.id) : [];
+  const myValorations = myPosts.flatMap((p) => p.valorations || []);
+  const myRatingCount = myValorations.length;
+  const myRatingAvg = myRatingCount > 0
+    ? myValorations.reduce((acc, v) => acc + (v.rating || 5), 0) / myRatingCount
+    : 0;
 
   const handleDeleteConfirm = async () => {
     if (!postToDelete) return;
@@ -188,29 +194,40 @@ export const MyPostsPage: React.FC = () => {
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
                 Calificación
               </span>
-              <div className="flex items-center gap-1">
-                <span className="font-aeonik text-3xl font-black text-[#d97706] dark:text-amber-400 leading-none">
-                  5.0
-                </span>
-                <Star className="h-5 w-5 text-amber-500 fill-amber-500" />
-              </div>
+              {myRatingCount > 0 ? (
+                <div className="flex items-center gap-1">
+                  <span className="font-aeonik text-3xl font-black text-[#d97706] dark:text-amber-400 leading-none">
+                    {myRatingAvg.toFixed(1)}
+                  </span>
+                  <Star className="h-5 w-5 text-amber-500 fill-amber-500" />
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 pt-1">
+                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500">
+                    Sin valoraciones
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="rounded-2xl p-4 bg-[#f4edf9]/80 dark:bg-purple-950/40 border border-purple-200/50 dark:border-purple-800/30 space-y-1 shadow-2xs">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
-                Intercambios UDC
+                Reseñas Recibidas
               </span>
-              <span className="font-aeonik text-3xl font-black text-[#44216b] dark:text-purple-300 leading-none block">
-                {myPosts.length > 0 ? myPosts.length : 1}
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-aeonik text-3xl font-black text-[#44216b] dark:text-purple-300 leading-none">
+                  {myRatingCount}
+                </span>
+                <MessageSquare className="h-4 w-4 text-[#44216b] dark:text-purple-300" />
+              </div>
             </div>
 
             <div className="rounded-2xl p-4 bg-[#edf7f5]/80 dark:bg-teal-950/40 border border-teal-200/50 dark:border-teal-800/30 space-y-1 shadow-2xs">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
-                Estado Cuenta
+                Campus Principal
               </span>
-              <span className="text-xs font-bold text-[#3da898] dark:text-teal-300 block mt-1">
-                Verificado Activo
+              <span className="text-xs font-bold text-[#0f766e] dark:text-teal-300 block truncate mt-1">
+                {campusLabel}
               </span>
             </div>
           </div>

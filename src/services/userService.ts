@@ -40,6 +40,13 @@ export const userService = {
       }
     });
 
+    const ratingCount = receivedValorations.length;
+    let ratingAvg = 0;
+    if (ratingCount > 0) {
+      const sum = receivedValorations.reduce((acc, v) => acc + (v.rating || 5), 0);
+      ratingAvg = sum / ratingCount;
+    }
+
     return {
       id: baseUser.id || id,
       title: baseUser.title || baseUser.name || 'Estudiante UDC',
@@ -49,10 +56,10 @@ export const userService = {
       role: baseUser.role || 'Estudiante',
       cellphone: baseUser.cellphone || '',
       picture: baseUser.picture || '',
-      created_at: baseUser.created_at || new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
+      created_at: baseUser.created_at || new Date().toISOString(),
       postsCount: userPosts.length,
-      ratingAvg: 4.9,
-      ratingCount: receivedValorations.length > 0 ? receivedValorations.length : 3,
+      ratingAvg: ratingAvg,
+      ratingCount: ratingCount,
       posts: userPosts,
       receivedValorations: receivedValorations,
     };

@@ -20,6 +20,7 @@ import {
   Mail,
   UserCheck,
   ArrowRight,
+  Star,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -204,9 +205,27 @@ export const ProductDetailPage: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <span className={`text-xs font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full inline-block shadow-2xs border ${categoryMeta.badgeLight} ${categoryMeta.badgeDark}`}>
-                  {post.tipoP}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className={`text-xs font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full inline-block shadow-2xs border ${categoryMeta.badgeLight} ${categoryMeta.badgeDark}`}>
+                    {post.tipoP}
+                  </span>
+                  {post.valorations && post.valorations.length > 0 ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 text-amber-800 dark:text-amber-300 text-xs font-bold shadow-2xs">
+                      <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                      <span>
+                        {(
+                          post.valorations.reduce((acc, v) => acc + (v.rating || 5), 0) /
+                          post.valorations.length
+                        ).toFixed(1)}{' '}
+                        ({post.valorations.length} {post.valorations.length === 1 ? 'opinión' : 'opiniones'})
+                      </span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 text-xs font-medium">
+                      <span>Sin valoraciones</span>
+                    </span>
+                  )}
+                </div>
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0f172a] dark:text-white leading-snug">
                   {post.nombre}
                 </h1>
