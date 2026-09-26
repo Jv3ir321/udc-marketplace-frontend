@@ -71,8 +71,8 @@ export const Footer: React.FC = () => {
               <Link to="/catalog?category=Uniformes%20y%20Batas" className="hover:text-[#ec8026] transition-colors">
                 Batas & Uniformes
               </Link>
-              <Link to="/catalog?category=Habitaciones%20y%20Alquiler" className="hover:text-[#ec8026] transition-colors">
-                Habitaciones
+              <Link to="/catalog?category=Snacks%20y%20Alimentación" className="hover:text-[#ec8026] transition-colors">
+                Snacks & Comida
               </Link>
               <Link to="/catalog?category=Servicios%20y%20Tutorías" className="hover:text-[#ec8026] transition-colors">
                 Tutorías & Asesorías

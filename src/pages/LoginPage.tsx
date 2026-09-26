@@ -8,7 +8,9 @@ export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/';
+  const searchParams = new URLSearchParams(location.search);
+  const redirectParam = searchParams.get('redirect') || searchParams.get('from');
+  const from = redirectParam || location.state?.from?.pathname || '/';
 
   const handleLoginSuccess = () => {
     navigate(from, { replace: true });

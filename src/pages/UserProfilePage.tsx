@@ -19,13 +19,14 @@ import {
   Plus,
   PackageCheck,
   UserCog,
+  Lock,
 } from 'lucide-react';
 import { api } from '@/services/api';
 import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
 
 export const UserProfilePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { user: currentUser } = useAuth();
+  const { user: currentUser, isAuthenticated } = useAuth();
   const { getPostsByUser } = useMarketplace();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [editProfileOpen, setEditProfileOpen] = useState(false);
@@ -105,11 +106,13 @@ export const UserProfilePage: React.FC = () => {
     );
   }
 
-  const displayName = profile.title || profile.name || 'Estudiante UDC';
+  const displayName = isAuthenticated
+    ? profile.title || profile.name || 'Estudiante UDC'
+    : 'Vendedor UDC';
   const campusLabel = formatCampusName(profile.sede);
 
   const handleWhatsAppContact = () => {
-    if (!profile.cellphone) return;
+    if (!profile.cellphone || !isAuthenticated) return;
     const url = `https://wa.me/57${profile.cellphone.replace(/\D/g, '')}?text=${encodeURIComponent(
       `Hola ${displayName}! Vi tus publicaciones en UDC Marketplace. ¿Podemos acordar entrega en ${campusLabel}?`
     )}`;
@@ -150,7 +153,7 @@ export const UserProfilePage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-white/10">
             <div className="flex items-center gap-4 sm:gap-5">
               <Avatar className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-[#ec8026]/30 shadow-md bg-[#f4edf9] dark:bg-purple-950/40 shrink-0">
-                {profile.picture && (
+                {isAuthenticated && profile.picture && (
                   <AvatarImage
                     src={getBackendImageUrl(profile.picture)}
                     alt={displayName}
@@ -158,7 +161,7 @@ export const UserProfilePage: React.FC = () => {
                   />
                 )}
                 <AvatarFallback className="text-2xl sm:text-3xl font-bold font-aeonik text-white bg-[#171a3d] dark:bg-[#ec8026]">
-                  {getInitials(displayName)}
+                  {isAuthenticated ? getInitials(displayName) : 'UDC'}
                 </AvatarFallback>
               </Avatar>
 
@@ -169,7 +172,7 @@ export const UserProfilePage: React.FC = () => {
                   </h1>
                   <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#edf7f5] dark:bg-teal-950/40 text-[#3da898] dark:text-teal-300 shadow-2xs border border-teal-200/40 dark:border-teal-800/30">
                     <ShieldCheck className="h-3.5 w-3.5" />
-                    <span>{profile.role || 'Estudiante UDC'}</span>
+                    <span>{isAuthenticated ? (profile.role || 'Estudiante UDC') : 'Verificado UDC'}</span>
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-2">
@@ -210,7 +213,7 @@ export const UserProfilePage: React.FC = () => {
                     </Link>
                   </Button>
                 </>
-              ) : (
+              ) : isAuthenticated ? (
                 profile.cellphone && (
                   <button
                     type="button"
@@ -221,6 +224,18 @@ export const UserProfilePage: React.FC = () => {
                     <span>Contactar por WhatsApp</span>
                   </button>
                 )
+              ) : (
+                <Button
+                  asChild
+                  size="sm"
+                  variant="udc"
+                  className="h-10 px-5 rounded-full font-bold text-xs shadow-md shadow-[#ec8026]/20"
+                >
+                  <Link to={`/login?redirect=${encodeURIComponent(`/user/${id}`)}`}>
+                    <Lock className="h-3.5 w-3.5 mr-1.5" />
+                    <span>Inicia sesión para contactar</span>
+                  </Link>
+                </Button>
               )}
             </div>
           </div>
@@ -324,12 +339,12 @@ export const UserProfilePage: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <Avatar className="h-8 w-8 rounded-full border border-slate-200 dark:border-white/10">
                           <AvatarFallback className="bg-[#171a3d] text-white text-xs font-bold">
-                            {getInitials(val.user?.title || val.user?.name)}
+                            {isAuthenticated ? getInitials(val.user?.title || val.user?.name) : 'UDC'}
                           </AvatarFallback>
                         </Avatar>
                         <div>
                           <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
-                            {val.user?.title || val.user?.name || 'Estudiante UDC'}
+                            {isAuthenticated ? (val.user?.title || val.user?.name || 'Estudiante UDC') : 'Estudiante UDC'}
                           </span>
                           <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
                             {val.user?.sede || 'Cartagena'}

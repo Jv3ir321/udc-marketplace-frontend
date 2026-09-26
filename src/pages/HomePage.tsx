@@ -11,7 +11,6 @@ import {
   BookOpen,
   Laptop,
   Shirt,
-  Home as HomeIcon,
   GraduationCap,
   Coffee,
   Stethoscope,
@@ -76,12 +75,6 @@ export const HomePage: React.FC = () => {
       icon: <Shirt className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />,
       config: CATEGORY_CONFIG['Uniformes y Batas'],
       desc: 'Batas de laboratorio y salud',
-    },
-    {
-      name: 'Habitaciones y Alquiler',
-      icon: <HomeIcon className="h-5 w-5 text-rose-600 dark:text-rose-400" />,
-      config: CATEGORY_CONFIG['Habitaciones y Alquiler'],
-      desc: 'Alojamientos cercanos a sedes',
     },
     {
       name: 'Servicios y Tutorías',

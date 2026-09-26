@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useMarketplace } from '@/context/MarketplaceContext';
+import { useAuth } from '@/context/AuthContext';
 import { ValorationSection } from '@/components/marketplace/ValorationSection';
 import { PageTransition } from '@/components/common/PageTransition';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,7 @@ import {
   UserCheck,
   ArrowRight,
   Star,
+  Lock,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -28,6 +30,7 @@ export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { getPostById, isLoading: contextLoading } = useMarketplace();
+  const { isAuthenticated } = useAuth();
   const [selectedImgIndex, setSelectedImgIndex] = useState(0);
 
   const post = id ? getPostById(Number(id)) : undefined;
@@ -233,18 +236,30 @@ export const ProductDetailPage: React.FC = () => {
 
               {/* Direct WhatsApp Call to Action */}
               <div className="space-y-3 pt-2">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white font-aeonik font-bold text-sm tracking-[0.02em] shadow-lg shadow-[#ec8026]/25 transition-all active:scale-95 group/wa"
-                >
-                  <WhatsappIcon size={20} strokeWidth={2.2} color="#ffffff" />
-                  <span>Pactar Entrega por WhatsApp</span>
-                </a>
+                {isAuthenticated ? (
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white font-aeonik font-bold text-sm tracking-[0.02em] shadow-lg shadow-[#ec8026]/25 transition-all active:scale-95 group/wa"
+                  >
+                    <WhatsappIcon size={20} strokeWidth={2.2} color="#ffffff" />
+                    <span>Pactar Entrega por WhatsApp</span>
+                  </a>
+                ) : (
+                  <Link
+                    to={`/login?redirect=${encodeURIComponent(`/post/${post.id}`)}`}
+                    className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white font-aeonik font-bold text-sm tracking-[0.02em] shadow-lg shadow-[#ec8026]/25 transition-all active:scale-95"
+                  >
+                    <Lock className="h-4 w-4 text-white" />
+                    <span>Inicia sesión para pactar entrega</span>
+                  </Link>
+                )}
 
                 <p className="text-center text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  Trato directo entre estudiantes UDC · Sin comisiones
+                  {isAuthenticated
+                    ? 'Trato directo entre estudiantes UDC · Sin comisiones'
+                    : 'Accede con tu cuenta institucional para acordar la entrega'}
                 </p>
               </div>
 
@@ -270,54 +285,97 @@ export const ProductDetailPage: React.FC = () => {
                 </h3>
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-teal-950/50 text-emerald-800 dark:text-teal-300 border border-emerald-200 dark:border-teal-800/40 shadow-2xs">
                   <UserCheck className="h-3 w-3 mr-1 inline text-emerald-600 dark:text-teal-300" />
-                  Estudiante Activo
+                  {isAuthenticated ? 'Estudiante Activo' : 'Verificado UDC'}
                 </span>
               </div>
 
-              <Link
-                to={`/user/${post.userId}`}
-                className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 dark:bg-[#161b38] hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200/70 dark:border-white/10 transition-all group"
-              >
-                <Avatar className="h-12 w-12 shrink-0 rounded-full shadow-sm">
-                  <AvatarFallback className="bg-[#171a3d] dark:bg-[#ec8026] text-white font-bold text-xs">
-                    {getInitials(post.user?.title || post.user?.name)}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <h5 className="font-extrabold text-sm text-[#0f172a] dark:text-white group-hover:text-[#ec8026] transition-colors truncate">
-                    {post.user?.title || post.user?.name || 'Estudiante UDC'}
-                  </h5>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-semibold truncate">
-                    {post.user?.role || 'Estudiante'} · Campus {post.user?.sede || post.sede}
-                  </p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-[#0f172a] dark:group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" />
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    to={`/user/${post.userId}`}
+                    className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 dark:bg-[#161b38] hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200/70 dark:border-white/10 transition-all group"
+                  >
+                    <Avatar className="h-12 w-12 shrink-0 rounded-full shadow-sm">
+                      <AvatarFallback className="bg-[#171a3d] dark:bg-[#ec8026] text-white font-bold text-xs">
+                        {getInitials(post.user?.title || post.user?.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <h5 className="font-extrabold text-sm text-[#0f172a] dark:text-white group-hover:text-[#ec8026] transition-colors truncate">
+                        {post.user?.title || post.user?.name || 'Estudiante UDC'}
+                      </h5>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 font-semibold truncate">
+                        {post.user?.role || 'Estudiante'} · Campus {post.user?.sede || post.sede}
+                      </p>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-[#0f172a] dark:group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" />
+                  </Link>
 
-              <div className="space-y-2 text-xs font-semibold">
-                <div className="flex items-center gap-2.5 p-3 bg-slate-50 dark:bg-[#161b38] border border-slate-200/70 dark:border-white/10 rounded-2xl text-[#0f172a] dark:text-slate-200">
-                  <Phone className="h-4 w-4 text-[#3da898] shrink-0" />
-                  <span className="truncate">WhatsApp: <strong>{sellerPhone}</strong></span>
-                </div>
-                {post.user?.mail && (
-                  <div className="flex items-center gap-2.5 p-3 bg-slate-50 dark:bg-[#161b38] border border-slate-200/70 dark:border-white/10 rounded-2xl text-[#0f172a] dark:text-slate-200">
-                    <Mail className="h-4 w-4 text-purple-700 dark:text-purple-400 shrink-0" />
-                    <span className="truncate">Institucional: <strong>{post.user.mail}</strong></span>
+                  <div className="space-y-2 text-xs font-semibold">
+                    <div className="flex items-center gap-2.5 p-3 bg-slate-50 dark:bg-[#161b38] border border-slate-200/70 dark:border-white/10 rounded-2xl text-[#0f172a] dark:text-slate-200">
+                      <Phone className="h-4 w-4 text-[#3da898] shrink-0" />
+                      <span className="truncate">WhatsApp: <strong>{sellerPhone}</strong></span>
+                    </div>
+                    {post.user?.mail && (
+                      <div className="flex items-center gap-2.5 p-3 bg-slate-50 dark:bg-[#161b38] border border-slate-200/70 dark:border-white/10 rounded-2xl text-[#0f172a] dark:text-slate-200">
+                        <Mail className="h-4 w-4 text-purple-700 dark:text-purple-400 shrink-0" />
+                        <span className="truncate">Institucional: <strong>{post.user.mail}</strong></span>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="w-full text-xs h-10 rounded-full border border-slate-300 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-white/10 text-[#0f172a] dark:text-white font-aeonik font-bold transition-all shadow-subtle"
-              >
-                <Link to={`/user/${post.userId}`}>
-                  Ver Perfil y Más Artículos
-                  <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
-                </Link>
-              </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="w-full text-xs h-10 rounded-full border border-slate-300 dark:border-white/15 bg-white dark:bg-[#161b38] hover:bg-slate-50 dark:hover:bg-white/10 text-[#0f172a] dark:text-white font-aeonik font-bold transition-all shadow-subtle"
+                  >
+                    <Link to={`/user/${post.userId}`}>
+                      Ver Perfil y Más Artículos
+                      <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
+                    </Link>
+                  </Button>
+                </>
+              ) : (
+                <div className="space-y-3.5">
+                  <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 dark:bg-[#161b38] border border-slate-200/70 dark:border-white/10">
+                    <Avatar className="h-12 w-12 shrink-0 rounded-full shadow-sm">
+                      <AvatarFallback className="bg-[#171a3d] dark:bg-[#ec8026] text-white font-bold text-xs">
+                        UDC
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <h5 className="font-extrabold text-sm text-[#0f172a] dark:text-white truncate">
+                        Vendedor UDC
+                      </h5>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold truncate">
+                        Comunidad UDC · Campus {campusDisplay}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Privacy Box */}
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#161b38] border border-slate-200/70 dark:border-white/10 space-y-2.5 text-center">
+                    <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200">
+                      <Lock className="h-4 w-4 text-[#ec8026]" />
+                      <span>Contacto institucional protegido</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                      Inicia sesión con tu cuenta institucional para ver el nombre, WhatsApp y correo de este vendedor.
+                    </p>
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="udc"
+                      className="w-full text-xs h-9 rounded-full font-bold shadow-xs"
+                    >
+                      <Link to={`/login?redirect=${encodeURIComponent(`/post/${post.id}`)}`}>
+                        Iniciar Sesión para Ver
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
