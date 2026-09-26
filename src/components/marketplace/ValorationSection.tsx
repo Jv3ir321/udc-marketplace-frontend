@@ -143,12 +143,12 @@ export const ValorationSection: React.FC<ValorationSectionProps> = ({
                   <div className="flex items-center gap-2.5">
                     <Avatar className="h-7 w-7 rounded-full border border-slate-200 dark:border-white/10">
                       <AvatarFallback className="bg-slate-100 dark:bg-[#161b38] text-[#171a3d] dark:text-white text-[10px] font-bold">
-                        {getInitials(val.user?.title || val.user?.name)}
+                        {isAuthenticated ? getInitials(val.user?.title || val.user?.name) : 'UDC'}
                       </AvatarFallback>
                     </Avatar>
                     <div>
                       <span className="text-xs font-bold text-[#171a3d] dark:text-white block leading-none">
-                        {val.user?.title || val.user?.name || 'Estudiante UDC'}
+                        {isAuthenticated ? (val.user?.title || val.user?.name || 'Estudiante UDC') : 'Estudiante UDC'}
                       </span>
                       <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
                         Campus {val.user?.sede || 'Cartagena'}

@@ -4,12 +4,14 @@ import { Post } from '@/types';
 import { formatCOP, getBackendImageUrl, formatCampusName, getCategoryMeta } from '@/lib/utils';
 import WhatsappIcon from '@/components/ui/whatsapp-icon';
 import { MapPin } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 interface ProductCardProps {
   post: Post;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
+  const { isAuthenticated } = useAuth();
   const images = post.imagenes || (post.postIMGs?.map((img) => img.imageURL) || []);
   const mainImage = images.length > 0 ? getBackendImageUrl(images[0]) : getBackendImageUrl('');
 
@@ -72,7 +74,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
           </p>
 
           <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 pt-0.5">
-            <span className="truncate text-slate-700 dark:text-slate-300">{post.user?.title || post.user?.name || 'Estudiante UDC'}</span>
+            <span className="truncate text-slate-700 dark:text-slate-300">
+              {isAuthenticated ? (post.user?.title || post.user?.name || 'Estudiante UDC') : 'Vendedor UDC'}
+            </span>
             <span>·</span>
             <span className="text-[#ec8026] font-bold">Comunidad UDC</span>
           </div>
@@ -91,15 +95,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({ post }) => {
         </div>
 
         <div className="flex items-center gap-2">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Pactar entrega por WhatsApp"
-            className="h-9 w-9 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-white transition-transform active:scale-95 shadow-md shadow-[#3da898]/30 group/wa"
-          >
-            <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
-          </a>
+          {isAuthenticated ? (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Pactar entrega por WhatsApp"
+              className="h-9 w-9 rounded-full bg-[#3da898] hover:bg-[#328e81] flex items-center justify-center text-white transition-transform active:scale-95 shadow-md shadow-[#3da898]/30 group/wa"
+            >
+              <WhatsappIcon size={16} strokeWidth={2.2} color="#ffffff" />
+            </a>
+          ) : (
+            <Link
+              to={`/login?redirect=${encodeURIComponent(`/post/${post.id}`)}`}
+              title="Inicia sesión para pactar entrega por WhatsApp"
+              className="h-9 w-9 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-transform active:scale-95 border border-slate-200/80 dark:border-white/10"
+            >
+              <WhatsappIcon size={16} strokeWidth={2.2} color="currentColor" />
+            </Link>
+          )}
           <Link
             to={`/post/${post.id}`}
             className="h-9 px-4 rounded-full bg-[#ec8026] hover:bg-[#d97018] text-white text-xs font-bold tracking-[0.02em] flex items-center justify-center transition-colors shadow-md shadow-[#ec8026]/30 active:scale-95"
